@@ -4,6 +4,28 @@ FORMAT: 1A
 
 Hackathon api documentation
 
+# Group Sessions
+
+## Sessions [/v1/sessions]
+
+### Store [POST]
+Get new JWT token
+
++ Request (application/json)
+    + Attributes
+        + email: mail@leomotta2.me (string, required)
+        + password: 114122 (string, required)
+
++ Response 200 (application/json)
+    + Attributes
+        + user (object)
+            + id: 1 (number, required)
+            + name: john Doe (string, required)
+        + token: long_string_jwt_token (string, required)
+
++ Response 400 (application/json)
+    + Attributes (Error)
+
 # Group User
 
 ## User [/v1/user]
@@ -62,29 +84,6 @@ Get hackathon.
 + Response 200
 
 + Response 404 (application/json)
-    + Attributes (Error)
-
-
-# Group Sessions
-
-## Sessions [/v1/sessions]
-
-### Store [POST]
-Get new JWT token
-
-+ Request (application/json)
-    + Attributes
-        + email: mail@leomotta2.me (string, required)
-        + password: 114122 (string, required)
-
-+ Response 200 (application/json)
-    + Attributes
-        + user (object)
-            + id: 1 (number, required)
-            + name: john Doe (string, required)
-        + token: long_string_jwt_token (string, required)
-
-+ Response 400 (application/json)
     + Attributes (Error)
 
 # Group Hackathon

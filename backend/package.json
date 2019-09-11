@@ -13,7 +13,7 @@
     "migrate:undo": "sequelize db:migrate:undo",
     "migrate:to": "sequelize db:migrate:undo:all --to",
     "debug": "node --inspect-brk -r sucrase/register src/server.js",
-    "aglio": "aglio -i src/docs/documentation.apib --theme-variables flatly --theme-template triple -o src/docs/index.html"
+    "aglio": "aglio -i doc/documentation.apib --theme-variables flatly --theme-template triple -o doc/index.html"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",

@@ -1,0 +1,106 @@
+FORMAT: 1A
+
+# Hackathon Documentation
+
+Hackathon api documentation
+
+# Group User
+
+## User [/v1/user]
+
+### Store [POST]
+Store new user to database.
+
++ Request (application/json)
+    + Attributes
+        + name: Leo Motta (string, required)
+        + email: test@test.com (string, required)
+        + password: 123456 (string, required)
+        + bio: user short bio (string)
+        + urls (array)
+            + https://validurl.com.br (string)
+        + role: frontend (string)
+
++ Response 200 (application/json)
+
++ Response 400 (application/json)
+    + Attributes
+        + name: error title (string, required)
+        + message: user friendly description (string, required)
+        + status: 400 (number)
+        + fields (array)
+            + (object)
+                + field_name: user friendly message (string)
+
+# Group Sessions
+
+## Sessions [/v1/sessions]
+
+### Store [POST]
+Get new JWT token
+
++ Request (application/json)
+    + Attributes
+        + email: mail@leomotta2.me (string, required)
+        + password: 114122 (string, required)
+
++ Response 200 (application/json)
+    + Attributes
+        + user (object)
+            + id: 1 (number, required)
+            + name: john Doe (string, required)
+        + token: long_string_jwt_token (string, required)
+
++ Response 400 (application/json)
+    + Attributes
+        + name: Unauthorized (string, required)
+        + message: invalid password or email (string, required)
+        + status: 401 (number)
+
+# Group Hackathon
+
+## Hackathon [/v1/hackathon/{id}]
+
++ Parameters
+    + id (string)
+
+### Index hackathon detail [GET]
+Get hackathon.
+
++ Response 200 (application/json)
+    + Attributes
+        + title: Hackathon Title (string, required)
+        + subtitle: The awesome hackathon subtitle (string, required)
+        + description: Textare description (string, required)
+        + location: address (string, required)
+        + online: true (boolean, required)
+        + event_date: UTC date (string, required)
+        + ending_date: Event ending date UTC (string, required)
+        + deadline_subscription: UTC date (string, required)
+        + min_participants: 0 (number, required)
+        + max_participants: 1000 (number, required)
+        + awards: text area string (string, required)
+        + cover_url: https://imageurl.com.br/cover (string, required)
+
+## Hackathon [/v1/hackathon]
+
+### Index all hackathons [GET]
+Get all available hackathons.
+
++ Response 200 (application/json)
+    + Attributes
+        + hackathons (array)
+            + (object)
+                + title: Hackathon Title (string, required)
+                + subtitle: The awesome hackathon subtitle (string, required)
+                + description: Textare description (string, required)
+                + location: address (string, required)
+                + online: true (boolean, required)
+                + event_date: UTC date (string, required)
+                + ending_date: Event ending date UTC (string, required)
+                + deadline_subscription: UTC date (string, required)
+                + min_participants: 0 (number, required)
+                + max_participants: 1000 (number, required)
+                + awards: text area string (string, required)
+                + cover_url: https://imageurl.com.br/cover (string, required)
+

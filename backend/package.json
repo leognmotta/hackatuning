@@ -13,7 +13,7 @@
     "migrate:undo": "sequelize db:migrate:undo",
     "migrate:to": "sequelize db:migrate:undo:all --to",
     "debug": "node --inspect-brk -r sucrase/register src/server.js",
-    "snowboard": "snowboard html -o doc/snowboard.html doc/documentation.apib",
+    "fake": "snowboard mock doc/documentation.apib",
     "aglio": "aglio -i doc/documentation.apib --theme-variables flatly --theme-template triple -o doc/index.html"
   },
   "dependencies": {
@@ -42,6 +42,7 @@
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
     "sequelize-cli": "^5.5.0",
+    "snowboard": "^3.3.2",
     "sucrase": "^3.10.1"
   }
 }

@@ -31,8 +31,8 @@ Get new JWT token
 ## User Collection [/v1/user{?perPage,page}]
 
 + Parameters
-    + perPage (number, optional)
-    + page (number, optional)
+    + perPage: 20 (number, optional)
+    + page: 1 (number, optional)
 
 ### Store [POST]
 Store new user to database.
@@ -47,7 +47,7 @@ Store new user to database.
 + Response 400 (application/json)
     + Attributes (Error Field)
 
-### Index All [GET]
+### Index [GET]
 Get all users.
 
 + Response 200 (application/json)
@@ -60,9 +60,9 @@ Get all users.
 ## User [/v1/user/{id}]
 
 + Parameters
-    + id (string)
+    + id (number, required)
 
-### Index One [GET]
+### Index (ID) [GET]
 Get hackathon.
 
 + Response 200 (application/json)
@@ -72,7 +72,7 @@ Get hackathon.
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Update One [PUT]
+### Update (ID) [PUT]
 
 + Request (application/json)
     + Headers
@@ -88,7 +88,7 @@ Get hackathon.
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Delete One [DELETE]
+### Delete (ID) [DELETE]
 
 + Request (application/json)
     + Headers
@@ -105,10 +105,10 @@ Get hackathon.
 ## Hackathon Collection [/v1/hackathon{?perPage,page}]
 
 + Parameters
-    + perPage (number, optional)
-    + page (number, optional)
+    + perPage: 20 (number, optional)
+    + page: 1 (number, optional)
 
-### Store One [POST]
+### Store [POST]
 
 + Request (application/json)
     + Headers
@@ -121,7 +121,7 @@ Get hackathon.
 + Response 400 (application/json)
     + Attributes (Error Field)
 
-### Index All [GET]
+### Index [GET]
 Get all available hackathons.
 
 + Request (application/json)
@@ -139,9 +139,9 @@ Get all available hackathons.
 ## Hackathon [/v1/hackathon/{id}]
 
 + Parameters
-    + id (string)
+    + id: 1 (number, required)
 
-### Index One [GET]
+### Index (ID) [GET]
 Get hackathon.
 
 + Request (application/json)
@@ -156,7 +156,7 @@ Get hackathon.
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Update One [PUT]
+### Update (ID) [PUT]
 
 + Request (application/json)
     + Headers
@@ -170,7 +170,7 @@ Get hackathon.
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Delete One [DELETE]
+### Delete (ID) [DELETE]
 
 + Request (application/json)
     + Headers

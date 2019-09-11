@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 import express from 'express';
 import path from 'path';
-import routes from "./routes/v1";
+import routes from './routes/v1';
 import ErrorHandler from './app/middlewares/ErrorHandler';
 
 import './database';

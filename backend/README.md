@@ -1,5 +1,6 @@
 # Hackathon
 
+- [Documentation](https://hackathon-doc.netlify.com/)
 - [Como executar o projeto](#Como-executar-o-projeto)
   - [Sem docker](#sem-docker)
   - [Com docker](#com-docker)

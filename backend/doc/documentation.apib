@@ -42,12 +42,12 @@ Store new user to database.
         + password: 123456 (number, required)
         + confirm_password: 123456 (number, required)
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
 + Response 400 (application/json)
     + Attributes (Error Field)
 
-### Index [GET]
+### Index All [GET]
 Get all users.
 
 + Response 200 (application/json)
@@ -62,7 +62,7 @@ Get all users.
 + Parameters
     + id (string)
 
-### Index [GET]
+### Index One [GET]
 Get hackathon.
 
 + Response 200 (application/json)
@@ -72,7 +72,7 @@ Get hackathon.
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Update [PUT]
+### Update One [PUT]
 
 + Request (application/json)
     + Headers
@@ -88,14 +88,14 @@ Get hackathon.
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Delete [DELETE]
+### Delete One [DELETE]
 
 + Request (application/json)
     + Headers
 
             Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
-+ Response 200
++ Response 204
 
 + Response 404 (application/json)
     + Attributes (Error)
@@ -108,20 +108,20 @@ Get hackathon.
     + perPage (number, optional)
     + page (number, optional)
 
-### Store [POST]
+### Store One [POST]
 
 + Request (application/json)
     + Headers
 
             Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Hackathon)
 
 + Response 400 (application/json)
     + Attributes (Error Field)
 
-### Index [GET]
+### Index All [GET]
 Get all available hackathons.
 
 + Request (application/json)
@@ -141,7 +141,7 @@ Get all available hackathons.
 + Parameters
     + id (string)
 
-### Index [GET]
+### Index One [GET]
 Get hackathon.
 
 + Request (application/json)
@@ -156,7 +156,7 @@ Get hackathon.
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Update [PUT]
+### Update One [PUT]
 
 + Request (application/json)
     + Headers
@@ -170,14 +170,14 @@ Get hackathon.
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Delete [DELETE]
+### Delete One [DELETE]
 
 + Request (application/json)
     + Headers
 
             Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
-+ Response 200
++ Response 204
 
 + Response 404 (application/json)
     + Attributes (Error)
@@ -188,7 +188,7 @@ Get hackathon.
 + name: Leo Motta (string, required)
 + email: test@test.com (string, required)
 + nickname: leomotta (string, required) Unique value
-+ bio: user short bio (string)
++ bio: user long string bio (string)
 + urls (array)
     + https://validurl.com.br (string)
 + role: frontend (string)

@@ -28,18 +28,28 @@ Get new JWT token
 
 # Group User
 
-## User [/v1/user]
+## User [/v1/user{?perPage,page}]
+
++ Parameters
+    + perPage (number, optional)
+    + page (number, optional)
 
 ### Index [GET]
 
 + Response 200 (application/json)
-    + Attributes (array[User Response])
+    + Attributes
+        + users (array)
+            + (User) (object)
+                + id (number, required)
+        + pagination (Pagination)
 
 ### Store [POST]
 Store new user to database.
 
 + Request (application/json)
-    + Attributes (User Request)
+    + Attributes (User)
+        + password: 123456 (number, required)
+        + confirm_password: 123456 (number, required)
 
 + Response 200 (application/json)
 
@@ -55,7 +65,8 @@ Store new user to database.
 Get hackathon.
 
 + Response 200 (application/json)
-    + Attributes (User Response)
+    + Attributes (User)
+        + id (number, required)
 
 + Response 404 (application/json)
     + Attributes (Error)
@@ -67,7 +78,9 @@ Get hackathon.
 
             Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
-    + Attributes (User Request)
+    + Attributes (User)
+        + password: 123456 (number, required)
+        + confirme_password: 123456 (number, required)
 
 + Response 200 (application/json)
 
@@ -88,7 +101,11 @@ Get hackathon.
 
 # Group Hackathon
 
-## Hackathon [/v1/hackathon]
+## Hackathon [/v1/hackathon{?perPage,page}]
+
++ Parameters
+    + perPage (number, optional)
+    + page (number, optional)
 
 ### Index [GET]
 Get all available hackathons.
@@ -99,7 +116,11 @@ Get all available hackathons.
             Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
 + Response 200 (application/json)
-    + Attributes (array[Hackathon Response])
+    + Attributes
+        + hackathons (array)
+            + (Hackathon) (object)
+                + id (number, required)
+        + pagination (Pagination)
 
 ### Store [POST]
 
@@ -109,7 +130,7 @@ Get all available hackathons.
             Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
 + Response 200 (application/json)
-    + Attributes (Hackathon Request)
+    + Attributes (Hackathon)
 
 + Response 400 (application/json)
     + Attributes (Error Field)
@@ -128,7 +149,8 @@ Get hackathon.
             Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
 + Response 200 (application/json)
-    + Attributes (Hackathon Response)
+    + Attributes (Hackathon)
+        + id (number, required)
 
 + Response 404 (application/json)
     + Attributes (Error)
@@ -140,7 +162,7 @@ Get hackathon.
 
             Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
-    + Attributes (Hackathon Request)
+    + Attributes (Hackathon)
 
 + Response 200 (application/json)
 
@@ -161,46 +183,18 @@ Get hackathon.
 
 ## Data Structures
 
-### User Request
+### User
 + name: Leo Motta (string, required)
 + email: test@test.com (string, required)
-+ password: 123456 (string, required)
 + nickname: leomotta (string, required) Unique value
 + bio: user short bio (string)
 + urls (array)
     + https://validurl.com.br (string)
 + role: frontend (string)
 
-### User Response
-+ id (number)
-+ name: Leo Motta (string, required)
-+ email: test@test.com (string, required)
-+ password: 123456 (string, required)
-+ nickname: leomotta (string, required) Unique value
-+ bio: user short bio (string)
-+ urls (array)
-    + https://validurl.com.br (string)
-+ role: frontend (string)
+### Hackathon
 
-
-### Hackathon Response
-
-+ id (number)
-+ title: Hackathon Title (string, required)
-+ subtitle: The awesome hackathon subtitle (string, required)
-+ description: Textare description (string, required)
-+ location: address (string, required)
-+ online: true (boolean, required)
-+ event_date: UTC date (string, required)
-+ ending_date: Event ending date UTC (string, required)
-+ deadline_subscription: UTC date (string, required)
-+ min_participants: 0 (number, required)
-+ max_participants: 1000 (number, required)
-+ awards: text area string (string, required)
-+ cover_url: https://imageurl.com.br/cover (string, required)
-
-### Hackathon Request
-
++ organizer: 1 (number, required) belongs to user id
 + title: Hackathon Title (string, required)
 + subtitle: The awesome hackathon subtitle (string, required)
 + description: Textare description (string, required)
@@ -226,3 +220,12 @@ Get hackathon.
 + fields (array)
     + (object)
         + field_name: message (string, required)
+
+### Pagination
+
++ maxPage: 1 (number, required)
++ currentPage: 1 (number, required)
++ nextPage: 0 (number, required)
++ previousPage: 2 (number, required)
++ hasNextPage: false (boolean, required)
++ hasPreviousPage: true (boolean, required)

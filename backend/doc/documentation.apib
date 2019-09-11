@@ -28,20 +28,11 @@ Get new JWT token
 
 # Group User
 
-## User [/v1/user{?perPage,page}]
+## User Collection [/v1/user{?perPage,page}]
 
 + Parameters
     + perPage (number, optional)
     + page (number, optional)
-
-### Index [GET]
-
-+ Response 200 (application/json)
-    + Attributes
-        + users (array)
-            + (User) (object)
-                + id (number, required)
-        + pagination (Pagination)
 
 ### Store [POST]
 Store new user to database.
@@ -56,7 +47,17 @@ Store new user to database.
 + Response 400 (application/json)
     + Attributes (Error Field)
 
-## By id [/v1/user/{id}]
+### Index [GET]
+Get all users.
+
++ Response 200 (application/json)
+    + Attributes
+        + users (array)
+            + (User) (object)
+                + id (number, required)
+        + pagination (Pagination)
+
+## User [/v1/user/{id}]
 
 + Parameters
     + id (string)
@@ -80,7 +81,7 @@ Get hackathon.
 
     + Attributes (User)
         + password: 123456 (number, required)
-        + confirme_password: 123456 (number, required)
+        + confirm_password: 123456 (number, required)
 
 + Response 200 (application/json)
 
@@ -101,11 +102,24 @@ Get hackathon.
 
 # Group Hackathon
 
-## Hackathon [/v1/hackathon{?perPage,page}]
+## Hackathon Collection [/v1/hackathon{?perPage,page}]
 
 + Parameters
     + perPage (number, optional)
     + page (number, optional)
+
+### Store [POST]
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
++ Response 200 (application/json)
+    + Attributes (Hackathon)
+
++ Response 400 (application/json)
+    + Attributes (Error Field)
 
 ### Index [GET]
 Get all available hackathons.
@@ -122,20 +136,7 @@ Get all available hackathons.
                 + id (number, required)
         + pagination (Pagination)
 
-### Store [POST]
-
-+ Request (application/json)
-    + Headers
-
-            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
-
-+ Response 200 (application/json)
-    + Attributes (Hackathon)
-
-+ Response 400 (application/json)
-    + Attributes (Error Field)
-
-## By id [/v1/hackathon/{id}]
+## Hackathon [/v1/hackathon/{id}]
 
 + Parameters
     + id (string)

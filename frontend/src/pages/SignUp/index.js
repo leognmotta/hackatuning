@@ -1,31 +1,37 @@
 import React from 'react';
+import { Form, Input, Select } from '@rocketseat/unform';
 import { Link } from 'react-router-dom';
+import { schema } from './validationSchema';
 
 // import { Container } from './styles';
 
 export default function SignUp() {
-  return (
-    <>
-      <form>
-        <input placeholder="Nome Completo" />
-        <input type="email" placeholder="Seu E-Mail aqui :)" />
-        <input type="password" placeholder="Senha super secreta aqui!" />
-        <textarea
-          placeholder="Uma linda bio, use para se divulgar (insira contato se possivel ;))"
-          maxLength="255"
-        />
+  // roles will come from database in useEffect.
+  const roles = [
+    { id: 'Frontend', title: 'Frontend' },
+    { id: 'Backend', title: 'Backend' },
+    { id: 'Fullstack', title: 'Fullstack' },
+    { id: 'Management', title: 'Management' },
+    { id: 'Busines', title: 'Busines' },
+    { id: 'Marketing', title: 'Marketing' },
+    { id: 'UX/UI', title: 'UX/UI' },
+  ];
 
-        <label>Selecione uma habilidade!</label>
-        <select name="skill">
-          <option>Front-End</option>
-          <option>Back-End</option>
-          <option>Fullstack</option>
-          <option>Gestão</option>
-          <option>Negócios</option>
-          <option>Marketing</option>
-          <option>UI/UX</option>
-        </select>
-      </form>
-    </>
+  function handleSubmit(data) {
+    console.log(data);
+  }
+
+  return (
+    <Form schema={schema} onSubmit={handleSubmit}>
+      <Input name="name" label="Name: " />
+      <Input name="email" type="email" label="Email: " err />
+      <Input name="password" type="password" label="Password: " />
+      <Input name="bio" maxLength="255" label="Bio: " multiline />
+
+      {/* <Select name="skill" options={roles} label="Skills: " /> */}
+      {/* should be an array */}
+
+      <button type="submit">Send</button>
+    </Form>
   );
 }

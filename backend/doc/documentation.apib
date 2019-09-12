@@ -165,14 +165,11 @@ Get hackathon.
 
 # Group Participants
 
-## Participants Query [/v1/hackathon/{id}/participants{?perPage,page}]
+### Index [GET /v1/hackathon/{id}/participants{?perPage,page}]
 
 + Parameters
     + perPage: 20 (number, optional)
     + page: 1 (number, optional)
-
-### Index [GET]
-Get all available hackathons.
 
 + Request (application/json)
     + Headers
@@ -186,12 +183,10 @@ Get all available hackathons.
                 + id (number, required)
         + pagination (Pagination)
 
-## Participants [/v1/hackathon/{id}/participants]
+### Store [POST /v1/hackathon/{id}/participants]
 
 + Parameters
     + id (number, required)
-
-### Store [POST]
 
 + Request (application/json)
     + Headers
@@ -204,7 +199,10 @@ Get all available hackathons.
 + Response 400 (application/json)
     + Attributes (Error)
 
-### Delete [DELETE]
+### Delete [DELETE /v1/hackathon/{id}/participants]
+
++ Parameters
+    + id (number, required)
 
 + Request (application/json)
     + Headers
@@ -215,6 +213,114 @@ Get all available hackathons.
     + Attributes (Hackathon)
 
 + Response 400 (application/json)
+    + Attributes (Error)
+
+
+# Group Team
+
+### Store [POST /v1/hackathons/{id}/team]
+
++ Parameters
+    + id (number, required)
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
+    + Attributes (array)
+        + email: user@email.com (string, required)
+
++ Response 201 (application/json)
+
++ Response 404 (application/json)
+    + Attributes (Error Field)
+
+### Index [GET /v1/hackathons/{id}/team{?perPage,page}]
+
++ Parameters
+    + id (number, required)
+    + perPage: 20 (number, optional)
+    + page: 1 (number, optional)
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
+    + Attributes
+        + participants (array)
+            + (object)
+                + id (number)
+                + name: Leo Motta (string, required)
+                + roles: (array)
+                    + (object)
+                        + id: 1 (number)
+                        + role: (object)
+                            + name: Frontend (string)
+            + (object)
+                + id (number)
+                + name: Leo Motta (string, required)
+                + roles: (array)
+                    + (object)
+                        + id: 1 (number)
+                        + role: (object)
+                            + name: Frontend (string)
+        + pagination (Pagination)
+
++ Response 200 (application/json)
+
+### Show [GET /v1/hackathons/{id}/team/{teamId}]
+
++ Parameters
+    + id (number, required)
+    + teamId (number, required)
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
+    + Attributes (array[User])
+
++ Response 200 (application/json)
+
++ Response 404 (application/json)
+    + Attributes (Error)
+
+### Update [PUT /v1/hackathons/{id}/team/{teamId}]
+
++ Parameters
+    + id (number, required)
+    + teamId (number, required)
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
+    + Attributes
+        + email: user@email.com (string, required)
+
++ Response 200 (application/json)
+
++ Response 404 (application/json)
+    + Attributes (Error)
+
+### Delete [DELETE /v1/hackathons/{id}/team/{teamId}]
+
++ Parameters
+    + id (number, required)
+    + teamId (number, required)
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
++ Response 204 (application/json)
+
++ Response 404 (application/json)
     + Attributes (Error)
 
 
@@ -249,12 +355,12 @@ Get all available hackathons.
 + roles: (array)
   + (object)
       + id: 1 (number)
-        + Role: (object)
-         + name: Frontend (string)
+        + role: (object)
+            + name: Frontend (string)
   + (object)
       + id: 1 (number)
-        + Role: (object)
-          + name: Marketing (string)
+        + role: (object)
+            + name: Marketing (string)
 
 ### Hackathon
 
@@ -283,7 +389,7 @@ Get all available hackathons.
 + status (number)
 + fields (array)
   + (object)
-    + field_name: message (string, required)
+      + field_name: message (string, required)
 
 ### Pagination
 

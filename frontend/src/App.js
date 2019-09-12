@@ -1,19 +1,20 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 
+import history from './services/history';
 import Layout from './components/Layout';
 import GlobalStyles from './styles/GlobalStyles';
 import Routes from './routes';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout>
-        <Routes />
-      </Layout>
+    <Router history={history}>
+      {/* <Layout> */}
+      <Routes />
+      {/* </Layout> */}
 
       <GlobalStyles />
-    </BrowserRouter>
+    </Router>
   );
 }
 

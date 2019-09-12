@@ -28,11 +28,7 @@ Get new JWT token
 
 # Group User
 
-## User Collection [/v1/user{?perPage,page}]
-
-+ Parameters
-    + perPage: 20 (number, optional)
-    + page: 1 (number, optional)
+## User [/v1/user]
 
 ### Store [POST]
 Store new user to database.
@@ -47,6 +43,12 @@ Store new user to database.
 + Response 400 (application/json)
     + Attributes (Error Field)
 
+## User [/v1/user{?perPage,page}]
+
++ Parameters
+    + perPage: 20 (number, optional)
+    + page: 1 (number, optional)
+
 ### Index [GET]
 Get all users.
 
@@ -57,12 +59,12 @@ Get all users.
                 + id (number, required)
         + pagination (Pagination)
 
-## User [/v1/user/{id}]
+## User ID [/v1/user/{id}]
 
 + Parameters
     + id (number, required)
 
-### Index (ID) [GET]
+### Index [GET]
 Get hackathon.
 
 + Response 200 (application/json)
@@ -72,7 +74,7 @@ Get hackathon.
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Update (ID) [PUT]
+### Update [PUT]
 
 + Request (application/json)
     + Headers
@@ -88,25 +90,9 @@ Get hackathon.
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Delete (ID) [DELETE]
-
-+ Request (application/json)
-    + Headers
-
-            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
-
-+ Response 204
-
-+ Response 404 (application/json)
-    + Attributes (Error)
-
 # Group Hackathon
 
-## Hackathon Collection [/v1/hackathon{?perPage,page}]
-
-+ Parameters
-    + perPage: 20 (number, optional)
-    + page: 1 (number, optional)
+## Hackathon [/v1/hackathon]
 
 ### Store [POST]
 
@@ -120,6 +106,12 @@ Get hackathon.
 
 + Response 400 (application/json)
     + Attributes (Error Field)
+
+## Hackathon Query [/v1/hackathon{?perPage,page}]
+
++ Parameters
+    + perPage: 20 (number, optional)
+    + page: 1 (number, optional)
 
 ### Index [GET]
 Get all available hackathons.
@@ -136,12 +128,12 @@ Get all available hackathons.
                 + id (number, required)
         + pagination (Pagination)
 
-## Hackathon [/v1/hackathon/{id}]
+## Hackathon ID [/v1/hackathon/{id}]
 
 + Parameters
     + id: 1 (number, required)
 
-### Index (ID) [GET]
+### Index [GET]
 Get hackathon.
 
 + Request (application/json)
@@ -156,7 +148,7 @@ Get hackathon.
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Update (ID) [PUT]
+### Update [PUT]
 
 + Request (application/json)
     + Headers
@@ -170,7 +162,7 @@ Get hackathon.
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Delete (ID) [DELETE]
+### Delete [DELETE]
 
 + Request (application/json)
     + Headers

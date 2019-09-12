@@ -1,5 +1,5 @@
 # Hackatuning
-Hey there, hackatuning is an open source hackathon management.
+Hey there, hackatuning is an open source hackathon management system.
 
 ## Goals
 

@@ -35,6 +35,7 @@
     "yup": "^0.27.0"
   },
   "devDependencies": {
+    "aglio": "^2.3.0",
     "eslint": "^6.3.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.3.0",

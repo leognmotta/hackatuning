@@ -25,7 +25,10 @@ class User extends Model {
 
   static associate(models) {
     this.belongsTo(models.File, { foreignKey: 'cover_id', as: 'cover' });
-    this.belongsTo(models.User, { foreignKey: 'organizer_id', as: 'cover' });
+    this.belongsTo(models.User, {
+      foreignKey: 'organizer_id',
+      as: 'organizer',
+    });
   }
 }
 

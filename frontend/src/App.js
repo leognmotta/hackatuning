@@ -9,9 +9,7 @@ import Routes from './routes';
 function App() {
   return (
     <Router history={history}>
-      {/* <Layout> */}
-      <Routes />
-      {/* </Layout> */}
+      <Layout component={Routes} />
 
       <GlobalStyles />
     </Router>

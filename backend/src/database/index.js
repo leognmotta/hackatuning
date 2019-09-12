@@ -1,11 +1,15 @@
 import Sequelize from 'sequelize';
 import mongoose from 'mongoose';
 
-import File from '../app/models/File';
-
 import databaseConfig from '../config/database';
 
-const models = [File];
+import File from '../app/models/File';
+import User from '../app/models/User';
+import UserUrl from '../app/models/UserUrl';
+import Role from '../app/models/Role';
+import UserRole from '../app/models/UserRole';
+
+const models = [Role, File, User, UserUrl, UserRole];
 
 class Database {
   constructor() {
@@ -23,6 +27,7 @@ class Database {
 
   mongo() {
     mongoose.set('useUnifiedTopology', true);
+
     this.mongoConnection = mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
       useFindAndModify: true,

@@ -4,6 +4,17 @@ FORMAT: 1A
 
 Hackathon api documentation
 
+# Group Roles
+
+## Roles [/v1/roles]
+
+### Index [GET]
+
++ Response 200 (application/json)
+    + Attributes
+        + id: 1 (number)
+        + name: Frontend (string)
+
 # Group Sessions
 
 ## Sessions [/v1/sessions]
@@ -19,99 +30,69 @@ Get new JWT token
 + Response 200 (application/json)
     + Attributes
         + user (object)
-            + id: 1 (number, required)
-            + name: john Doe (string, required)
-        + token: long_string_jwt_token (string, required)
+            + id: 1 (number)
+            + name: john Doe (string)
+            + email: john@email.com (string)
+        + token: long_string_jwt_token (string)
 
 + Response 400 (application/json)
     + Attributes (Error)
 
-# Group User
+# Group Users
 
-## User [/v1/user]
-
-### Store [POST]
+### Store [POST /v1/users]
 Store new user to database.
 
 + Request (application/json)
     + Attributes (User)
-        + password: 123456 (number, required)
-        + confirm_password: 123456 (number, required)
+        + password: 123456 (string, required)
 
 + Response 201 (application/json)
+    + Attributes
+      + id: 1 (number)
+      + name: 'Jonas Coe' (string)
+      + nickname: 'jonascoe' (string)
 
 + Response 400 (application/json)
     + Attributes (Error Field)
 
-## User [/v1/user{?perPage,page}]
+### Show [GET /v1/users/:nickname]
 
-+ Parameters
-    + perPage: 20 (number, optional)
-    + page: 1 (number, optional)
++ Response 200 (application/json)
+    + Attributes (UserShow)
 
-### Index [GET]
-Get all users.
++ Response 404 (application/json)
+    + Attributes (Error)
+
+### Update [PUT /v1/users]
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
+    + Attributes (User)
+        + password: 123456 (string, required)
+        + confirmPassword: 123456 (string, required)
 
 + Response 200 (application/json)
     + Attributes
-        + users (array)
-            + (User) (object)
-                + id (number, required)
-        + pagination (Pagination)
-
-## User ID [/v1/user/{id}]
-
-+ Parameters
-    + id (number, required)
-
-### Index [GET]
-Get hackathon.
-
-+ Response 200 (application/json)
-    + Attributes (User)
-        + id (number, required)
+      + id: 1 (number)
+      + name: 'Jonas Coe' (string)
+      + nickname: 'jonascoe' (string)
 
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Update [PUT]
+# Group Hackathons
+
+### Store [POST /v1/hackathons]
 
 + Request (application/json)
     + Headers
 
             Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
-
-    + Attributes (User)
-        + password: 123456 (number, required)
-        + confirm_password: 123456 (number, required)
-
-+ Response 200 (application/json)
-
-+ Response 404 (application/json)
-    + Attributes (Error)
-
-### Delete [DELETE]
-
-+ Request (application/json)
-    + Headers
-
-            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
-
-+ Response 204
-
-+ Response 404 (application/json)
-    + Attributes (Error)
-
-# Group Hackathon
-
-## Hackathon [/v1/hackathon]
-
-### Store [POST]
-
-+ Request (application/json)
-    + Headers
-
-            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+    + Attributes (Hackathon)
 
 + Response 201 (application/json)
     + Attributes (Hackathon)
@@ -119,19 +100,13 @@ Get hackathon.
 + Response 400 (application/json)
     + Attributes (Error Field)
 
-## Hackathon Query [/v1/hackathon{?perPage,page}]
-
-+ Parameters
-    + perPage: 20 (number, optional)
-    + page: 1 (number, optional)
-
-### Index [GET]
+### Index [GET /v1/hackathons]
 Get all available hackathons.
 
 + Request (application/json)
     + Headers
-
-            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+        Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+    +
 
 + Response 200 (application/json)
     + Attributes
@@ -140,12 +115,11 @@ Get all available hackathons.
                 + id (number, required)
         + pagination (Pagination)
 
-## Hackathon ID [/v1/hackathon/{id}]
-
 + Parameters
-    + id: 1 (number, required)
+    + perPage: 20 (number, optional)
+    + page: 1 (number, optional)
 
-### Index [GET]
+### Show [GET /v1/hackathon/:id]
 Get hackathon.
 
 + Request (application/json)
@@ -160,7 +134,7 @@ Get hackathon.
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Update [PUT]
+### Update [PUT /v1/hackathon/:id]
 
 + Request (application/json)
     + Headers
@@ -170,11 +144,12 @@ Get hackathon.
     + Attributes (Hackathon)
 
 + Response 200 (application/json)
+    + Attributes (Hackathon)
 
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Delete [DELETE]
+### Delete [DELETE /v1/hackathon/:id]
 
 + Request (application/json)
     + Headers
@@ -194,8 +169,35 @@ Get hackathon.
 + nickname: leomotta (string, required) Unique value
 + bio: user long string bio (string)
 + urls (array)
-    + https://validurl.com.br (string)
-+ role: frontend (string)
+  + https://validurl.com.br (string)
++ role: (array)
+  + 1 (number)
+  + 2 (number)
+
+### UserShow
++ user: (object)
+  + id: 1 (number, required)
+  + name: Leo Motta (string, required)
+  + nickname: leomotta (string, required) Unique value
+  + bio: user long string bio (string)
+  + avatar: (object)
+      + url: "https://urlimage.com"
+      + name: "arquivo.jpg"
+      + path: "cefcaedb6c373b421d533167e509b552.jpg"
++ urls (array)
+  + (object)
+      + url: https://validurl.com.br (string)
+  + (object)
+      + url: https://github.com (string)
++ roles: (array)
+  + (object)
+      + id: 1 (number)
+        + Role: (object)
+         + name: Frontend (string)
+  + (object)
+      + id: 1 (number)
+        + Role: (object)
+          + name: Marketing (string)
 
 ### Hackathon
 
@@ -223,8 +225,8 @@ Get hackathon.
 + message: User friendly error message(string, required)
 + status (number)
 + fields (array)
-    + (object)
-        + field_name: message (string, required)
+  + (object)
+    + field_name: message (string, required)
 
 ### Pagination
 

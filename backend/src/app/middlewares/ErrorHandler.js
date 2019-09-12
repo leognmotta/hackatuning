@@ -1,4 +1,4 @@
-import ApiError from '../../helpers/ApiError';
+import ApiError from '../../config/ApiError';
 
 class ErrorHandler {
   catchNotFound(req, res, next) {

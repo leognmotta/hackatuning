@@ -9,7 +9,6 @@ import AuthMiddleware from '../../app/middlewares/Auth';
 const routes = Router();
 const upload = multer(multerConfig);
 
-// [POST] /v1/files
 routes.post(
   '/files',
   AuthMiddleware,

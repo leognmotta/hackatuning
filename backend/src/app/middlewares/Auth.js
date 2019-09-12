@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
-import ApiError from '../../helpers/ApiError';
+import ApiError from '../../config/ApiError';
 import authConfig from '../../config/authConfig';
 
 class Auth {
@@ -8,12 +8,13 @@ class Auth {
     try {
       const { authorization: authHeader } = req.headers;
 
-      if (!authHeader)
+      if (!authHeader) {
         throw new ApiError(
           'No token provided.',
           'Your request most provide a Bearer token validation to access this route.',
           401
         );
+      }
 
       const [, token] = authHeader.split(' ');
 

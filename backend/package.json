@@ -17,7 +17,7 @@
     "aglio": "aglio -i doc/documentation.apib --theme-variables flatly --theme-template triple -o doc/index.html"
   },
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
     "bee-queue": "^1.2.2",
     "date-fns": "^2.0.1",
     "dotenv": "^8.1.0",

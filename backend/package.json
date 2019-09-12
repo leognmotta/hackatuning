@@ -14,7 +14,7 @@
     "migrate:to": "sequelize db:migrate:undo:all --to",
     "debug": "node --inspect-brk -r sucrase/register src/server.js",
     "fake": "snowboard mock doc/documentation.apib",
-    "aglio": "aglio -i doc/documentation.apib --theme-variables flatly --theme-template triple -o doc/index.html"
+    "aglio": "aglio -i doc/documentation.apib --theme-variables default -o doc/index.html"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

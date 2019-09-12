@@ -17,7 +17,6 @@
     "aglio": "aglio -i doc/documentation.apib --theme-variables flatly --theme-template triple -o doc/index.html"
   },
   "dependencies": {
-    "bcrypt": "^3.0.6",
     "bcryptjs": "^2.4.3",
     "bee-queue": "^1.2.2",
     "date-fns": "^2.0.1",
@@ -35,7 +34,6 @@
     "yup": "^0.27.0"
   },
   "devDependencies": {
-    "aglio": "^2.3.0",
     "eslint": "^6.3.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.3.0",

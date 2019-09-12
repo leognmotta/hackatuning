@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import AuthLayout from '../components/Layout/auth';
 import DefaultLayout from '../components/Layout/default';
 
-//aqui faço a validação se ele está logado
+//checks if user is authenticated
 
 export default function RouteWrapper({
   component: Component,
@@ -27,11 +27,7 @@ export default function RouteWrapper({
   return (
     <Route
       {...rest}
-      render={props => (
-        <Layout>
-          <Component {...props} />
-        </Layout>
-      )}
+      render={props => <Layout childComponent={Component} {...props} />}
     />
   );
 }

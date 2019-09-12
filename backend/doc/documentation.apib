@@ -94,8 +94,10 @@ Store new user to database.
             Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
     + Attributes (Hackathon)
 
-+ Response 201 (application/json)
     + Attributes (Hackathon)
+
++ Response 201 (application/json)
+    + Attributes
 
 + Response 400 (application/json)
     + Attributes (Error Field)
@@ -160,6 +162,61 @@ Get hackathon.
 
 + Response 404 (application/json)
     + Attributes (Error)
+
+# Group Participants
+
+## Participants Query [/v1/hackathon/{id}/participants{?perPage,page}]
+
++ Parameters
+    + perPage: 20 (number, optional)
+    + page: 1 (number, optional)
+
+### Index [GET]
+Get all available hackathons.
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
++ Response 200 (application/json)
+    + Attributes
+        + participants (array)
+            + (User) (object)
+                + id (number, required)
+        + pagination (Pagination)
+
+## Participants [/v1/hackathon/{id}/participants]
+
++ Parameters
+    + id (number, required)
+
+### Store [POST]
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
++ Response 201 (application/json)
+    + Attributes (Hackathon)
+
++ Response 400 (application/json)
+    + Attributes (Error)
+
+### Delete [DELETE]
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
++ Response 204 (application/json)
+    + Attributes (Hackathon)
+
++ Response 400 (application/json)
+    + Attributes (Error)
+
 
 ## Data Structures
 

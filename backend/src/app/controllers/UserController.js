@@ -170,6 +170,23 @@ class UserController {
         throw new ApiError('Not Found', 'User not found!', 404);
       }
 
+      if (user.email !== email) {
+        const token = await jwt.sign({ email }, authConfig.secret, {
+          expiresIn: '1h',
+        });
+
+        req.body.confirm_email = false;
+        req.body.confirm_email_token = token;
+
+        await Queue.add(ConfirmMail.key, {
+          user: {
+            name: user.name,
+            email: user.email,
+          },
+          link: `${process.env.WEB_URL}/confirm?tk=${token}`,
+        });
+      }
+
       if (urls && urls.length > 0) {
         await UserUrl.destroy({
           where: {

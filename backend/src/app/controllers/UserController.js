@@ -35,6 +35,8 @@ class UserController {
         );
       }
 
+      req.body.confirm_email = false;
+
       const user = await User.create(req.body);
 
       if (urls && urls.length > 0) {

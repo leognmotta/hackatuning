@@ -11,6 +11,9 @@ class User extends Model {
         email: Sequelize.STRING,
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
+        recover_pass_token: Sequelize.TEXT,
+        confirm_email: Sequelize.BOOLEAN,
+        confirm_email_token: Sequelize.TEXT,
       },
       {
         sequelize,

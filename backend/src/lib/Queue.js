@@ -6,13 +6,15 @@ import RecoverSuccessMail from '../app/jobs/RecoverSuccessMail';
 import HackathonCreationMail from '../app/jobs/HackathonCreationMail';
 import HackathonUpdateMail from '../app/jobs/HackathonUpdateMail';
 import HackathonDeleteMail from '../app/jobs/HackathonDeleteMail';
+import ConfirmMail from '../app/jobs/ConfirmMail';
 
 const jobs = [
-  RecoverMail, 
+  RecoverMail,
   RecoverSuccessMail,
   HackathonCreationMail,
   HackathonUpdateMail,
   HackathonDeleteMail,
+  ConfirmMail,
 ];
 
 class Queue {

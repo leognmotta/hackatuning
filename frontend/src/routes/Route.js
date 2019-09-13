@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import AuthLayout from '../components/Layout/auth';
 import DefaultLayout from '../components/Layout/default';
 
+import store from '../store';
+
 //checks if user is authenticated
 
 export default function RouteWrapper({
@@ -12,7 +14,7 @@ export default function RouteWrapper({
   isPrivate,
   ...rest
 }) {
-  const signed = false;
+  const { signed } = store.getState().auth;
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;

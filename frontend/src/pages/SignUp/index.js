@@ -28,10 +28,12 @@ export default function SignUp() {
       <Input name="password" type="password" label="Password: " />
       <Input name="bio" maxLength="255" label="Bio: " multiline />
 
-      {/* <Select name="skill" options={roles} label="Skills: " /> */}
-      {/* should be an array */}
+      <Select name="skill" options={roles} label="Skills 1: " />
+      <Select name="skill" options={roles} label="Skills 2: " />
+      <Select name="skill" options={roles} label="Skills 3: " />
 
       <button type="submit">Send</button>
+      <Link to="/">Have an account? Make a login!</Link>
     </Form>
   );
 }

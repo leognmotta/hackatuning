@@ -1,12 +1,15 @@
 import Bee from 'bee-queue';
-import CancellationMail from '../app/jobs/CancellationMail';
+
+import redisConfig from '../config/redis';
+import RecoverMail from '../app/jobs/RecoverMail';
+import RecoverSuccessMail from '../app/jobs/RecoverSuccessMail';
 import HackathonCreationMail from '../app/jobs/HackathonCreationMail';
 import HackathonUpdateMail from '../app/jobs/HackathonUpdateMail';
 import HackathonDeleteMail from '../app/jobs/HackathonDeleteMail';
-import redisConfig from '../config/redis';
 
 const jobs = [
-  CancellationMail,
+  RecoverMail, 
+  RecoverSuccessMail,
   HackathonCreationMail,
   HackathonUpdateMail,
   HackathonDeleteMail,

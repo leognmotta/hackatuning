@@ -86,7 +86,7 @@ Store new user to database.
 
 # Group User Recover
 
-### Store [POST /v1/hackathons]
+### Store [POST /v1/users/recover]
 
 + Request (application/json)
     + Attributes
@@ -101,12 +101,28 @@ Store new user to database.
 + Response 400 (application/json)
     + Attributes (Error Field)
 
-### Update [PUT /v1/hackathons/:token]
+### Update [PUT /v1/users/recover/:token]
 
 + Request (application/json)
     + Attributes
           + password: 123123 (string, required)
           + confirmPassword: 123123 (string, required)
+
++ Response 200 (application/json)
+    + Attributes
+      + id: 1 (number)
+      + name: 'Jonas Coe' (string)
+      + nickname: 'jonascoe' (string)
+
++ Response 400 (application/json)
+    + Attributes (Error Field)
+
+# Group User Email Confirm
+
+### Update [PUT /v1/users/confirm/:token]
+
++ Request (application/json)
+    + Attributes
 
 + Response 200 (application/json)
     + Attributes

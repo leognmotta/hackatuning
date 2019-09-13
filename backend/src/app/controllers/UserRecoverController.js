@@ -53,7 +53,7 @@ class UserRecoverController {
       ).catch(() => {
         throw new ApiError(
           'Invalid token.',
-          'The token provided is not valid.',
+          'The token has expired or is not valid.',
           401
         );
       });
@@ -66,11 +66,7 @@ class UserRecoverController {
       });
 
       if (!user) {
-        throw new ApiError(
-          'Not Found',
-          'User not found or expired token!',
-          404
-        );
+        throw new ApiError('Not Found', 'User not found!', 404);
       }
 
       const { id, nickname, name } = await user.update({

@@ -8,8 +8,9 @@ import User from '../app/models/User';
 import UserUrl from '../app/models/UserUrl';
 import Role from '../app/models/Role';
 import UserRole from '../app/models/UserRole';
+import Hackathon from '../app/models/Hackathon';
 
-const models = [Role, File, User, UserUrl, UserRole];
+const models = [Role, File, User, UserUrl, UserRole, Hackathon];
 
 class Database {
   constructor() {

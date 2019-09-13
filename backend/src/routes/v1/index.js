@@ -4,6 +4,7 @@ import filesRoute from './filesRoute';
 import usersRoute from './usersRoute';
 import rolesRoute from './rolesRoute';
 import sessionsRoute from './sessionsRoute';
+import HackathonsRoute from './hackathonsRoutes';
 
 const routes = Router();
 
@@ -14,5 +15,7 @@ routes.use(usersRoute);
 routes.use(rolesRoute);
 
 routes.use(sessionsRoute);
+
+routes.use(HackathonsRoute);
 
 export default routes;

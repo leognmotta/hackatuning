@@ -13,6 +13,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allownull: true,
+        defaultValue: 1,
       },
       organizer_id: {
         type: Sequelize.INTEGER,
@@ -34,7 +35,7 @@ module.exports = {
         allowNull: false,
       },
       location: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       online: {
@@ -48,7 +49,15 @@ module.exports = {
       },
       deadline_subscription: {
         type: Sequelize.DATE,
+        allowNull: true,
+      },
+      event_ending: {
+        type: Sequelize.DATE,
         allowNull: false,
+      },
+      deadline_team_creation: {
+        type: Sequelize.DATE,
+        allowNull: true,
       },
       awards: {
         type: Sequelize.TEXT,

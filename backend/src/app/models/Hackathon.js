@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-class User extends Model {
+class Hackathon extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -11,6 +11,8 @@ class User extends Model {
         online: Sequelize.BOOLEAN,
         event_date: Sequelize.DATE,
         deadline_subscription: Sequelize.DATE,
+        event_ending: Sequelize.DATE,
+        deadline_team_creation: Sequelize.DATE,
         awards: Sequelize.TEXT,
         min_participants: Sequelize.INTEGER,
         max_participants: Sequelize.INTEGER,
@@ -32,4 +34,4 @@ class User extends Model {
   }
 }
 
-export default User;
+export default Hackathon;

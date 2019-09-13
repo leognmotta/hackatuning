@@ -15,5 +15,15 @@ routes.post(
 );
 
 routes.get('/hackathons', AuthMiddleware, HackathonController.index);
+routes.get('/hackathons/:id', AuthMiddleware, HackathonController.show);
+
+routes.put(
+  '/hackathons/:id',
+  AuthMiddleware,
+  HackathonValidator.update,
+  HackathonController.update
+);
+
+routes.delete('/hackathons/:id', AuthMiddleware, HackathonController.delete);
 
 export default routes;

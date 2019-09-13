@@ -26,13 +26,14 @@ class HackathonController {
             [Op.gt]: new Date(),
           },
         },
+        attributes: ['id', 'title', 'subtitle', 'description'],
         limit: perPage,
         offset: (page - 1) * perPage,
         include: [
           {
             model: File,
-            required: true,
             as: 'cover',
+            attributes: ['id', 'url', 'path'],
           },
         ],
       });
@@ -60,11 +61,55 @@ class HackathonController {
     }
   }
 
-  async show() {}
+  async show(req, res, next) {
+    try {
+      const { id } = req.params;
 
-  async update() {}
+      const hackathon = await Hackathon.findByPk(id);
 
-  async delete() {}
+      if (!hackathon)
+        throw new ApiError(
+          'Not found',
+          `The Hackathon event was not found with id: ${id}`,
+          404
+        );
+
+      return res.json(hackathon);
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  async update(req, res, next) {
+    try {
+      const { id } = req.params;
+
+      const hackathon = await Hackathon.findByPk(id);
+
+      if (!hackathon)
+        throw new ApiError(
+          'Not found',
+          `The Hackathon event was not found with id: ${id}`,
+          404
+        );
+
+      return res.json(hackathon);
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  delete(req, res, next) {
+    try {
+      const { id } = req.params;
+
+      Hackathon.destroy({ where: { id } });
+
+      return res.status(204).end();
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
 
 export default new HackathonController();

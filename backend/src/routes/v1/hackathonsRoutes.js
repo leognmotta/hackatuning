@@ -14,4 +14,6 @@ routes.post(
   HackathonController.store
 );
 
+routes.get('/hackathons', AuthMiddleware, HackathonController.index);
+
 export default routes;

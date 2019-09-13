@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 import ApiError from '../../config/ApiError';
 import File from '../models/File';
+import User from '../models/User';
 import Hackathon from '../models/Hackathon';
 
 class HackathonController {
@@ -65,7 +66,28 @@ class HackathonController {
     try {
       const { id } = req.params;
 
-      const hackathon = await Hackathon.findByPk(id);
+      const hackathon = await Hackathon.findOne({
+        where: { id },
+        include: [
+          {
+            model: File,
+            as: 'cover',
+            attributes: ['id', 'url', 'path'],
+          },
+          {
+            model: User,
+            as: 'organizer',
+            attributes: ['id', 'name', 'nickname'],
+            include: [
+              {
+                model: File,
+                as: 'avatar',
+                attributes: ['id', 'url', 'path'],
+              },
+            ],
+          },
+        ],
+      });
 
       if (!hackathon)
         throw new ApiError(

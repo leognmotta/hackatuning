@@ -113,15 +113,22 @@ Get all available hackathons.
 + Response 200 (application/json)
     + Attributes
         + hackathons (array)
-            + (Hackathon) (object)
+            + (object)
                 + id (number, required)
+                + title: title (string, required)
+                + subtitle (string, required)
+                + description (string, required)
+                + cover (object)
+                    + url: http://localhost:3333/files/1dbab0a07cef66b17bafa6eba0644c21.png (string, required)
+                    + id (number, required)
+                    + path: 1dbab0a07cef66b17bafa6eba0644c21.png (string, required)
         + pagination (Pagination)
 
 + Parameters
     + perPage: 20 (number, optional)
     + page: 1 (number, optional)
 
-### Show [GET /v1/hackathon/:id]
+### Show [GET /v1/hackathons/:id]
 Get hackathon.
 
 + Request (application/json)
@@ -132,11 +139,17 @@ Get hackathon.
 + Response 200 (application/json)
     + Attributes (Hackathon)
         + id (number, required)
+        + createdAt: date (string, required)
+        + updatedAt: date (string, required)
+        + cover (object)
+            + url: http://localhost:3333/files/1dbab0a07cef66b17bafa6eba0644c21.png (string, required)
+            + id (number, required)
+            + path: 1dbab0a07cef66b17bafa6eba0644c21.png (string, required)
 
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Update [PUT /v1/hackathon/:id]
+### Update [PUT /v1/hackathons/:id]
 
 + Request (application/json)
     + Headers
@@ -151,7 +164,7 @@ Get hackathon.
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Delete [DELETE /v1/hackathon/:id]
+### Delete [DELETE /v1/hackathons/:id]
 
 + Request (application/json)
     + Headers
@@ -364,19 +377,19 @@ Get hackathon.
 
 ### Hackathon
 
-+ organizer: 1 (number, required) belongs to user id
 + title: Hackathon Title (string, required)
 + subtitle: The awesome hackathon subtitle (string, required)
 + description: Textare description (string, required)
++ organizer_id: 1 (number, required) belongs to user id
 + location: address (string, required)
 + online: true (boolean, required)
-+ event_date: UTC date (string, required)
-+ ending_date: Event ending date UTC (string, required)
-+ deadline_subscription: UTC date (string, required)
-+ min_participants: 0 (number, required)
++ event_date: 2019-09-25T12:00:00-03:00 (string, required)
++ event_ending: 2019-09-25T12:00:00-03:00 (string, required)
++ deadline_subscription: 2019-09-25T12:00:00-03:00 (string, required)
++ deadline_team_creation: 2019-09-25T12:00:00-03:00 (string, required)
++ min_participants: 1 (number, required)
 + max_participants: 1000 (number, required)
 + awards: text area string (string, required)
-+ cover_url: https://imageurl.com.br/cover (string, required)
 
 ### Error
 + name: Error title (string, required)

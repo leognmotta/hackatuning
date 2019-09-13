@@ -4,12 +4,34 @@ import File from '../models/File';
 import User from '../models/User';
 import Hackathon from '../models/Hackathon';
 
+import Queue from '../../lib/Queue';
+import HackathonCreationMail from '../jobs/HackathonCreationMail';
+
 class HackathonController {
   async store(req, res, next) {
     try {
       req.body.organizer_id = req.userId;
 
       const hackathon = await Hackathon.create(req.body);
+
+      const { name: organizer, email } = await User.findByPk(req.userId);
+      const {
+        title,
+        event_date,
+        event_ending,
+        deadline_subscription,
+        deadline_team_creation,
+      } = hackathon;
+
+      await Queue.add(HackathonCreationMail.key, {
+        organizer,
+        email,
+        title,
+        event_date,
+        event_ending,
+        deadline_subscription,
+        deadline_team_creation,
+      });
 
       return res.json(hackathon);
     } catch (error) {

@@ -16,7 +16,7 @@ class HackathonValidator {
         event_date: Yup.date().required(),
         event_ending: Yup.date().required(),
         deadline_subscription: Yup.date().required(),
-        deadline_team_creation: Yup.date(),
+        deadline_team_creation: Yup.date().required(),
         awards: Yup.string().required(),
         min_participantsitle: Yup.number().positive(),
         max_participants: Yup.number().positive(),

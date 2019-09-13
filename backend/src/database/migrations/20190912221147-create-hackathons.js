@@ -20,7 +20,7 @@ module.exports = {
         references: { model: 'users', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        allownull: true,
+        allownull: false,
       },
       title: {
         type: Sequelize.STRING,
@@ -49,7 +49,7 @@ module.exports = {
       },
       deadline_subscription: {
         type: Sequelize.DATE,
-        allowNull: true,
+        allowNull: false,
       },
       event_ending: {
         type: Sequelize.DATE,
@@ -57,7 +57,7 @@ module.exports = {
       },
       deadline_team_creation: {
         type: Sequelize.DATE,
-        allowNull: true,
+        allowNull: false,
       },
       awards: {
         type: Sequelize.TEXT,

@@ -6,6 +6,8 @@ import Hackathon from '../models/Hackathon';
 
 import Queue from '../../lib/Queue';
 import HackathonCreationMail from '../jobs/HackathonCreationMail';
+import HackathonUpdateMail from '../jobs/HackathonUpdateMail';
+import HackathonDeleteMail from '../jobs/HackathonDeleteMail';
 
 class HackathonController {
   async store(req, res, next) {
@@ -137,15 +139,59 @@ class HackathonController {
           404
         );
 
+      if (hackathon.organizer_id !== req.userId)
+        throw new ApiError(
+          'Unauthorized',
+          `You need to own the event to update it.`,
+          401
+        );
+
+      const { name: organizer, email } = await User.findByPk(req.userId);
+
+      const {
+        title,
+        event_date,
+        event_ending,
+        deadline_subscription,
+        deadline_team_creation,
+      } = await hackathon.update(req.body);
+
+      await Queue.add(HackathonUpdateMail.key, {
+        organizer,
+        email,
+        title,
+        event_date,
+        event_ending,
+        deadline_subscription,
+        deadline_team_creation,
+      });
+
       return res.json(hackathon);
     } catch (error) {
       return next(error);
     }
   }
 
-  delete(req, res, next) {
+  async delete(req, res, next) {
     try {
       const { id } = req.params;
+
+      const { organizer_id, title } = await Hackathon.findByPk(id);
+
+      if (organizer_id !== req.userId)
+        throw new ApiError(
+          'Unauthorized',
+          `You need to own the event to update it.`,
+          401
+        );
+
+      const { name: organizer, email } = await User.findByPk(req.userId);
+
+      await Queue.add(HackathonDeleteMail.key, {
+        organizer,
+        email,
+        title,
+      });
 
       Hackathon.destroy({ where: { id } });
 

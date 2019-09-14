@@ -31,6 +31,11 @@ class User extends Model {
 
   static associate(models) {
     this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
+    this.belongsToMany(models.Role, {
+      through: 'UserRole',
+      as: 'roles',
+      foreignKey: 'user_id',
+    });
 
     // this.belongsToMany(models.UserUrl, {
     //   through: 'user_urls',

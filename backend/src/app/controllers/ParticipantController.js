@@ -4,7 +4,7 @@ import Participant from '../models/Participant';
 import Hackathon from '../models/Hackathon';
 import User from '../models/User';
 import File from '../models/File';
-import UserRole from '../models/UserRole';
+import Role from '../models/Role';
 
 class ParticipantController {
   async store(req, res, next) {
@@ -77,9 +77,10 @@ class ParticipantController {
                 attributes: ['id', 'url', 'path'],
               },
               {
-                model: UserRole,
+                model: Role,
                 as: 'roles',
                 through: { attributes: [] },
+                attributes: ['id', 'name'],
               },
             ],
           },

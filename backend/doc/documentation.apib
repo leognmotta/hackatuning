@@ -155,6 +155,7 @@ Get all available hackathons.
                     + url: http://localhost:3333/files/1dbab0a07cef66b17bafa6eba0644c21.png (string, required)
                     + id (number, required)
                     + path: 1dbab0a07cef66b17bafa6eba0644c21.png (string, required)
+                + isParticipant: true (boolean, required) if user is participant or not
         + pagination (Pagination)
 
 + Parameters
@@ -227,7 +228,12 @@ Get hackathon.
         + participants (array)
             + (User) (object)
                 + id (number, required)
+                + avatar (object)
+                    + url: image_url (required, string)
         + pagination (Pagination)
+
++ Response 400 (application/json)
+    + Attributes (Error)
 
 ### Store [POST /v1/hackathons/{id}/participants]
 

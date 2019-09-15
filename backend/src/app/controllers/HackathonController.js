@@ -65,20 +65,6 @@ class HackathonController {
         order: [['createdAt', 'DESC']],
       });
 
-      await Promise.all(
-        hackathons.rows.map(async (hackathon, index) => {
-          const isParticipant = await Participant.findOne({
-            where: { hackathon_id: hackathon.id, user_id: req.userId },
-          });
-
-          if (isParticipant) {
-            hackathons.rows[index].dataValues.isParticipant = true;
-          } else {
-            hackathons.rows[index].dataValues.isParticipant = false;
-          }
-        })
-      );
-
       const maxPage = Math.ceil(hackathons.count / perPage);
       const previousPage = parseInt(page, 10) - 1;
       const hasPreviousPage = previousPage >= 1;

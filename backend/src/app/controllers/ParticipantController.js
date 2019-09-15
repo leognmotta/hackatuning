@@ -7,6 +7,10 @@ import File from '../models/File';
 import Role from '../models/Role';
 import UserUrl from '../models/UserUrl';
 
+import Queue from '../../lib/Queue';
+import ParticipantSubscribeMail from '../jobs/ParticipantSubscribeMail';
+import ParticipantUnsubscribeMail from '../jobs/ParticipantUnsubscribeMail';
+
 class ParticipantController {
   async store(req, res, next) {
     try {
@@ -44,6 +48,16 @@ class ParticipantController {
       await Participant.create({
         hackathon_id: id,
         user_id: req.userId,
+      });
+
+      const user = await User.findByPk(req.userId);
+
+      await Queue.add(ParticipantSubscribeMail.key, {
+        name: user.name,
+        email: user.email,
+        hackathon_title: hackathon.title,
+        event_date: hackathon.event_date,
+        deadline_team_creation: hackathon.deadline_team_creation,
       });
 
       return res.json();
@@ -131,9 +145,19 @@ class ParticipantController {
     }
   }
 
-  delete(req, res, next) {
+  async delete(req, res, next) {
     try {
       const { id } = req.params;
+
+      const { name, email } = await User.findByPk(req.userId);
+      const { title, deadline_subscription } = await Hackathon.findByPk(id);
+
+      await Queue.add(ParticipantUnsubscribeMail.key, {
+        name,
+        email,
+        title,
+        deadline_subscription,
+      });
 
       Participant.destroy({
         where: {

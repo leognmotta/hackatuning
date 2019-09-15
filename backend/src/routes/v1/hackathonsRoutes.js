@@ -14,7 +14,7 @@ routes.post(
   HackathonController.store
 );
 
-routes.get('/hackathons', AuthMiddleware, HackathonController.index);
+routes.get('/hackathons', HackathonController.index);
 routes.get('/hackathons/:id', AuthMiddleware, HackathonController.show);
 
 routes.put(

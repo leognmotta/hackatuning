@@ -18,4 +18,10 @@ routes.post(
   ParticipantController.store
 );
 
+routes.delete(
+  '/hackathons/:id/participants',
+  AuthMiddleware,
+  ParticipantController.delete
+);
+
 export default routes;

@@ -130,6 +130,23 @@ class ParticipantController {
       return next(error);
     }
   }
+
+  delete(req, res, next) {
+    try {
+      const { id } = req.params;
+
+      Participant.destroy({
+        where: {
+          user_id: req.userId,
+          hackathon_id: id,
+        },
+      });
+
+      return res.status(204).end();
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
 
 export default new ParticipantController();

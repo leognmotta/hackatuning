@@ -23,7 +23,7 @@ class UserRecoverController {
         expiresIn: '1h',
       });
 
-      const { id, nickname, name, recover_pass_token } = await user.update({
+      const { recover_pass_token } = await user.update({
         recover_pass_token: token,
       });
 
@@ -36,7 +36,7 @@ class UserRecoverController {
         link: `${process.env.WEB_URL}/recover?tk=${token}`,
       });
 
-      return res.json({ id, nickname, name });
+      return res.json();
     } catch (error) {
       return next(error);
     }

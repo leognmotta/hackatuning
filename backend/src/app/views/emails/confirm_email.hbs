@@ -1,5 +1,11 @@
-<strong>Hi, {{ user }}</strong>
-<p>Congratulations on your registration, now you just need to confirm your email, it is very simple just click the link below:</p>
-<p>
-  <strong>Link:</strong> <a href="{{ link }}" title="Confirm">{{ link }}</a>
+<h1 class="content__title m-bottom">
+  Well come <span class="cl-blue">{{ user }}</span>!
+</h1>
+
+<p class="content__paragraph m-bottom">
+  To use our services, please confirm your email by clicking the button below:
 </p>
+
+<a href="{{ link }}" title="Confirm your email" class="btn btn--blue">
+  CONFIRM YOUR EMAIL
+</a>

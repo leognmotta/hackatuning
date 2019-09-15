@@ -3,6 +3,7 @@ import ApiError from '../../config/ApiError';
 import UserUrl from '../models/UserUrl';
 import UserRole from '../models/UserRole';
 import Role from '../models/Role';
+import PivotUrl from '../models/PivotUrl';
 
 class UserController {
   async store(req, res, next) {
@@ -42,7 +43,12 @@ class UserController {
       if (urls && urls.length > 0) {
         await Promise.all(
           urls.map(async url => {
-            await UserUrl.create({ url, user_id: user.id });
+            const userUrl = await UserUrl.create({ url, user_id: user.id });
+
+            await PivotUrl.create({
+              user_url_id: userUrl.id,
+              user_id: user.id,
+            });
           })
         );
       }
@@ -161,7 +167,12 @@ class UserController {
 
         await Promise.all(
           urls.map(async url => {
-            await UserUrl.create({ url, user_id: user.id });
+            const userUrl = await UserUrl.create({ url, user_id: user.id });
+
+            await PivotUrl.create({
+              user_url_id: userUrl.id,
+              user_id: user.id,
+            });
           })
         );
       }

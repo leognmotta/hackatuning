@@ -1,8 +1,13 @@
+import jwt from 'jsonwebtoken';
+
+import authConfig from '../../config/authConfig';
 import User from '../models/User';
 import ApiError from '../../config/ApiError';
 import UserUrl from '../models/UserUrl';
 import UserRole from '../models/UserRole';
 import Role from '../models/Role';
+import Queue from '../../lib/Queue';
+import ConfirmMail from '../jobs/ConfirmMail';
 import PivotUrl from '../models/PivotUrl';
 
 class UserController {
@@ -36,9 +41,22 @@ class UserController {
         );
       }
 
+      const token = await jwt.sign({ email }, authConfig.secret, {
+        expiresIn: '1h',
+      });
+
       req.body.confirm_email = false;
+      req.body.confirm_email_token = token;
 
       const user = await User.create(req.body);
+
+      await Queue.add(ConfirmMail.key, {
+        user: {
+          name: user.name,
+          email: user.email,
+        },
+        link: `${process.env.WEB_URL}/confirm?tk=${token}`,
+      });
 
       if (urls && urls.length > 0) {
         await Promise.all(
@@ -156,6 +174,23 @@ class UserController {
 
       if (!user) {
         throw new ApiError('Not Found', 'User not found!', 404);
+      }
+
+      if (user.email !== email) {
+        const token = await jwt.sign({ email }, authConfig.secret, {
+          expiresIn: '1h',
+        });
+
+        req.body.confirm_email = false;
+        req.body.confirm_email_token = token;
+
+        await Queue.add(ConfirmMail.key, {
+          user: {
+            name: user.name,
+            email: user.email,
+          },
+          link: `${process.env.WEB_URL}/confirm?tk=${token}`,
+        });
       }
 
       if (urls && urls.length > 0) {

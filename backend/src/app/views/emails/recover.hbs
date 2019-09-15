@@ -1,5 +1,7 @@
-<strong>Hi, {{ user }}</strong>
-<p>To recover your password just click the link below:</p>
-<p>
-  <strong>Link:</strong> <a href="{{ link }}" title="Recover">{{ link }}</a>
-</p>
+<h1 class="m-bottom">Hi <span class="cl-blue">{{ user }}</span>!</h1>
+
+<p class="content__paragraph m-bottom">To recover your password just click the button below:</p>
+
+<a href="{{ link }}" title="Recover password" class="btn btn--blue">
+  RECOVER PASSWORD
+</a>

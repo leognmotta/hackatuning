@@ -13,6 +13,7 @@ class HackathonDeleteMail {
       subject: 'Hackathon deleted!',
       template: 'hackathon_delete',
       context: {
+        api: process.env.APP_URL,
         organizer,
         title,
       },

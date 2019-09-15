@@ -7,6 +7,6 @@ export default {
     pass: process.env.MAIL_PASS,
   },
   default: {
-    from: 'Equipe Hackatuning <noreply@hackatuning.com>',
+    from: 'Team Hackatuning <noreply@hackatuning.com>',
   },
 };

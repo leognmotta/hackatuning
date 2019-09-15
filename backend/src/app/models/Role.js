@@ -13,6 +13,14 @@ class Role extends Model {
 
     return this;
   }
+
+  static associate(models) {
+    this.belongsToMany(models.User, {
+      through: 'UserRole',
+      as: 'users',
+      foreignKey: 'role_id',
+    });
+  }
 }
 
 export default Role;

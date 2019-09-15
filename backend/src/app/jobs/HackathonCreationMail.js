@@ -22,6 +22,7 @@ class HackathonCreationMail {
       subject: 'Hackathon created!',
       template: 'hackathon_creation',
       context: {
+        api: process.env.APP_URL,
         organizer,
         title,
         date: format(parseISO(event_date), "MMMM dd', at' H:mm'h'"),

@@ -6,6 +6,8 @@ import RecoverSuccessMail from '../app/jobs/RecoverSuccessMail';
 import HackathonCreationMail from '../app/jobs/HackathonCreationMail';
 import HackathonUpdateMail from '../app/jobs/HackathonUpdateMail';
 import HackathonDeleteMail from '../app/jobs/HackathonDeleteMail';
+import ParticipantSubscribeMail from '../app/jobs/ParticipantSubscribeMail';
+import ParticipantUnsubscribeMail from '../app/jobs/ParticipantUnsubscribeMail';
 import ConfirmMail from '../app/jobs/ConfirmMail';
 
 const jobs = [
@@ -14,6 +16,8 @@ const jobs = [
   HackathonCreationMail,
   HackathonUpdateMail,
   HackathonDeleteMail,
+  ParticipantSubscribeMail,
+  ParticipantUnsubscribeMail,
   ConfirmMail,
 ];
 

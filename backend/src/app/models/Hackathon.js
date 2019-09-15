@@ -31,6 +31,11 @@ class Hackathon extends Model {
       foreignKey: 'organizer_id',
       as: 'organizer',
     });
+    this.belongsToMany(models.User, {
+      through: 'Participant',
+      as: 'participants',
+      foreignKey: 'hackathon_id',
+    });
   }
 }
 

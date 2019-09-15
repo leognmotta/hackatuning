@@ -10,11 +10,12 @@ class ConfirmMail {
 
     await Mail.sendMail({
       to: `${user.name} <${user.email}>`,
-      subject: 'Confirm email',
+      subject: 'Thank you for signing up, please confirm your email!',
       template: 'confirm_email',
       context: {
-        user: user.name,
+        user: user.name.split(' ')[0] ? user.name.split(' ')[0] : user.name,
         link,
+        api: process.env.APP_URL,
       },
     });
   }

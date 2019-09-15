@@ -31,12 +31,21 @@ class User extends Model {
 
   static associate(models) {
     this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
-
-    // this.belongsToMany(models.UserUrl, {
-    //   through: 'user_urls',
-    //   otherKey: 'id',
-    //   as: 'urls',
-    // });
+    this.belongsToMany(models.Role, {
+      through: 'UserRole',
+      as: 'roles',
+      foreignKey: 'user_id',
+    });
+    this.belongsToMany(models.Hackathon, {
+      through: 'Participant',
+      as: 'hackathons',
+      foreignKey: 'user_id',
+    });
+    this.belongsToMany(models.UserUrl, {
+      through: 'PivotUrl',
+      as: 'urls',
+      foreignKey: 'user_id',
+    });
   }
 
   checkPassword(password) {

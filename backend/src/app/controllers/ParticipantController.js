@@ -29,6 +29,18 @@ class ParticipantController {
         );
       }
 
+      const isParticipant = await Participant.findOne({
+        where: { user_id: req.userId, hackathon_id: id },
+      });
+
+      if (isParticipant) {
+        throw new ApiError(
+          'Already a participant',
+          'You are already a participant in this hackathon',
+          400
+        );
+      }
+
       await Participant.create({
         hackathon_id: id,
         user_id: req.userId,

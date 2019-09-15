@@ -3,6 +3,7 @@ import ApiError from '../../config/ApiError';
 import File from '../models/File';
 import User from '../models/User';
 import Hackathon from '../models/Hackathon';
+import Participant from '../models/Participant';
 
 import Queue from '../../lib/Queue';
 import HackathonCreationMail from '../jobs/HackathonCreationMail';
@@ -62,6 +63,22 @@ class HackathonController {
           },
         ],
       });
+
+      await Promise.all(
+        hackathons.rows.map(async (hackathon, index) => {
+          const isParticipant = await Participant.findOne({
+            where: { hackathon_id: hackathon.id, user_id: req.userId },
+          });
+
+          if (isParticipant) {
+            hackathons.rows[index].dataValues.isParticipant = true;
+          } else {
+            hackathons.rows[index].dataValues.isParticipant = false;
+          }
+        })
+      );
+
+      console.log(hackathons.rows[0].dataValues);
 
       const maxPage = Math.ceil(hackathons.count / perPage);
       const previousPage = parseInt(page, 10) - 1;

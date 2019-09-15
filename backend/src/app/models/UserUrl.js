@@ -16,6 +16,11 @@ class UserUrl extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'user_id' });
+    this.belongsToMany(models.User, {
+      through: 'PivotUrl',
+      as: 'users',
+      foreignKey: 'user_url_id',
+    });
   }
 }
 

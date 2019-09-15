@@ -211,7 +211,7 @@ Get hackathon.
 
 # Group Participants
 
-### Index [GET /v1/hackathon/{id}/participants{?perPage,page}]
+### Index [GET /v1/hackathons/{id}/participants{?perPage,page}]
 
 + Parameters
     + perPage: 20 (number, optional)
@@ -229,7 +229,7 @@ Get hackathon.
                 + id (number, required)
         + pagination (Pagination)
 
-### Store [POST /v1/hackathon/{id}/participants]
+### Store [POST /v1/hackathons/{id}/participants]
 
 + Parameters
     + id (number, required)
@@ -245,7 +245,7 @@ Get hackathon.
 + Response 400 (application/json)
     + Attributes (Error)
 
-### Delete [DELETE /v1/hackathon/{id}/participants]
+### Delete [DELETE /v1/hackathons/{id}/participants]
 
 + Parameters
     + id (number, required)

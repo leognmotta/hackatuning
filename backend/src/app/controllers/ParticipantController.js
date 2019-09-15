@@ -5,6 +5,7 @@ import Hackathon from '../models/Hackathon';
 import User from '../models/User';
 import File from '../models/File';
 import Role from '../models/Role';
+import UserUrl from '../models/UserUrl';
 
 class ParticipantController {
   async store(req, res, next) {
@@ -14,8 +15,8 @@ class ParticipantController {
       const hackathon = await Hackathon.findOne({
         where: {
           id,
-          event_date: {
-            [Op.gt]: new Date(),
+          deadline_subscription: {
+            [Op.gte]: new Date(),
           },
         },
       });
@@ -83,6 +84,12 @@ class ParticipantController {
                 as: 'roles',
                 through: { attributes: [] },
                 attributes: ['id', 'name'],
+              },
+              {
+                model: UserUrl,
+                as: 'urls',
+                through: { attributes: [] },
+                attributes: ['id', 'url'],
               },
             ],
           },

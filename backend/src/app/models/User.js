@@ -36,12 +36,16 @@ class User extends Model {
       as: 'roles',
       foreignKey: 'user_id',
     });
-
-    // this.belongsToMany(models.UserUrl, {
-    //   through: 'user_urls',
-    //   otherKey: 'id',
-    //   as: 'urls',
-    // });
+    this.belongsToMany(models.Hackathon, {
+      through: 'Participant',
+      as: 'hackathons',
+      foreignKey: 'user_id',
+    });
+    this.belongsToMany(models.UserUrl, {
+      through: 'PivotUrl',
+      as: 'urls',
+      foreignKey: 'user_id',
+    });
   }
 
   checkPassword(password) {

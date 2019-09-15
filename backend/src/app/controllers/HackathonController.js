@@ -3,7 +3,6 @@ import ApiError from '../../config/ApiError';
 import File from '../models/File';
 import User from '../models/User';
 import Hackathon from '../models/Hackathon';
-import Participant from '../models/Participant';
 
 import Queue from '../../lib/Queue';
 import HackathonCreationMail from '../jobs/HackathonCreationMail';

@@ -5,6 +5,7 @@ import UserValidator from '../../app/validators/UserValidator';
 import AuthMiddleware from '../../app/middlewares/Auth';
 import UserRecoverController from '../../app/controllers/UserRecoverController';
 import UserRecoverValidator from '../../app/validators/UserRecoverValidator';
+import UserConfirmEmailController from '../../app/controllers/UserConfirmEmailController';
 
 const routes = Router();
 
@@ -30,5 +31,7 @@ routes.put(
   UserRecoverValidator.update,
   UserRecoverController.update
 );
+
+routes.put('/users/confirm/:token', UserConfirmEmailController.update);
 
 export default routes;

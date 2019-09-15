@@ -1,22 +1,23 @@
 import Mail from '../../lib/Mail';
 
-class RecoverSuccessMail {
+class ConfirmMail {
   get key() {
-    return 'RecoverSuccessMail';
+    return 'ConfirmMail';
   }
 
   async handle({ data }) {
-    const { user } = data;
+    const { user, link } = data;
 
     await Mail.sendMail({
       to: `${user.name} <${user.email}>`,
-      subject: 'Password changed',
-      template: 'recover_success',
+      subject: 'Confirm email',
+      template: 'confirm_email',
       context: {
         user: user.name,
+        link,
       },
     });
   }
 }
 
-export default new RecoverSuccessMail();
+export default new ConfirmMail();

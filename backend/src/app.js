@@ -25,6 +25,10 @@ class App {
     this.app.use(cors({ origin: process.env.WEB_URL }));
     this.app.use(express.json());
     this.app.use(
+      '/static',
+      express.static(path.resolve(__dirname, '..', 'tmp', 'static'))
+    );
+    this.app.use(
       '/files',
       express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
     );

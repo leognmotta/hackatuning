@@ -1,51 +1,51 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2019-09-16T02:30:45.656Z",
+  "__export_date": "2019-09-16T05:27:54.807Z",
   "__export_source": "insomnia.desktop.app:v6.6.2",
   "resources": [
     {
-      "_id": "req_75ad14bed428485898a00256be16e5e4",
+      "_id": "req_8a8af30dc9044c518c7cd28e78cfa0c2",
       "authentication": {},
-      "body": {
-        "mimeType": "application/json",
-        "text": "{\n\t\"email\": \"adam51.dias@outlook.br\",\n\t\"password\": \"123123\"\n}"
-      },
-      "created": 1568277391551,
+      "body": {},
+      "created": 1568404124412,
       "description": "",
-      "headers": [
-        {
-          "id": "pair_d84a55f1afda4cd9ab84b858af4b5366",
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
+      "headers": [],
       "isPrivate": false,
-      "metaSortKey": -1568277391551,
-      "method": "POST",
-      "modified": 1568597716559,
-      "name": "Store",
+      "metaSortKey": -1568404124412,
+      "method": "PUT",
+      "modified": 1568404166123,
+      "name": "Update",
       "parameters": [],
-      "parentId": "fld_00291d6d430f4f0d85e9a01ac6e1c1d4",
+      "parentId": "fld_d8f88bf98dbd48919c18b2205c2e3cc6",
       "settingDisableRenderRequestBody": false,
       "settingEncodeUrl": true,
       "settingRebuildPath": true,
       "settingSendCookies": true,
       "settingStoreCookies": true,
-      "url": "{{ v1_url  }}/sessions",
+      "url": "{{ v1_url  }}/users/confirm/{{ tokenEmailConfirm  }}",
       "_type": "request"
     },
     {
-      "_id": "fld_00291d6d430f4f0d85e9a01ac6e1c1d4",
-      "created": 1568277381521,
+      "_id": "fld_d8f88bf98dbd48919c18b2205c2e3cc6",
+      "created": 1568404115108,
       "description": "",
       "environment": {},
       "environmentPropertyOrder": null,
-      "metaSortKey": -1568277381521,
-      "modified": 1568277381521,
-      "name": "Sessions",
+      "metaSortKey": -1568404115109,
+      "modified": 1568404115108,
+      "name": "User Email Confirm",
       "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
       "_type": "request_group"
+    },
+    {
+      "_id": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "created": 1568219659255,
+      "description": "",
+      "modified": 1568258109252,
+      "name": "Hackatuning",
+      "parentId": null,
+      "_type": "workspace"
     },
     {
       "_id": "jar_77a239b775b9c8d9afc82851d4c475d1ff66f939",

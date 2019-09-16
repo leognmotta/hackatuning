@@ -1,1 +1,60 @@
-{"_type":"export","__export_format":4,"__export_date":"2019-09-16T02:31:29.220Z","__export_source":"insomnia.desktop.app:v6.6.2","resources":[{"_id":"req_82226cac0cdc42068096ec71932c06ad","authentication":{},"body":{},"created":1568264609569,"description":"","headers":[],"isPrivate":false,"metaSortKey":-1568264609569,"method":"GET","modified":1568264619178,"name":"Index","parameters":[],"parentId":"fld_3940d85e63de46b5810e8acd5d130a95","settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingSendCookies":true,"settingStoreCookies":true,"url":"{{ v1_url  }}/roles","_type":"request"},{"_id":"fld_3940d85e63de46b5810e8acd5d130a95","created":1568264603467,"description":"","environment":{},"environmentPropertyOrder":null,"metaSortKey":-1568264603467,"modified":1568264603467,"name":"Roles","parentId":"wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e","_type":"request_group"},{"_id":"wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e","created":1568219659255,"description":"","modified":1568258109252,"name":"Hackatuning","parentId":null,"_type":"workspace"},{"_id":"env_77a239b775b9c8d9afc82851d4c475d1ff66f939","color":null,"created":1568219659586,"data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTU2ODUxMjAwMSwiZXhwIjoxNTY5MTE2ODAxfQ.du9L6VEBOFzgtraeLrB7nEBTbqGXF2WhYqgStTWE0c4","v1_url":"http://localhost:3333/v1"},"dataPropertyOrder":{"&":["v1_url","token"]},"isPrivate":false,"metaSortKey":1568219659586,"modified":1568512010003,"name":"Base Environment","parentId":"wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e","_type":"environment"},{"_id":"jar_77a239b775b9c8d9afc82851d4c475d1ff66f939","cookies":[],"created":1568219659590,"modified":1568219659590,"name":"Default Jar","parentId":"wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e","_type":"cookie_jar"}]}
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2019-09-16T02:31:29.220Z",
+  "__export_source": "insomnia.desktop.app:v6.6.2",
+  "resources": [
+    {
+      "_id": "req_82226cac0cdc42068096ec71932c06ad",
+      "authentication": {},
+      "body": {},
+      "created": 1568264609569,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568264609569,
+      "method": "GET",
+      "modified": 1568264619178,
+      "name": "Index",
+      "parameters": [],
+      "parentId": "fld_3940d85e63de46b5810e8acd5d130a95",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/roles",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_3940d85e63de46b5810e8acd5d130a95",
+      "created": 1568264603467,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1568264603467,
+      "modified": 1568264603467,
+      "name": "Roles",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "created": 1568219659255,
+      "description": "",
+      "modified": 1568258109252,
+      "name": "Hackatuning",
+      "parentId": null,
+      "_type": "workspace"
+    },
+    {
+      "_id": "jar_77a239b775b9c8d9afc82851d4c475d1ff66f939",
+      "cookies": [],
+      "created": 1568219659590,
+      "modified": 1568219659590,
+      "name": "Default Jar",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "cookie_jar"
+    }
+  ]
+}

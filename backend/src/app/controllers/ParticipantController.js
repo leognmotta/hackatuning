@@ -5,7 +5,7 @@ import Hackathon from '../models/Hackathon';
 import User from '../models/User';
 import File from '../models/File';
 import Role from '../models/Role';
-import UserUrl from '../models/UserUrl';
+import Url from '../models/Url';
 
 import Queue from '../../lib/Queue';
 import ParticipantSubscribeMail from '../jobs/ParticipantSubscribeMail';
@@ -60,7 +60,7 @@ class ParticipantController {
         deadline_team_creation: hackathon.deadline_team_creation,
       });
 
-      return res.json();
+      return res.status(204).json();
     } catch (error) {
       return next(error);
     }
@@ -112,7 +112,7 @@ class ParticipantController {
                 attributes: ['id', 'name'],
               },
               {
-                model: UserUrl,
+                model: Url,
                 as: 'urls',
                 through: { attributes: [] },
                 attributes: ['id', 'url'],

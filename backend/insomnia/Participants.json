@@ -1,0 +1,113 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2019-09-16T02:28:59.550Z",
+  "__export_source": "insomnia.desktop.app:v6.6.2",
+  "resources": [
+    {
+      "_id": "req_bd90f82932f742698b07531243e7bdf9",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1568519216791,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568519216791,
+      "method": "DELETE",
+      "modified": 1568519254207,
+      "name": "Delete",
+      "parameters": [],
+      "parentId": "fld_7b2b460af6a24259835e94cfe027571a",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/hackathons/2/participants",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_7b2b460af6a24259835e94cfe027571a",
+      "created": 1568407422748,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1568407422748,
+      "modified": 1568407422748,
+      "name": "Participants",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "created": 1568219659255,
+      "description": "",
+      "modified": 1568258109252,
+      "name": "Hackatuning",
+      "parentId": null,
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_9b4ec2bee7dd46a5ab172c193dd167c5",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1568408471387,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568408471387,
+      "method": "GET",
+      "modified": 1568408530129,
+      "name": "index",
+      "parameters": [],
+      "parentId": "fld_7b2b460af6a24259835e94cfe027571a",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/hackathons/2/participants",
+      "_type": "request"
+    },
+    {
+      "_id": "req_fdea8b0743654cc688a0b64e3b4ee730",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1568407433669,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568407433670,
+      "method": "POST",
+      "modified": 1568512030040,
+      "name": "Store",
+      "parameters": [],
+      "parentId": "fld_7b2b460af6a24259835e94cfe027571a",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/hackathons/2/participants",
+      "_type": "request"
+    },
+    {
+      "_id": "jar_77a239b775b9c8d9afc82851d4c475d1ff66f939",
+      "cookies": [],
+      "created": 1568219659590,
+      "modified": 1568219659590,
+      "name": "Default Jar",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "cookie_jar"
+    }
+  ]
+}

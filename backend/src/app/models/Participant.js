@@ -17,6 +17,7 @@ class Participant extends Model {
       foreignKey: 'hackathon_id',
       as: 'hackathon',
     });
+
     this.belongsTo(models.User, { foreignKey: 'user_id', as: 'participant' });
   }
 }

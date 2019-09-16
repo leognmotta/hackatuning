@@ -1,0 +1,100 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2019-09-16T05:27:37.690Z",
+  "__export_source": "insomnia.desktop.app:v6.6.2",
+  "resources": [
+    {
+      "_id": "req_34bc264cb24d4564b7825a665af05c5a",
+      "authentication": {},
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"adam.dias@outlook.com\"\n}"
+      },
+      "created": 1568391376048,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_a5427464dd094ffbb846a261427b5544",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1568398214354,
+      "method": "POST",
+      "modified": 1568561796288,
+      "name": "Store",
+      "parameters": [],
+      "parentId": "fld_b1cccb5e2b784ce4b26fdc9f55ef493b",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/users/recover",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_b1cccb5e2b784ce4b26fdc9f55ef493b",
+      "created": 1568391363691,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1568391363691,
+      "modified": 1568391363691,
+      "name": "User Recover",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "created": 1568219659255,
+      "description": "",
+      "modified": 1568258109252,
+      "name": "Hackatuning",
+      "parentId": null,
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_acfdaefab0fc42a0be4ecb9ec1642790",
+      "authentication": {},
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"password\": \"1234567\",\n\t\"confirmPassword\": \"1234567\"\n}"
+      },
+      "created": 1568398214304,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_16b8b528c6a44561a7e9b2e3e933074a",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1568398214304,
+      "method": "PUT",
+      "modified": 1568405419983,
+      "name": "Update",
+      "parameters": [],
+      "parentId": "fld_b1cccb5e2b784ce4b26fdc9f55ef493b",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/users/recover/{{ tokenRecover  }}",
+      "_type": "request"
+    },
+    {
+      "_id": "jar_77a239b775b9c8d9afc82851d4c475d1ff66f939",
+      "cookies": [],
+      "created": 1568219659590,
+      "modified": 1568219659590,
+      "name": "Default Jar",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "cookie_jar"
+    }
+  ]
+}

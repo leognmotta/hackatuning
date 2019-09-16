@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('pivot_urls', {
+    return queryInterface.createTable('user_urls', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -14,9 +14,9 @@ module.exports = {
         onDelete: 'CASCADE',
         allownull: false,
       },
-      user_url_id: {
+      url_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'user_urls', key: 'id' },
+        references: { model: 'urls', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         allownull: false,
@@ -33,6 +33,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('pivot_urls');
+    return queryInterface.dropTable('user_urls');
   },
 };

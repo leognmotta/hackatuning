@@ -3,12 +3,14 @@ import jwt from 'jsonwebtoken';
 import authConfig from '../../config/authConfig';
 import User from '../models/User';
 import ApiError from '../../config/ApiError';
-import UserUrl from '../models/UserUrl';
+import Url from '../models/Url';
 import UserRole from '../models/UserRole';
 import Role from '../models/Role';
 import Queue from '../../lib/Queue';
 import ConfirmMail from '../jobs/ConfirmMail';
-import PivotUrl from '../models/PivotUrl';
+import UserUrl from '../models/UserUrl';
+import File from '../models/File';
+import Hackathon from '../models/Hackathon';
 
 class UserController {
   async store(req, res, next) {
@@ -61,10 +63,10 @@ class UserController {
       if (urls && urls.length > 0) {
         await Promise.all(
           urls.map(async url => {
-            const userUrl = await UserUrl.create({ url, user_id: user.id });
+            const newUrl = await Url.create({ url });
 
-            await PivotUrl.create({
-              user_url_id: userUrl.id,
+            await UserUrl.create({
+              url_id: newUrl.id,
               user_id: user.id,
             });
           })
@@ -100,33 +102,32 @@ class UserController {
           nickname,
         },
         attributes: ['id', 'name', 'nickname', 'bio', 'avatar_id'],
+        include: [
+          {
+            model: File,
+            as: 'avatar',
+            attributes: ['id', 'url', 'path'],
+          },
+          {
+            model: Role,
+            as: 'roles',
+            through: { attributes: [] },
+            attributes: ['id', 'name'],
+          },
+          {
+            model: Url,
+            as: 'urls',
+            through: { attributes: [] },
+            attributes: ['id', 'url'],
+          },
+        ],
       });
 
       if (!user) {
         throw new ApiError('Not Found', 'User Not Found', 404);
       }
 
-      const urls = await UserUrl.findAll({
-        where: {
-          user_id: user.id,
-        },
-        attributes: ['url'],
-      });
-
-      const roles = await UserRole.findAll({
-        where: {
-          user_id: user.id,
-        },
-        attributes: ['id'],
-        include: [
-          {
-            model: Role,
-            attributes: ['name'],
-          },
-        ],
-      });
-
-      return res.json({ user, urls, roles });
+      return res.json(user);
     } catch (error) {
       return next(error);
     }
@@ -202,10 +203,10 @@ class UserController {
 
         await Promise.all(
           urls.map(async url => {
-            const userUrl = await UserUrl.create({ url, user_id: user.id });
+            const newUrl = await Url.create({ url });
 
-            await PivotUrl.create({
-              user_url_id: userUrl.id,
+            await UserUrl.create({
+              url_id: newUrl.id,
               user_id: user.id,
             });
           })

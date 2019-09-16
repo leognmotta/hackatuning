@@ -20,7 +20,7 @@ export function* signIn({ payload }) {
 
   login(token);
 
-  history.push('/home');
+  history.push('/');
 }
 
 export default all([takeLatest('@auth/SIGN_IN_REQUEST', signIn)]);

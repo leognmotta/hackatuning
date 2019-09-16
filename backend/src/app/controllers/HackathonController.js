@@ -5,6 +5,7 @@ import User from '../models/User';
 import Hackathon from '../models/Hackathon';
 
 import Queue from '../../lib/Queue';
+import Notification from '../schemas/Notifications';
 import HackathonCreationMail from '../jobs/HackathonCreationMail';
 import HackathonUpdateMail from '../jobs/HackathonUpdateMail';
 import HackathonDeleteMail from '../jobs/HackathonDeleteMail';
@@ -24,6 +25,12 @@ class HackathonController {
         deadline_subscription,
         deadline_team_creation,
       } = hackathon;
+
+      await Notification.create({
+        content: `You have created ${hackathon.title}`,
+        user: req.userId,
+        url: `${process.env.WEB_URL}/hackathons/${hackathon.id}`,
+      });
 
       await Queue.add(HackathonCreationMail.key, {
         organizer,
@@ -157,6 +164,12 @@ class HackathonController {
         deadline_team_creation,
       } = await hackathon.update(req.body);
 
+      await Notification.create({
+        content: `You have updated ${title}`,
+        user: req.userId,
+        url: `${process.env.WEB_URL}/hackathons/${id}`,
+      });
+
       await Queue.add(HackathonUpdateMail.key, {
         organizer,
         email,
@@ -187,6 +200,12 @@ class HackathonController {
         );
 
       const { name: organizer, email } = await User.findByPk(req.userId);
+
+      await Notification.create({
+        content: `You have deleted ${title}`,
+        user: req.userId,
+        url: `${process.env.WEB_URL}/hackathons/${id}`,
+      });
 
       await Queue.add(HackathonDeleteMail.key, {
         organizer,

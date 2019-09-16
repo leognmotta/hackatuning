@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import AuthLayout from '../components/Layout/auth';
 import DefaultLayout from '../components/Layout/default';
 
-import store from '../store';
+import { store } from '../store';
 
 //checks if user is authenticated
 

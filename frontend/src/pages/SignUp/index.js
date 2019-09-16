@@ -1,11 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Form, Input, Select } from '@rocketseat/unform';
 import { Link } from 'react-router-dom';
 import { schema } from './validationSchema';
 
+import { signUpRequest } from '../../store/modules/auth/actions';
+
 // import { Container } from './styles';
 
 export default function SignUp() {
+  const dispatch = useDispatch();
   // roles will come from database in useEffect.
   const roles = [
     { id: 'Frontend', title: 'Frontend' },
@@ -17,8 +21,8 @@ export default function SignUp() {
     { id: 'UX/UI', title: 'UX/UI' },
   ];
 
-  function handleSubmit(data) {
-    console.log(data);
+  function handleSubmit({ name, email, password, bio, skill }) {
+    dispatch(signUpRequest(name, email, password, bio, skill));
   }
 
   return (

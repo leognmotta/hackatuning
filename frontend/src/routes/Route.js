@@ -6,7 +6,8 @@ import { isAuthenticated } from '../utils/auth';
 import AuthLayout from '../components/Layout/auth';
 import DefaultLayout from '../components/Layout/default';
 
-// import store from '../store';
+
+import { store } from '../store';
 
 export default function RouteWrapper({
   component: Component,

@@ -4,7 +4,7 @@ Hey there, hackatuning is an open source hackathon management system.
 ## Goals
 
 - [x] Create user
-- [ ] Create a hackathon
+- [x] Create a hackathon
 - [ ] Subscribe to a hackathon
 - [ ] Create team inside a hackathon
 - [ ] Invite users to a team

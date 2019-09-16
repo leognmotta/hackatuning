@@ -13,7 +13,8 @@ class RecoverSuccessMail {
       subject: 'Password changed',
       template: 'recover_success',
       context: {
-        user: user.name,
+        api: process.env.APP_URL,
+        user: user.name.split(' ')[0] ? user.name.split(' ')[0] : user.name,
       },
     });
   }

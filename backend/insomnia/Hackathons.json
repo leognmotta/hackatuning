@@ -1,0 +1,181 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2019-09-16T02:29:28.674Z",
+  "__export_source": "insomnia.desktop.app:v6.6.2",
+  "resources": [
+    {
+      "_id": "req_cb1d811b1ae847a0bd129ef68d442a55",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1568389233408,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568389233408,
+      "method": "DELETE",
+      "modified": 1568401018618,
+      "name": "Delete",
+      "parameters": [],
+      "parentId": "fld_f272bf74b0144652adea0b737e7f09f0",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/hackathons/6",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_f272bf74b0144652adea0b737e7f09f0",
+      "created": 1568379789130,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1568379789130,
+      "modified": 1568379789130,
+      "name": "Hackathons",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "created": 1568219659255,
+      "description": "",
+      "modified": 1568258109252,
+      "name": "Hackatuning",
+      "parentId": null,
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_4e23b296f54c46aab9d903a61c0ebdb0",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"title\": \"Rocketseat Hackathon\",\n\t\"subtitle\": \"Improve students experience!\",\n\t\"description\": \"Rocketseat is a education company, students have access to skylab platform, and we would like to improve the experience of the studants\",\n\t\"location\": \"sqs 18\",\n\t\"event_date\": \"2019-09-29T19:00:00-03:00\",\n\t\"event_ending\": \"2019-10-10T12:00:00-03:00\",\n\t\"deadline_subscription\": \"2019-09-25T12:00:00-03:00\",\n\t\"deadline_team_creation\": \"2019-09-30T12:00:00-03:00\",\n\t\"awards\": \"10000 USD\"\n}"
+      },
+      "created": 1568388312769,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_4ec2569a8ea749d89fab4e3882254667",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1568388312769,
+      "method": "PUT",
+      "modified": 1568399036520,
+      "name": "Update",
+      "parameters": [],
+      "parentId": "fld_f272bf74b0144652adea0b737e7f09f0",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/hackathons/1",
+      "_type": "request"
+    },
+    {
+      "_id": "req_24122faa231040b79a5d65a7f409182b",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1568387656223,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568387656223,
+      "method": "GET",
+      "modified": 1568387889867,
+      "name": "Show",
+      "parameters": [],
+      "parentId": "fld_f272bf74b0144652adea0b737e7f09f0",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/hackathons/1",
+      "_type": "request"
+    },
+    {
+      "_id": "req_b18f023622b049db9998dcd48282fe40",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1568385705922,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568385705922,
+      "method": "GET",
+      "modified": 1568385757773,
+      "name": "Index",
+      "parameters": [],
+      "parentId": "fld_f272bf74b0144652adea0b737e7f09f0",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/hackathons",
+      "_type": "request"
+    },
+    {
+      "_id": "req_97d0b8c7e40b4bb396ca460e23db15be",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"title\": \"First\",\n\t\"subtitle\": \"Improve students experience!\",\n\t\"description\": \"Rocketseat is a education company, students have access to skylab platform, and we would like to improve the experience of the studants\",\n\t\"location\": \"sqs 18\",\n\t\"event_date\": \"2019-09-29T19:00:00-03:00\",\n\t\"event_ending\": \"2019-10-10T12:00:00-03:00\",\n\t\"deadline_subscription\": \"2019-09-25T12:00:00-03:00\",\n\t\"deadline_team_creation\": \"2019-09-30T12:00:00-03:00\",\n\t\"awards\": \"10000 USD\"\n}"
+      },
+      "created": 1568379799271,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_b4b6eecfb2284dd8947bf5add19ac470",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1568379799271,
+      "method": "POST",
+      "modified": 1568518106376,
+      "name": "Store",
+      "parameters": [],
+      "parentId": "fld_f272bf74b0144652adea0b737e7f09f0",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/hackathons",
+      "_type": "request"
+    },
+    {
+      "_id": "jar_77a239b775b9c8d9afc82851d4c475d1ff66f939",
+      "cookies": [],
+      "created": 1568219659590,
+      "modified": 1568219659590,
+      "name": "Default Jar",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "cookie_jar"
+    }
+  ]
+}

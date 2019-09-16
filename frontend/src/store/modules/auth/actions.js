@@ -22,5 +22,5 @@ export function signUpRequest(name, email, password, bio, skill ) {
 export function signFailure() {
   return {
     type: '@auth/SIGN_FAILURE',
-  }
+  };
 }

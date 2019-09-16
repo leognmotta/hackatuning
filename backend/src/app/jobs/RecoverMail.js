@@ -10,10 +10,11 @@ class RecoverMail {
 
     await Mail.sendMail({
       to: `${user.name} <${user.email}>`,
-      subject: 'Password recover',
+      subject: 'Recover your password!',
       template: 'recover',
       context: {
-        user: user.name,
+        api: process.env.APP_URL,
+        user: user.name.split(' ')[0] ? user.name.split(' ')[0] : user.name,
         link,
       },
     });

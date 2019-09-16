@@ -21,6 +21,7 @@ module.exports = {
       nickname: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
       bio: {
         type: Sequelize.TEXT,
@@ -33,6 +34,16 @@ module.exports = {
       password_hash: {
         type: Sequelize.STRING,
         allowNull: false,
+      },
+      confirm_email: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+      confirm_email_token: {
+        type: Sequelize.TEXT,
+      },
+      recover_pass_token: {
+        type: Sequelize.TEXT,
       },
       created_at: {
         type: Sequelize.DATE,

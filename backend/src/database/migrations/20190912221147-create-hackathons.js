@@ -13,7 +13,6 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allownull: true,
-        defaultValue: 1,
       },
       organizer_id: {
         type: Sequelize.INTEGER,

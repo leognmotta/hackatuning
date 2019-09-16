@@ -5,12 +5,23 @@ import databaseConfig from '../config/database';
 
 import File from '../app/models/File';
 import User from '../app/models/User';
+import Url from '../app/models/Url';
 import UserUrl from '../app/models/UserUrl';
 import Role from '../app/models/Role';
 import UserRole from '../app/models/UserRole';
 import Hackathon from '../app/models/Hackathon';
+import Participant from '../app/models/Participant';
 
-const models = [Role, File, User, UserUrl, UserRole, Hackathon];
+const models = [
+  Role,
+  File,
+  User,
+  Url,
+  UserUrl,
+  UserRole,
+  Hackathon,
+  Participant,
+];
 
 class Database {
   constructor() {

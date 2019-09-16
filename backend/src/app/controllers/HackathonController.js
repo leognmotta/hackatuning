@@ -61,6 +61,7 @@ class HackathonController {
             attributes: ['id', 'url', 'path'],
           },
         ],
+        order: [['createdAt', 'DESC']],
       });
 
       const maxPage = Math.ceil(hackathons.count / perPage);

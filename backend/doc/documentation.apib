@@ -38,6 +38,44 @@ Get new JWT token
 + Response 400 (application/json)
     + Attributes (Error)
 
+# Group Files
+
+### Store Users [POST /v1/files/users]
+
++ Request (application/json)
+    + Headers
+            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+    + Attributes
+
++ Response 200 (application/json)
+    + Attributes
+      + url: http://localhost:3333/files/1dbab0a07cef66b17bafa6eba0644c21.png (string)
+      + id (number)
+      + name (string)
+      + updatedAt: 2019-09-16T07:39:20.194Z (date)
+      + createdAt: 2019-09-16T07:39:20.194Z  (date)
+
++ Response 400 (application/json)
+    + Attributes (Error Field)
+
+### Store Hackathons [POST /v1/files/hackathons/:id]
+
++ Request (application/json)
+    + Headers
+            Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+    + Attributes
+
++ Response 200 (application/json)
+    + Attributes
+      + url: http://localhost:3333/files/1dbab0a07cef66b17bafa6eba0644c21.png (string)
+      + id (number)
+      + name (string)
+      + updatedAt: 2019-09-16T07:39:20.194Z (date)
+      + createdAt: 2019-09-16T07:39:20.194Z  (date)
+
++ Response 400 (application/json)
+    + Attributes (Error Field)
+
 # Group Users
 
 ### Store [POST /v1/users]
@@ -171,6 +209,7 @@ Get all available hackathons.
                     + url: http://localhost:3333/files/1dbab0a07cef66b17bafa6eba0644c21.png (string, required)
                     + id (number, required)
                     + path: 1dbab0a07cef66b17bafa6eba0644c21.png (string, required)
+                + isParticipant: true (boolean, required) if user is participant or not
         + pagination (Pagination)
 
 + Parameters
@@ -227,7 +266,7 @@ Get hackathon.
 
 # Group Participants
 
-### Index [GET /v1/hackathon/{id}/participants{?perPage,page}]
+### Index [GET /v1/hackathons/{id}/participants{?perPage,page}]
 
 + Parameters
     + perPage: 20 (number, optional)
@@ -243,9 +282,14 @@ Get hackathon.
         + participants (array)
             + (User) (object)
                 + id (number, required)
+                + avatar (object)
+                    + url: image_url (required, string)
         + pagination (Pagination)
 
-### Store [POST /v1/hackathon/{id}/participants]
++ Response 400 (application/json)
+    + Attributes (Error)
+
+### Store [POST /v1/hackathons/{id}/participants]
 
 + Parameters
     + id (number, required)
@@ -261,7 +305,7 @@ Get hackathon.
 + Response 400 (application/json)
     + Attributes (Error)
 
-### Delete [DELETE /v1/hackathon/{id}/participants]
+### Delete [DELETE /v1/hackathons/{id}/participants]
 
 + Parameters
     + id (number, required)

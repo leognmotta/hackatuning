@@ -10,10 +10,10 @@ import SignUp from '../pages/SignUp';
 export default function Routes() {
   return (
     <Switch>
-      <Route path="/" exact component={SignIn} />
+      <Route path="/login" exact component={SignIn} />
       <Route path="/register" component={SignUp} />
 
-      <Route path="/home" component={Home} />
+      <Route path="/" component={Home} />
     </Switch>
   );
 }

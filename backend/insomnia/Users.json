@@ -1,1 +1,150 @@
-{"_type":"export","__export_format":4,"__export_date":"2019-09-16T02:31:51.363Z","__export_source":"insomnia.desktop.app:v6.6.2","resources":[{"_id":"req_b9e51f42068c4c03aa4336ef023bfdbb","authentication":{"token":"{{ token  }}","type":"bearer"},"body":{"mimeType":"application/json","text":"{\n\t\"name\": \"Adam Dias\",\n\t\"password\": \"123456\",\n\t\"confirmPassword\": \"123456\"\n}"},"created":1568277227558,"description":"","headers":[{"id":"pair_a13619704abf421a89388aba33a595ef","name":"Content-Type","value":"application/json"}],"isPrivate":false,"metaSortKey":-1568277227558,"method":"PUT","modified":1568278687999,"name":"Update","parameters":[],"parentId":"fld_7c4dcde2acaf4554b5d0d15d4372354a","settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingSendCookies":true,"settingStoreCookies":true,"url":"{{ v1_url  }}/users","_type":"request"},{"_id":"fld_7c4dcde2acaf4554b5d0d15d4372354a","created":1568258119825,"description":"","environment":{},"environmentPropertyOrder":null,"metaSortKey":-1568258119825,"modified":1568258119825,"name":"Users","parentId":"wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e","_type":"request_group"},{"_id":"wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e","created":1568219659255,"description":"","modified":1568258109252,"name":"Hackatuning","parentId":null,"_type":"workspace"},{"_id":"req_c8515eb43fca422bb782159fd1de034a","authentication":{},"body":{},"created":1568268525225,"description":"","headers":[],"isPrivate":false,"metaSortKey":-1568268525225,"method":"GET","modified":1568522181732,"name":"Show","parameters":[],"parentId":"fld_7c4dcde2acaf4554b5d0d15d4372354a","settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingSendCookies":true,"settingStoreCookies":true,"url":"{{ v1_url  }}/users/Adam51","_type":"request"},{"_id":"req_c618ff003c44476090d573987163c40e","authentication":{},"body":{"mimeType":"application/json","text":"{\n\t\"name\": \"Adam Dias\",\n\t\"bio\": \"Esse sou eu, muito prazer!\",\n\t\"nickname\": \"Adam51\",\n\t\"email\": \"adam51.dias@outlook.br\",\n\t\"password\": \"123123\",\n\t\"urls\": [\n\t\t\"http://adamdias.com.br\",\n\t\t\"https://github.com/adamdias\"\n\t],\n\t\"roles\": [\n\t\t1,\n\t\t2\n\t]\n}"},"created":1568258130218,"description":"","headers":[{"id":"pair_b2d98b36ad484e348707c3f75cf2f9a8","name":"Content-Type","value":"application/json"}],"isPrivate":false,"metaSortKey":-1568258130218,"method":"POST","modified":1568511844109,"name":"Store","parameters":[],"parentId":"fld_7c4dcde2acaf4554b5d0d15d4372354a","settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingSendCookies":true,"settingStoreCookies":true,"url":"{{ v1_url  }}/users","_type":"request"},{"_id":"env_77a239b775b9c8d9afc82851d4c475d1ff66f939","color":null,"created":1568219659586,"data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTU2ODUxMjAwMSwiZXhwIjoxNTY5MTE2ODAxfQ.du9L6VEBOFzgtraeLrB7nEBTbqGXF2WhYqgStTWE0c4","v1_url":"http://localhost:3333/v1"},"dataPropertyOrder":{"&":["v1_url","token"]},"isPrivate":false,"metaSortKey":1568219659586,"modified":1568512010003,"name":"Base Environment","parentId":"wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e","_type":"environment"},{"_id":"jar_77a239b775b9c8d9afc82851d4c475d1ff66f939","cookies":[],"created":1568219659590,"modified":1568219659590,"name":"Default Jar","parentId":"wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e","_type":"cookie_jar"}]}
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2019-09-16T02:31:51.363Z",
+  "__export_source": "insomnia.desktop.app:v6.6.2",
+  "resources": [
+    {
+      "_id": "req_b9e51f42068c4c03aa4336ef023bfdbb",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"Adam Dias\",\n\t\"password\": \"123456\",\n\t\"confirmPassword\": \"123456\"\n}"
+      },
+      "created": 1568277227558,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_a13619704abf421a89388aba33a595ef",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1568277227558,
+      "method": "PUT",
+      "modified": 1568278687999,
+      "name": "Update",
+      "parameters": [],
+      "parentId": "fld_7c4dcde2acaf4554b5d0d15d4372354a",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/users",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_7c4dcde2acaf4554b5d0d15d4372354a",
+      "created": 1568258119825,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1568258119825,
+      "modified": 1568258119825,
+      "name": "Users",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "created": 1568219659255,
+      "description": "",
+      "modified": 1568258109252,
+      "name": "Hackatuning",
+      "parentId": null,
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_c8515eb43fca422bb782159fd1de034a",
+      "authentication": {},
+      "body": {},
+      "created": 1568268525225,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568268525225,
+      "method": "GET",
+      "modified": 1568522181732,
+      "name": "Show",
+      "parameters": [],
+      "parentId": "fld_7c4dcde2acaf4554b5d0d15d4372354a",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/users/Adam51",
+      "_type": "request"
+    },
+    {
+      "_id": "req_c618ff003c44476090d573987163c40e",
+      "authentication": {},
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"Adam Dias\",\n\t\"bio\": \"Esse sou eu, muito prazer!\",\n\t\"nickname\": \"Adam51\",\n\t\"email\": \"adam51.dias@outlook.br\",\n\t\"password\": \"123123\",\n\t\"urls\": [\n\t\t\"http://adamdias.com.br\",\n\t\t\"https://github.com/adamdias\"\n\t],\n\t\"roles\": [\n\t\t1,\n\t\t2\n\t]\n}"
+      },
+      "created": 1568258130218,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_b2d98b36ad484e348707c3f75cf2f9a8",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1568258130218,
+      "method": "POST",
+      "modified": 1568511844109,
+      "name": "Store",
+      "parameters": [],
+      "parentId": "fld_7c4dcde2acaf4554b5d0d15d4372354a",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/users",
+      "_type": "request"
+    },
+    {
+      "_id": "env_77a239b775b9c8d9afc82851d4c475d1ff66f939",
+      "color": null,
+      "created": 1568219659586,
+      "data": {
+        "v1_url": "http://localhost:3333/v1",
+        "token": "",
+        "tokenRecover": "",
+        "tokenEmailConfirm": ""
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "v1_url",
+          "token",
+          "tokenRecover",
+          "tokenEmailConfirm"
+        ]
+      },
+      "isPrivate": false,
+      "metaSortKey": 1568219659586,
+      "modified": 1568512010003,
+      "name": "Base Environment",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_77a239b775b9c8d9afc82851d4c475d1ff66f939",
+      "cookies": [],
+      "created": 1568219659590,
+      "modified": 1568219659590,
+      "name": "Default Jar",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "cookie_jar"
+    }
+  ]
+}

@@ -36,7 +36,7 @@ class UserRecoverController {
         link: `${process.env.WEB_URL}/recover?tk=${token}`,
       });
 
-      return res.json();
+      return res.status(204).json();
     } catch (error) {
       return next(error);
     }

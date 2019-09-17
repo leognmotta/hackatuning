@@ -6,7 +6,7 @@ import { isAuthenticated } from '../utils/auth';
 import AuthLayout from '../components/Layout/auth';
 import DefaultLayout from '../components/Layout/default';
 
-// import store from '../store';
+import { store } from '../store';
 
 export default function RouteWrapper({
   component: Component,
@@ -16,11 +16,11 @@ export default function RouteWrapper({
   const signed = isAuthenticated();
 
   if (!signed && isPrivate) {
-    return <Redirect to="/" />;
+    return <Redirect to="/login" />;
   }
 
   if (signed && !isPrivate) {
-    return <Redirect to="/home" />;
+    return <Redirect to="/" />;
   }
 
   const Layout = signed ? DefaultLayout : AuthLayout;

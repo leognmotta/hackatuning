@@ -1,26 +1,73 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
-import { login } from '../../../utils/auth';
+
+import { toast } from 'react-toastify';
 
 import api from '../../../services/api';
 import history from '../../../services/history';
 
-import { signInSuccess } from './actions';
+import { signInSuccess, signFailure } from './actions';
 
 export function* signIn({ payload }) {
-  const { email, password } = payload;
+  try {
+    const { email, password } = payload;
 
-  const response = yield call(api.post, '/v1/sessions', {
-    email,
-    password,
-  });
+    const response = yield call(api.post, 'v1/sessions', {
+      email,
+      password,
+    });
 
-  const { token, user } = response.data;
+    const { token, user } = response.data;
 
-  yield put(signInSuccess(token, user));
+    if (!token) {
+      console.tron.error('não tem token')
+      return;
+    }
 
-  login(token);
+    api.defaults.headers.Authorization = `Bearer ${token}`;
 
-  history.push('/');
+    yield put(signInSuccess(token, user));
+
+    history.push('/home');
+  } catch (err) {
+    toast.error('Fail on sign In. Please verify your email/password');
+    yield put(signFailure());
+  }
 }
 
-export default all([takeLatest('@auth/SIGN_IN_REQUEST', signIn)]);
+export function* signUp({ payload }) {
+  try {
+    const { name, nickname, email, password, bio, urls, role } = payload;
+
+    yield call(api.post, '/v1/users', {
+      name,
+      nickname,
+      email,
+      password,
+      bio,
+      urls,
+      role,
+    });
+
+    history.push('/login');
+  } catch (err) {
+    toast.error('Sign Up fail, pease verify yours informations');
+
+    yield put(signFailure());
+  }
+}
+
+// export function setToken({ payload }) {
+//   if (!payload) return;
+
+//   const { token } = payload.auth;
+
+//   if (token) {
+//     api.defaults.headers.Authorization = `Bearer ${token}`;
+//   }
+// }
+
+export default all([
+  takeLatest('@auth/SIGN_IN_REQUEST', signIn),
+  takeLatest('@auth/SIGN_UP_REQUEST', signUp),
+  // takeLatest('persist/REHYDRATE', setToken),
+]);

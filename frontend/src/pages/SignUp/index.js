@@ -1,11 +1,15 @@
 import React from 'react';
-import { Form, Input, Select } from '@rocketseat/unform';
+import { useDispatch } from 'react-redux';
+// import { Form, Input, Select } from '@rocketseat/unform';
 import { Link } from 'react-router-dom';
 import { schema } from './validationSchema';
 
-// import { Container } from './styles';
+import { signUpRequest } from '../../store/modules/auth/actions';
+
+import { Container, Form, Input, Select, H1 } from './styles';
 
 export default function SignUp() {
+  const dispatch = useDispatch();
   // roles will come from database in useEffect.
   const roles = [
     { id: 'Frontend', title: 'Frontend' },
@@ -17,23 +21,29 @@ export default function SignUp() {
     { id: 'UX/UI', title: 'UX/UI' },
   ];
 
-  function handleSubmit(data) {
-    console.log(data);
+  function handleSubmit({ name, email, nickname, password, bio, urls, role }) {
+    dispatch(signUpRequest(name, email, nickname, password, bio, urls, role));
   }
 
   return (
-    <Form schema={schema} onSubmit={handleSubmit}>
-      <Input name="name" label="Name: " />
-      <Input name="email" type="email" label="Email: " err />
-      <Input name="password" type="password" label="Password: " />
-      <Input name="bio" maxLength="255" label="Bio: " multiline />
+    <Container>
+      <H1> Register </H1>
+      <Form schema={schema} onSubmit={handleSubmit}>
+        <Input name="name" placeholder=" Your name here!" />
+        <Input name="nickname" placeholder=" Nickname (not pussySlayer69)" />
+        <Input name="email" type="email" placeholder=" E-Mail here!" err />
+        <Input name="password" type="password" placeholder=" Super secret pass plss" />
+        <Input name="bio" maxLength="255" placeholder=" Tell me about you! I want to know..." multiline />
 
-      <Select name="skill" options={roles} label="Skills 1: " />
-      <Select name="skill" options={roles} label="Skills 2: " />
-      <Select name="skill" options={roles} label="Skills 3: " />
+        <Input name="urls" placeholder=" Some useful links here" />
 
-      <button type="submit">Send</button>
-      <Link to="/">Have an account? Make a login!</Link>
-    </Form>
+        <Select name="role" options={roles} />
+        <Select name="role2" options={roles} />
+        <Select name="role3" options={roles} />
+
+        <button type="submit">Send</button>
+        <Link to="/login">Have an account? Make a login!</Link>
+      </Form>
+    </Container>
   );
 }

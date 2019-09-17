@@ -24,12 +24,14 @@ export default function Header() {
   });
 
   useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  });
+    async function getNotifications() {
+      const { data } = await api.get('/v1/notifications');
+
+      setNotifications(data);
+    }
+
+    getNotifications();
+  }, []);
 
   let authMenu = (
     <Desktop

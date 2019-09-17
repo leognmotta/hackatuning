@@ -10,7 +10,6 @@ import Queue from '../../lib/Queue';
 import ConfirmMail from '../jobs/ConfirmMail';
 import UserUrl from '../models/UserUrl';
 import File from '../models/File';
-import Hackathon from '../models/Hackathon';
 
 class UserController {
   async store(req, res, next) {

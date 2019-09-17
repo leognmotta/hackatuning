@@ -3,13 +3,11 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 
-export default function Layout({ component: Component, ...props }) {
+export default function Layout({ children }) {
   return (
     <>
       <Header />
-      <main>
-        <Component {...props} test="ola" />
-      </main>
+      <main>{children}</main>
       <Footer />
     </>
   );

@@ -1,29 +1,63 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Form, Input } from '@rocketseat/unform';
-import { schema } from './validationSchema';
 import { Link } from 'react-router-dom';
+import api from '../../services/api';
+import { login } from '../../utils/auth';
+import { reduxLogin } from '../../store/ducks/auth';
 
-import { signInRequest } from '../../store/modules/auth/actions';
+import { StyledForm, Container, Input } from './styles';
 
-import { StyledForm } from './styles';
-
-export default function SignIn() {
+export default function SignIn({ history }) {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   const dispatch = useDispatch();
 
-  function handleSubmit({ email, password }) {
-    dispatch(signInRequest(email, password));
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+      const { data } = await api.post('/v1/sessions', {
+        email,
+        password,
+      });
+
+      login(data.token);
+
+      dispatch(
+        reduxLogin({
+          id: data.user.id,
+          isAuth: true,
+          name: data.user.name,
+        })
+      );
+
+      history.push('/');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
-    <StyledForm schema={schema} onSubmit={handleSubmit}>
-      <h1>Sign in</h1>
+    <Container>
+      <StyledForm onSubmit={handleSubmit}>
+        <h1>Sign in</h1>
 
-      <Input type="email" name="email" label="email: " />
-      <Input type="password" name="password" label="password: " />
+        <Input
+          type="email"
+          name="email"
+          placeholder="Your E-Mail here"
+          onChange={e => setEmail(e.target.value)}
+        />
+        <Input
+          type="password"
+          name="password"
+          placeholder="A super secret pass here!"
+          onChange={e => setPassword(e.target.value)}
+        />
 
-      <button type="submit">Sign In</button>
-      <Link to="/register">Register NOW!</Link>
-    </StyledForm>
+        <button type="submit">Sign in</button>
+        <Link to="/register">Register NOW!</Link>
+      </StyledForm>
+    </Container>
   );
 }

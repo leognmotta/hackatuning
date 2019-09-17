@@ -7,7 +7,7 @@ import './config/reactotronConfig';
 import history from './services/history';
 import Layout from './components/Layout';
 import GlobalStyles from './styles/GlobalStyles';
-import Routes from './routes';
+import Routes from './Routes';
 
 import store from './store';
 
@@ -15,8 +15,9 @@ function App() {
   return (
     <Provider store={store}>
       <Router history={history}>
-        <Layout component={Routes} />
-
+        <Layout>
+          <Routes />
+        </Layout>
         <GlobalStyles />
       </Router>
     </Provider>

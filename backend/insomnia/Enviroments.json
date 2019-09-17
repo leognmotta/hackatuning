@@ -1,0 +1,33 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2019-09-16T02:31:51.363Z",
+  "__export_source": "insomnia.desktop.app:v6.6.2",
+  "resources": [
+    {
+      "_id": "env_77a239b775b9c8d9afc82851d4c475d1ff66f939",
+      "color": null,
+      "created": 1568219659586,
+      "data": {
+        "v1_url": "http://localhost:3333/v1",
+        "token": "",
+        "tokenRecover": "",
+        "tokenEmailConfirm": ""
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "v1_url",
+          "token",
+          "tokenRecover",
+          "tokenEmailConfirm"
+        ]
+      },
+      "isPrivate": false,
+      "metaSortKey": 1568219659586,
+      "modified": 1568512010003,
+      "name": "Base Environment",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "environment"
+    }
+  ]
+}

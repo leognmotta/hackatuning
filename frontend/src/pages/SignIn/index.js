@@ -1,37 +1,61 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-// import { Form, Input } from '@rocketseat/unform';
-import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-
-import { signInRequest } from '../../store/modules/auth/actions';
+import api from '../../services/api';
+import { login } from '../../utils/auth';
+import { reduxLogin } from '../../store/ducks/auth';
 
 import { StyledForm, Container, Input } from './styles';
 
-const schema = Yup.object().shape({
-  email: Yup.string()
-    .email('Insert a valid E-Mail')
-    .required('E-Mail is required'),
-  password: Yup.string().required('Password is required'),
-});
-
-export default function SignIn() {
+export default function SignIn({ history }) {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   const dispatch = useDispatch();
-  const loading = useSelector(state => state.auth.loading);
 
-  function handleSubmit({ email, password }) {
-    dispatch(signInRequest(email, password));
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+      const { data } = await api.post('/v1/sessions', {
+        email,
+        password,
+      });
+
+      login(data.token);
+
+      dispatch(
+        reduxLogin({
+          id: data.user.id,
+          isAuth: true,
+          name: data.user.name,
+        })
+      );
+
+      history.push('/');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
     <Container>
-      <StyledForm schema={schema} onSubmit={handleSubmit}>
+      <StyledForm onSubmit={handleSubmit}>
         <h1>Sign in</h1>
 
-        <Input type="email" name="email" placeholder="Your E-Mail here" />
-        <Input type="password" name="password" placeholder="A super secret pass here!" />
+        <Input
+          type="email"
+          name="email"
+          placeholder="Your E-Mail here"
+          onChange={e => setEmail(e.target.value)}
+        />
+        <Input
+          type="password"
+          name="password"
+          placeholder="A super secret pass here!"
+          onChange={e => setPassword(e.target.value)}
+        />
 
-        <button type="submit">{ loading ? 'Loading...' : 'Sign In' }</button>
+        <button type="submit">Sign in</button>
         <Link to="/register">Register NOW!</Link>
       </StyledForm>
     </Container>

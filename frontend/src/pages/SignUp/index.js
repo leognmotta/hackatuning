@@ -1,10 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-// import { Form, Input, Select } from '@rocketseat/unform';
 import { Link } from 'react-router-dom';
-import { schema } from './validationSchema';
-
-import { signUpRequest } from '../../store/modules/auth/actions';
 
 import { Container, Form, Input, Select, H1 } from './styles';
 
@@ -22,18 +18,27 @@ export default function SignUp() {
   ];
 
   function handleSubmit({ name, email, nickname, password, bio, urls, role }) {
-    dispatch(signUpRequest(name, email, nickname, password, bio, urls, role));
+    dispatch();
   }
 
   return (
     <Container>
       <H1> Register </H1>
-      <Form schema={schema} onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Input name="name" placeholder=" Your name here!" />
         <Input name="nickname" placeholder=" Nickname (not pussySlayer69)" />
         <Input name="email" type="email" placeholder=" E-Mail here!" err />
-        <Input name="password" type="password" placeholder=" Super secret pass plss" />
-        <Input name="bio" maxLength="255" placeholder=" Tell me about you! I want to know..." multiline />
+        <Input
+          name="password"
+          type="password"
+          placeholder=" Super secret pass plss"
+        />
+        <Input
+          name="bio"
+          maxLength="255"
+          placeholder=" Tell me about you! I want to know..."
+          multiline
+        />
 
         <Input name="urls" placeholder=" Some useful links here" />
 

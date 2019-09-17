@@ -20,15 +20,20 @@ class UserValidator {
           .required(),
       });
 
-      await schema.validate(req.body);
+      await schema.validate(req.body, { abortEarly: false });
 
       return next();
     } catch (error) {
       if (error.name === 'ValidationError' && error.errors[0]) {
+        const schemaErrors = error.inner.map(err => {
+          return { field: err.path, message: err.message };
+        });
+
         const validationError = new ApiError(
           'Validation Error',
-          error.errors[0],
-          400
+          'One or more fields is not valid.',
+          400,
+          schemaErrors
         );
 
         return next(validationError);
@@ -58,15 +63,20 @@ class UserValidator {
         roles: Yup.array().of(Yup.number()),
       });
 
-      await schema.validate(req.body);
+      await schema.validate(req.body, { abortEarly: false });
 
       return next();
     } catch (error) {
       if (error.name === 'ValidationError' && error.errors[0]) {
+        const schemaErrors = error.inner.map(err => {
+          return { field: err.path, message: err.message };
+        });
+
         const validationError = new ApiError(
           'Validation Error',
-          error.errors[0],
-          400
+          'One or more fields is not valid.',
+          400,
+          schemaErrors
         );
 
         return next(validationError);

@@ -1,10 +1,15 @@
 import React from 'react';
-import { FaBell, FaCog } from 'react-icons/fa';
+import { FaCog } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import Notification from '../../../Notifications';
 
 import { TabLink, StyledUl } from './styles';
 
-export default function Desktop() {
+export default function Desktop({
+  notifications,
+  showNotifications,
+  toggleNotifications,
+}) {
   return (
     <StyledUl>
       <li>
@@ -20,8 +25,12 @@ export default function Desktop() {
           Teams
         </TabLink>
       </li>
-      <li>
-        <FaBell color="#1437E3" size={24} />
+      <li className="notification_container">
+        <Notification
+          notifications={notifications}
+          showNotifications={showNotifications}
+          toggleNotifications={toggleNotifications}
+        />
       </li>
       <li>
         <FaCog color="#1437E3" size={24} />

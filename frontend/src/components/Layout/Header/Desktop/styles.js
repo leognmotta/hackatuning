@@ -8,9 +8,42 @@ export const StyledUl = styled.ul`
   li {
     margin: 0 10px;
     list-style: none;
-    cursor: pointer;
 
+    svg {
+      cursor: pointer;
+    }
+  }
+
+  .notification_container {
     position: relative;
+
+    .badge {
+      height: 12px;
+      width: 12px;
+      background: #e3143e;
+      border-radius: 6px;
+      position: absolute;
+
+      top: 0;
+      right: -3px;
+    }
+
+    .notification {
+      position: absolute;
+      padding: 10px;
+      border-radius: 6px;
+      top: 30px;
+      left: -280px;
+      background: #ffffff;
+      box-shadow: 0px 1px 20px #0000000f;
+      width: 300px;
+
+      div {
+        border-bottom: 1px solid #f3f3f3f3;
+        padding: 4px 0;
+        width: 100%;
+      }
+    }
   }
 
   .create_hackathon {

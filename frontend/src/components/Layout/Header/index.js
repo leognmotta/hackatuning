@@ -7,15 +7,56 @@ import Tablet from './Tablet';
 import Mobile from './Mobile';
 import { StyledHeader, Container, StyledLink, TabLink } from './styles';
 
-import { store } from '../../../store';
-
 export default function Header() {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
+  const [notifications, setNotifications] = useState([
+    {
+      read: false,
+      type: 'notification',
+      _id: '5d8001b7cd98323217242e75',
+      content: 'You have created Rocketseat',
+      user: 1,
+      url: 'http://localhost:3000/hackathons/6',
+      createdAt: '2019-09-16T21:42:15.231Z',
+      updatedAt: '2019-09-16T21:42:15.231Z',
+      __v: 0,
+    },
+    {
+      read: false,
+      type: 'notification',
+      _id: '5d7fff3147fb002e3bcafed2',
+      content: 'You have created dadasdasd asd sadasd asdasasdasddas ada',
+      user: 1,
+      createdAt: '2019-09-16T21:31:29.993Z',
+      updatedAt: '2019-09-16T21:31:29.993Z',
+      __v: 0,
+    },
+    {
+      read: false,
+      type: 'notification',
+      _id: '5d7fff2747fb002e3bcafed0',
+      content: 'You have created First',
+      user: 1,
+      createdAt: '2019-09-16T21:31:19.758Z',
+      updatedAt: '2019-09-16T21:31:19.758Z',
+      __v: 0,
+    },
+    {
+      read: false,
+      type: 'notification',
+      _id: '5d7ffd8f7150a42c7afaac80',
+      content: 'You have created First',
+      user: 1,
+      createdAt: '2019-09-16T21:24:31.508Z',
+      updatedAt: '2019-09-16T21:24:31.508Z',
+      __v: 0,
+    },
+  ]);
+  const [showNotifications, setShowNotifications] = useState(false);
+
   const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    console.log(store.getState());
-
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => {
@@ -23,14 +64,32 @@ export default function Header() {
     };
   });
 
-  let authMenu = <Desktop />;
+  let authMenu = (
+    <Desktop
+      notifications={notifications}
+      showNotifications={showNotifications}
+      toggleNotifications={setShowNotifications}
+    />
+  );
 
   if (width < 960) {
-    authMenu = <Tablet />;
+    authMenu = (
+      <Tablet
+        notifications={notifications}
+        showNotifications={showNotifications}
+        toggleNotifications={setShowNotifications}
+      />
+    );
   }
 
   if (width < 550) {
-    authMenu = <Mobile />;
+    authMenu = (
+      <Mobile
+        notifications={notifications}
+        showNotifications={showNotifications}
+        toggleNotifications={setShowNotifications}
+      />
+    );
   }
 
   return (

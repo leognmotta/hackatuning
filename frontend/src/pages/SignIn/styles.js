@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Form } from '@rocketseat/unform';
 
 export const Container = styled.div`
   display: flex;

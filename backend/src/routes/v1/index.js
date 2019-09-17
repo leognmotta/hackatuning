@@ -4,8 +4,8 @@ import filesRoute from './filesRoute';
 import usersRoute from './usersRoute';
 import rolesRoute from './rolesRoute';
 import sessionsRoute from './sessionsRoute';
-import HackathonsRoute from './hackathonsRoutes';
-import ParticipantRoute from './ParticipantRoutes';
+import hackathonsRoute from './hackathonsRoutes';
+import participantsRoutes from './participantsRoutes';
 
 const routes = Router();
 
@@ -17,8 +17,8 @@ routes.use(rolesRoute);
 
 routes.use(sessionsRoute);
 
-routes.use(HackathonsRoute);
+routes.use(hackathonsRoute);
 
-routes.use(ParticipantRoute);
+routes.use(participantsRoutes);
 
 export default routes;

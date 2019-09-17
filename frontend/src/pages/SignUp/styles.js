@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Form } from '@rocketseat/unform';
+// import { Form } from '@rocketseat/unform';
 
 export const Container = styled.div`
   display: flex;
@@ -10,8 +10,11 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 `
+export const H1 = styled.h1`
+  margin: 15px 0 15px 0;
+`;
 
-export const StyledForm = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
 
@@ -34,6 +37,14 @@ export const Input = styled.input`
   height: 35px;
   width: 350px;
   border-radius: 12px;
+  border: 1px solid #eee;
   padding: 0 0 0 10px;
+`;
+
+export const Select = styled.select`
+  margin: 10px 0 10px 0;
+  height: 35px;
+  width: auto;
+  border-radius: 12px;
   border: 1px solid #eee;
 `;

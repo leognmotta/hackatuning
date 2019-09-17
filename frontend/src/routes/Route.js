@@ -16,11 +16,11 @@ export default function RouteWrapper({
   const signed = isAuthenticated();
 
   if (!signed && isPrivate) {
-    return <Redirect to="/" />;
+    return <Redirect to="/login" />;
   }
 
   if (signed && !isPrivate) {
-    return <Redirect to="/home" />;
+    return <Redirect to="/" />;
   }
 
   const Layout = signed ? DefaultLayout : AuthLayout;

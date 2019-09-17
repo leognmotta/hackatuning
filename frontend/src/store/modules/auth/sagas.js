@@ -18,6 +18,11 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
+    if (!token) {
+      console.tron.error('não tem token')
+      return;
+    }
+
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(token, user));
@@ -31,17 +36,19 @@ export function* signIn({ payload }) {
 
 export function* signUp({ payload }) {
   try {
-    const { name, email, password, bio, skill } = payload;
+    const { name, nickname, email, password, bio, urls, role } = payload;
 
-    yield call(api.post, 'v1/users', {
+    yield call(api.post, '/v1/users', {
       name,
+      nickname,
       email,
       password,
       bio,
-      skill,
+      urls,
+      role,
     });
 
-    history.push('/');
+    history.push('/login');
   } catch (err) {
     toast.error('Sign Up fail, pease verify yours informations');
 
@@ -49,18 +56,18 @@ export function* signUp({ payload }) {
   }
 }
 
-export function setToken({ payload }) {
-  if (!payload) return;
+// export function setToken({ payload }) {
+//   if (!payload) return;
 
-  const { token } = payload.auth;
+//   const { token } = payload.auth;
 
-  if (token) {
-    api.defaults.headers.Authorization = `Bearer ${token}`;
-  }
-}
+//   if (token) {
+//     api.defaults.headers.Authorization = `Bearer ${token}`;
+//   }
+// }
 
 export default all([
-  takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
+  // takeLatest('persist/REHYDRATE', setToken),
 ]);

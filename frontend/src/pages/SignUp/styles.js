@@ -5,11 +5,10 @@ export const Container = styled.div`
   display: flex;
   text-align: center;
   width: 100%;
-  height: 75%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
 export const H1 = styled.h1`
   margin: 15px 0 15px 0;
 `;

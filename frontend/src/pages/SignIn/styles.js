@@ -5,11 +5,11 @@ export const Container = styled.div`
   display: flex;
   text-align: center;
   width: 100%;
-  height: 75%;
+  margin-top: 20%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
 
 export const StyledForm = styled.form`
   display: flex;

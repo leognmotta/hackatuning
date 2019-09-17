@@ -8,6 +8,7 @@ import Role from '../models/Role';
 import Url from '../models/Url';
 
 import Queue from '../../lib/Queue';
+import Notification from '../schemas/Notifications';
 import ParticipantSubscribeMail from '../jobs/ParticipantSubscribeMail';
 import ParticipantUnsubscribeMail from '../jobs/ParticipantUnsubscribeMail';
 
@@ -51,6 +52,12 @@ class ParticipantController {
       });
 
       const user = await User.findByPk(req.userId);
+
+      await Notification.create({
+        content: `Hey ${user.name} you are now subscribed to ${hackathon.title}`,
+        user: req.userId,
+        url: `${process.env.WEB_URL}/hackathons/${hackathon.id}`,
+      });
 
       await Queue.add(ParticipantSubscribeMail.key, {
         name: user.name,
@@ -151,6 +158,11 @@ class ParticipantController {
 
       const { name, email } = await User.findByPk(req.userId);
       const { title, deadline_subscription } = await Hackathon.findByPk(id);
+
+      await Notification.create({
+        content: `Hey ${name} you are no longer subscribed to ${title}`,
+        user: req.userId,
+      });
 
       await Queue.add(ParticipantUnsubscribeMail.key, {
         name,

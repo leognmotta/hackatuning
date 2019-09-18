@@ -1,8 +1,12 @@
 import { Op } from 'sequelize';
+import jwt from 'jsonwebtoken';
+import { promisify } from 'util';
 import ApiError from '../../config/ApiError';
 import File from '../models/File';
 import User from '../models/User';
 import Hackathon from '../models/Hackathon';
+import Participant from '../models/Participant';
+import authConfig from '../../config/authConfig';
 
 import Queue from '../../lib/Queue';
 import Notification from '../schemas/Notifications';
@@ -51,6 +55,15 @@ class HackathonController {
   async index(req, res, next) {
     try {
       const { page = 1, perPage = 20 } = req.query;
+      const { authorization: authHeader } = req.headers;
+
+      if (authHeader) {
+        const [, token] = authHeader.split(' ');
+
+        const decoded = await promisify(jwt.verify)(token, authConfig.secret);
+
+        req.userId = decoded.id;
+      }
 
       const hackathons = await Hackathon.findAndCountAll({
         where: {
@@ -70,6 +83,31 @@ class HackathonController {
         ],
         order: [['createdAt', 'DESC']],
       });
+
+      hackathons.rows.map(
+        hackathon => (hackathon.dataValues.isParticipant = false)
+      );
+
+      if (req.userId) {
+        await Promise.all(
+          hackathons.rows.map(async hackthon => {
+            const isParticipant = await Participant.findOne({
+              where: {
+                hackathon_id: hackthon.dataValues.id,
+                user_id: req.userId,
+              },
+            });
+
+            if (isParticipant) {
+              hackthon.dataValues.isParticipant = true;
+            } else {
+              hackthon.dataValues.isParticipant = false;
+            }
+          })
+        );
+      }
+
+      console.log(hackathons.rows[0].dataValues);
 
       const maxPage = Math.ceil(hackathons.count / perPage);
       const previousPage = parseInt(page, 10) - 1;

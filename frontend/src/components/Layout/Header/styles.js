@@ -3,13 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export const StyledHeader = styled.header`
   background-color: #fff;
-
-  .tablet {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 20px;
-  }
+  box-shadow: 0px 1px 20px #0000000f;
 
   @media only screen and (max-width: 550px) {
     .tablet {
@@ -19,8 +13,9 @@ export const StyledHeader = styled.header`
 `;
 
 export const Container = styled.div`
-  box-shadow: 0px 1px 20px #0000000f;
   padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
 
   display: flex;
   justify-content: space-between;
@@ -106,5 +101,16 @@ export const TabLink = styled(NavLink)`
     &.left {
       border-radius: 0;
     }
+  }
+`;
+
+export const TabeletNav = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+
+  @media only screen and (max-width: 550px) {
+    margin: 0;
   }
 `;

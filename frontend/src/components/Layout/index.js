@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import api from '../../services/api';
 import { reduxLogin, reduxLogout } from '../../store/ducks/auth';
 import { logout } from '../../utils/auth';
@@ -8,7 +7,7 @@ import { logout } from '../../utils/auth';
 import Header from './Header';
 import Footer from './Footer';
 
-export default withRouter(function Layout({ children, history }) {
+export default function Layout({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,12 +19,11 @@ export default withRouter(function Layout({ children, history }) {
       } catch (error) {
         logout();
         dispatch(reduxLogout());
-        history.push('/login');
       }
     }
 
     persistAuthState();
-  }, [dispatch, history]);
+  }, [dispatch]);
 
   return (
     <>
@@ -34,4 +32,4 @@ export default withRouter(function Layout({ children, history }) {
       <Footer />
     </>
   );
-});
+}

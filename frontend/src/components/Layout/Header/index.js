@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import api from '../../../services/api';
 
@@ -9,7 +9,7 @@ import Tablet from './Tablet';
 import Mobile from './Mobile';
 import { StyledHeader, Container, StyledLink, TabLink } from './styles';
 
-export default function Header() {
+export default withRouter(function Header({ history }) {
   const isAuth = useSelector(state => state.auth.isAuth);
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -31,7 +31,7 @@ export default function Header() {
     }
 
     getNotifications();
-  }, []);
+  }, [history.location.pathname]);
 
   let authMenu = (
     <Desktop
@@ -91,4 +91,4 @@ export default function Header() {
       ) : null}
     </StyledHeader>
   );
-}
+});

@@ -71,7 +71,14 @@ class HackathonController {
             [Op.gt]: new Date(),
           },
         },
-        attributes: ['id', 'title', 'subtitle', 'description'],
+        attributes: [
+          'id',
+          'title',
+          'subtitle',
+          'description',
+          'event_date',
+          'location',
+        ],
         limit: perPage,
         offset: (page - 1) * perPage,
         include: [

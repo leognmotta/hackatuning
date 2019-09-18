@@ -17,7 +17,7 @@ import {
 export default function Home({ history }) {
   const [hackathons, setHackthons] = useState([]);
   const [pagination, setPagination] = useState({});
-  const perPage = 1;
+  const perPage = 8;
 
   useEffect(() => {
     async function loadHackathons() {

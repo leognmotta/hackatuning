@@ -14,7 +14,7 @@ class UserValidator {
         password: Yup.string()
           .required()
           .min(6),
-        urls: Yup.array().of(Yup.string().url()),
+        urls: Yup.array().of(Yup.string().url('url not valid')),
         roles: Yup.array()
           .of(Yup.number())
           .required(),
@@ -59,7 +59,7 @@ class UserValidator {
         confirmPassword: Yup.string().when('password', (password, field) =>
           password ? field.required().oneOf([Yup.ref('password')]) : field
         ),
-        urls: Yup.array().of(Yup.string().url()),
+        urls: Yup.array().of(Yup.string().url('url not valid')),
         roles: Yup.array().of(Yup.number()),
       });
 

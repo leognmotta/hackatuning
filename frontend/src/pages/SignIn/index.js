@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import api from '../../services/api';
 import { login } from '../../utils/auth';
 import { reduxLogin } from '../../store/ducks/auth';
@@ -33,7 +34,16 @@ export default function SignIn({ history }) {
 
       history.push('/');
     } catch (error) {
-      console.log(error);
+      toast(
+        error.response.data.fields
+          ? error.response.data.fields[0]
+          : error.response.data.message,
+        {
+          className: 'toast-background',
+          bodyClassName: 'toast-font-size',
+          progressClassName: 'toast-progress-bar',
+        }
+      );
     }
   }
 
@@ -56,8 +66,11 @@ export default function SignIn({ history }) {
         />
 
         <button type="submit">Sign in</button>
+        <span className="or">OR</span>
         <Link to="/register">Register NOW!</Link>
       </StyledForm>
+
+      <ToastContainer />
     </Container>
   );
 }

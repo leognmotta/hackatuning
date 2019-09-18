@@ -29,6 +29,7 @@ export default createGlobalStyle`
   }
 
   main {
+    width: 100%;
     max-width: 1020px;
     margin: 0 auto auto auto;
     padding: 1em;

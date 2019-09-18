@@ -4,15 +4,10 @@ import filesRoute from './filesRoute';
 import usersRoute from './usersRoute';
 import rolesRoute from './rolesRoute';
 import sessionsRoute from './sessionsRoute';
-<<<<<<< HEAD
-import hackathonsRoute from './hackathonsRoutes';
-import participantsRoutes from './participantsRoutes';
-=======
-import HackathonsRoute from './hackathonsRoutes';
-import ParticipantRoute from './ParticipantRoutes';
-import NotificationRoute from './NotificationRoutes';
-import ValidateTokenRoute from './ValidateTokenRoute';
->>>>>>> 51ae68bd44f4f6ada2c787b701e0cf6fd659bcc1
+import hackathonsRoute from './hackathonsRoute';
+import participantsRoute from './participantsRoute';
+import notificationsRoute from './notificationsRoute';
+import validateTokensRoute from './validateTokensRoute';
 
 const routes = Router();
 
@@ -24,16 +19,12 @@ routes.use(rolesRoute);
 
 routes.use(sessionsRoute);
 
-<<<<<<< HEAD
 routes.use(hackathonsRoute);
-=======
-routes.use(NotificationRoute);
 
-routes.use(HackathonsRoute);
->>>>>>> 51ae68bd44f4f6ada2c787b701e0cf6fd659bcc1
+routes.use(participantsRoute);
 
-routes.use(participantsRoutes);
+routes.use(notificationsRoute);
 
-routes.use(ValidateTokenRoute);
+routes.use(validateTokensRoute);
 
 export default routes;

@@ -4,6 +4,38 @@ export const Container = styled.div`
   .carousel .slide {
     background: none;
   }
+
+  .pagination-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+
+    .selected {
+      a {
+        background: #bbd7fb 0% 0% no-repeat padding-box;
+      }
+    }
+
+    .disabled {
+      a {
+        background: #ccc !important;
+        cursor: not-allowed;
+      }
+    }
+
+    li {
+      list-style: none;
+      margin: 10px;
+
+      a {
+        border: 2px solid #e0ecf9;
+        border-radius: 6px;
+        padding: 14px 18px;
+        cursor: pointer;
+      }
+    }
+  }
 `;
 
 export const CarouselContainer = styled.div`

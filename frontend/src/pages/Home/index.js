@@ -3,6 +3,7 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { FaCalendar, FaMapMarkerAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
 import api from '../../services/api';
 
 import {
@@ -13,22 +14,39 @@ import {
   Card,
 } from './styles';
 
-export default function Home() {
+export default function Home({ history }) {
   const [hackathons, setHackthons] = useState([]);
+  const [pagination, setPagination] = useState({});
+  const perPage = 8;
 
   useEffect(() => {
     async function loadHackathons() {
-      const { data } = await api.get('/v1/hackathons');
+      const searchURLParam = new URLSearchParams(history.location.search);
+      const page = searchURLParam.get('page') || 1;
+
+      const { data } = await api.get(
+        `/v1/hackathons?perPage=${perPage}&page=${page}`
+      );
 
       setHackthons(data.hackathons);
+      setPagination(data.pagination);
     }
 
     loadHackathons();
-  }, []);
+  }, [history.location.search]);
+
+  async function handlePageChange(index) {
+    const { data } = await api.get(
+      `/v1/hackathons?perPage=${perPage}&page=${index.selected + 1}`
+    );
+    setPagination(data.pagination);
+    setHackthons(data.hackathons);
+    history.push(`/?page=${index.selected + 1}`);
+  }
 
   return (
     <Container>
-      <Carousel autoPlay interval={3000} showThumbs={false}>
+      <Carousel autoPlay infiniteLoop interval={3000} showThumbs={false}>
         {hackathons.map(hackathon => (
           <CarouselContainer key={hackathon.id} url={hackathon.cover.url}>
             <img
@@ -91,6 +109,17 @@ export default function Home() {
           ))}
         </CardContainer>
       </PageContainer>
+
+      <ReactPaginate
+        pageCount={pagination.maxPage}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={3}
+        onPageChange={index => handlePageChange(index)}
+        containerClassName="pagination-container"
+        activeLinkClassName="active"
+        nextLabel=">"
+        previousLabel="<"
+      />
     </Container>
   );
 }

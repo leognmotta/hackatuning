@@ -119,7 +119,7 @@ export default function SignUp({ history }) {
           onChange={e => setForm({ ...form, bio: e.target.value })}
         />
 
-        <h2>Usefull urls</h2>
+        <h2>Useful urls</h2>
         <small>Github link, linkedin or personal website</small>
         <div className="urls">
           <div className="url_box">

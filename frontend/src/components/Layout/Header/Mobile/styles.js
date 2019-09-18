@@ -24,6 +24,7 @@ export const NotificationContianer = styled.div`
     background: #ffffff;
     box-shadow: 0px 1px 20px #0000000f;
     width: 300px;
+    z-index: 100000;
 
     div {
       border-bottom: 1px solid #f3f3f3f3;

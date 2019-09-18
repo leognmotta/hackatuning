@@ -6,6 +6,7 @@ import api from '../../services/api';
 import { login } from '../../utils/auth';
 import { reduxLogin } from '../../store/ducks/auth';
 
+import LogoIcon from '../../assets/Logo@icon.svg';
 import { StyledForm, Container, Input } from './styles';
 
 export default function SignIn({ history }) {
@@ -50,15 +51,34 @@ export default function SignIn({ history }) {
   return (
     <Container>
       <StyledForm onSubmit={handleSubmit}>
+        <img src={LogoIcon} alt="logo" style={{ marginBottom: 20 }} />
         <h1>Sign in</h1>
+        <small>Please, provide your email and password</small>
 
+        <label
+          htmlFor="email"
+          style={{ marginTop: 20, textAlign: 'left', fontWeight: 'bold' }}
+        >
+          {' '}
+          Email:
+        </label>
         <Input
+          id="email"
           type="email"
           name="email"
           placeholder="Your E-Mail here"
           onChange={e => setEmail(e.target.value)}
         />
+
+        <label
+          htmlFor="password"
+          style={{ textAlign: 'left', fontWeight: 'bold' }}
+        >
+          {' '}
+          Passowrd:
+        </label>
         <Input
+          id="password"
           type="password"
           name="password"
           placeholder="A super secret pass here!"

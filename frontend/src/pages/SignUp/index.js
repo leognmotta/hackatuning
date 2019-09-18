@@ -5,7 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../../services/api';
 
-import { Container, Form, Input, H1 } from './styles';
+import LogoIcon from '../../assets/Logo@icon.svg';
+import { Container, Form, Input, H1, TextArea } from './styles';
 
 export default function SignUp({ history }) {
   const [roles, setRoles] = useState([]);
@@ -86,40 +87,72 @@ export default function SignUp({ history }) {
 
   return (
     <Container>
+      <img src={LogoIcon} alt="Logo" />
       <H1> Register </H1>
+      <small>Create an account to use our services.</small>
+
       <Form onSubmit={handleSubmit}>
+        <label htmlFor="name" style={{ marginTop: 20, textAlign: 'left' }}>
+          {' '}
+          Name:
+        </label>
         <Input
           name="name"
+          id="name"
           placeholder=" Your name here!"
           onChange={e => setForm({ ...form, name: e.target.value })}
         />
+
+        <label htmlFor="nickname" style={{ marginTop: 20, textAlign: 'left' }}>
+          {' '}
+          Nickname:
+        </label>
         <Input
+          id="nickname"
           name="nickname"
           placeholder=" Nickname"
           onChange={e => setForm({ ...form, nickname: e.target.value })}
         />
+
+        <label htmlFor="email" style={{ marginTop: 20, textAlign: 'left' }}>
+          {' '}
+          Email:
+        </label>
         <Input
           name="email"
           type="email"
+          id="email"
           placeholder=" E-Mail here!"
           err
           onChange={e => setForm({ ...form, email: e.target.value })}
         />
+
+        <label htmlFor="password" style={{ marginTop: 20, textAlign: 'left' }}>
+          {' '}
+          Password:
+        </label>
         <Input
+          id="password"
           name="password"
           type="password"
           placeholder=" Super secret pass plss"
           onChange={e => setForm({ ...form, password: e.target.value })}
         />
-        <Input
+
+        <label htmlFor="bio" style={{ marginTop: 20, textAlign: 'left' }}>
+          {' '}
+          Bio:
+        </label>
+        <TextArea
+          id="bio"
           name="bio"
           maxLength="255"
           placeholder=" Tell me about you! I want to know..."
-          multiline
+          rows="5"
           onChange={e => setForm({ ...form, bio: e.target.value })}
         />
 
-        <h2>Useful urls</h2>
+        <h4>Useful urls</h4>
         <small>Github link, linkedin or personal website</small>
         <div className="urls">
           <div className="url_box">
@@ -148,7 +181,7 @@ export default function SignUp({ history }) {
           </button>
         </div>
 
-        <h2>Select Roles</h2>
+        <h4>Select Roles</h4>
         <div className="roles">
           {roles.map(role => (
             <label key={role.id} htmlFor={`${role.name}`}>

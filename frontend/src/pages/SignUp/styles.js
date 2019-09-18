@@ -32,7 +32,7 @@ export const Form = styled.form`
     margin: 20px;
   }
 
-  h2 {
+  h4 {
     text-align: left;
     margin: 10px 0 10px 0;
   }
@@ -127,6 +127,25 @@ export const Input = styled.input`
   border: 2px solid #cccccc;
   border-radius: 6px;
   opacity: 1;
+
+  &:focus {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: 2px solid #1437e3;
+    border-radius: 6px;
+    opacity: 1;
+  }
+`;
+
+export const TextArea = styled.textarea`
+  margin: 10px 0 10px 0;
+  width: 100%;
+  font-size: 14px;
+  padding: 10px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 2px solid #cccccc;
+  border-radius: 6px;
+  opacity: 1;
+  resize: none;
 
   &:focus {
     background: #ffffff 0% 0% no-repeat padding-box;

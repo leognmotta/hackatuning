@@ -114,8 +114,6 @@ class HackathonController {
         );
       }
 
-      console.log(hackathons.rows[0].dataValues);
-
       const maxPage = Math.ceil(hackathons.count / perPage);
       const previousPage = parseInt(page, 10) - 1;
       const hasPreviousPage = previousPage >= 1;

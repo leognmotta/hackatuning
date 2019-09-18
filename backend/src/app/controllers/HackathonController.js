@@ -71,7 +71,14 @@ class HackathonController {
             [Op.gt]: new Date(),
           },
         },
-        attributes: ['id', 'title', 'subtitle', 'description'],
+        attributes: [
+          'id',
+          'title',
+          'subtitle',
+          'description',
+          'event_date',
+          'location',
+        ],
         limit: perPage,
         offset: (page - 1) * perPage,
         include: [
@@ -106,8 +113,6 @@ class HackathonController {
           })
         );
       }
-
-      console.log(hackathons.rows[0].dataValues);
 
       const maxPage = Math.ceil(hackathons.count / perPage);
       const previousPage = parseInt(page, 10) - 1;

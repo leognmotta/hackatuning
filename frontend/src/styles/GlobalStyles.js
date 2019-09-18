@@ -14,6 +14,7 @@ export default createGlobalStyle`
 
   html, body {
     height: 100%;
+    background: #F6F8F9;
   }
 
   body, input, button {
@@ -30,10 +31,11 @@ export default createGlobalStyle`
 
   main {
     width: 100%;
-    max-width: 1020px;
+    max-width: 1140px;
     margin: 0 auto auto auto;
     padding: 1em;
     flex: 1;
+    background: #F6F8F9;
   }
 
   button {

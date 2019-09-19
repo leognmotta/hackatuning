@@ -9,8 +9,8 @@ const StyledForm = styled.form`
   flex-direction: column;
 `;
 
-function Form({ ...props }) {
-  return <StyledForm {...props} />;
+function Form({ onSubmit, ...props }) {
+  return <StyledForm onSubmit={onSubmit} {...props} />;
 }
 
 export { Input, TextArea, Form, Button };

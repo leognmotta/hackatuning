@@ -14,6 +14,10 @@ const StyledButton = styled.button`
   font-weight: bold;
 `;
 
-export default function Button({ text = 'Button', ...props }) {
-  return <StyledButton {...props}>{text}</StyledButton>;
+export default function Button({ text = 'Button', type = 'submit', ...props }) {
+  return (
+    <StyledButton type={type} {...props}>
+      {text}
+    </StyledButton>
+  );
 }

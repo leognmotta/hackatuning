@@ -37,7 +37,7 @@ export default function SignIn({ history }) {
     } catch (error) {
       toast(
         error.response.data.fields
-          ? error.response.data.fields[0]
+          ? error.response.data.fields[0].message
           : error.response.data.message,
         {
           className: 'toast-background',

@@ -46,7 +46,13 @@ export default function Home({ history }) {
 
   return (
     <Container>
-      <Carousel autoPlay infiniteLoop interval={3000} showThumbs={false}>
+      <Carousel
+        autoPlay
+        infiniteLoop
+        interval={3000}
+        showThumbs={false}
+        showArrows={false}
+      >
         {hackathons.map(hackathon => (
           <CarouselContainer key={hackathon.id} url={hackathon.cover.url}>
             <img

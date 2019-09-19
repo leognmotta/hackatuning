@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import jwt from 'jsonwebtoken';
 
 import authConfig from '../../config/authConfig';
@@ -98,7 +99,10 @@ class UserController {
 
       const user = await User.findOne({
         where: {
-          nickname,
+          [Op.or]: [
+            { nickname },
+            { id: parseInt(nickname, 16) ? parseInt(nickname, 16) : 0 },
+          ],
         },
         attributes: ['id', 'name', 'nickname', 'bio', 'avatar_id'],
         include: [

@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaCog } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import Notification from '../../../Notifications';
 
 import { StyledUl } from './styles';
@@ -12,9 +13,9 @@ export default function Desktop({
   return (
     <StyledUl>
       <li>
-        <button className="create_hackathon btn" type="button">
+        <Link className="create_hackathon" to="register-hackathon">
           Create Hackathon
-        </button>
+        </Link>
       </li>
       <li className="notification_container">
         <Notification
@@ -24,7 +25,9 @@ export default function Desktop({
         />
       </li>
       <li>
-        <FaCog color="#1437E3" size={22} />
+        <Link to="/settings">
+          <FaCog color="#1437E3" size={24} />
+        </Link>
       </li>
     </StyledUl>
   );

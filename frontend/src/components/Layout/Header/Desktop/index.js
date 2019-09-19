@@ -13,7 +13,7 @@ export default function Desktop({
   return (
     <StyledUl>
       <li>
-        <Link to="register-hackathon" className="create_hackathon">
+        <Link to="/register-hackathon" className="create_hackathon">
           Create Hackathon
         </Link>
       </li>
@@ -33,7 +33,9 @@ export default function Desktop({
         />
       </li>
       <li>
-        <FaCog color="#1437E3" size={24} />
+        <Link to="/settings">
+          <FaCog color="#1437E3" size={24} />
+        </Link>
       </li>
       <li>Logout</li>
     </StyledUl>

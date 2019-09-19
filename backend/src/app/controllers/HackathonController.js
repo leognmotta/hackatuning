@@ -91,9 +91,10 @@ class HackathonController {
         order: [['createdAt', 'DESC']],
       });
 
-      hackathons.rows.map(
-        hackathon => (hackathon.dataValues.isParticipant = false)
-      );
+      hackathons.rows.map(hackathon => {
+        hackathon.dataValues.isParticipant = false;
+        return false;
+      });
 
       if (req.userId) {
         await Promise.all(
@@ -238,7 +239,7 @@ class HackathonController {
       if (organizer_id !== req.userId)
         throw new ApiError(
           'Unauthorized',
-          `You need to own the event to update it.`,
+          `You need to own the event to delete it.`,
           401
         );
 

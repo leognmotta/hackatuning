@@ -9,6 +9,11 @@ import HackathonDeleteMail from '../app/jobs/HackathonDeleteMail';
 import ParticipantSubscribeMail from '../app/jobs/ParticipantSubscribeMail';
 import ParticipantUnsubscribeMail from '../app/jobs/ParticipantUnsubscribeMail';
 import ConfirmMail from '../app/jobs/ConfirmMail';
+import TeamInviteMail from '../app/jobs/TeamInviteMail';
+import TeamRemovedMemberMail from '../app/jobs/TeamRemovedMemberMail';
+import TeamRemovedMemberNotifiyMail from '../app/jobs/TeamRemovedMemberNotifiyMail';
+import TeamAcceptInviteMail from '../app/jobs/TeamAcceptInviteMail';
+import TeamDeniedInviteMail from '../app/jobs/TeamDeniedInviteMail';
 
 const jobs = [
   RecoverMail,
@@ -19,6 +24,11 @@ const jobs = [
   ParticipantSubscribeMail,
   ParticipantUnsubscribeMail,
   ConfirmMail,
+  TeamInviteMail,
+  TeamRemovedMemberMail,
+  TeamRemovedMemberNotifiyMail,
+  TeamAcceptInviteMail,
+  TeamDeniedInviteMail,
 ];
 
 class Queue {

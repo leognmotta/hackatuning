@@ -1,0 +1,271 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2019-09-19T19:03:00.004Z",
+  "__export_source": "insomnia.desktop.app:v6.6.2",
+  "resources": [
+    {
+      "_id": "req_2e009636f7fb4e9c839c6de1d6f9ba9b",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1568853691691,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568853691691,
+      "method": "DELETE",
+      "modified": 1568897323456,
+      "name": "Delete",
+      "parameters": [],
+      "parentId": "fld_55e5e2c10e88427999499e2c0b3c53c6",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/teams/6",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_55e5e2c10e88427999499e2c0b3c53c6",
+      "created": 1568833903040,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1568407422698,
+      "modified": 1568833919611,
+      "name": "Teams",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "created": 1568219659255,
+      "description": "",
+      "modified": 1568258109252,
+      "name": "Hackatuning",
+      "parentId": null,
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_647ef7088a2248a385a9d0027ac1d208",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1568833930524,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568848096507,
+      "method": "POST",
+      "modified": 1568890612956,
+      "name": "Store",
+      "parameters": [],
+      "parentId": "fld_55e5e2c10e88427999499e2c0b3c53c6",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/teams/hackathons/1",
+      "_type": "request"
+    },
+    {
+      "_id": "req_c3e2e0db6a12422f8f7bde83a173a9c3",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1568848096457,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568848096457,
+      "method": "GET",
+      "modified": 1568848749084,
+      "name": "Show",
+      "parameters": [],
+      "parentId": "fld_55e5e2c10e88427999499e2c0b3c53c6",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/teams/1",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0f08c49caabc4f24a106096a7405fabd",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1568848002633,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568841013465.5,
+      "method": "GET",
+      "modified": 1568853186583,
+      "name": "Index",
+      "parameters": [],
+      "parentId": "fld_55e5e2c10e88427999499e2c0b3c53c6",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/teams/hackathons/1",
+      "_type": "request"
+    },
+    {
+      "_id": "req_47a19e3775134cebaaec5d69c3c10282",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"denied\": true\n}"
+      },
+      "created": 1568904763561,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_05d898632a35427fa5c44facdbc8e8f2",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1568904763561,
+      "method": "PUT",
+      "modified": 1568916470105,
+      "name": "Update",
+      "parameters": [],
+      "parentId": "fld_f9f55a4dbf114cb7bb083eafc6d5e03f",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/teams/invites/2",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_f9f55a4dbf114cb7bb083eafc6d5e03f",
+      "created": 1568838754050,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1568833930474,
+      "modified": 1568838756766,
+      "name": "Invite",
+      "parentId": "fld_55e5e2c10e88427999499e2c0b3c53c6",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_8c83fde1f67b420197fb22747d41cf5d",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1568903477548,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568903477548,
+      "method": "GET",
+      "modified": 1568910379700,
+      "name": "Index",
+      "parameters": [],
+      "parentId": "fld_f9f55a4dbf114cb7bb083eafc6d5e03f",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/teams/invites/me",
+      "_type": "request"
+    },
+    {
+      "_id": "req_a01a40ceaf424d6bafd684d34bea6f0c",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1568838767279,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568838767279,
+      "method": "POST",
+      "modified": 1568910296026,
+      "name": "Store",
+      "parameters": [],
+      "parentId": "fld_f9f55a4dbf114cb7bb083eafc6d5e03f",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/teams/7/invites/4",
+      "_type": "request"
+    },
+    {
+      "_id": "req_7d3361e19e9c4ca4a7896ea542880d0b",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1568853996372,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568853996372,
+      "method": "DELETE",
+      "modified": 1568889504237,
+      "name": "Delete",
+      "parameters": [],
+      "parentId": "fld_97107ecdd96a40929b4aabe0ff2b2f47",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/teams/1/participants/5",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_97107ecdd96a40929b4aabe0ff2b2f47",
+      "created": 1568853920510,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1568833930424,
+      "modified": 1568853928484,
+      "name": "Participants",
+      "parentId": "fld_55e5e2c10e88427999499e2c0b3c53c6",
+      "_type": "request_group"
+    },
+    {
+      "_id": "jar_77a239b775b9c8d9afc82851d4c475d1ff66f939",
+      "cookies": [],
+      "created": 1568219659590,
+      "modified": 1568219659590,
+      "name": "Default Jar",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "cookie_jar"
+    }
+  ]
+}

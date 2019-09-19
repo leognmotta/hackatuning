@@ -6,7 +6,7 @@ import api from '../../services/api';
 
 import { Container, Form, Input, H1, TextArea } from './styles';
 
-export default function Settings({ history }) {
+export default function Settings() {
   const [roles, setRoles] = useState([]);
   const [avatar, setAvatar] = useState(null);
   const [form, setForm] = useState({
@@ -52,12 +52,13 @@ export default function Settings({ history }) {
       if (urls[0].length > 1) obj.urls = urls;
       if (skills.length > 1) obj.roles = skills;
 
+      await api.put(`/v1/users`, obj);
+
       toast('Profile updated!', {
         className: 'toast-background_success',
         bodyClassName: 'toast-font-size',
         progressClassName: 'toast-progress-bar_success',
       });
-      await api.put(`/v1/users`, obj);
     } catch (error) {
       toast(
         error.response.data.fields
@@ -108,8 +109,6 @@ export default function Settings({ history }) {
     };
 
     const { data } = await api.post(`/v1/files/users`, formData, config);
-
-    console.log(data.url);
 
     setAvatar(data.url);
   }

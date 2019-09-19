@@ -207,7 +207,6 @@ export const Card = styled.div`
       font-weight: bold;
       padding: 10px 15px;
       display: block;
-      margin-top: 10px;
       max-width: 245px;
       color: #fff;
       background: transparent

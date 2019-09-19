@@ -52,6 +52,17 @@ class User extends Model {
       as: 'urls',
       foreignKey: 'user_id',
     });
+
+    this.belongsToMany(models.Team, {
+      through: 'TeamMember',
+      as: 'members',
+      foreignKey: 'member_id',
+    });
+
+    this.belongsTo(models.TeamMember, {
+      foreignKey: 'id',
+      as: 'member',
+    });
   }
 
   checkPassword(password) {

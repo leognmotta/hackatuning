@@ -11,6 +11,8 @@ import Role from '../app/models/Role';
 import UserRole from '../app/models/UserRole';
 import Hackathon from '../app/models/Hackathon';
 import Participant from '../app/models/Participant';
+import Team from '../app/models/Team';
+import TeamMember from '../app/models/TeamMember';
 
 const models = [
   Role,
@@ -21,6 +23,8 @@ const models = [
   UserRole,
   Hackathon,
   Participant,
+  Team,
+  TeamMember,
 ];
 
 class Database {

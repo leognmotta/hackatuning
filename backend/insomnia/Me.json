@@ -1,0 +1,112 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2019-09-19T19:03:36.119Z",
+  "__export_source": "insomnia.desktop.app:v6.6.2",
+  "resources": [
+    {
+      "_id": "req_12daeb4901bc401ea96cdb52cb0a9656",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1568919285877,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568911769641,
+      "method": "GET",
+      "modified": 1568919296336,
+      "name": "Index",
+      "parameters": [],
+      "parentId": "fld_2c06e8c93b3f4ae7b61f58b7741fe64b",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/me/participants/hackas",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_2c06e8c93b3f4ae7b61f58b7741fe64b",
+      "created": 1568919280205,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1568919280205,
+      "modified": 1568919280205,
+      "name": "Participants",
+      "parentId": "fld_0c7c3f1167304bb68e143d1ed7a14107",
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_0c7c3f1167304bb68e143d1ed7a14107",
+      "created": 1568918739973,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1568407422648,
+      "modified": 1568919265614,
+      "name": "Me",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "created": 1568219659255,
+      "description": "",
+      "modified": 1568258109252,
+      "name": "Hackatuning",
+      "parentId": null,
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_9009355db3cd4b74a9c873702ef1581a",
+      "authentication": {
+        "token": "{{ token  }}",
+        "type": "bearer"
+      },
+      "body": {},
+      "created": 1568918775721,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1568918775721,
+      "method": "GET",
+      "modified": 1568919282081,
+      "name": "Index",
+      "parameters": [],
+      "parentId": "fld_4c86394b4f4b44b6afd8d6ef7eca3e35",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ v1_url  }}/me/hackas",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_4c86394b4f4b44b6afd8d6ef7eca3e35",
+      "created": 1568919273263,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1568919273263,
+      "modified": 1568919273263,
+      "name": "Hackas",
+      "parentId": "fld_0c7c3f1167304bb68e143d1ed7a14107",
+      "_type": "request_group"
+    },
+    {
+      "_id": "jar_77a239b775b9c8d9afc82851d4c475d1ff66f939",
+      "cookies": [],
+      "created": 1568219659590,
+      "modified": 1568219659590,
+      "name": "Default Jar",
+      "parentId": "wrk_9ceb3fbd7fce4db8999e6d01f3e1c47e",
+      "_type": "cookie_jar"
+    }
+  ]
+}

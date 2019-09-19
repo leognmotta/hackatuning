@@ -1,14 +1,15 @@
-<strong>Hello, {{ organizer }}</strong>
-<p>You have successfully updated {{ title }}!</p>
-<p>
-  <strong>Date: </strong> {{ date }} <br />
-  <strong>End: </strong> {{ event_ending }}
-  <br />
+<h1 class="content__title m-bottom">
+  Hello <span class="cl-blue">{{ organizer }}</span>!
+</h1>
 
-  <p>Participants can now subscribe to {{ title }} until {{ deadline_subscription }} before the event starts.</p>
-  <p>After {{ date }} Participants will be able to create teams until {{ deadline_team_creation }}</p>
+<p class="content__paragraph">You have successfully updated {{ title }}!</p>
 
-  <small>
-    You can update your event at any time!
-  </small>
-</p>
+<p class="content__paragraph"><strong>Date: </strong> {{ date }}</p>
+<p class="content__paragraph m-bottom"><strong>End: </strong> {{ event_ending }}</p>
+
+<p class="content__paragraph m-bottom">Participants can now subscribe to <strong>{{ title }}</strong> until {{ deadline_subscription }} before the event starts.</p>
+<p class="content__paragraph m-bottom">After {{ date }} Participants will be able to create teams until {{ deadline_team_creation }}</p>
+
+<small>
+  You can update your event at any time!
+</small>

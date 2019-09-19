@@ -1,9 +1,11 @@
-<strong>Hello, {{ name }}</strong>
-<p>You have successfully unsubscribed to {{ title }}!</p>
-<p>
-  <p>But if you change your mind you have untill {{ deadline_subscription }} to subscribe again.</p>
+<h1 class="content__title m-bottom">
+  Hello <span class="cl-blue">{{ name }}</span>!
+</h1>
 
-  <small>
-    You can subscribe again until {{ deadline_subscription }}!
-  </small>
-</p>
+<p class="content__paragraph m-bottom">You have successfully unsubscribed to <strong>{{ title }}</strong>!</p>
+
+<p class="content__paragraph m-bottom">But if you change your mind you have untill {{ deadline_subscription }} to subscribe again.</p>
+
+<small>
+  You can subscribe again until {{ deadline_subscription }}!
+</small>

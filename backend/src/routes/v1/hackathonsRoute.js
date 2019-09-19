@@ -15,6 +15,9 @@ routes.post(
 );
 
 routes.get('/hackathons', HackathonController.index);
+
+routes.get('/hackathons', HackathonController.index);
+
 routes.get('/hackathons/:id', HackathonController.show);
 
 routes.put(

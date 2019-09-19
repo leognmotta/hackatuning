@@ -1,4 +1,5 @@
 import { Op } from 'sequelize';
+
 import ApiError from '../../config/ApiError';
 import Participant from '../models/Participant';
 import Hackathon from '../models/Hackathon';
@@ -11,6 +12,8 @@ import Queue from '../../lib/Queue';
 import Notification from '../schemas/Notifications';
 import ParticipantSubscribeMail from '../jobs/ParticipantSubscribeMail';
 import ParticipantUnsubscribeMail from '../jobs/ParticipantUnsubscribeMail';
+import Team from '../models/Team';
+import TeamMember from '../models/TeamMember';
 
 class ParticipantController {
   async store(req, res, next) {
@@ -76,7 +79,7 @@ class ParticipantController {
   async index(req, res, next) {
     try {
       const { id } = req.params;
-      const { page = 1, perPage = 20 } = req.query;
+      const { page = 1, perPage = 20, onlyNoTeam, onlyTeam } = req.query;
 
       const isParticipant = await Participant.findOne({
         where: {
@@ -93,10 +96,26 @@ class ParticipantController {
         );
       }
 
-      const participants = await Participant.findAndCountAll({
-        where: {
+      let where = {
+        hackathon_id: id,
+      };
+
+      if (onlyTeam) {
+        where = {
           hackathon_id: id,
-        },
+          team_member_id: { [Op.ne]: null },
+        };
+      }
+
+      if (onlyNoTeam) {
+        where = {
+          hackathon_id: id,
+          team_member_id: null,
+        };
+      }
+
+      const participants = await Participant.findAndCountAll({
+        where,
         attributes: [],
         limit: perPage,
         offset: (page - 1) * perPage,
@@ -157,18 +176,62 @@ class ParticipantController {
       const { id } = req.params;
 
       const { name, email } = await User.findByPk(req.userId);
-      const { title, deadline_subscription } = await Hackathon.findByPk(id);
+
+      const hackathon = await Hackathon.findByPk(id);
+
+      if (!hackathon) {
+        throw new ApiError('Not Found', 'Hackathon not found!', 404);
+      }
+
+      const isTeamCreator = await Team.findOne({
+        where: {
+          hackathon_id: id,
+          creator_id: req.userId,
+        },
+      });
+
+      if (isTeamCreator) {
+        throw new ApiError(
+          'Not Authorized',
+          'You must close your team before you can unsubscribe from hackathon!',
+          401
+        );
+      }
+
+      const isTeamMember = await TeamMember.findOne({
+        where: {
+          member_id: req.userId,
+          is_member: true,
+        },
+        include: [
+          {
+            model: Team,
+            as: 'team',
+            where: {
+              hackathon_id: id,
+            },
+          },
+        ],
+      });
+
+      if (isTeamMember) {
+        throw new ApiError(
+          'Not Authorized',
+          'You must close your team before you can unsubscribe from hackathon!',
+          401
+        );
+      }
 
       await Notification.create({
-        content: `Hey ${name} you are no longer subscribed to ${title}`,
+        content: `Hey ${name} you are no longer subscribed to ${hackathon.title}`,
         user: req.userId,
       });
 
       await Queue.add(ParticipantUnsubscribeMail.key, {
         name,
         email,
-        title,
-        deadline_subscription,
+        title: hackathon.title,
+        deadline_subscription: hackathon.deadline_subscription,
       });
 
       Participant.destroy({
@@ -176,6 +239,21 @@ class ParticipantController {
           user_id: req.userId,
           hackathon_id: id,
         },
+      });
+
+      TeamMember.destroy({
+        where: {
+          member_id: req.userId,
+        },
+        include: [
+          {
+            model: Team,
+            as: 'team',
+            where: {
+              hackathon_id: id,
+            },
+          },
+        ],
       });
 
       return res.status(204).end();

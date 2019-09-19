@@ -7,6 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Container } from './styles';
 
 export default function RegisterHackathon() {
+  const [file, setFile] = useState();
   const [form, setForm] = useState({
     title: '',
     subtitle: '',
@@ -24,11 +25,27 @@ export default function RegisterHackathon() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    let formData;
+    let config = {};
+
     if (form.online) form.location = 'online';
     setForm(form);
 
+    if (file) {
+      formData = new FormData();
+      formData.append('file', file);
+      config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      };
+    }
+
     try {
       const { data } = await api.post('/v1/hackathons', form);
+
+      if (formData)
+        await api.post(`/v1/files/hackathons/${data.id}`, formData, config);
 
       console.log(data);
     } catch (error) {
@@ -41,6 +58,15 @@ export default function RegisterHackathon() {
       <h1>Rregister Hackathon</h1>
 
       <Form onSubmit={handleSubmit}>
+        <label htmlFor="cover">
+          Cover image:
+          <input
+            id="cover"
+            type="file"
+            onChange={e => setFile(e.target.files[0])}
+          />
+        </label>
+
         <Input
           label="Title:"
           type="text"

@@ -45,6 +45,7 @@ export const StyledUl = styled.ul`
   background: #fff;
   width: 100%;
   height: 60px;
+  z-index: 10000000;
 
   li {
     list-style: none;

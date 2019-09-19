@@ -109,8 +109,6 @@ export default function Settings() {
 
     const { data } = await api.post(`/v1/files/users`, formData, config);
 
-    console.log(data.url);
-
     setAvatar(data.url);
   }
 

@@ -49,9 +49,8 @@ export const CarouselContainer = styled.div`
   }
 
   #cover {
-    width: 100%;
-    max-width: 360px;
-    max-height: 360px;
+    max-height: 190px;
+    width: auto;
     margin-right: 10px;
     margin-right: 20px;
     border-radius: 6px;
@@ -159,6 +158,7 @@ export const Card = styled.div`
   box-shadow: 0px 1px 20px #0000000d;
   border-radius: 6px;
   margin: 10px;
+  max-width: 276px;
 
   header {
     height: 150px;
@@ -170,6 +170,8 @@ export const Card = styled.div`
 
     h2 {
       color: #fff;
+      font-size: 18px;
+      text-align: center;
     }
 
     background-image: -webkit-gradient(

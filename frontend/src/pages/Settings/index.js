@@ -52,12 +52,13 @@ export default function Settings() {
       if (urls[0].length > 1) obj.urls = urls;
       if (skills.length > 1) obj.roles = skills;
 
+      await api.put(`/v1/users`, obj);
+
       toast('Profile updated!', {
         className: 'toast-background_success',
         bodyClassName: 'toast-font-size',
         progressClassName: 'toast-progress-bar_success',
       });
-      await api.put(`/v1/users`, obj);
     } catch (error) {
       toast(
         error.response.data.fields
@@ -108,8 +109,6 @@ export default function Settings() {
     };
 
     const { data } = await api.post(`/v1/files/users`, formData, config);
-
-    console.log(data.url);
 
     setAvatar(data.url);
   }

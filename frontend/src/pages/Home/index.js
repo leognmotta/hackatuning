@@ -15,7 +15,7 @@ import {
 } from './styles';
 
 export default function Home({ history }) {
-  const [hackathons, setHackthons] = useState([]);
+  const [hackathons, setHackathons] = useState([]);
   const [pagination, setPagination] = useState({});
   const perPage = 8;
 
@@ -28,7 +28,7 @@ export default function Home({ history }) {
         `/v1/hackathons?perPage=${perPage}&page=${page}`
       );
 
-      setHackthons(data.hackathons);
+      setHackathons(data.hackathons);
       setPagination(data.pagination);
     }
 
@@ -40,7 +40,7 @@ export default function Home({ history }) {
       `/v1/hackathons?perPage=${perPage}&page=${index.selected + 1}`
     );
     setPagination(data.pagination);
-    setHackthons(data.hackathons);
+    setHackathons(data.hackathons);
     history.push(`/?page=${index.selected + 1}`);
   }
 
@@ -76,9 +76,9 @@ export default function Home({ history }) {
               </div>
 
               {hackathon.isParticipant ? (
-                <Link to={`hackthon/${hackathon.id}`}>Go to event</Link>
+                <Link to={`hackathon/${hackathon.id}`}>Go to event</Link>
               ) : (
-                <Link to={`hackthon/detail/${hackathon.id}`}>Details</Link>
+                <Link to={`/hackathon/${hackathon.id}/details`}>Details</Link>
               )}
             </div>
           </CarouselContainer>
@@ -106,9 +106,9 @@ export default function Home({ history }) {
                 </div>
 
                 {hackathon.isParticipant ? (
-                  <Link to={`hackthon/${hackathon.id}`}>Go to event</Link>
+                  <Link to={`hackathon/${hackathon.id}`}>Go to event</Link>
                 ) : (
-                  <Link to={`hackthon/detail/${hackathon.id}`}>Details</Link>
+                  <Link to={`/hackathon/${hackathon.id}/details`}>Details</Link>
                 )}
               </div>
             </Card>

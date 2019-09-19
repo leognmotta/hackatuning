@@ -6,7 +6,7 @@ import api from '../../services/api';
 
 import { Container, Form, Input, H1, TextArea } from './styles';
 
-export default function Settings({ history }) {
+export default function Settings() {
   const [roles, setRoles] = useState([]);
   const [avatar, setAvatar] = useState(null);
   const [form, setForm] = useState({

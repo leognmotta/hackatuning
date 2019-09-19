@@ -19,6 +19,14 @@ class UserController {
 
       const { email, urls, roles, nickname } = req.body;
 
+      if (/^[0-9]+$/.test(nickname)) {
+        throw new ApiError(
+          'Validation Error',
+          'Nickname cannot be a number',
+          400
+        );
+      }
+
       const emailExists = await User.findOne({
         where: { email },
       });

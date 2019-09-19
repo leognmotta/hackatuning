@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
+import { ToastContainer, toast } from 'react-toastify';
 import api from '../../services/api';
 import { Form, Input, TextArea, Button } from '../../components/Form/index';
 import 'react-datepicker/dist/react-datepicker.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Container } from './styles';
 
@@ -47,9 +49,22 @@ export default function RegisterHackathon() {
       if (formData)
         await api.post(`/v1/files/hackathons/${data.id}`, formData, config);
 
-      console.log(data);
+      toast('Hackathon created!', {
+        className: 'toast-background_success',
+        bodyClassName: 'toast-font-size',
+        progressClassName: 'toast-progress-bar_success',
+      });
     } catch (error) {
-      console.log(error.response.data);
+      toast(
+        error.response.data.fields
+          ? error.response.data.fields[0].message
+          : error.response.data.message,
+        {
+          className: 'toast-background',
+          bodyClassName: 'toast-font-size',
+          progressClassName: 'toast-progress-bar',
+        }
+      );
     }
   }
 
@@ -192,6 +207,8 @@ export default function RegisterHackathon() {
 
         <Button text="Send" type="submit" />
       </Form>
+
+      <ToastContainer />
     </Container>
   );
 }

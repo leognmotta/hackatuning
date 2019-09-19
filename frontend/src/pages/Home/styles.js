@@ -49,9 +49,8 @@ export const CarouselContainer = styled.div`
   }
 
   #cover {
-    width: 100%;
-    max-width: 360px;
-    max-height: 360px;
+    max-height: 190px;
+    width: auto;
     margin-right: 10px;
     margin-right: 20px;
     border-radius: 6px;

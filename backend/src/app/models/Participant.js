@@ -1,9 +1,11 @@
-import { Model } from 'sequelize';
+import Sequelize, { Model } from 'sequelize';
 
 class Participant extends Model {
   static init(sequelize) {
     super.init(
-      {},
+      {
+        team_member_id: Sequelize.INTEGER,
+      },
       {
         sequelize,
       }

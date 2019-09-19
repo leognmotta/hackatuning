@@ -7,7 +7,6 @@ class ParticipantSubscribeMail {
   }
 
   async handle({ data }) {
-    console.log(data);
     const {
       name,
       email,
@@ -16,18 +15,21 @@ class ParticipantSubscribeMail {
       deadline_team_creation,
     } = data;
 
+    const firstName = name.split(' ')[0] ? name.split(' ')[0] : name;
+
     await Mail.sendMail({
       to: `${name} <${email}>`,
-      subject: `${name}, You have subscribed to ${hackathon_title}`,
+      subject: `${firstName}, You have subscribed to ${hackathon_title}`,
       template: 'subscription',
       context: {
-        name,
+        name: firstName,
         hackathon_title,
         date: format(parseISO(event_date), "MMMM dd', at' H:mm'h'"),
         deadline_team_creation: format(
           parseISO(deadline_team_creation),
           "MMMM dd', at' H:mm'h'"
         ),
+        api: process.env.APP_URL,
       },
     });
   }

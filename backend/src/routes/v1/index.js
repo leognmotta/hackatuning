@@ -8,6 +8,8 @@ import hackathonsRoute from './hackathonsRoute';
 import participantsRoute from './participantsRoute';
 import notificationsRoute from './notificationsRoute';
 import validateTokensRoute from './validateTokensRoute';
+import teamsRoute from './teamsRoute';
+import meRoute from './meRoute';
 
 const routes = Router();
 
@@ -26,5 +28,9 @@ routes.use(participantsRoute);
 routes.use(notificationsRoute);
 
 routes.use(validateTokensRoute);
+
+routes.use(teamsRoute);
+
+routes.use(meRoute);
 
 export default routes;

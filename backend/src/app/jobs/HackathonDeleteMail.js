@@ -14,7 +14,9 @@ class HackathonDeleteMail {
       template: 'hackathon_delete',
       context: {
         api: process.env.APP_URL,
-        organizer,
+        organizer: organizer.split(' ')[0]
+          ? organizer.split(' ')[0]
+          : organizer,
         title,
       },
     });

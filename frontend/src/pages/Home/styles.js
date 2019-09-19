@@ -159,6 +159,7 @@ export const Card = styled.div`
   box-shadow: 0px 1px 20px #0000000d;
   border-radius: 6px;
   margin: 10px;
+  max-width: 276px;
 
   header {
     height: 150px;
@@ -170,6 +171,8 @@ export const Card = styled.div`
 
     h2 {
       color: #fff;
+      font-size: 18px;
+      text-align: center;
     }
 
     background-image: -webkit-gradient(

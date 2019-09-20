@@ -54,7 +54,7 @@ export default function UpdateHackathon({ match }) {
     }
 
     loadHackathon();
-  }, []);
+  }, [match.params]);
 
   async function handleSubmit(e) {
     e.preventDefault();

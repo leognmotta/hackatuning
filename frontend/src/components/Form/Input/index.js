@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledInput = styled.input`
-  margin: 10px 0 10px 0;
+  margin: 10px 0 15px 0;
   height: 40px;
   width: 100%;
   font-size: 14px;
@@ -21,7 +21,7 @@ const StyledInput = styled.input`
 
 export default function Input({ label, value, onChange, ...props }) {
   return (
-    <label htmlFor={label}>
+    <label htmlFor={label} className="label">
       {label}
       <StyledInput id={label} value={value} onChange={onChange} {...props} />
     </label>

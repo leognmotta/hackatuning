@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 export const StyledHeader = styled.header`
   background-color: #fff;
   box-shadow: 0px 1px 20px #0000000f;
+  z-index: 10;
 
   @media only screen and (max-width: 550px) {
     .tablet {
@@ -13,7 +14,7 @@ export const StyledHeader = styled.header`
 `;
 
 export const Container = styled.div`
-  padding: 20px;
+  padding: 22px 20px 17.5px 20px;
   max-width: 1400px;
   margin: 0 auto;
 
@@ -22,7 +23,7 @@ export const Container = styled.div`
   align-items: center;
 
   img {
-    height: 41px;
+    height: 35px;
   }
 
   @media only screen and (max-width: 740px) {
@@ -47,6 +48,8 @@ export const StyledLink = styled(NavLink)`
     linear-gradient(140deg, #348cfe 0%, #163de5 93%, #1437e3 100%) 0% 0%
     no-repeat padding-box;
   border-radius: 6px;
+  display: block;
+  margin-top: -5px !important;
 
   &:visited {
     color: #fff;

@@ -4,10 +4,19 @@ export const Container = styled.div`
   display: flex;
   text-align: center;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 40px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  img {
+    height: 110px;
+  }
+
+  small {
+    margin-top: 5px;
+    margin-bottom: 30px;
+  }
 
   .toast-background {
     background: lightcoral;
@@ -33,6 +42,10 @@ export const StyledForm = styled.form`
 
   button {
     height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-family: 'Montserrat Alternates', sans-serif;
     width: auto;
     color: #fff;
     background: transparent
@@ -45,7 +58,7 @@ export const StyledForm = styled.form`
 `;
 
 export const Input = styled.input`
-  margin: 10px 0 10px 0;
+  margin: 10px 0 15px 0;
   height: 40px;
   width: 100%;
   font-size: 14px;

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 // import { Form } from '@rocketseat/unform';
 
 export const Container = styled.div`
+  margin: 40px auto;
   display: flex;
   text-align: center;
   width: 100%;
@@ -9,19 +10,40 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 
+  img {
+    height: 110px;
+  }
+
+  .subTitle {
+    margin-top: 5px;
+    margin-bottom: 30px;
+  }
+
   .toast-background {
     background: lightcoral;
   }
+
+  .toast-background-success {
+    background: #04a777;
+  }
+
   .toast-font-size {
     color: #fff;
+    text-align: left;
+    font-size: 14px;
     font-weight: bold;
   }
+
+  .toast-progress-bar-success {
+    background: #333745;
+  }
+
   .toast-progress-bar {
     background: red;
   }
 `;
 export const H1 = styled.h1`
-  margin: 15px 0 15px 0;
+  margin: 15px 0 5px 0;
 `;
 
 export const Form = styled.form`
@@ -41,32 +63,21 @@ export const Form = styled.form`
     text-align: left;
   }
 
-  .roles {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    label {
-      width: 33%;
-      display: flex;
-      align-items: center;
-      .checkbox {
-        margin-right: 5px;
-      }
-    }
-  }
-
   .btn {
     height: 40px;
     width: auto;
     color: #fff;
+    font-size: 14px;
+    font-family: 'Montserrat Alternates', sans-serif;
     background: transparent
       linear-gradient(140deg, #348cfe 0%, #163de5 93%, #1437e3 100%) 0% 0%
       no-repeat padding-box;
     border-radius: 6px;
     border: 0;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .urls {
@@ -118,7 +129,7 @@ export const Form = styled.form`
 `;
 
 export const Input = styled.input`
-  margin: 10px 0 10px 0;
+  margin: 10px 0 15px 0;
   height: 40px;
   width: 100%;
   font-size: 14px;
@@ -137,7 +148,7 @@ export const Input = styled.input`
 `;
 
 export const TextArea = styled.textarea`
-  margin: 10px 0 10px 0;
+  margin: 10px 0 5px 0;
   width: 100%;
   font-size: 14px;
   padding: 10px;

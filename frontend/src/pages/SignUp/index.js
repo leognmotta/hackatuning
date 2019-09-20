@@ -44,7 +44,18 @@ export default function SignUp({ history }) {
         roles: form.skills,
       });
 
-      history.push('/login');
+      toast(
+        'Your registration has been successfully completed, now just sign in!',
+        {
+          className: 'toast-background-success',
+          bodyClassName: 'toast-font-size',
+          progressClassName: 'toast-progress-bar-success',
+        }
+      );
+
+      setTimeout(() => {
+        history.push('/login');
+      }, 3500);
     } catch (error) {
       toast(
         error.response.data.fields
@@ -89,10 +100,10 @@ export default function SignUp({ history }) {
     <Container>
       <img src={LogoIcon} alt="Logo" />
       <H1> Register </H1>
-      <small>Create an account to use our services.</small>
+      <small className="subTitle">Create an account to use our services.</small>
 
       <Form onSubmit={handleSubmit}>
-        <label htmlFor="name" style={{ marginTop: 20, textAlign: 'left' }}>
+        <label htmlFor="name" className="label">
           {' '}
           Name:
         </label>
@@ -103,7 +114,7 @@ export default function SignUp({ history }) {
           onChange={e => setForm({ ...form, name: e.target.value })}
         />
 
-        <label htmlFor="nickname" style={{ marginTop: 20, textAlign: 'left' }}>
+        <label htmlFor="nickname" className="label">
           {' '}
           Nickname:
         </label>
@@ -114,7 +125,7 @@ export default function SignUp({ history }) {
           onChange={e => setForm({ ...form, nickname: e.target.value })}
         />
 
-        <label htmlFor="email" style={{ marginTop: 20, textAlign: 'left' }}>
+        <label htmlFor="email" className="label">
           {' '}
           Email:
         </label>
@@ -127,7 +138,7 @@ export default function SignUp({ history }) {
           onChange={e => setForm({ ...form, email: e.target.value })}
         />
 
-        <label htmlFor="password" style={{ marginTop: 20, textAlign: 'left' }}>
+        <label htmlFor="password" className="label">
           {' '}
           Password:
         </label>
@@ -139,7 +150,7 @@ export default function SignUp({ history }) {
           onChange={e => setForm({ ...form, password: e.target.value })}
         />
 
-        <label htmlFor="bio" style={{ marginTop: 20, textAlign: 'left' }}>
+        <label htmlFor="bio" className="label">
           {' '}
           Bio:
         </label>
@@ -152,7 +163,7 @@ export default function SignUp({ history }) {
           onChange={e => setForm({ ...form, bio: e.target.value })}
         />
 
-        <h4>Useful urls</h4>
+        <h4 className="label">Useful urls:</h4>
         <small>Github link, linkedin or personal website</small>
         <div className="urls">
           <div className="url_box">
@@ -163,15 +174,18 @@ export default function SignUp({ history }) {
                   placeholder="Some useful links here"
                   value={url}
                   onChange={e => onChangeUrl(e, index)}
+                  style={{ marginBottom: '10px' }}
                 />
 
-                <button
-                  className="btn btn_remove"
-                  type="button"
-                  onClick={() => removeUrlField(index)}
-                >
-                  <FaTimes />
-                </button>
+                {form.urls.length > 1 ? (
+                  <button
+                    className="btn btn_remove"
+                    type="button"
+                    onClick={() => removeUrlField(index)}
+                  >
+                    <FaTimes />
+                  </button>
+                ) : null}
               </div>
             ))}
           </div>
@@ -181,11 +195,12 @@ export default function SignUp({ history }) {
           </button>
         </div>
 
-        <h4>Select Roles</h4>
+        <h4 className="label">Select Roles:</h4>
         <div className="roles">
           {roles.map(role => (
-            <label key={role.id} htmlFor={`${role.name}`}>
+            <label key={role.id} htmlFor={`roles${role.name}`}>
               <input
+                id={`roles${role.name}`}
                 className="checkbox"
                 type="checkbox"
                 name={role.name}
@@ -199,12 +214,14 @@ export default function SignUp({ history }) {
         </div>
 
         <button className="btn" type="submit">
-          Send
+          Register
         </button>
 
         <span className="or">OR</span>
 
-        <Link to="/login">Login with existing account!</Link>
+        <Link className="link" to="/login">
+          Login with existing account!
+        </Link>
       </Form>
       <ToastContainer />
     </Container>

@@ -22,7 +22,7 @@ const StyledTextArea = styled.textarea`
 
 export default function TextArea({ label, value, onChange, ...props }) {
   return (
-    <label htmlFor={label}>
+    <label htmlFor={label} className="label">
       {label}
       <StyledTextArea id={label} value={value} onChange={onChange} {...props} />
     </label>

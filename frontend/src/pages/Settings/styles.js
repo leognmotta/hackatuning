@@ -8,22 +8,35 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 40px;
+  margin-top: 10px;
+
+  .file {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    padding: 8px;
+    border-radius: 6px;
+    border: 2px solid #cccccc;
+  }
 
   .toast-background {
     background: lightcoral;
   }
   .toast-font-size {
     color: #fff;
+    text-align: left;
+    font-size: 14px;
     font-weight: bold;
   }
   .toast-progress-bar {
     background: red;
   }
   .toast-background_success {
-    background: lightgreen;
+    background: #04a777;
   }
   .toast-progress-bar_success {
-    background: green;
+    background: #333745;
   }
 
   /*###################################################################*/
@@ -42,22 +55,6 @@ export const Container = styled.div`
       text-align: left;
     }
 
-    .roles {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-      label {
-        width: 33%;
-        display: flex;
-        align-items: center;
-        .checkbox {
-          margin-right: 5px;
-        }
-      }
-    }
-
     .btn {
       height: 40px;
       width: auto;
@@ -68,6 +65,9 @@ export const Container = styled.div`
       border-radius: 6px;
       border: 0;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .urls {

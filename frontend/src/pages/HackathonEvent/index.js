@@ -23,7 +23,7 @@ export default function HackathonEvent({ match }) {
     }
 
     loadParticipants();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     async function loadIsTeamOwner() {
@@ -34,7 +34,7 @@ export default function HackathonEvent({ match }) {
     }
 
     loadIsTeamOwner();
-  }, []);
+  }, [id]);
 
   return (
     <Container>

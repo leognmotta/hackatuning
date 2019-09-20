@@ -214,7 +214,7 @@ export default function Settings() {
           onChange={e => setForm({ ...form, bio: e.target.value })}
         />
 
-        <h4>Useful urls</h4>
+        <h4>Useful urls:</h4>
         <small>Github link, linkedin or personal website</small>
         <div className="urls">
           <div className="url_box">
@@ -246,7 +246,7 @@ export default function Settings() {
           </button>
         </div>
 
-        <h4>Select Roles</h4>
+        <h4>Select Roles:</h4>
         <div className="roles">
           {roles.map((role, roleIndex) => (
             <label key={role.name} htmlFor={role.name}>

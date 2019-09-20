@@ -38,7 +38,12 @@ export const Container = styled.div`
   }
 `;
 
-export const ParticipantContainer = styled.div``;
+export const ParticipantContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 auto;
+`;
 
 export const ManageHackathonContainer = styled.div`
   display: flex;

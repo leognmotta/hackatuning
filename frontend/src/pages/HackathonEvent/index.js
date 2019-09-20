@@ -29,8 +29,8 @@ export default function HackathonEvent({ match }) {
     async function loadIsTeamOwner() {
       const { data } = await api.get(`/v1/me/teams/creator?hackathon_id=${id}`);
 
-      if (data.hackathons.length > 0)
-        setIsTeamOwner({ state: true, id: data.hackathons[0].id });
+      if (data.teams.length > 0)
+        setIsTeamOwner({ state: true, id: data.teams[0].id });
     }
 
     loadIsTeamOwner();

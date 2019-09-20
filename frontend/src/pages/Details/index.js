@@ -5,6 +5,8 @@ import api from '../../services/api';
 import { Form, Button } from '../../components/Form';
 import 'react-datepicker/dist/react-datepicker.css';
 
+import DefaultCover from '../../assets/default_cover.jpg';
+import DefaultAvatar from '../../assets/default-user-image.png';
 import { Container } from './styles';
 
 export default function Details({ match, history }) {
@@ -46,7 +48,7 @@ export default function Details({ match, history }) {
   }
 
   return (
-    <Container url={hackathon.cover.url}>
+    <Container url={hackathon.cover ? hackathon.cover.url : DefaultCover}>
       <div className="image_container">
         <h1>{hackathon.title}</h1>
         <h2>{hackathon.subtitle}</h2>
@@ -92,7 +94,11 @@ export default function Details({ match, history }) {
         </h2>
 
         <img
-          src={hackathon.organizer.avatar.url}
+          src={
+            hackathon.organizer.avatar
+              ? hackathon.organizer.avatar.url
+              : DefaultAvatar
+          }
           alt={hackathon.organizer.name}
         />
       </div>

@@ -10,6 +10,7 @@ import notificationsRoute from './notificationsRoute';
 import validateTokensRoute from './validateTokensRoute';
 import teamsRoute from './teamsRoute';
 import meRoute from './meRoute';
+import projectsRoute from './projectsRoute';
 
 const routes = Router();
 
@@ -32,5 +33,7 @@ routes.use(validateTokensRoute);
 routes.use(teamsRoute);
 
 routes.use(meRoute);
+
+routes.use(projectsRoute);
 
 export default routes;

@@ -152,7 +152,9 @@ class TeamController {
 
   async index(req, res, next) {
     try {
-      const team = await Team.findAll({
+      const { page = 1, perPage = 20 } = req.query;
+
+      const team = await Team.findAndCountAll({
         where: {
           hackathon_id: req.params.id,
         },
@@ -218,7 +220,24 @@ class TeamController {
         ],
       });
 
-      return res.json(team);
+      const maxPage = Math.ceil(team.count / perPage);
+      const previousPage = parseInt(page, 10) - 1;
+      const hasPreviousPage = previousPage >= 1;
+      const nextPage = parseInt(page, 10) + 1;
+      const hasNextPage = maxPage > page;
+      const currentPage = parseInt(page, 10);
+
+      return res.json({
+        hackathons: team.rows,
+        pagination: {
+          maxPage,
+          previousPage,
+          hasPreviousPage,
+          nextPage,
+          hasNextPage,
+          currentPage,
+        },
+      });
     } catch (error) {
       return next(error);
     }

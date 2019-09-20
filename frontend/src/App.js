@@ -17,8 +17,8 @@ function App() {
       <Router history={history}>
         <Layout>
           <Routes />
+          <GlobalStyles />
         </Layout>
-        <GlobalStyles />
       </Router>
     </Provider>
   );

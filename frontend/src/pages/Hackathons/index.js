@@ -77,62 +77,6 @@ export default function Hackathons() {
   return (
     <Container>
       <h1>My Hackathons</h1>
-
-      <h2 className="heading_section">Participating</h2>
-      <ParticipantContainer>
-        {meParticipants.length > 0 ? (
-          meParticipants.map(participant => (
-            <Card
-              key={participant.id}
-              url={participant.cover ? participant.cover.url : DefaultCover}
-            >
-              <div className="content">
-                <header>
-                  <h2>{participant.title}</h2>
-                </header>
-
-                <div className="card_content">
-                  <div>
-                    <p className="subtitle">{participant.subtitle}</p>
-                  </div>
-
-                  <div>
-                    <FaRegCalendarAlt color="#1437E3" size={18} />
-                    <span>
-                      Start:{' '}
-                      {format(
-                        parseISO(participant.event_date),
-                        "MMMM dd',' yyyy"
-                      )}
-                    </span>
-                  </div>
-
-                  <div>
-                    <FaRegCalendarAlt color="#1437E3" size={18} />
-                    <span>
-                      End:{' '}
-                      {format(
-                        parseISO(participant.event_ending),
-                        "MMMM dd',' yyyy"
-                      )}
-                    </span>
-                  </div>
-
-                  <div>
-                    <Link
-                      to={`hackathon/${participant.id}`}
-                      text="Go to event!"
-                    />
-                  </div>
-                </div>
-              </div>
-            </Card>
-          ))
-        ) : (
-          <h3>You are not participating of any hackathon!</h3>
-        )}
-      </ParticipantContainer>
-
       <h2 className="heading_section">Manage your hackathons</h2>
       <ManageHackathonContainer>
         {meHackathons.length > 0 ? (
@@ -190,6 +134,61 @@ export default function Hackathons() {
           <h3>You do not have any hackathon to manage!</h3>
         )}
       </ManageHackathonContainer>
+
+      <h2 className="heading_section">Participating</h2>
+      <ParticipantContainer>
+        {meParticipants.length > 0 ? (
+          meParticipants.map(participant => (
+            <Card
+              key={participant.id}
+              url={participant.cover ? participant.cover.url : DefaultCover}
+            >
+              <div className="content">
+                <header>
+                  <h2>{participant.title}</h2>
+                </header>
+
+                <div className="card_content">
+                  <div>
+                    <p className="subtitle">{participant.subtitle}</p>
+                  </div>
+
+                  <div>
+                    <FaRegCalendarAlt color="#1437E3" size={18} />
+                    <span>
+                      Start:{' '}
+                      {format(
+                        parseISO(participant.event_date),
+                        "MMMM dd',' yyyy"
+                      )}
+                    </span>
+                  </div>
+
+                  <div>
+                    <FaRegCalendarAlt color="#1437E3" size={18} />
+                    <span>
+                      End:{' '}
+                      {format(
+                        parseISO(participant.event_ending),
+                        "MMMM dd',' yyyy"
+                      )}
+                    </span>
+                  </div>
+
+                  <div>
+                    <Link
+                      to={`hackathon/${participant.id}`}
+                      text="Go to event!"
+                    />
+                  </div>
+                </div>
+              </div>
+            </Card>
+          ))
+        ) : (
+          <h3>You are not participating of any hackathon!</h3>
+        )}
+      </ParticipantContainer>
 
       <ToastContainer />
     </Container>

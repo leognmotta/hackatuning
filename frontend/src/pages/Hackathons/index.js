@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
+import { FaRegCalendarAlt } from 'react-icons/fa';
+import { format, parseISO } from 'date-fns';
+
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../../services/api';
 
@@ -68,7 +71,7 @@ export default function Hackathons() {
 
   return (
     <Container>
-      <h1>Hackathons</h1>
+      <h1>My Hackathons</h1>
 
       <h2 className="heading_section">Participating</h2>
       <ParticipantContainer>
@@ -78,17 +81,45 @@ export default function Hackathons() {
               key={participant.id}
               url={participant.cover ? participant.cover.url : DefaultCover}
             >
-              <header>
-                <h2>{participant.title}</h2>
-                <h3>{participant.subtitle}</h3>
-              </header>
+              <div className="content">
+                <header>
+                  <h2>{participant.title}</h2>
+                </header>
 
-              <div>
-                <p>{participant.description}</p>
-              </div>
+                <div className="card_content">
+                  <div>
+                    <p className="subtitle">{participant.subtitle}</p>
+                  </div>
 
-              <div>
-                <Link to={`hackathon/${participant.id}`} text="Go to event!" />
+                  <div>
+                    <FaRegCalendarAlt color="#1437E3" size={18} />
+                    <span>
+                      Start:{' '}
+                      {format(
+                        parseISO(participant.event_date),
+                        "MMMM dd',' yyyy"
+                      )}
+                    </span>
+                  </div>
+
+                  <div>
+                    <FaRegCalendarAlt color="#1437E3" size={18} />
+                    <span>
+                      End:{' '}
+                      {format(
+                        parseISO(participant.event_ending),
+                        "MMMM dd',' yyyy"
+                      )}
+                    </span>
+                  </div>
+
+                  <div>
+                    <Link
+                      to={`hackathon/${participant.id}`}
+                      text="Go to event!"
+                    />
+                  </div>
+                </div>
               </div>
             </Card>
           ))
@@ -105,23 +136,48 @@ export default function Hackathons() {
               key={hackathon.id}
               url={hackathon.cover ? hackathon.cover.url : DefaultCover}
             >
-              <header>
-                <h2>{hackathon.title}</h2>
-                <h3>{hackathon.subtitle}</h3>
-              </header>
+              <div className="content">
+                <header>
+                  <h2>{hackathon.title}</h2>
+                </header>
 
-              <div className="actions">
-                <p>{hackathon.description}</p>
-              </div>
+                <div className="card_content">
+                  <div>
+                    <p className="subtitle">{hackathon.subtitle}</p>
+                  </div>
 
-              <div className="actions">
-                <Button
-                  text="Delete"
-                  color="#E3143E"
-                  type="button"
-                  onClick={() => handleDeleteHackathon(hackathon.id)}
-                />
-                <Link to={`hackathon/${hackathon.id}/edit`} text="Edit" />
+                  <div>
+                    <FaRegCalendarAlt color="#1437E3" size={18} />
+                    <span>
+                      Start:{' '}
+                      {format(
+                        parseISO(hackathon.event_date),
+                        "MMMM dd',' yyyy"
+                      )}
+                    </span>
+                  </div>
+
+                  <div>
+                    <FaRegCalendarAlt color="#1437E3" size={18} />
+                    <span>
+                      End:{' '}
+                      {format(
+                        parseISO(hackathon.event_ending),
+                        "MMMM dd',' yyyy"
+                      )}
+                    </span>
+                  </div>
+
+                  <div className="actions">
+                    <Link to={`hackathon/${hackathon.id}/edit`} text="Edit" />
+                    <Button
+                      text="Delete"
+                      color="#E3143E"
+                      type="button"
+                      onClick={() => handleDeleteHackathon(hackathon.id)}
+                    />
+                  </div>
+                </div>
               </div>
             </Card>
           ))

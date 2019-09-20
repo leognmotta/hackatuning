@@ -9,7 +9,9 @@ import { Form, Input, TextArea, Button } from '../../components/Form';
 import { Container, H1 } from './styles';
 
 export default function Settings() {
-  const [roles, setRoles] = useState([{ id: null, name: '', checked: false }]);
+  const [roles, setRoles] = useState([
+    { id: undefined, name: '', checked: false },
+  ]);
   const [avatar, setAvatar] = useState(null);
   const [form, setForm] = useState({
     name: '',
@@ -206,7 +208,7 @@ export default function Settings() {
         <h4>Select Roles</h4>
         <div className="roles">
           {roles.map((role, roleIndex) => (
-            <label key={role.id} htmlFor={role.name}>
+            <label key={role.name} htmlFor={role.name}>
               <input
                 id={role.name}
                 checked={role.checked}

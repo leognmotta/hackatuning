@@ -110,7 +110,7 @@ export default function UpdateHackathon({ match }) {
       );
 
       if (data.url) {
-        toast('Avatar successfully changed!', {
+        toast('Cover successfully changed!', {
           className: 'toast-background_success',
           bodyClassName: 'toast-font-size',
           progressClassName: 'toast-progress-bar_success',
@@ -143,10 +143,21 @@ export default function UpdateHackathon({ match }) {
       <h1>Update Hackathon</h1>
 
       <Form onSubmit={handleSubmit}>
-        <img src={cover || DefaultCover} alt={`${form.title}cover`} />
+        <img
+          src={cover || DefaultCover}
+          alt={`${form.title}cover`}
+          style={{ maxWidth: 200, maxHeight: 200, margin: '30px auto' }}
+        />
+
+        <p className="label">Cover:</p>
 
         <label htmlFor="file">
-          <input id="file" type="file" onChange={e => handleFileChange(e)} />
+          <input
+            className="file"
+            id="file"
+            type="file"
+            onChange={e => handleFileChange(e)}
+          />
         </label>
 
         <Input
@@ -161,13 +172,25 @@ export default function UpdateHackathon({ match }) {
           value={form.subtitle}
         />
 
-        <label htmlFor="checkbox">
+        <TextArea
+          label="Description:"
+          onChange={e => setForm({ ...form, description: e.target.value })}
+          value={form.description}
+          rows="7"
+        />
+
+        <label
+          htmlFor="checkbox"
+          className="label"
+          style={{ marginBottom: '10px' }}
+        >
           Is the event online?
           <input
             checked={form.online}
             id="checkbox"
             type="checkbox"
             value={form.online}
+            style={{ marginLeft: '10px' }}
             onChange={() => setForm({ ...form, online: !form.online })}
           />
         </label>
@@ -181,13 +204,8 @@ export default function UpdateHackathon({ match }) {
         ) : null}
 
         <TextArea
-          label="Description:"
-          onChange={e => setForm({ ...form, description: e.target.value })}
-          value={form.description}
-        />
-
-        <TextArea
           label="Awards:"
+          rows="4"
           onChange={e => setForm({ ...form, awards: e.target.value })}
           value={form.awards}
         />
@@ -197,6 +215,7 @@ export default function UpdateHackathon({ match }) {
           type="number"
           onChange={e => setForm({ ...form, min_participants: e.target.value })}
           value={form.min_participants}
+          style={{ width: 100, marginLeft: 10 }}
         />
 
         <Input
@@ -204,69 +223,65 @@ export default function UpdateHackathon({ match }) {
           type="number"
           onChange={e => setForm({ ...form, max_participants: e.target.value })}
           value={form.max_participants}
+          style={{ width: 100, marginLeft: 10 }}
         />
 
-        <label htmlFor="event_date">
-          Date:
-          <DatePicker
-            id="event_date"
-            selected={form.event_date}
-            value={form.event_date}
-            showTimeInput
-            onClickOutside
-            shouldCloseOnSelect
-            time
-            onChange={date => setForm({ ...form, event_date: new Date(date) })}
-          />
-        </label>
+        <p className="label">Event beginning:</p>
+        <DatePicker
+          className="input"
+          id="event_date"
+          selected={form.event_date}
+          value={form.event_date}
+          showTimeInput
+          onClickOutside
+          shouldCloseOnSelect
+          time
+          onChange={date => setForm({ ...form, event_date: new Date(date) })}
+        />
 
-        <label htmlFor="deadline_subscription">
-          End subscription date:
-          <DatePicker
-            id="deadline_subscription"
-            selected={form.deadline_subscription}
-            value={form.deadline_subscription}
-            showTimeInput
-            onClickOutside
-            shouldCloseOnSelect
-            time
-            onChange={date =>
-              setForm({ ...form, deadline_subscription: new Date(date) })
-            }
-          />
-        </label>
+        <p className="label">Event ending:</p>
+        <DatePicker
+          className="input"
+          id="event_ending"
+          selected={form.event_ending}
+          value={form.event_ending}
+          showTimeInput
+          onClickOutside
+          shouldCloseOnSelect
+          time
+          onChange={date => setForm({ ...form, event_ending: new Date(date) })}
+        />
 
-        <label htmlFor="deadline_team_creation">
-          End team creation date:
-          <DatePicker
-            id="deadline_team_creation"
-            selected={form.deadline_team_creation}
-            value={form.deadline_team_creation}
-            showTimeInput
-            onClickOutside
-            shouldCloseOnSelect
-            time
-            onChange={date =>
-              setForm({ ...form, deadline_team_creation: new Date(date) })
-            }
-          />
-        </label>
+        <p className="label">End subscription date:</p>
+        <DatePicker
+          className="input"
+          id="deadline_subscription"
+          selected={form.deadline_subscription}
+          value={form.deadline_subscription}
+          showTimeInput
+          onClickOutside
+          shouldCloseOnSelect
+          time
+          onChange={date =>
+            setForm({ ...form, deadline_subscription: new Date(date) })
+          }
+        />
 
-        <label htmlFor="event_ending">
-          End event date:
-          <DatePicker
-            id="event_ending"
-            selected={form.event_ending}
-            value={form.event_ending}
-            showTimeInput
-            onClickOutside
-            shouldCloseOnSelect
-            time
-            onChange={date =>
-              setForm({ ...form, event_ending: new Date(date) })
-            }
-          />
-        </label>
+        <p className="label">End team creation date:</p>
+        <DatePicker
+          className="input"
+          id="deadline_team_creation"
+          selected={form.deadline_team_creation}
+          value={form.deadline_team_creation}
+          showTimeInput
+          onClickOutside
+          shouldCloseOnSelect
+          time
+          onChange={date =>
+            setForm({ ...form, deadline_team_creation: new Date(date) })
+          }
+        />
+
         <Button text="Send" />
       </Form>
 

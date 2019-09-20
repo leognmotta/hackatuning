@@ -93,7 +93,6 @@ export const CarouselContainer = styled.div`
       margin-top: 10px;
       max-width: 245px;
       color: #fff;
-
       border-radius: 6px;
 
       &:visited {
@@ -232,7 +231,7 @@ export const Card = styled.div`
       font-weight: bold;
       padding: 10px 15px;
       display: block;
-      max-width: 245px;
+      width: 100%;
       color: #fff;
       background: transparent
         linear-gradient(127deg, #348cfe 0%, #163de5 93%, #1437e3 100%) 0% 0%

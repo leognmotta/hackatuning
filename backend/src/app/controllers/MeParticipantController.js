@@ -13,6 +13,8 @@ class MeParticipantController {
           'title',
           'subtitle',
           'description',
+          'event_date',
+          'event_ending',
           'cover_id',
           'createdAt',
         ],

@@ -20,11 +20,11 @@ const StyledTextArea = styled.textarea`
   }
 `;
 
-export default function TextArea({ label, ...props }) {
+export default function TextArea({ label, value, onChange, ...props }) {
   return (
     <label htmlFor={label}>
       {label}
-      <StyledTextArea {...props} />
+      <StyledTextArea id={label} value={value} onChange={onChange} {...props} />
     </label>
   );
 }

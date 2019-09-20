@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import api from '../../services/api';
 
+import DefaultCover from '../../assets/default_cover.jpg';
 import {
   Container,
   CarouselContainer,
@@ -54,10 +55,13 @@ export default function Home({ history }) {
         showArrows={false}
       >
         {hackathons.map(hackathon => (
-          <CarouselContainer key={hackathon.id} url={hackathon.cover.url}>
+          <CarouselContainer
+            key={hackathon.id}
+            url={hackathon.cover ? hackathon.cover.url : DefaultCover}
+          >
             <img
               id="cover"
-              src={hackathon.cover.url}
+              src={hackathon.cover ? hackathon.cover.url : DefaultCover}
               alt={`${hackathon.title} cover`}
             />
 
@@ -89,7 +93,10 @@ export default function Home({ history }) {
         <h1>Find Hackathons</h1>
         <CardContainer>
           {hackathons.map(hackathon => (
-            <Card key={hackathon.id} url={hackathon.cover.url}>
+            <Card
+              key={hackathon.id}
+              url={hackathon.cover ? hackathon.cover.url : DefaultCover}
+            >
               <header>
                 <h2>{hackathon.title}</h2>
               </header>

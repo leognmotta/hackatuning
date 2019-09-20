@@ -9,11 +9,20 @@ class MeTeamController {
   async index(req, res, next) {
     try {
       const { page = 1, perPage = 20 } = req.query;
+      const { hackathon_id } = req.query;
+
+      let where = {
+        creator_id: req.userId,
+      };
+
+      if (hackathon_id) {
+        where = {
+          hackathon_id,
+        };
+      }
 
       const team = await Team.findAndCountAll({
-        where: {
-          creator_id: req.userId,
-        },
+        where,
         attributes: ['id', 'creator_id'],
         include: [
           {

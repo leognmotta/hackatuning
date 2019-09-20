@@ -10,7 +10,14 @@ class MeController {
         where: {
           organizer_id: req.userId,
         },
-        attributes: ['id', 'title', 'subtitle', 'description'],
+        attributes: [
+          'id',
+          'title',
+          'subtitle',
+          'description',
+          'event_date',
+          'event_ending',
+        ],
         limit: perPage,
         offset: (page - 1) * perPage,
         include: [

@@ -14,7 +14,19 @@ import TeamDeniedInviteMail from '../jobs/TeamDeniedInviteMail';
 class TeamInviteController {
   async store(req, res, next) {
     try {
-      const { memberId } = req.params;
+      const { memberId: memberNickname } = req.params;
+
+      const memberFind = await User.findOne({
+        where: {
+          nickname: memberNickname,
+        },
+      });
+
+      if (!memberFind) {
+        throw new ApiError('Not Found', 'Not found member', 404);
+      }
+
+      const memberId = memberFind.id;
 
       if (memberId === req.userId) {
         throw new ApiError('Not Authorized', 'You cannot invite yourself', 401);

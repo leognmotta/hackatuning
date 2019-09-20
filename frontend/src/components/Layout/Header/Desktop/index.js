@@ -2,6 +2,7 @@ import React from 'react';
 import { FaCog } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Notification from '../../../Notifications';
+import { logout } from '../../../../utils/auth';
 
 import { TabLink, StyledUl } from './styles';
 
@@ -37,7 +38,7 @@ export default function Desktop({
           <FaCog color="#1437E3" size={24} />
         </Link>
       </li>
-      <li>Logout</li>
+      <li onClick={logout}>Logout</li>
     </StyledUl>
   );
 }

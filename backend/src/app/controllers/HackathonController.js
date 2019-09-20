@@ -54,8 +54,25 @@ class HackathonController {
 
   async index(req, res, next) {
     try {
-      const { page = 1, perPage = 20 } = req.query;
+      const { page = 1, perPage = 20, featured, noFeatured } = req.query;
       const { authorization: authHeader } = req.headers;
+
+      let offset;
+
+      if (featured) {
+        offset = 0;
+      } else if (noFeatured) {
+        if (page > 1) {
+          const intPerPage = parseInt(perPage, 16);
+          const intNoFeatured = parseInt(noFeatured, 16);
+
+          offset = (page - 1) * intPerPage + intNoFeatured;
+        } else {
+          offset = noFeatured;
+        }
+      } else {
+        offset = (page - 1) * perPage;
+      }
 
       if (authHeader) {
         const [, token] = authHeader.split(' ');
@@ -78,14 +95,20 @@ class HackathonController {
           'description',
           'event_date',
           'location',
+          'online',
         ],
-        limit: perPage,
-        offset: (page - 1) * perPage,
+        limit: featured || perPage,
+        offset,
         include: [
           {
             model: File,
             as: 'cover',
             attributes: ['id', 'url', 'path'],
+          },
+          {
+            model: User,
+            as: 'organizer',
+            attributes: ['id', 'name', 'nickname'],
           },
         ],
         order: [['createdAt', 'DESC']],
@@ -115,6 +138,10 @@ class HackathonController {
         );
       }
 
+      hackathons.count = noFeatured
+        ? hackathons.count - noFeatured
+        : hackathons.count;
+
       const maxPage = Math.ceil(hackathons.count / perPage);
       const previousPage = parseInt(page, 10) - 1;
       const hasPreviousPage = previousPage >= 1;
@@ -123,6 +150,7 @@ class HackathonController {
       const currentPage = parseInt(page, 10);
 
       return res.json({
+        count: hackathons.count,
         hackathons: hackathons.rows,
         pagination: {
           maxPage,

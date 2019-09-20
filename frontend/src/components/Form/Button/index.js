@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
+  font-size: 14px;
+  font-family: 'Montserrat Alternates', sans-serif;
   margin: 10px 0 10px 0;
   height: 40px;
   padding: 10px 15px;

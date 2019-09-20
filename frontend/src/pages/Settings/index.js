@@ -71,7 +71,7 @@ export default function Settings() {
 
       await api.put(`/v1/users`, obj);
 
-      toast('Profile updated!', {
+      toast('Profile updated successfully!', {
         className: 'toast-background_success',
         bodyClassName: 'toast-font-size',
         progressClassName: 'toast-progress-bar_success',
@@ -122,34 +122,74 @@ export default function Settings() {
     setForm({ ...form, urls: form.urls });
   }
 
-  async function onFileChange(file) {
-    const formData = new FormData();
-    formData.append('file', file);
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    };
+  async function onFileChange(e) {
+    try {
+      const formData = new FormData();
 
-    const { data } = await api.post(`/v1/files/users`, formData, config);
+      const file = e.target.files[0];
 
-    setAvatar(data.url);
+      formData.append('file', file);
+
+      const config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      };
+
+      e.target.value = '';
+
+      const { data } = await api.post(`/v1/files/users`, formData, config);
+
+      if (data.url) {
+        toast('Avatar successfully changed!', {
+          className: 'toast-background_success',
+          bodyClassName: 'toast-font-size',
+          progressClassName: 'toast-progress-bar_success',
+        });
+      } else {
+        toast('There was an error uploading the avatar!', {
+          className: 'toast-background',
+          bodyClassName: 'toast-font-size',
+          progressClassName: 'toast-progress-bar',
+        });
+      }
+
+      setAvatar(data.url);
+    } catch (error) {
+      toast(
+        error.response.data.fields
+          ? error.response.data.fields[0].message
+          : error.response.data.message,
+        {
+          className: 'toast-background',
+          bodyClassName: 'toast-font-size',
+          progressClassName: 'toast-progress-bar',
+        }
+      );
+    }
   }
 
   return (
     <Container>
       <H1> Edite your profile </H1>
 
-      <img src={avatar} alt="user" style={{ maxWidth: 200, maxHeight: 200 }} />
+      <img
+        id="avatarFiles"
+        src={avatar}
+        alt="user"
+        style={{ maxWidth: 200, maxHeight: 200 }}
+      />
+
       <Form onSubmit={handleSubmit}>
-        <label htmlFor="file" style={{ marginTop: 20, textAlign: 'left' }}>
+        <p className="label" style={{ marginTop: '20px' }}>
           Avatar:
-          <input
-            id="file"
-            type="file"
-            onChange={e => onFileChange(e.target.files[0])}
-          />
-        </label>
+        </p>
+        <input
+          className="file"
+          id="fileAvatar"
+          type="file"
+          onChange={e => onFileChange(e)}
+        />
 
         <Input
           label="Name:"
@@ -179,9 +219,10 @@ export default function Settings() {
         <div className="urls">
           <div className="url_box">
             {form.urls.map((url, index) => (
-              <div key={url} className="inner_input">
+              <div className="inner_input">
                 <Input
-                  key={url}
+                  style={{ marginBottom: '10px' }}
+                  key={index}
                   placeholder="Some useful links here"
                   value={url}
                   onChange={e => onChangeUrl(e, index)}
@@ -210,6 +251,7 @@ export default function Settings() {
           {roles.map((role, roleIndex) => (
             <label key={role.name} htmlFor={role.name}>
               <input
+                className="checkbox"
                 id={role.name}
                 checked={role.checked}
                 type="checkbox"

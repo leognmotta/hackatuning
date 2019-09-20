@@ -55,10 +55,7 @@ export default function SignIn({ history }) {
         <h1>Sign in</h1>
         <small>Please, provide your email and password</small>
 
-        <label
-          htmlFor="email"
-          style={{ marginTop: 20, textAlign: 'left', fontWeight: 'bold' }}
-        >
+        <label htmlFor="email" className="label">
           {' '}
           Email:
         </label>
@@ -70,12 +67,9 @@ export default function SignIn({ history }) {
           onChange={e => setEmail(e.target.value)}
         />
 
-        <label
-          htmlFor="password"
-          style={{ textAlign: 'left', fontWeight: 'bold' }}
-        >
+        <label htmlFor="password" className="label">
           {' '}
-          Passowrd:
+          Passoword:
         </label>
         <Input
           id="password"
@@ -86,8 +80,9 @@ export default function SignIn({ history }) {
         />
 
         <button type="submit">Sign in</button>
-        <span className="or">OR</span>
-        <Link to="/register">Register NOW!</Link>
+        <Link className="link" to="/register">
+          Register now!
+        </Link>
       </StyledForm>
 
       <ToastContainer />

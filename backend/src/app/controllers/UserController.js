@@ -12,10 +12,23 @@ import ConfirmMail from '../jobs/ConfirmMail';
 import UserUrl from '../models/UserUrl';
 import File from '../models/File';
 
+const convertToSlug = text => {
+  const a = 'àáäâãèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/_,:;';
+  const b = 'aaaaaeeeeiiiioooouuuuncsyoarsnpwgnmuxzh------';
+  const p = new RegExp(a.split('').join('|'), 'g');
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(p, c => b.charAt(a.indexOf(c))) // Replace special chars
+    .replace(/&/g, '-and-') // Replace & with 'and'
+    .replace(/[\s\W-]+/g, '-'); // Replace spaces, non-word characters and dashes with a single dash (-)
+};
+
 class UserController {
   async store(req, res, next) {
     try {
-      req.body.nickname = req.body.nickname.replace(/\s+/g, '').toLowerCase();
+      req.body.nickname = convertToSlug(req.body.nickname);
 
       const { email, urls, roles, nickname } = req.body;
 
@@ -147,14 +160,17 @@ class UserController {
   async update(req, res, next) {
     try {
       if (req.body.nickname) {
-        req.body.nickname = req.body.nickname.replace(/\s+/g, '').toLowerCase();
+        req.body.nickname = convertToSlug(req.body.nickname);
       }
 
       const { email, urls, roles, nickname } = req.body;
 
       if (email) {
         const emailExists = await User.findOne({
-          where: { email },
+          where: {
+            email,
+            [Op.ne]: req.userId,
+          },
         });
 
         if (emailExists) {
@@ -168,7 +184,10 @@ class UserController {
 
       if (nickname) {
         const nicknameExists = await User.findOne({
-          where: { nickname },
+          where: {
+            nickname,
+            id: { [Op.ne]: req.userId },
+          },
         });
 
         if (nicknameExists) {
@@ -206,11 +225,29 @@ class UserController {
       }
 
       if (urls && urls.length > 0) {
-        await UserUrl.destroy({
-          where: {
-            user_id: user.id,
-          },
+        const urlsFind = await Url.findAll({
+          include: [
+            {
+              model: User,
+              as: 'users',
+              where: {
+                id: req.userId,
+              },
+            },
+          ],
         });
+
+        if (urlsFind.length) {
+          await Promise.all(
+            urlsFind.map(async url => {
+              await Url.destroy({
+                where: {
+                  id: url.id,
+                },
+              });
+            })
+          );
+        }
 
         await Promise.all(
           urls.map(async url => {
@@ -218,7 +255,7 @@ class UserController {
 
             await UserUrl.create({
               url_id: newUrl.id,
-              user_id: user.id,
+              user_id: req.userId,
             });
           })
         );
@@ -227,7 +264,7 @@ class UserController {
       if (roles && roles.length > 0) {
         await UserRole.destroy({
           where: {
-            user_id: user.id,
+            user_id: req.userId,
           },
         });
 
@@ -236,7 +273,7 @@ class UserController {
             const roleExists = await Role.findByPk(role);
 
             if (roleExists) {
-              await UserRole.create({ role_id: role, user_id: user.id });
+              await UserRole.create({ role_id: role, user_id: req.userId });
             }
           })
         );
@@ -246,7 +283,7 @@ class UserController {
 
       return res.json({
         id,
-        userNick,
+        nickaname: userNick,
         name,
       });
     } catch (error) {

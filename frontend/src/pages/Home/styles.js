@@ -5,35 +5,17 @@ export const Container = styled.div`
     background: none;
   }
 
+  .carousel .carousel-status {
+    margin-top: 20px;
+  }
+
   .pagination-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 40px;
+    margin-top: 15px;
+  }
 
-    .selected {
-      a {
-        background: #bbd7fb 0% 0% no-repeat padding-box;
-      }
-    }
-
-    .disabled {
-      a {
-        background: #ccc !important;
-        cursor: not-allowed;
-      }
-    }
-
-    li {
-      list-style: none;
-      margin: 10px;
-
-      a {
-        border: 2px solid #e0ecf9;
-        border-radius: 6px;
-        padding: 14px 18px;
-        cursor: pointer;
-      }
+  @media only screen and (max-width: 400px) {
+    .carousel .carousel-status {
+      margin-top: 0px;
     }
   }
 `;
@@ -42,17 +24,17 @@ export const CarouselContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px;
+  margin-top: 20px;
+  padding: 10px;
 
   @media only screen and (max-width: 400px) {
-    padding: 10px;
+    margin-top: 0px;
   }
 
   #cover {
-    max-height: 190px;
+    max-height: 200px;
     width: auto;
-    margin-right: 10px;
-    margin-right: 20px;
+    margin-right: 30px;
     border-radius: 6px;
 
     @media only screen and (max-width: 700px) {
@@ -73,6 +55,33 @@ export const CarouselContainer = styled.div`
       color: #fff;
       text-align: left;
       margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .organized {
+      font-size: 20px;
+      margin-bottom: 10px;
+
+      span {
+        font-weight: 400;
+      }
+    }
+
+    h2 {
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-weight: 700;
+      font-size: 32px;
+    }
+
+    @media only screen and (max-width: 800px) {
+      h2 {
+        font-size: 28px;
+      }
+
+      span {
+        font-size: 16px;
+      }
     }
 
     a {
@@ -123,11 +132,13 @@ export const CarouselContainer = styled.div`
 `;
 
 export const PageContainer = styled.div`
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding-bottom: 20px;
 
   h1 {
-    margin-top: 40px;
+    margin-top: 35px;
+    margin-bottom: 22px;
     padding-bottom: 17px;
     border-bottom: 1px solid #bbd7fb;
     text-align: left;
@@ -140,25 +151,27 @@ export const PageContainer = styled.div`
 export const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  max-width: 889px;
-
+  width: 100%;
   margin: 0 auto;
-
-  @media only screen and (max-width: 995px) {
-    max-width: 593px;
-  }
-
-  @media only screen and (max-width: 639px) {
-    justify-content: center;
-  }
 `;
 
 export const Card = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 1px 20px #0000000d;
-  border-radius: 6px;
-  margin: 10px;
-  max-width: 276px;
+  width: 25%;
+  padding: 15px;
+
+  @media only screen and (max-width: 995px) {
+    width: 50%;
+  }
+
+  @media only screen and (max-width: 639px) {
+    width: 100%;
+  }
+
+  .content {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 1px 20px #0000000d;
+    border-radius: 6px;
+  }
 
   header {
     height: 150px;
@@ -170,8 +183,10 @@ export const Card = styled.div`
 
     h2 {
       color: #fff;
-      font-size: 18px;
-      text-align: center;
+      font-family: 'Montserrat Alternates', sans-serif;
+      padding: 22px;
+      font-size: 20px;
+      text-align: left;
     }
 
     background-image: -webkit-gradient(
@@ -195,13 +210,23 @@ export const Card = styled.div`
     padding: 20px;
 
     div {
+      display: flex;
       margin: 10px 0;
+      align-items: center;
+
       svg {
-        margin-right: 10px;
+        margin-right: 15px;
+      }
+
+      span {
+        font-weight: 700;
+        font-size: 15px;
+        color: #210d4a;
       }
     }
 
     a {
+      margin-top: 20px;
       text-align: center;
       text-decoration: none;
       font-weight: bold;
@@ -216,6 +241,15 @@ export const Card = styled.div`
 
       &:visited {
         color: #fff;
+      }
+    }
+
+    .organized {
+      margin-bottom: 15px;
+
+      span {
+        font-size: 12px !important;
+        font-weight: 400;
       }
     }
   }

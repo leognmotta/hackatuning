@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { format, parseISO } from 'date-fns';
+
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { FaCalendar, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaRegCalendarAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import api from '../../services/api';
@@ -16,19 +18,25 @@ import {
 } from './styles';
 
 export default function Home({ history }) {
+  const [hackaCarousel, setHackaCarousel] = useState([]);
   const [hackathons, setHackathons] = useState([]);
   const [pagination, setPagination] = useState({});
-  const perPage = 9;
+  const perPage = 8;
 
   useEffect(() => {
     async function loadHackathons() {
       const searchURLParam = new URLSearchParams(history.location.search);
       const page = searchURLParam.get('page') || 1;
 
-      const { data } = await api.get(
-        `/v1/hackathons?perPage=${perPage}&page=${page}`
+      const { data: dataCarousel } = await api.get(
+        `/v1/hackathons?perPage=${perPage}&page=${page}&featured=3`
       );
 
+      const { data } = await api.get(
+        `/v1/hackathons?perPage=${perPage}&page=${page}&noFeatured=3`
+      );
+
+      setHackaCarousel(dataCarousel.hackathons);
       setHackathons(data.hackathons);
       setPagination(data.pagination);
     }
@@ -38,8 +46,10 @@ export default function Home({ history }) {
 
   async function handlePageChange(index) {
     const { data } = await api.get(
-      `/v1/hackathons?perPage=${perPage}&page=${index.selected + 1}`
+      `/v1/hackathons?noFeatured=3&perPage=${perPage}&page=${index.selected +
+        1}`
     );
+
     setPagination(data.pagination);
     setHackathons(data.hackathons);
     history.push(`/?page=${index.selected + 1}`);
@@ -54,7 +64,7 @@ export default function Home({ history }) {
         showThumbs={false}
         showArrows={false}
       >
-        {hackathons.map(hackathon => (
+        {hackaCarousel.map(hackathon => (
           <CarouselContainer
             key={hackathon.id}
             url={hackathon.cover ? hackathon.cover.url : DefaultCover}
@@ -67,16 +77,22 @@ export default function Home({ history }) {
 
             <div className="content_container">
               <h2>{hackathon.title}</h2>
-              <h3>{hackathon.subtitle}</h3>
-
-              <div>
-                <FaCalendar color="#fff" size={18} />
-                <span>{hackathon.event_date}</span>
+              <div className="organized">
+                <span>
+                  Organized by <strong>{hackathon.organizer.name}</strong>
+                </span>
               </div>
 
               <div>
-                <FaMapMarkerAlt color="#fff" size={18} />
-                <span>{hackathon.location}</span>
+                <FaRegCalendarAlt color="#fff" size={21} />
+                <span>
+                  {format(parseISO(hackathon.event_date), "MMMM dd',' yyyy")}
+                </span>
+              </div>
+
+              <div>
+                <FaMapMarkerAlt color="#fff" size={21} />
+                <span>{hackathon.online ? 'Online' : hackathon.location}</span>
               </div>
 
               {hackathon.isParticipant ? (
@@ -97,42 +113,63 @@ export default function Home({ history }) {
               key={hackathon.id}
               url={hackathon.cover ? hackathon.cover.url : DefaultCover}
             >
-              <header>
-                <h2>{hackathon.title}</h2>
-              </header>
+              <div className="content">
+                <header>
+                  <h2>{hackathon.title}</h2>
+                </header>
 
-              <div className="card_content">
-                <div>
-                  <FaCalendar color="#1437E3" size={18} />
-                  <span>{hackathon.event_date}</span>
+                <div className="card_content">
+                  <div className="organized">
+                    <span>
+                      Organized by <strong>{hackathon.organizer.name}</strong>
+                    </span>
+                  </div>
+
+                  <div>
+                    <FaRegCalendarAlt color="#1437E3" size={18} />
+                    <span>
+                      {format(
+                        parseISO(hackathon.event_date),
+                        "MMMM dd',' yyyy"
+                      )}
+                    </span>
+                  </div>
+
+                  <div>
+                    <FaMapMarkerAlt color="#1437E3" size={18} />
+                    <span>
+                      {hackathon.online ? 'Online' : hackathon.location}
+                    </span>
+                  </div>
+
+                  {hackathon.isParticipant ? (
+                    <Link to={`hackathon/${hackathon.id}`}>Go to event</Link>
+                  ) : (
+                    <Link to={`/hackathon/${hackathon.id}/details`}>
+                      Details
+                    </Link>
+                  )}
                 </div>
-
-                <div>
-                  <FaMapMarkerAlt color="#1437E3" size={18} />
-                  <span>{hackathon.location}</span>
-                </div>
-
-                {hackathon.isParticipant ? (
-                  <Link to={`hackathon/${hackathon.id}`}>Go to event</Link>
-                ) : (
-                  <Link to={`/hackathon/${hackathon.id}/details`}>Details</Link>
-                )}
               </div>
             </Card>
           ))}
         </CardContainer>
       </PageContainer>
 
-      <ReactPaginate
-        pageCount={pagination.maxPage}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={3}
-        onPageChange={index => handlePageChange(index)}
-        containerClassName="pagination-container"
-        activeLinkClassName="active"
-        nextLabel=">"
-        previousLabel="<"
-      />
+      {pagination.maxPage > 1 ? (
+        <ReactPaginate
+          pageCount={pagination.maxPage}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={3}
+          onPageChange={index => handlePageChange(index)}
+          containerClassName="pagination-container"
+          activeLinkClassName="active"
+          nextLabel="&#10095;"
+          previousLabel="&#10094;"
+        />
+      ) : (
+        ''
+      )}
     </Container>
   );
 }

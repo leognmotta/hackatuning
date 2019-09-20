@@ -10,6 +10,7 @@ import Settings from './pages/Settings';
 import Details from './pages/Details';
 import RegisterHackathon from './pages/RegisterHackathon';
 import Hackathons from './pages/Hackathons';
+import UpdateHackathon from './pages/UpdateHackathon';
 
 const Routes = () => (
   <Switch>
@@ -19,6 +20,7 @@ const Routes = () => (
     <PrivateRoute path="/settings" component={Settings} />
     <PrivateRoute path="/register-hackathon" component={RegisterHackathon} />
     <PrivateRoute path="/hackathons" component={Hackathons} />
+    <PrivateRoute path="/hackathon/:id/edit" component={UpdateHackathon} />
     <Route path="/hackathon/:id/details" component={Details} />
     <Route path="/internal-error" render={() => <h1>Internal error</h1>} />
     <Route path="*" render={() => <h1>Not found</h1>} />

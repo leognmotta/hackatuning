@@ -15,11 +15,10 @@ class Url extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.User, { foreignKey: 'user_id' });
     this.belongsToMany(models.User, {
       through: 'UserUrl',
       as: 'users',
-      foreignKey: 'url_id',
+      foreignKey: 'id',
     });
   }
 }

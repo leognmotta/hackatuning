@@ -42,19 +42,24 @@ export default function Hackathons() {
 
   async function handleDeleteHackathon(id) {
     try {
-      await api.delete(`/v1/hackathons/${id}`);
+      // eslint-disable-next-line no-alert
+      const action = window.confirm('Are you sure about that?');
 
-      const newMeHackathons = meHackathons.filter(
-        hackathon => hackathon.id !== id
-      );
+      if (action) {
+        await api.delete(`/v1/hackathons/${id}`);
 
-      setMeHackathons(newMeHackathons);
+        const newMeHackathons = meHackathons.filter(
+          hackathon => hackathon.id !== id
+        );
 
-      toast('Hackathon deleted!', {
-        className: 'toast-background_success',
-        bodyClassName: 'toast-font-size',
-        progressClassName: 'toast-progress-bar_success',
-      });
+        setMeHackathons(newMeHackathons);
+
+        toast('Hackathon deleted!', {
+          className: 'toast-background_success',
+          bodyClassName: 'toast-font-size',
+          progressClassName: 'toast-progress-bar_success',
+        });
+      }
     } catch (error) {
       toast(
         error.response.data.fields

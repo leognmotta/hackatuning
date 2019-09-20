@@ -4,51 +4,66 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../../services/api';
 
-import { Container, Form, Input, H1, TextArea } from './styles';
+import DefaultAvatar from '../../assets/default-user-image.png';
+import { Form, Input, TextArea, Button } from '../../components/Form';
+import { Container, H1 } from './styles';
 
 export default function Settings() {
-  const [roles, setRoles] = useState([]);
+  const [roles, setRoles] = useState([{ id: null, name: '', checked: false }]);
   const [avatar, setAvatar] = useState(null);
   const [form, setForm] = useState({
     name: '',
     nickname: '',
-    email: '',
     bio: '',
     urls: [''],
     skills: [],
   });
 
   useEffect(() => {
-    async function getNotifications() {
-      const { data } = await api.get('/v1/roles');
+    async function getUserData() {
+      const response = await api.get('/v1/validate');
+      const { data } = await api.get(`/v1/users/${response.data.id}`);
+      const rolesResponse = await api.get('/v1/roles');
 
-      setRoles(data);
+      const arr = rolesResponse.data.map(role => {
+        let bool = false;
+        const isTrue = data.roles.filter(r => r.id === role.id).length;
+
+        if (isTrue === 1) {
+          bool = true;
+        }
+
+        return {
+          id: role.id,
+          name: role.name,
+          checked: bool,
+        };
+      });
+
+      setRoles(arr);
+      setForm({
+        name: data.name,
+        nickname: data.nickname,
+        bio: data.bio,
+        urls: data.urls.map(url => url.url),
+        skills: data.roles.map(role => role.id),
+      });
+      setAvatar(data.avatar ? data.avatar.url : DefaultAvatar);
     }
 
-    getNotifications();
-  }, []);
-
-  useEffect(() => {
-    async function getNotifications() {
-      const { data } = await api.get('/v1/roles');
-
-      setRoles(data);
-    }
-
-    getNotifications();
+    getUserData();
   }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
-      const { name, bio, nickname, email, urls, skills } = form;
+      const { name, bio, nickname, urls, skills } = form;
       const obj = {};
 
       if (name) obj.name = name;
       if (bio) obj.bio = bio;
       if (nickname) obj.nickname = nickname;
-      if (email) obj.email = email;
       if (urls[0].length > 1) obj.urls = urls;
       if (skills.length > 1) obj.roles = skills;
 
@@ -73,11 +88,17 @@ export default function Settings() {
     }
   }
 
-  function onChangeSkills(skill) {
-    if (form.skills.includes(skill)) {
-      form.skills = form.skills.filter(item => item !== skill);
+  function onChangeSkills(skill, roleIndex) {
+    const parsedSkill = Number(skill);
+    if (form.skills.includes(parsedSkill)) {
+      form.skills = form.skills.filter(item => item !== parsedSkill);
+      roles[roleIndex].checked = false;
+      setRoles(roles);
     } else {
-      form.skills.push(skill);
+      roles[roleIndex].checked = true;
+      setRoles(roles);
+
+      form.skills.push(parsedSkill);
     }
 
     setForm({ ...form, skills: form.skills });
@@ -120,55 +141,34 @@ export default function Settings() {
       <img src={avatar} alt="user" style={{ maxWidth: 200, maxHeight: 200 }} />
       <Form onSubmit={handleSubmit}>
         <label htmlFor="file" style={{ marginTop: 20, textAlign: 'left' }}>
-          Avatar:{' '}
+          Avatar:
+          <input
+            id="file"
+            type="file"
+            onChange={e => onFileChange(e.target.files[0])}
+          />
         </label>
-        <input type="file" onChange={e => onFileChange(e.target.files[0])} />
 
-        <label htmlFor="name" style={{ marginTop: 20, textAlign: 'left' }}>
-          {' '}
-          Name:
-        </label>
         <Input
-          name="name"
-          id="name"
+          label="Name:"
+          value={form.name}
           placeholder=" Your name here!"
           onChange={e => setForm({ ...form, name: e.target.value })}
         />
 
-        <label htmlFor="nickname" style={{ marginTop: 20, textAlign: 'left' }}>
-          {' '}
-          Nickname:
-        </label>
         <Input
-          id="nickname"
-          name="nickname"
-          placeholder=" Nickname"
+          label="nickname:"
+          value={form.nickname}
+          placeholder="Nickname"
           onChange={e => setForm({ ...form, nickname: e.target.value })}
         />
 
-        <label htmlFor="email" style={{ marginTop: 20, textAlign: 'left' }}>
-          {' '}
-          Email:
-        </label>
-        <Input
-          name="email"
-          type="email"
-          id="email"
-          placeholder=" E-Mail here!"
-          err
-          onChange={e => setForm({ ...form, email: e.target.value })}
-        />
-
-        <label htmlFor="bio" style={{ marginTop: 20, textAlign: 'left' }}>
-          {' '}
-          Bio:
-        </label>
         <TextArea
-          id="bio"
-          name="bio"
+          label="Bio:"
           maxLength="255"
           placeholder=" Tell me about you! I want to know..."
           rows="5"
+          value={form.bio}
           onChange={e => setForm({ ...form, bio: e.target.value })}
         />
 
@@ -177,8 +177,9 @@ export default function Settings() {
         <div className="urls">
           <div className="url_box">
             {form.urls.map((url, index) => (
-              <div key={index} className="inner_input">
+              <div key={url} className="inner_input">
                 <Input
+                  key={url}
                   placeholder="Some useful links here"
                   value={url}
                   onChange={e => onChangeUrl(e, index)}
@@ -204,24 +205,21 @@ export default function Settings() {
 
         <h4>Select Roles</h4>
         <div className="roles">
-          {roles.map(role => (
-            <label key={role.id} htmlFor={`${role.name}`}>
+          {roles.map((role, roleIndex) => (
+            <label key={role.id} htmlFor={role.name}>
               <input
-                className="checkbox"
+                id={role.name}
+                checked={role.checked}
                 type="checkbox"
-                name={role.name}
                 value={role.id}
-                onChange={e => onChangeSkills(e.target.value)}
+                onChange={e => onChangeSkills(e.target.value, roleIndex)}
               />
-              <span className="checkmark" />
               {role.name}
             </label>
           ))}
         </div>
 
-        <button className="btn" type="submit">
-          Send
-        </button>
+        <Button text="Send" />
       </Form>
       <ToastContainer />
     </Container>

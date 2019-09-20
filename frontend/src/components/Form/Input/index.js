@@ -10,7 +10,6 @@ const StyledInput = styled.input`
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 2px solid #cccccc;
   border-radius: 6px;
-  opacity: 1;
 
   &:focus {
     background: #ffffff 0% 0% no-repeat padding-box;
@@ -20,11 +19,11 @@ const StyledInput = styled.input`
   }
 `;
 
-export default function Input({ label, ...props }) {
+export default function Input({ label, value, onChange, ...props }) {
   return (
     <label htmlFor={label}>
       {label}
-      <StyledInput id={label} {...props} />
+      <StyledInput id={label} value={value} onChange={onChange} {...props} />
     </label>
   );
 }

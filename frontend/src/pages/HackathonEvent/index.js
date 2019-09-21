@@ -22,9 +22,9 @@ export default function HackathonEvent({ match }) {
         `/v1/hackathons/${id}/participants?onlyNoTeam=true?perPage=100`
       );
 
-      const { data: member } = await api(`/v1/teams/hackathons/${id}`);
+      const { data: members } = await api(`/v1/teams/hackathons/${id}`);
 
-      setTeams(member.hackathons);
+      setTeams(members.teams);
       setParticipants(data.participants);
     }
 

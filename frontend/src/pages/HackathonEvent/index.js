@@ -11,7 +11,7 @@ import Link from '../../components/Link';
 import { Container, TabContainer, Card } from './styles';
 
 export default function HackathonEvent({ match, history }) {
-  const perPage = 10;
+  const perPage = 1;
   const { id } = match.params;
   const [userId, setUserId] = useState();
   const [isTeamOwner, setIsTeamOwner] = useState({ state: false, id: '' });
@@ -132,13 +132,13 @@ export default function HackathonEvent({ match, history }) {
     if (search !== '') shouldSearch = `&search=${search}`;
 
     const { data } = await api.get(
-      `/v1/hackathons/${id}/participants?onlyNoTeam=true&perPage=${perPage}&page=${index +
+      `/v1/hackathons/${id}/participants?onlyNoTeam=true&perPage=${perPage}&page=${index.selected +
         1}&filterRoles=${select}${shouldSearch}`
     );
 
     setPagination(data.pagination.maxPage);
     setParticipants(data.participants);
-    history.push(`/?page=${index.selected + 1}`);
+    history.push(`/hackathon/1?page=${index.selected + 1}`);
   }
 
   return (

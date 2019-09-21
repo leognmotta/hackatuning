@@ -143,13 +143,13 @@ export default function HackathonEvent({ match, history }) {
   function handleSearchChange(e) {
     setSearch(e.target.value);
 
-    history.push('/hackathon/1?page=1');
+    history.push(`/hackathon/${id}?page=1`);
   }
 
   function handleSelectChange(e) {
     setSelect(e.target.value);
 
-    history.push('/hackathon/1?page=1');
+    history.push(`/hackathon/${id}?page=1`);
   }
 
   return (

@@ -246,7 +246,7 @@ class TeamController {
       const currentPage = parseInt(page, 10);
 
       return res.json({
-        hackathons: team.rows,
+        teams: team.rows,
         pagination: {
           maxPage,
           previousPage,

@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import ReactPaginate from 'react-paginate';
-import { FaSearch } from 'react-icons/fa';
 import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 
 import DefaultAvatar from '../../assets/default-user-image.png';
-import { Button, Form, Input, Select } from '../../components/Form';
+import { Button, Input, Select } from '../../components/Form';
 import Link from '../../components/Link';
 import { Container, TabContainer, Card } from './styles';
 
 export default function HackathonEvent({ match, history }) {
-  const perPage = 10;
+  const perPage = 1;
   const { id } = match.params;
   const [userId, setUserId] = useState();
   const [isTeamOwner, setIsTeamOwner] = useState({ state: false, id: '' });
@@ -38,7 +37,8 @@ export default function HackathonEvent({ match, history }) {
 
         const response = await api('/v1/validate');
 
-        setPagination(data.pagination);
+        console.log(data.participants);
+        setPagination(data.pagination.maxPage);
         setUserId(response.data.id);
         setParticipants(data.participants);
       } catch (error) {
@@ -73,11 +73,6 @@ export default function HackathonEvent({ match, history }) {
   }, []);
 
   async function handleCraeteTeam() {
-    // eslint-disable-next-line no-alert
-    window.confirm(
-      'If you create a team, you can invite participants, but will not be available to be invited unless you delete the team, are you sure?'
-    );
-
     try {
       await api.post(`/v1/teams/hackathons/${id}`);
 
@@ -88,8 +83,6 @@ export default function HackathonEvent({ match, history }) {
         bodyClassName: 'toast-font-size',
         progressClassName: 'toast-progress-bar-success',
       });
-
-      history.location.reoload();
     } catch (error) {
       toast(
         error.response.data.fields
@@ -104,9 +97,15 @@ export default function HackathonEvent({ match, history }) {
     }
   }
 
-  async function handleInviteUser(nickname) {
+  async function handleInviteUser(nickname, index) {
     try {
       await api.post(`/v1/teams/${isTeamOwner.id}/invites/${nickname}`);
+
+      const newParticipants = [...participants];
+
+      newParticipants[index].statusInvite = 'sending';
+
+      setParticipants(newParticipants);
 
       toast(`${nickname} was invited!`, {
         className: 'toast-background-success',
@@ -133,13 +132,13 @@ export default function HackathonEvent({ match, history }) {
     if (search !== '') shouldSearch = `&search=${search}`;
 
     const { data } = await api.get(
-      `/v1/hackathons/${id}/participants?onlyNoTeam=true&perPage=${perPage}&page=${index +
+      `/v1/hackathons/${id}/participants?onlyNoTeam=true&perPage=${perPage}&page=${index.selected +
         1}&filterRoles=${select}${shouldSearch}`
     );
 
-    setPagination(data.pagination);
+    setPagination(data.pagination.maxPage);
     setParticipants(data.participants);
-    history.push(`/?page=${index.selected + 1}`);
+    history.push(`/hackathon/1?page=${index.selected + 1}`);
   }
 
   return (
@@ -165,7 +164,7 @@ export default function HackathonEvent({ match, history }) {
       )}
 
       <TabContainer>
-        {participants.map(participant => (
+        {participants.map((participant, index) => (
           <Card key={participant.participant.id}>
             <header>
               <img
@@ -205,7 +204,7 @@ export default function HackathonEvent({ match, history }) {
                   text={participant.statusInvite ? 'sent' : 'invite'}
                   disabled={!!participant.statusInvite}
                   onClick={() =>
-                    handleInviteUser(participant.participant.nickname)
+                    handleInviteUser(participant.participant.nickname, index)
                   }
                 />
               ) : null}
@@ -214,9 +213,9 @@ export default function HackathonEvent({ match, history }) {
         ))}
       </TabContainer>
 
-      {pagination.maxPage > 1 ? (
+      {pagination > 1 ? (
         <ReactPaginate
-          pageCount={pagination.maxPage}
+          pageCount={pagination}
           pageRangeDisplayed={3}
           marginPagesDisplayed={3}
           onPageChange={index => handlePageChange(index)}

@@ -5,6 +5,7 @@ class Participant extends Model {
     super.init(
       {
         team_member_id: Sequelize.INTEGER,
+        team_creator_id: Sequelize.INTEGER,
       },
       {
         sequelize,
@@ -23,7 +24,7 @@ class Participant extends Model {
     this.belongsTo(models.User, { foreignKey: 'user_id', as: 'participant' });
     this.belongsToMany(models.Role, {
       through: 'UserRole',
-      as: 'user_role',
+      as: 'search_role',
       foreignKey: 'user_id',
     });
   }

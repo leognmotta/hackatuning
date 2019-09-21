@@ -15,6 +15,7 @@ import HackathonEvent from './pages/HackathonEvent';
 import ManageTeam from './pages/ManageTeam';
 import Profile from './pages/Profile';
 import Invitations from './pages/Invitations';
+import Teams from './pages/Teams';
 
 const Routes = () => (
   <Switch>
@@ -22,6 +23,8 @@ const Routes = () => (
     <IsLogged path="/login" component={SignIn} />
     <IsLogged path="/register" component={SignUp} />
     <PrivateRoute path="/settings" component={Settings} />
+
+    <PrivateRoute path="/teams" component={Teams} />
 
     <Route path="/profile/:nickname" component={Profile} />
 

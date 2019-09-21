@@ -1,16 +1,12 @@
 import React from 'react';
-import { FaCog } from 'react-icons/fa';
+import { FaEnvelope, FaCog } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import Notification from '../../../Notifications';
 import { logout } from '../../../../utils/auth';
 
+import InvitationCount from '../../../InvitationCount';
 import { TabLink, StyledUl } from './styles';
 
-export default function Desktop({
-  notifications,
-  showNotifications,
-  toggleNotifications,
-}) {
+export default function Desktop({ count }) {
   async function handleLogout() {
     await logout();
     document.location.reload();
@@ -32,11 +28,10 @@ export default function Desktop({
         </TabLink>
       </li>
       <li className="notification_container">
-        <Notification
-          notifications={notifications}
-          showNotifications={showNotifications}
-          toggleNotifications={toggleNotifications}
-        />
+        <Link to="/invitations">
+          {count > 0 ? <InvitationCount count={count} /> : null}
+          <FaEnvelope color="#1437E3" size={24} />
+        </Link>
       </li>
       <li>
         <Link to="/settings">

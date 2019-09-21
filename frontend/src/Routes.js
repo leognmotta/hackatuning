@@ -14,6 +14,7 @@ import UpdateHackathon from './pages/UpdateHackathon';
 import HackathonEvent from './pages/HackathonEvent';
 import ManageTeam from './pages/ManageTeam';
 import Profile from './pages/Profile';
+import Invitations from './pages/Invitations';
 
 const Routes = () => (
   <Switch>
@@ -23,6 +24,8 @@ const Routes = () => (
     <PrivateRoute path="/settings" component={Settings} />
 
     <Route path="/profile/:nickname" component={Profile} />
+
+    <PrivateRoute path="/invitations" component={Invitations} />
 
     <PrivateRoute path="/hackathons" component={Hackathons} />
     <PrivateRoute path="/hackathon/:id" exact component={HackathonEvent} />

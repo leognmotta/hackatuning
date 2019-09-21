@@ -7,13 +7,14 @@ import { Container } from './styles';
 
 export default function Profile({ match }) {
   const { nickname } = match.params;
-  const [profile, setProfile] = useState({});
+  const [profile, setProfile] = useState({
+    urls: [{ id: '', url: '' }],
+    roles: [{ id: '', name: '' }],
+  });
 
   useEffect(() => {
     async function loadProfile() {
       const { data } = await api.get(`/v1/users/${nickname}`);
-
-      console.log(data);
 
       setProfile(data);
     }
@@ -30,11 +31,15 @@ export default function Profile({ match }) {
       <h1>{profile.name}</h1>
       <small>{profile.nickname}</small>
 
-      {/* {profile.urls.map(url => (
-        <span>
-          <FaGlobe /> {url.url}
-        </span>
-      ))} */}
+      {profile.urls.map(url => (
+        <div key={url.id} className="urls">
+          <FaGlobe /> <a href={url.url}>{url.url}</a>
+        </div>
+      ))}
+
+      {profile.roles.map(role => (
+        <span key={role.id}>{role.name}</span>
+      ))}
     </Container>
   );
 }

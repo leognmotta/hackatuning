@@ -220,6 +220,14 @@ class TeamInviteController {
           member_id: req.userId,
           is_member: false,
         },
+        attributes: [
+          'id',
+          'is_member',
+          'team_id',
+          'member_id',
+          'created_at',
+          'updated_at',
+        ],
         include: [
           {
             model: Team,

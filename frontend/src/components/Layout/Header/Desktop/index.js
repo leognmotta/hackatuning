@@ -11,6 +11,11 @@ export default function Desktop({
   showNotifications,
   toggleNotifications,
 }) {
+  async function handleLogout() {
+    await logout();
+    document.location.reload();
+  }
+
   return (
     <StyledUl>
       <li>
@@ -38,7 +43,7 @@ export default function Desktop({
           <FaCog color="#1437E3" size={24} />
         </Link>
       </li>
-      <li onClick={logout}>Logout</li>
+      <li onClick={() => handleLogout()}>Logout</li>
     </StyledUl>
   );
 }

@@ -224,7 +224,7 @@ export default function HackathonEvent({ match, history }) {
                       <RouterLink
                         target="_blank"
                         to={`/profile/${participant.participant.nickname}`}
-                        class="link"
+                        className="link"
                       >
                         Full Profile
                       </RouterLink>

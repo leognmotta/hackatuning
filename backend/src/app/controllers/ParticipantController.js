@@ -79,6 +79,7 @@ class ParticipantController {
   async index(req, res, next) {
     try {
       const { id } = req.params;
+
       const {
         page = 1,
         perPage = 20,
@@ -184,6 +185,34 @@ class ParticipantController {
         subQuery: false,
         include,
       });
+
+      const userLoggedTeamCreator = await Team.findOne({
+        where: {
+          hackathon_id: id,
+          creator_id: req.userId,
+        },
+      });
+
+      if (userLoggedTeamCreator) {
+        await Promise.all(
+          participants.rows.map(async participant => {
+            const invite = await TeamMember.findOne({
+              where: {
+                team_id: userLoggedTeamCreator.id,
+                member_id: participant.participant.id,
+              },
+            });
+
+            if (invite) {
+              if (invite.is_member) {
+                participant.dataValues.statusInvite = 'is_member';
+              } else {
+                participant.dataValues.statusInvite = 'sending';
+              }
+            }
+          })
+        );
+      }
 
       const maxPage = Math.ceil(participants.count / perPage);
       const previousPage = parseInt(page, 10) - 1;

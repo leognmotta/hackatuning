@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import ReactPaginate from 'react-paginate';
-import { FaSearch } from 'react-icons/fa';
 import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 
 import DefaultAvatar from '../../assets/default-user-image.png';
-import { Button, Form, Input, Select } from '../../components/Form';
+import { Button, Input, Select } from '../../components/Form';
 import Link from '../../components/Link';
 import { Container, TabContainer, Card } from './styles';
 

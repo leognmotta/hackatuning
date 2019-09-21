@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import ReactPaginate from 'react-paginate';
+import { FaSearch } from 'react-icons/fa';
 import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
-import { FaSearch } from 'react-icons/fa';
 
 import DefaultAvatar from '../../assets/default-user-image.png';
 import { Button, Form, Input, Select } from '../../components/Form';
@@ -20,6 +20,7 @@ export default function HackathonEvent({ match, history }) {
   const [pagination, setPagination] = useState({});
   const [roles, setRoles] = useState([]);
   const [select, setSelect] = useState('all');
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     async function loadData() {
@@ -27,8 +28,12 @@ export default function HackathonEvent({ match, history }) {
         const searchURLParam = new URLSearchParams(history.location.search);
         const page = searchURLParam.get('page') || 1;
 
+        let shouldSearch = '';
+
+        if (search !== '') shouldSearch = `&search=${search}`;
+
         const { data } = await api.get(
-          `/v1/hackathons/${id}/participants?onlyNoTeam=true&perPage=${perPage}&page=${page}&filterRoles=${select}`
+          `/v1/hackathons/${id}/participants?onlyNoTeam=true&perPage=${perPage}&page=${page}&filterRoles=${select}${shouldSearch}`
         );
 
         const response = await api('/v1/validate');
@@ -42,7 +47,7 @@ export default function HackathonEvent({ match, history }) {
     }
 
     loadData();
-  }, [id, history, select]);
+  }, [id, history, select, search]);
 
   useEffect(() => {
     async function loadIsTeamOwner() {
@@ -123,9 +128,13 @@ export default function HackathonEvent({ match, history }) {
   }
 
   async function handlePageChange(index) {
+    let shouldSearch = '';
+
+    if (search !== '') shouldSearch = `&search=${search}`;
+
     const { data } = await api.get(
       `/v1/hackathons/${id}/participants?onlyNoTeam=true&perPage=${perPage}&page=${index +
-        1}&filterRoles=${select}`
+        1}&filterRoles=${select}${shouldSearch}`
     );
 
     setPagination(data.pagination);
@@ -133,29 +142,21 @@ export default function HackathonEvent({ match, history }) {
     history.push(`/?page=${index.selected + 1}`);
   }
 
-  async function handleSearch(e) {
-    e.preventDefault();
-
-    console.log(select);
-  }
-
   return (
     <Container>
-      <Form style={{ marginBottom: 20 }} onSubmit={handleSearch}>
-        <div className="search">
-          <Input />
-
-          <button type="submit">
-            <FaSearch />
-          </button>
-        </div>
+      <div className="search" style={{ marginBottom: 20 }}>
+        <Input
+          label="Name, nickname or email:"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
 
         <Select
           label="Roles:"
           options={roles}
           onChange={e => setSelect(e.target.value)}
         />
-      </Form>
+      </div>
 
       {isTeamOwner.state ? (
         <Link to={`/hackathon/${id}/manage`} text="Manage Team" />

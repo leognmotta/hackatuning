@@ -21,13 +21,13 @@ export default function SignUp({ history }) {
   });
 
   useEffect(() => {
-    async function getNotifications() {
+    async function loadRoles() {
       const { data } = await api.get('/v1/roles');
 
       setRoles(data);
     }
 
-    getNotifications();
+    loadRoles();
   }, []);
 
   async function handleSubmit(e) {

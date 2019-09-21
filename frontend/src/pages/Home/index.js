@@ -161,9 +161,7 @@ export default function Home({ history }) {
           nextLabel="&#10095;"
           previousLabel="&#10094;"
         />
-      ) : (
-        ''
-      )}
+      ) : null}
     </Container>
   );
 }

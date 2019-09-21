@@ -9,7 +9,7 @@ import { Button } from '../../components/Form';
 import Link from '../../components/Link';
 import { Container, TabContainer, Card } from './styles';
 
-export default function HackathonEvent({ match }) {
+export default function HackathonEvent({ match, history }) {
   const { id } = match.params;
   const [isTeamOwner, setIsTeamOwner] = useState({ state: false, id: '' });
   const [toggleTab, setToggleTav] = useState(true);
@@ -18,14 +18,19 @@ export default function HackathonEvent({ match }) {
 
   useEffect(() => {
     async function loadData() {
-      const { data } = await api.get(
-        `/v1/hackathons/${id}/participants?onlyNoTeam=true?perPage=100`
-      );
+      try {
+        const { data } = await api.get(
+          `/v1/hackathons/${id}/participants?onlyNoTeam=${true}`
+        );
 
-      const { data: members } = await api(`/v1/teams/hackathons/${id}`);
+        const { data: members } = await api(`/v1/teams/hackathons/${id}`);
 
-      setTeams(members.teams);
-      setParticipants(data.participants);
+        setTeams(members.teams);
+
+        setParticipants(data.participants);
+      } catch (error) {
+        history.push(`/hackathon/${id}/details`);
+      }
     }
 
     loadData();

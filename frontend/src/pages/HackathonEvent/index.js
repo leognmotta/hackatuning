@@ -38,7 +38,7 @@ export default function HackathonEvent({ match, history }) {
 
         const response = await api('/v1/validate');
 
-        setPagination(data.pagination);
+        setPagination(data.pagination.maxPage);
         setUserId(response.data.id);
         setParticipants(data.participants);
       } catch (error) {
@@ -137,7 +137,7 @@ export default function HackathonEvent({ match, history }) {
         1}&filterRoles=${select}${shouldSearch}`
     );
 
-    setPagination(data.pagination);
+    setPagination(data.pagination.maxPage);
     setParticipants(data.participants);
     history.push(`/?page=${index.selected + 1}`);
   }
@@ -214,9 +214,9 @@ export default function HackathonEvent({ match, history }) {
         ))}
       </TabContainer>
 
-      {pagination.maxPage > 1 ? (
+      {pagination > 1 ? (
         <ReactPaginate
-          pageCount={pagination.maxPage}
+          pageCount={pagination}
           pageRangeDisplayed={3}
           marginPagesDisplayed={3}
           onPageChange={index => handlePageChange(index)}

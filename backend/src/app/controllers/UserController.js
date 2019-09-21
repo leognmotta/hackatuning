@@ -207,7 +207,7 @@ class UserController {
         throw new ApiError('Not Found', 'User not found!', 404);
       }
 
-      if (user.email !== email) {
+      if (email && user.email !== email) {
         const token = await jwt.sign({ email }, authConfig.secret, {
           expiresIn: '1h',
         });

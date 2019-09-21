@@ -1,23 +1,18 @@
 import React from 'react';
-import { FaCog, FaHome, FaPlus } from 'react-icons/fa';
+import { FaCog, FaHome, FaPlus, FaEnvelope } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
-import Notification from '../../../Notifications';
+import InvitationCount from '../../../InvitationCount';
 
 import { StyledUl, NotificationContianer } from './styles';
 
-export default function Desktop({
-  notifications,
-  showNotifications,
-  toggleNotifications,
-}) {
+export default function Desktop({ count }) {
   return (
     <>
       <NotificationContianer>
-        <Notification
-          notifications={notifications}
-          showNotifications={showNotifications}
-          toggleNotifications={toggleNotifications}
-        />
+        <NavLink to="/invitations">
+          {count > 0 ? <InvitationCount count={count} /> : null}
+          <FaEnvelope color="#1437E3" size={24} />
+        </NavLink>
       </NotificationContianer>
 
       <StyledUl>

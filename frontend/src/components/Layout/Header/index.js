@@ -15,11 +15,10 @@ import {
   TabeletNav,
 } from './styles';
 
-export default withRouter(function Header({ history }) {
+export default withRouter(function Header() {
   const isAuth = useSelector(state => state.auth.isAuth);
-  const [notifications, setNotifications] = useState([]);
-  const [showNotifications, setShowNotifications] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
+  const [invitationCount, setInvitationCount] = useState(0);
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -30,41 +29,23 @@ export default withRouter(function Header({ history }) {
   });
 
   useEffect(() => {
-    async function getNotifications() {
-      const { data } = await api.get('/v1/notifications');
+    async function loadInvitationCount() {
+      const { data } = await api.get('/v1/teams/invites/me');
 
-      setNotifications(data);
+      setInvitationCount(data.length);
     }
 
-    getNotifications();
-  }, [history.location.pathname]);
+    loadInvitationCount();
+  }, []);
 
-  let authMenu = (
-    <Desktop
-      notifications={notifications}
-      showNotifications={showNotifications}
-      toggleNotifications={setShowNotifications}
-    />
-  );
+  let authMenu = <Desktop count={invitationCount} />;
 
   if (width < 960) {
-    authMenu = (
-      <Tablet
-        notifications={notifications}
-        showNotifications={showNotifications}
-        toggleNotifications={setShowNotifications}
-      />
-    );
+    authMenu = <Tablet count={invitationCount} />;
   }
 
   if (width < 550) {
-    authMenu = (
-      <Mobile
-        notifications={notifications}
-        showNotifications={showNotifications}
-        toggleNotifications={setShowNotifications}
-      />
-    );
+    authMenu = <Mobile count={invitationCount} />;
   }
 
   return (

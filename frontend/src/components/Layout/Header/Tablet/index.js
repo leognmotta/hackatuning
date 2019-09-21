@@ -1,15 +1,11 @@
 import React from 'react';
-import { FaCog } from 'react-icons/fa';
+import { FaCog, FaEnvelope } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import Notification from '../../../Notifications';
+import InvitationCount from '../../../InvitationCount';
 
 import { StyledUl } from './styles';
 
-export default function Desktop({
-  notifications,
-  showNotifications,
-  toggleNotifications,
-}) {
+export default function Desktop({ count }) {
   return (
     <StyledUl>
       <li>
@@ -18,11 +14,10 @@ export default function Desktop({
         </Link>
       </li>
       <li className="notification_container">
-        <Notification
-          notifications={notifications}
-          showNotifications={showNotifications}
-          toggleNotifications={toggleNotifications}
-        />
+        <Link to="/invitations">
+          {count > 0 ? <InvitationCount count={count} /> : null}
+          <FaEnvelope color="#1437E3" size={24} />
+        </Link>
       </li>
       <li>
         <Link to="/settings">

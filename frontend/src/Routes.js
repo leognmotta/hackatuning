@@ -12,6 +12,7 @@ import RegisterHackathon from './pages/RegisterHackathon';
 import Hackathons from './pages/Hackathons';
 import UpdateHackathon from './pages/UpdateHackathon';
 import HackathonEvent from './pages/HackathonEvent';
+import ManageTeam from './pages/ManageTeam';
 
 const Routes = () => (
   <Switch>
@@ -24,6 +25,7 @@ const Routes = () => (
     <PrivateRoute path="/hackathon/:id" exact component={HackathonEvent} />
     <Route path="/hackathon/:id/details" component={Details} />
     <PrivateRoute path="/hackathon/:id/edit" component={UpdateHackathon} />
+    <PrivateRoute path="/hackathon/:id/manage" component={ManageTeam} />
     <PrivateRoute path="/register-hackathon" component={RegisterHackathon} />
 
     <Route path="/internal-error" render={() => <h1>Internal error</h1>} />

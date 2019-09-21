@@ -182,7 +182,10 @@ export default function HackathonEvent({ match, history }) {
           />
 
           {isTeamOwner.state ? (
-            <Link to={`/hackathon/${id}/manage`} text="Manage Team" />
+            <Link
+              to={`/hackathon/team/${isTeamOwner.id}/manage`}
+              text="Manage Team"
+            />
           ) : (
             <Button
               type="button"

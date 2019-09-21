@@ -77,7 +77,7 @@ export default function Teams() {
               </div>
 
               <div className="actions">
-                <Link to={`/hackathon/${team.id}/manage`} text="edit" />
+                <Link to={`/hackathon/team/${team.id}/manage`} text="edit" />
                 <Button
                   text="Delete"
                   color="#e3133e"

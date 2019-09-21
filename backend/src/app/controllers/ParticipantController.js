@@ -131,9 +131,9 @@ class ParticipantController {
       if (search) {
         whereSearch = {
           [Op.or]: [
-            { name: { [Op.substring]: search } },
-            { email: { [Op.substring]: search } },
-            { nickname: { [Op.substring]: search } },
+            { name: { [Op.iLike]: `%${search}%` } },
+            { email: { [Op.iLike]: `%${search}%` } },
+            { nickname: { [Op.iLike]: `%${search}%` } },
           ],
         };
       }

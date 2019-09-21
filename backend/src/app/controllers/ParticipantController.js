@@ -81,12 +81,12 @@ class ParticipantController {
       const { id } = req.params;
 
       const {
-        page = 1,
-        perPage = 20,
         onlyNoTeam,
         onlyTeam,
         search,
         filterRoles,
+        page = 1,
+        perPage = 20,
       } = req.query;
 
       const isParticipant = await Participant.findOne({
@@ -137,11 +137,12 @@ class ParticipantController {
           ],
         };
       }
+
       const include = [
         {
           model: User,
           as: 'participant',
-          attributes: ['id', 'name', 'nickname', 'bio'],
+          attributes: ['id', 'name', 'nickname', 'avatar_id', 'bio'],
           where: whereSearch,
           include: [
             {
@@ -178,11 +179,11 @@ class ParticipantController {
       }
 
       const participants = await Participant.findAndCountAll({
+        distinct: true,
         where,
-        attributes: [],
+        attributes: ['id', 'user_id'],
         limit: perPage,
         offset: (page - 1) * perPage,
-        subQuery: false,
         include,
       });
 

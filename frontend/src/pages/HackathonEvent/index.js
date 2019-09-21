@@ -46,7 +46,7 @@ export default function HackathonEvent({ match, history }) {
     }
 
     loadData();
-  }, [id, history, select, search]);
+  }, [id, history, select, search, isTeamOwner.state]);
 
   useEffect(() => {
     async function loadIsTeamOwner() {

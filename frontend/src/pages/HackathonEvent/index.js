@@ -37,6 +37,7 @@ export default function HackathonEvent({ match, history }) {
 
         const response = await api('/v1/validate');
 
+        console.log(data.participants);
         setPagination(data.pagination.maxPage);
         setUserId(response.data.id);
         setParticipants(data.participants);
@@ -72,11 +73,6 @@ export default function HackathonEvent({ match, history }) {
   }, []);
 
   async function handleCraeteTeam() {
-    // eslint-disable-next-line no-alert
-    window.confirm(
-      'If you create a team, you can invite participants, but will not be available to be invited unless you delete the team, are you sure?'
-    );
-
     try {
       await api.post(`/v1/teams/hackathons/${id}`);
 
@@ -87,8 +83,6 @@ export default function HackathonEvent({ match, history }) {
         bodyClassName: 'toast-font-size',
         progressClassName: 'toast-progress-bar-success',
       });
-
-      history.location.reoload();
     } catch (error) {
       toast(
         error.response.data.fields
@@ -103,9 +97,15 @@ export default function HackathonEvent({ match, history }) {
     }
   }
 
-  async function handleInviteUser(nickname) {
+  async function handleInviteUser(nickname, index) {
     try {
       await api.post(`/v1/teams/${isTeamOwner.id}/invites/${nickname}`);
+
+      const newParticipants = [...participants];
+
+      newParticipants[index].statusInvite = 'sending';
+
+      setParticipants(newParticipants);
 
       toast(`${nickname} was invited!`, {
         className: 'toast-background-success',
@@ -164,7 +164,7 @@ export default function HackathonEvent({ match, history }) {
       )}
 
       <TabContainer>
-        {participants.map(participant => (
+        {participants.map((participant, index) => (
           <Card key={participant.participant.id}>
             <header>
               <img
@@ -204,7 +204,7 @@ export default function HackathonEvent({ match, history }) {
                   text={participant.statusInvite ? 'sent' : 'invite'}
                   disabled={!!participant.statusInvite}
                   onClick={() =>
-                    handleInviteUser(participant.participant.nickname)
+                    handleInviteUser(participant.participant.nickname, index)
                   }
                 />
               ) : null}

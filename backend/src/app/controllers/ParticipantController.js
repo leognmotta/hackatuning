@@ -165,7 +165,7 @@ class ParticipantController {
         },
       ];
 
-      if (filterRoles) {
+      if (/^[0-9]+$/.test(filterRoles)) {
         include.push({
           model: Role,
           as: 'search_role',

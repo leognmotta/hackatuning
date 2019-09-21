@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { format, parseISO } from 'date-fns';
-
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { FaMapMarkerAlt, FaRegCalendarAlt } from 'react-icons/fa';

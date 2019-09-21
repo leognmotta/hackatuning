@@ -21,6 +21,11 @@ class Participant extends Model {
     });
 
     this.belongsTo(models.User, { foreignKey: 'user_id', as: 'participant' });
+    this.belongsToMany(models.Role, {
+      through: 'UserRole',
+      as: 'user_role',
+      foreignKey: 'user_id',
+    });
   }
 }
 

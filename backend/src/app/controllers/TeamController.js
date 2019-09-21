@@ -1,3 +1,4 @@
+import { parseISO, isBefore } from 'date-fns';
 import ApiError from '../../config/ApiError';
 import Participant from '../models/Participant';
 import Team from '../models/Team';
@@ -6,11 +7,28 @@ import TeamMember from '../models/TeamMember';
 import File from '../models/File';
 import Role from '../models/Role';
 import Url from '../models/Url';
+import Hackathon from '../models/Hackathon';
 
 class TeamController {
   async store(req, res, next) {
     try {
       const { hackathonId } = req.params;
+
+      const hackathon = await Hackathon.findByPk(hackathonId);
+
+      if (!hackathon) {
+        throw new ApiError('Not Found', 'Not found hackathon', 404);
+      }
+
+      const deadline_team_creation = parseISO(hackathon.deadline_team_creation);
+
+      if (isBefore(deadline_team_creation, new Date())) {
+        throw new ApiError(
+          'Not Authorized',
+          'The date for creation and team has already expired, so it is not possible to create a new team.',
+          401
+        );
+      }
 
       const isParticipant = await Participant.findOne({
         where: {
@@ -228,7 +246,7 @@ class TeamController {
       const currentPage = parseInt(page, 10);
 
       return res.json({
-        hackathons: team.rows,
+        teams: team.rows,
         pagination: {
           maxPage,
           previousPage,

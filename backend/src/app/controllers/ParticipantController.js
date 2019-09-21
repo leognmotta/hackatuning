@@ -14,6 +14,7 @@ import ParticipantSubscribeMail from '../jobs/ParticipantSubscribeMail';
 import ParticipantUnsubscribeMail from '../jobs/ParticipantUnsubscribeMail';
 import Team from '../models/Team';
 import TeamMember from '../models/TeamMember';
+import UserRole from '../models/UserRole';
 
 class ParticipantController {
   async store(req, res, next) {
@@ -79,7 +80,14 @@ class ParticipantController {
   async index(req, res, next) {
     try {
       const { id } = req.params;
-      const { page = 1, perPage = 20, onlyNoTeam, onlyTeam } = req.query;
+      const {
+        page = 1,
+        perPage = 20,
+        onlyNoTeam,
+        onlyTeam,
+        search,
+        filterRoles,
+      } = req.query;
 
       const isParticipant = await Participant.findOne({
         where: {
@@ -114,6 +122,26 @@ class ParticipantController {
         };
       }
 
+      let whereSearch;
+
+      if (search) {
+        whereSearch = {
+          [Op.or]: [
+            { name: { [Op.substring]: search } },
+            { email: { [Op.substring]: search } },
+            { nickname: { [Op.substring]: search } },
+          ],
+        };
+      }
+
+      let whereRoles;
+
+      if (filterRoles) {
+        whereRoles = {
+          id: filterRoles,
+        };
+      }
+
       const participants = await Participant.findAndCountAll({
         where,
         attributes: [],
@@ -122,9 +150,16 @@ class ParticipantController {
         subQuery: false,
         include: [
           {
+            model: Role,
+            as: 'user_role',
+            attributes: ['id', 'name'],
+            where: whereRoles,
+          },
+          {
             model: User,
             as: 'participant',
             attributes: ['id', 'name', 'nickname', 'bio'],
+            where: whereSearch,
             include: [
               {
                 model: File,

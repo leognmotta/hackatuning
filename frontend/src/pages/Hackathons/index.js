@@ -118,6 +118,15 @@ export default function Hackathons() {
                   </div>
 
                   <div className="actions">
+                    <Link
+                      to={`hackathon/${hackathon.id}/details`}
+                      text="Details"
+                      style={{
+                        maxWidth: '80px',
+                        backgroundColor: 'green',
+                        marginRight: '10px',
+                      }}
+                    />
                     <Link to={`hackathon/${hackathon.id}/edit`} text="Edit" />
                     <Button
                       text="Delete"

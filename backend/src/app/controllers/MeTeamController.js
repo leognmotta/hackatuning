@@ -17,6 +17,7 @@ class MeTeamController {
 
       if (hackathon_id) {
         where = {
+          creator_id: req.userId,
           hackathon_id,
         };
       }

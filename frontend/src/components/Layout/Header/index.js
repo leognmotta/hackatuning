@@ -44,7 +44,7 @@ export default withRouter(function Header() {
     authMenu = <Tablet count={invitationCount} />;
   }
 
-  if (width < 550) {
+  if (width < 580) {
     authMenu = <Mobile count={invitationCount} />;
   }
 

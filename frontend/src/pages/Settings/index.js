@@ -207,7 +207,6 @@ export default function Settings() {
 
         <TextArea
           label="Bio:"
-          maxLength="255"
           placeholder=" Tell me about you! I want to know..."
           rows="5"
           value={form.bio}

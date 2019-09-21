@@ -24,22 +24,38 @@ export default function Profile({ match }) {
 
   return (
     <Container>
-      <img
-        src={profile.avatar ? profile.avatar.url : DefaultAvatar}
-        alt={profile.name}
-      />
-      <h1>{profile.name}</h1>
-      <small>{profile.nickname}</small>
+      <div className="profile__box">
+        <img
+          src={profile.avatar ? profile.avatar.url : DefaultAvatar}
+          alt={profile.name}
+        />
 
-      {profile.urls.map(url => (
-        <div key={url.id} className="urls">
-          <FaGlobe /> <a href={url.url}>{url.url}</a>
+        <div className="profile__desc">
+          <h1>{profile.name}</h1>
+          <small>{profile.nickname}</small>
+
+          <div className="participants__roles">
+            {profile.roles.map(role => (
+              <span key={role.id} className="participants__items">
+                {role.name}
+              </span>
+            ))}
+          </div>
+
+          {profile.urls.map(url => (
+            <div key={url.id} className="urls">
+              <FaGlobe />{' '}
+              <a href={url.url} target="_blank" rel="noopener noreferrer">
+                {url.url}
+              </a>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
 
-      {profile.roles.map(role => (
-        <span key={role.id}>{role.name}</span>
-      ))}
+      <div className="profile__content">
+        <p>{profile.bio}</p>
+      </div>
     </Container>
   );
 }

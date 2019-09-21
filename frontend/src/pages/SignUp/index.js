@@ -157,7 +157,6 @@ export default function SignUp({ history }) {
         <TextArea
           id="bio"
           name="bio"
-          maxLength="255"
           placeholder=" Tell me about you! I want to know..."
           rows="5"
           onChange={e => setForm({ ...form, bio: e.target.value })}

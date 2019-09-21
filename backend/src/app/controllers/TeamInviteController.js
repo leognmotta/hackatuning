@@ -10,6 +10,9 @@ import User from '../models/User';
 import Hackathon from '../models/Hackathon';
 import TeamAcceptInviteMail from '../jobs/TeamAcceptInviteMail';
 import TeamDeniedInviteMail from '../jobs/TeamDeniedInviteMail';
+import File from '../models/File';
+import Role from '../models/Role';
+import Url from '../models/Url';
 
 class TeamInviteController {
   async store(req, res, next) {
@@ -217,6 +220,84 @@ class TeamInviteController {
           member_id: req.userId,
           is_member: false,
         },
+        attributes: [
+          'id',
+          'is_member',
+          'team_id',
+          'member_id',
+          'created_at',
+          'updated_at',
+        ],
+        include: [
+          {
+            model: Team,
+            as: 'team',
+            attributes: ['id', 'creator_id'],
+            include: [
+              {
+                model: Hackathon,
+                as: 'hackathon',
+                attributes: ['id', 'title'],
+              },
+              {
+                model: User,
+                as: 'creator',
+                attributes: ['id', 'name', 'nickname', 'bio', 'avatar_id'],
+                include: [
+                  {
+                    model: File,
+                    as: 'avatar',
+                    attributes: ['id', 'url', 'path'],
+                  },
+                  {
+                    model: Role,
+                    as: 'roles',
+                    through: { attributes: [] },
+                    attributes: ['id', 'name'],
+                  },
+                  {
+                    model: Url,
+                    as: 'urls',
+                    through: { attributes: [] },
+                    attributes: ['id', 'url'],
+                  },
+                ],
+              },
+              {
+                model: User,
+                as: 'members',
+                through: { attributes: [] },
+                attributes: ['id', 'name', 'nickname', 'bio', 'avatar_id'],
+                include: [
+                  {
+                    model: TeamMember,
+                    as: 'member',
+                    where: {
+                      is_member: true,
+                    },
+                  },
+                  {
+                    model: File,
+                    as: 'avatar',
+                    attributes: ['id', 'url', 'path'],
+                  },
+                  {
+                    model: Role,
+                    as: 'roles',
+                    through: { attributes: [] },
+                    attributes: ['id', 'name'],
+                  },
+                  {
+                    model: Url,
+                    as: 'urls',
+                    through: { attributes: [] },
+                    attributes: ['id', 'url'],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
         order: [['created_at', 'DESC']],
       });
 

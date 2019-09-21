@@ -8,10 +8,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import DefaultAvatar from '../../assets/default-user-image.png';
 import { Button, Input, Select } from '../../components/Form';
 import Link from '../../components/Link';
-import { Container, TabContainer, Card } from './styles';
+import { Container, TabContainer, Card, Content } from './styles';
 
 export default function HackathonEvent({ match, history }) {
-  const perPage = 1;
+  const perPage = 10;
   const { id } = match.params;
   const [userId, setUserId] = useState();
   const [isTeamOwner, setIsTeamOwner] = useState({ state: false, id: '' });
@@ -154,75 +154,103 @@ export default function HackathonEvent({ match, history }) {
 
   return (
     <Container>
-      <div className="search" style={{ marginBottom: 20 }}>
-        <Input
-          label="Name, nickname or email:"
-          value={search}
-          onChange={e => handleSearchChange(e)}
-        />
+      <Content>
+        <div className="search" style={{ marginBottom: 20 }}>
+          <div className="search__select">
+            <Select
+              label="Roles:"
+              options={roles}
+              onChange={e => handleSelectChange(e)}
+            />
+          </div>
 
-        <Select
-          label="Roles:"
-          options={roles}
-          onChange={e => handleSelectChange(e)}
-        />
-      </div>
+          <div className="search__text">
+            <Input
+              label="Name, nickname or email:"
+              value={search}
+              placeholder="Search:"
+              onChange={e => handleSearchChange(e)}
+            />
+          </div>
+        </div>
 
-      {isTeamOwner.state ? (
-        <Link to={`/hackathon/${id}/manage`} text="Manage Team" />
-      ) : (
-        <Button type="button" text="Create team" onClick={handleCraeteTeam} />
-      )}
+        <div className="buttons">
+          <Link
+            to={`/hackathon/${id}/teams`}
+            text="See All Teams"
+            style={{ marginRight: '20px' }}
+          />
 
-      <TabContainer>
-        {participants.map((participant, index) => (
-          <Card key={participant.participant.id}>
-            <header>
-              <img
-                src={
-                  participant.participant.avatar
-                    ? participant.participant.avatar.url
-                    : DefaultAvatar
-                }
-                alt={`${participant.name}`}
-              />
+          {isTeamOwner.state ? (
+            <Link to={`/hackathon/${id}/manage`} text="Manage Team" />
+          ) : (
+            <Button
+              type="button"
+              text="Create team"
+              onClick={handleCraeteTeam}
+            />
+          )}
+        </div>
 
-              <h2>{participant.participant.name}</h2>
-              <small>{participant.participant.nickname}</small>
-            </header>
+        <TabContainer>
+          {participants.map((participant, index) => (
+            <Card key={participant.participant.id}>
+              <div className="tab-content">
+                <header>
+                  <img
+                    src={
+                      participant.participant.avatar
+                        ? participant.participant.avatar.url
+                        : DefaultAvatar
+                    }
+                    alt={`${participant.name}`}
+                  />
+                </header>
 
-            <div className="participant_content">
-              <p>{participant.participant.bio}</p>
+                <div className="participant_content">
+                  <h2>{participant.participant.name}</h2>
+                  <small>{participant.participant.nickname}</small>
 
-              {participant.participant.roles.map(role => (
-                <span key={role.id} className="participant_roles">
-                  {role.name}
-                </span>
-              ))}
-            </div>
+                  <div className="participants__roles">
+                    {participant.participant.roles.map(role => (
+                      <span key={role.id} className="participants__items">
+                        {role.name}
+                      </span>
+                    ))}
+                  </div>
 
-            <div className="participant_actions">
-              <RouterLink
-                target="_blank"
-                to={`/profile/${participant.participant.nickname}`}
-              >
-                Profile
-              </RouterLink>
+                  <div className="align-right">
+                    <div className="participants__actions">
+                      <RouterLink
+                        target="_blank"
+                        to={`/profile/${participant.participant.nickname}`}
+                        class="link"
+                      >
+                        Full Profile
+                      </RouterLink>
 
-              {isTeamOwner.state && participant.participant.id !== userId ? (
-                <Button
-                  type="button"
-                  text={participant.statusInvite ? 'sent' : 'invite'}
-                  disabled={!!participant.statusInvite}
-                  onClick={() =>
-                    handleInviteUser(participant.participant.nickname, index)
-                  }
-                />
-              ) : null}
-            </div>
-          </Card>
-        ))}
-      </TabContainer>
+                      {isTeamOwner.state &&
+                      participant.participant.id !== userId ? (
+                        <Button
+                          type="button"
+                          text={participant.statusInvite ? 'Sent' : 'invite'}
+                          disabled={!!participant.statusInvite}
+                          onClick={() =>
+                            handleInviteUser(
+                              participant.participant.nickname,
+                              index
+                            )
+                          }
+                        />
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </TabContainer>
+      </Content>
 
       {pagination > 1 ? (
         <ReactPaginate

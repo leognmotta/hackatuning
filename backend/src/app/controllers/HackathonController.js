@@ -150,7 +150,6 @@ class HackathonController {
       const currentPage = parseInt(page, 10);
 
       return res.json({
-        count: hackathons.count,
         hackathons: hackathons.rows,
         pagination: {
           maxPage,

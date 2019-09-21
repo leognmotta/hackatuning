@@ -58,7 +58,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -10px;
+    margin-top: -15px;
     margin-bottom: 5px;
 
     @media only screen and (max-width: 460px) {
@@ -167,6 +167,11 @@ export const Card = styled.div`
       margin-bottom: 10px;
       color: #fff;
       background-color: #210d4a;
+    }
+
+    .profile__urls {
+      display: flex;
+      align-items: center;
     }
 
     .participants__actions {

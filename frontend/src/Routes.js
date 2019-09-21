@@ -34,7 +34,7 @@ const Routes = () => (
     <PrivateRoute path="/hackathon/:id" exact component={HackathonEvent} />
     <Route path="/hackathon/:id/details" component={Details} />
     <PrivateRoute path="/hackathon/:id/edit" component={UpdateHackathon} />
-    <PrivateRoute path="/hackathon/:id/manage" component={ManageTeam} />
+    <PrivateRoute path="/hackathon/team/:id/manage" component={ManageTeam} />
     <PrivateRoute path="/register-hackathon" component={RegisterHackathon} />
 
     <Route path="/internal-error" render={() => <h1>Internal error</h1>} />

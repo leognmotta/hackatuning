@@ -137,7 +137,7 @@ export default function HackathonEvent({ match, history }) {
 
     setPagination(data.pagination.maxPage);
     setParticipants(data.participants);
-    history.push(`/hackathon/1?page=${index.selected + 1}`);
+    history.push(`/hackathon/${id}?page=${index.selected + 1}`);
   }
 
   function handleSearchChange(e) {
@@ -204,7 +204,7 @@ export default function HackathonEvent({ match, history }) {
             <div className="participant_actions">
               <RouterLink
                 target="_blank"
-                to={`/${participant.participant.nickname}`}
+                to={`/profile/${participant.participant.nickname}`}
               >
                 Profile
               </RouterLink>

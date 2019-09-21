@@ -12,6 +12,8 @@ export default function Profile({ match }) {
     async function loadProfile() {
       const { data } = await api.get(`/v1/users/${nickname}`);
 
+      console.log(data);
+
       setProfile(data);
     }
 
@@ -20,7 +22,11 @@ export default function Profile({ match }) {
 
   return (
     <Container>
-      <h1>te</h1>
+      <img
+        src={profile.avatar ? profile.avatar.url : DefaultAvatar}
+        alt={profile.name}
+      />
+      <h1>{profile.name}</h1>
     </Container>
   );
 }

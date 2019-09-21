@@ -14,6 +14,14 @@ export const StyledUl = styled.ul`
     }
   }
 
+  .logout {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   .notification_container {
     position: relative;
 

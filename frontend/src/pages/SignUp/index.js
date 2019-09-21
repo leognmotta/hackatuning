@@ -168,7 +168,7 @@ export default function SignUp({ history }) {
         <div className="urls">
           <div className="url_box">
             {form.urls.map((url, index) => (
-              <div className="inner_input">
+              <div key={url} className="inner_input">
                 <Input
                   key={index}
                   placeholder="Some useful links here"

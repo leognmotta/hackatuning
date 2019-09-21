@@ -273,7 +273,10 @@ class UserController {
             const roleExists = await Role.findByPk(role);
 
             if (roleExists) {
-              await UserRole.create({ role_id: role, user_id: req.userId });
+              await UserRole.create({
+                role_id: roleExists.id,
+                user_id: req.userId,
+              });
             }
           })
         );

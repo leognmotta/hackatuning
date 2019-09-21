@@ -43,7 +43,9 @@ export default function Desktop({
           <FaCog color="#1437E3" size={24} />
         </Link>
       </li>
-      <li onClick={() => handleLogout()}>Logout</li>
+      <li className="logout" onClick={() => handleLogout()}>
+        Logout
+      </li>
     </StyledUl>
   );
 }

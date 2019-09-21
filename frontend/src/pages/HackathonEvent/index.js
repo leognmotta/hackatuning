@@ -1,35 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import ReactPaginate from 'react-paginate';
 import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaSearch } from 'react-icons/fa';
 
 import DefaultAvatar from '../../assets/default-user-image.png';
-import { Button } from '../../components/Form';
+import { Button, Form, Input, Select } from '../../components/Form';
 import Link from '../../components/Link';
 import { Container, TabContainer, Card } from './styles';
 
-export default function HackathonEvent({ match }) {
+export default function HackathonEvent({ match, history }) {
+  const perPage = 10;
   const { id } = match.params;
+  const [userId, setUserId] = useState();
   const [isTeamOwner, setIsTeamOwner] = useState({ state: false, id: '' });
-  const [toggleTab, setToggleTav] = useState(true);
   const [participants, setParticipants] = useState([]);
-  const [teams, setTeams] = useState([]);
+  const [pagination, setPagination] = useState({});
+  const [roles, setRoles] = useState([]);
+  const [select, setSelect] = useState('all');
 
   useEffect(() => {
     async function loadData() {
-      const { data } = await api.get(
-        `/v1/hackathons/${id}/participants?onlyNoTeam=true?perPage=100`
-      );
+      try {
+        const searchURLParam = new URLSearchParams(history.location.search);
+        const page = searchURLParam.get('page') || 1;
 
-      const { data: members } = await api(`/v1/teams/hackathons/${id}`);
+        const { data } = await api.get(
+          `/v1/hackathons/${id}/participants?onlyNoTeam=true&perPage=${perPage}&page=${page}&filterRoles=${select}`
+        );
 
-      setTeams(members.teams);
-      setParticipants(data.participants);
+        const response = await api('/v1/validate');
+
+        setPagination(data.pagination);
+        setUserId(response.data.id);
+        setParticipants(data.participants);
+      } catch (error) {
+        history.push(`/hackathon/${id}/details`);
+      }
     }
 
     loadData();
-  }, [id]);
+  }, [id, history, select]);
 
   useEffect(() => {
     async function loadIsTeamOwner() {
@@ -41,6 +54,18 @@ export default function HackathonEvent({ match }) {
 
     loadIsTeamOwner();
   }, [id]);
+
+  useEffect(() => {
+    async function loadRoles() {
+      const { data } = await api.get('/v1/roles');
+
+      data.unshift({ id: 'all', name: 'All' });
+
+      setRoles(data);
+    }
+
+    loadRoles();
+  }, []);
 
   async function handleCraeteTeam() {
     // eslint-disable-next-line no-alert
@@ -58,6 +83,8 @@ export default function HackathonEvent({ match }) {
         bodyClassName: 'toast-font-size',
         progressClassName: 'toast-progress-bar-success',
       });
+
+      history.location.reoload();
     } catch (error) {
       toast(
         error.response.data.fields
@@ -95,13 +122,40 @@ export default function HackathonEvent({ match }) {
     }
   }
 
+  async function handlePageChange(index) {
+    const { data } = await api.get(
+      `/v1/hackathons/${id}/participants?onlyNoTeam=true&perPage=${perPage}&page=${index +
+        1}&filterRoles=${select}`
+    );
+
+    setPagination(data.pagination);
+    setParticipants(data.participants);
+    history.push(`/?page=${index.selected + 1}`);
+  }
+
+  async function handleSearch(e) {
+    e.preventDefault();
+
+    console.log(select);
+  }
+
   return (
     <Container>
-      <Button
-        type="button"
-        text={toggleTab ? 'See teams' : 'See participants'}
-        onClick={() => setToggleTav(!toggleTab)}
-      />
+      <Form style={{ marginBottom: 20 }} onSubmit={handleSearch}>
+        <div className="search">
+          <Input />
+
+          <button type="submit">
+            <FaSearch />
+          </button>
+        </div>
+
+        <Select
+          label="Roles:"
+          options={roles}
+          onChange={e => setSelect(e.target.value)}
+        />
+      </Form>
 
       {isTeamOwner.state ? (
         <Link to={`/hackathon/${id}/manage`} text="Manage Team" />
@@ -110,66 +164,67 @@ export default function HackathonEvent({ match }) {
       )}
 
       <TabContainer>
-        {toggleTab
-          ? participants.map(participant => (
-              <Card key={participant.participant.id}>
-                <header>
-                  <img
-                    src={
-                      participant.participant.avatar
-                        ? participant.participant.avatar.url
-                        : DefaultAvatar
-                    }
-                    alt={`${participant.name}`}
-                  />
+        {participants.map(participant => (
+          <Card key={participant.participant.id}>
+            <header>
+              <img
+                src={
+                  participant.participant.avatar
+                    ? participant.participant.avatar.url
+                    : DefaultAvatar
+                }
+                alt={`${participant.name}`}
+              />
 
-                  <h2>{participant.participant.name}</h2>
-                  <small>{participant.participant.nickname}</small>
-                </header>
+              <h2>{participant.participant.name}</h2>
+              <small>{participant.participant.nickname}</small>
+            </header>
 
-                <div className="participant_content">
-                  <p>{participant.participant.bio}</p>
+            <div className="participant_content">
+              <p>{participant.participant.bio}</p>
 
-                  {participant.participant.roles.map(role => (
-                    <span key={role.id} className="participant_roles">
-                      {role.name}
-                    </span>
-                  ))}
-                </div>
+              {participant.participant.roles.map(role => (
+                <span key={role.id} className="participant_roles">
+                  {role.name}
+                </span>
+              ))}
+            </div>
 
-                <div className="participant_actions">
-                  <RouterLink
-                    target="_blank"
-                    to={`/${participant.participant.nickname}`}
-                  >
-                    Profile
-                  </RouterLink>
+            <div className="participant_actions">
+              <RouterLink
+                target="_blank"
+                to={`/${participant.participant.nickname}`}
+              >
+                Profile
+              </RouterLink>
 
-                  {isTeamOwner.state ? (
-                    <Button
-                      type="button"
-                      text="Invite"
-                      onClick={() =>
-                        handleInviteUser(participant.participant.nickname)
-                      }
-                    />
-                  ) : null}
-                </div>
-              </Card>
-            ))
-          : teams.map(team => (
-              <Card key={team.id}>
-                <div className="team_content">
-                  <h2>{team.id}</h2>
-                  <strong>Creator:</strong>
-                  <span>{team.creator.name}</span>
-
-                  <strong>Members:</strong>
-                  <span>{team.members.length + 1}</span>
-                </div>
-              </Card>
-            ))}
+              {isTeamOwner.state && participant.participant.id !== userId ? (
+                <Button
+                  type="button"
+                  text={participant.statusInvite ? 'sent' : 'invite'}
+                  disabled={!!participant.statusInvite}
+                  onClick={() =>
+                    handleInviteUser(participant.participant.nickname)
+                  }
+                />
+              ) : null}
+            </div>
+          </Card>
+        ))}
       </TabContainer>
+
+      {pagination.maxPage > 1 ? (
+        <ReactPaginate
+          pageCount={pagination.maxPage}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={3}
+          onPageChange={index => handlePageChange(index)}
+          containerClassName="pagination-container"
+          activeLinkClassName="active"
+          nextLabel="&#10095;"
+          previousLabel="&#10094;"
+        />
+      ) : null}
 
       <ToastContainer />
     </Container>

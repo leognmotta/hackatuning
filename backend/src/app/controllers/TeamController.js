@@ -88,6 +88,8 @@ class TeamController {
         hackathon_id: hackathonId,
       });
 
+      await isParticipant.update({ team_creator_id: team.id });
+
       return res.status(201).json(team);
     } catch (error) {
       return next(error);

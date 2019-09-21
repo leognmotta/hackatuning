@@ -14,7 +14,6 @@ import ParticipantSubscribeMail from '../jobs/ParticipantSubscribeMail';
 import ParticipantUnsubscribeMail from '../jobs/ParticipantUnsubscribeMail';
 import Team from '../models/Team';
 import TeamMember from '../models/TeamMember';
-import UserRole from '../models/UserRole';
 
 class ParticipantController {
   async store(req, res, next) {
@@ -80,6 +79,7 @@ class ParticipantController {
   async index(req, res, next) {
     try {
       const { id } = req.params;
+
       const {
         page = 1,
         perPage = 20,
@@ -111,7 +111,10 @@ class ParticipantController {
       if (onlyTeam) {
         where = {
           hackathon_id: id,
-          team_member_id: { [Op.ne]: null },
+          [Op.or]: [
+            { team_member_id: { [Op.ne]: null } },
+            { team_creator_id: { [Op.ne]: null } },
+          ],
         };
       }
 
@@ -119,6 +122,7 @@ class ParticipantController {
         where = {
           hackathon_id: id,
           team_member_id: null,
+          team_creator_id: null,
         };
       }
 
@@ -133,13 +137,44 @@ class ParticipantController {
           ],
         };
       }
+      const include = [
+        {
+          model: User,
+          as: 'participant',
+          attributes: ['id', 'name', 'nickname', 'bio'],
+          where: whereSearch,
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['id', 'url', 'path'],
+            },
+            {
+              model: Role,
+              as: 'roles',
+              through: { attributes: [] },
+              attributes: ['id', 'name'],
+            },
+            {
+              model: Url,
+              as: 'urls',
+              through: { attributes: [] },
+              attributes: ['id', 'url'],
+            },
+          ],
+        },
+      ];
 
-      let whereRoles;
-
-      if (filterRoles) {
-        whereRoles = {
-          id: filterRoles,
-        };
+      if (/^[0-9]+$/.test(filterRoles)) {
+        include.push({
+          model: Role,
+          as: 'search_role',
+          through: { attributes: [] },
+          attributes: ['id', 'name'],
+          where: {
+            id: filterRoles,
+          },
+        });
       }
 
       const participants = await Participant.findAndCountAll({
@@ -148,40 +183,36 @@ class ParticipantController {
         limit: perPage,
         offset: (page - 1) * perPage,
         subQuery: false,
-        include: [
-          {
-            model: Role,
-            as: 'user_role',
-            attributes: ['id', 'name'],
-            where: whereRoles,
-          },
-          {
-            model: User,
-            as: 'participant',
-            attributes: ['id', 'name', 'nickname', 'bio'],
-            where: whereSearch,
-            include: [
-              {
-                model: File,
-                as: 'avatar',
-                attributes: ['id', 'url', 'path'],
-              },
-              {
-                model: Role,
-                as: 'roles',
-                through: { attributes: [] },
-                attributes: ['id', 'name'],
-              },
-              {
-                model: Url,
-                as: 'urls',
-                through: { attributes: [] },
-                attributes: ['id', 'url'],
-              },
-            ],
-          },
-        ],
+        include,
       });
+
+      const userLoggedTeamCreator = await Team.findOne({
+        where: {
+          hackathon_id: id,
+          creator_id: req.userId,
+        },
+      });
+
+      if (userLoggedTeamCreator) {
+        await Promise.all(
+          participants.rows.map(async participant => {
+            const invite = await TeamMember.findOne({
+              where: {
+                team_id: userLoggedTeamCreator.id,
+                member_id: participant.participant.id,
+              },
+            });
+
+            if (invite) {
+              if (invite.is_member) {
+                participant.dataValues.statusInvite = 'is_member';
+              } else {
+                participant.dataValues.statusInvite = 'sending';
+              }
+            }
+          })
+        );
+      }
 
       const maxPage = Math.ceil(participants.count / perPage);
       const previousPage = parseInt(page, 10) - 1;

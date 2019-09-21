@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { FaCalendar, FaMapMarkerAlt } from 'react-icons/fa';
+import {
+  FaMapMarkerAlt,
+  FaPenAlt,
+  FaUsers,
+  FaRegCalendarAlt,
+  FaTrophy,
+} from 'react-icons/fa';
+import { format, parseISO } from 'date-fns';
 import { ToastContainer, toast } from 'react-toastify';
 import api from '../../services/api';
 import { Form, Button } from '../../components/Form';
@@ -8,6 +15,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import DefaultCover from '../../assets/default_cover.jpg';
 import DefaultAvatar from '../../assets/default-user-image.png';
 import { Container } from './styles';
+import { isAuthenticated } from '../../utils/auth';
 
 export default function Details({ match, history }) {
   const hackathonId = match.params.id;
@@ -20,6 +28,19 @@ export default function Details({ match, history }) {
     async function loadHackathon() {
       const { data } = await api.get(`/v1/hackathons/${hackathonId}`);
 
+      data.event_date = format(parseISO(data.event_date), 'MM/dd/yyyy');
+      data.event_ending = format(parseISO(data.event_ending), 'MM/dd/yyyy');
+
+      data.deadline_subscription = format(
+        parseISO(data.deadline_subscription),
+        'MM/dd/yyyy'
+      );
+
+      data.deadline_team_creation = format(
+        parseISO(data.deadline_team_creation),
+        'MM/dd/yyyy'
+      );
+
       setHackathon(data);
     }
 
@@ -30,9 +51,13 @@ export default function Details({ match, history }) {
     e.preventDefault();
 
     try {
-      await api.post(`/v1/hackathons/${hackathonId}/participants`);
+      if (isAuthenticated()) {
+        await api.post(`/v1/hackathons/${hackathonId}/participants`);
 
-      history.push(`/hackathon/${hackathonId}`);
+        history.push(`/hackathon/${hackathonId}`);
+      } else {
+        history.push(`/login`);
+      }
     } catch (error) {
       toast(
         error.response.data.fields
@@ -50,62 +75,94 @@ export default function Details({ match, history }) {
   return (
     <Container url={hackathon.cover ? hackathon.cover.url : DefaultCover}>
       <div className="image_container">
-        <h1>{hackathon.title}</h1>
-        <h2>{hackathon.subtitle}</h2>
-        <span>
-          <FaCalendar /> {hackathon.event_date}
-        </span>
-        <span>
-          <FaMapMarkerAlt />{' '}
-          {hackathon.location ? hackathon.location : 'online'}
-        </span>
+        <div className="header__text">
+          <h1>{hackathon.title}</h1>
+          <div className="organizer">
+            <h2>
+              <span>Organized by</span>
+              <img
+                src={
+                  hackathon.organizer.avatar
+                    ? hackathon.organizer.avatar.url
+                    : DefaultAvatar
+                }
+                alt={hackathon.organizer.name}
+              />
+              <strong>{hackathon.organizer.name}</strong>
+            </h2>
+          </div>
+        </div>
+
+        {isAuthenticated() ? (
+          <Form onSubmit={handleSubmit}>
+            <Button
+              text="Subscribe"
+              style={{ width: 240, margin: '20px auto' }}
+            />
+          </Form>
+        ) : (
+          <Form onSubmit={handleSubmit}>
+            <Button
+              text="Sign In"
+              style={{ width: 240, margin: '20px auto' }}
+            />
+          </Form>
+        )}
       </div>
 
       <div className="details">
-        <div>
-          <strong>About:</strong>
-          <p>{hackathon.description}</p>
+        <div className="details__photo">
+          <img
+            id="cover"
+            src={hackathon.cover ? hackathon.cover.url : DefaultCover}
+            alt={`${hackathon.title} cover`}
+          />
+
+          <div className="details__awards">
+            <FaTrophy size={47} />
+            <p>
+              {hackathon.awards
+                ? hackathon.awards
+                : 'The creator of this hackathon has not reported any awards!'}
+            </p>
+          </div>
         </div>
 
-        <div>
-          <strong>Date:</strong>
-          <p>{hackathon.event_date}</p>
-        </div>
+        <div className="details__desc">
+          <div className="details__dates">
+            <div>
+              <FaPenAlt />
+              <span>
+                Registrations: until {hackathon.deadline_subscription}
+              </span>
+            </div>
 
-        <div>
-          <strong>Subscription:</strong>
-          <p>You can subscribe until {hackathon.event_date}</p>
-        </div>
+            <div>
+              <FaUsers />
+              <span>
+                Create teams: until {hackathon.deadline_team_creation}
+              </span>
+            </div>
 
-        <div>
-          <strong>End date:</strong>
-          <p>{hackathon.event_ending}</p>
-        </div>
+            <div>
+              <FaRegCalendarAlt />
+              <span>
+                Event: {hackathon.event_date} to {hackathon.event_ending}
+              </span>
+            </div>
 
-        <div>
-          <strong>Awards:</strong>
-          <p>{hackathon.awards}</p>
+            <div>
+              <FaMapMarkerAlt />
+              <span>{!hackathon.online ? hackathon.location : 'Online'}</span>
+            </div>
+          </div>
+
+          <div className="details__text">
+            <h3>{hackathon.subtitle}</h3>
+            <p>{hackathon.description}</p>
+          </div>
         </div>
       </div>
-
-      <div className="organizer">
-        <h2>
-          {hackathon.title} is an envent by {hackathon.organizer.name}
-        </h2>
-
-        <img
-          src={
-            hackathon.organizer.avatar
-              ? hackathon.organizer.avatar.url
-              : DefaultAvatar
-          }
-          alt={hackathon.organizer.name}
-        />
-      </div>
-
-      <Form onSubmit={handleSubmit}>
-        <Button text="Subscribe" style={{ width: 240, margin: '20px auto' }} />
-      </Form>
 
       <ToastContainer />
     </Container>

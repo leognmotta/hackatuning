@@ -37,7 +37,6 @@ export default function HackathonEvent({ match, history }) {
 
         const response = await api('/v1/validate');
 
-        console.log(data.participants);
         setPagination(data.pagination.maxPage);
         setUserId(response.data.id);
         setParticipants(data.participants);
@@ -141,19 +140,31 @@ export default function HackathonEvent({ match, history }) {
     history.push(`/hackathon/1?page=${index.selected + 1}`);
   }
 
+  function handleSearchChange(e) {
+    setSearch(e.target.value);
+
+    history.push('/hackathon/1?page=1');
+  }
+
+  function handleSelectChange(e) {
+    setSelect(e.target.value);
+
+    history.push('/hackathon/1?page=1');
+  }
+
   return (
     <Container>
       <div className="search" style={{ marginBottom: 20 }}>
         <Input
           label="Name, nickname or email:"
           value={search}
-          onChange={e => setSearch(e.target.value)}
+          onChange={e => handleSearchChange(e)}
         />
 
         <Select
           label="Roles:"
           options={roles}
-          onChange={e => setSelect(e.target.value)}
+          onChange={e => handleSelectChange(e)}
         />
       </div>
 

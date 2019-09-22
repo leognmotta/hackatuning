@@ -32,6 +32,6 @@ routes.put(
   UserRecoverController.update
 );
 
-routes.put('/users/confirm/:token', UserConfirmEmailController.update);
+routes.get('/users/confirm/:token', UserConfirmEmailController.update);
 
 export default routes;

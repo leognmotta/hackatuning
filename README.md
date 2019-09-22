@@ -8,6 +8,32 @@ A project by:
 
 Hey there, hackatuning is an open source hackathon management system.
 
+<a href="https://hackatuning.com">
+    <img src="https://hackatuning.com/static/media/Logo@default.85d7e950.svg" alt="hackatuning logo" title="hackatuning" height="50" />
+</a>
+======================
+## **Creating and managing hackathons is easy!**
+
+### Did you have trouble organizing a hackathon? Did you have trouble finding a team or member for your team? Outdated or old tools? Would you like to tuning your hackathon?
+
+<a href="https://hackatuning.com">
+<img src="https://i.ibb.co/cyNrdgB/thumb.png" alt="hackatuning" title="hackatuning" /></a>
+
+### We created [Hackatuning](https://hackatuning.com)! A cross-platform solution to simplify, optimize and enhance the hackathon experience by:
+
+- Create and manage hackathons
+- Join hackathons
+- Find a team
+- Create team and find specific member
+
+#### With the latest technologies!
+
+---
+
+## [Watch the Trailer](https://vimeo.com/361611891)
+
+---
+
 ## How to run the project
 
 The project is a mono repository, you will need to run `yarn install` or `npm install` in both frontend and backend directory.

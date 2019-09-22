@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  margin: 40px auto;
+
   .toast-background {
     background: lightcoral;
   }
@@ -20,3 +22,5 @@ export const Container = styled.div`
     background: #333745;
   }
 `;
+
+export const Content = styled.div``;

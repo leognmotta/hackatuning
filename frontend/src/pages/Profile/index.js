@@ -45,7 +45,7 @@ export default function Profile({ match }) {
           {profile.urls.map(url => (
             <div key={url.id} className="urls">
               <FaGlobe />{' '}
-              <a href={url.url} target="_blank" rel="noopener noreferrer">
+                <a href={url.url} target="_blank" rel="noopener noreferrer">
                 {url.url}
               </a>
             </div>
@@ -54,7 +54,9 @@ export default function Profile({ match }) {
       </div>
 
       <div className="profile__content">
-        <p>{profile.bio}</p>
+        <p>
+          {profile.bio ? profile.bio : 'This user does not have a biography'}
+        </p>
       </div>
     </Container>
   );

@@ -8,6 +8,7 @@ export const Container = styled.div`
 
   .participants__roles {
     display: flex;
+    flex-wrap: wrap;
   }
 
   .participants__items {

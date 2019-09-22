@@ -22,7 +22,7 @@ class App {
   }
 
   middlewares() {
-    this.app.use(cors());
+    this.app.use(cors({ origin: process.env.WEB_URL }));
     this.app.use(express.json());
     this.app.use(
       '/static',

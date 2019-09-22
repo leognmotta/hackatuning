@@ -6,8 +6,8 @@ import { FaUsers, FaExternalLinkAlt, FaUserCircle } from 'react-icons/fa';
 import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button } from '../../components/Form';
-import { Container, Content } from './styles';
 import { CardTeam } from '../../components/Card/styles';
+import { Container, Content } from './styles';
 
 export default function Invitations() {
   const [invites, setInvites] = useState([]);
@@ -89,7 +89,7 @@ export default function Invitations() {
           invites.map(invite => (
             <CardTeam key={invite.id}>
               <div className="team-id">
-                <p>{String(invite.id).padStart(3, '0')}</p>
+                <p>{String(invite.team_id).padStart(3, '0')}</p>
               </div>
 
               <div className="team-content">

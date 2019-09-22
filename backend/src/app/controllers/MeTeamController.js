@@ -4,6 +4,7 @@ import Team from '../models/Team';
 import Role from '../models/Role';
 import Url from '../models/Url';
 import TeamMember from '../models/TeamMember';
+import Hackathon from '../models/Hackathon';
 
 class MeTeamController {
   async index(req, res, next) {
@@ -26,6 +27,11 @@ class MeTeamController {
         where,
         attributes: ['id', 'creator_id'],
         include: [
+          {
+            model: Hackathon,
+            as: 'hackathon',
+            attributes: ['id', 'title'],
+          },
           {
             model: User,
             as: 'creator',

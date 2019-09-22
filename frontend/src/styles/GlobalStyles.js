@@ -92,6 +92,13 @@ export default createGlobalStyle`
     font-weight: 700;
     color: #1437E3;
     font-size: 14px;
+
+    &--black {
+      color: #231456;
+      font-size: 18px;
+      text-decoration: underline;
+      text-transform: uppercase;
+    }
   }
 
   .link:hover {

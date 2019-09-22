@@ -178,7 +178,6 @@ class TeamController {
         where: {
           hackathon_id: req.params.id,
         },
-        attributes: ['id', 'creator_id'],
         include: [
           {
             model: User,
@@ -204,41 +203,55 @@ class TeamController {
               },
             ],
           },
-          {
-            model: User,
-            as: 'members',
-            through: { attributes: [] },
-            attributes: ['id', 'name', 'nickname', 'bio', 'avatar_id'],
-            include: [
-              {
-                model: TeamMember,
-                as: 'member',
-                where: {
-                  team_id: req.params.id,
-                  is_member: true,
-                },
-              },
-              {
-                model: File,
-                as: 'avatar',
-                attributes: ['id', 'url', 'path'],
-              },
-              {
-                model: Role,
-                as: 'roles',
-                through: { attributes: [] },
-                attributes: ['id', 'name'],
-              },
-              {
-                model: Url,
-                as: 'urls',
-                through: { attributes: [] },
-                attributes: ['id', 'url'],
-              },
-            ],
-          },
         ],
+        attributes: ['id', 'creator_id'],
       });
+
+      if (team) {
+        await Promise.all(
+          team.rows.map(async teamFind => {
+            const members = await TeamMember.findAll({
+              where: {
+                team_id: teamFind.id,
+                is_member: true,
+              },
+              attributes: ['id'],
+              include: [
+                {
+                  model: User,
+                  as: 'member',
+                  attributes: ['id', 'name', 'nickname', 'bio', 'avatar_id'],
+                  include: [
+                    {
+                      model: File,
+                      as: 'avatar',
+                      attributes: ['id', 'url', 'path'],
+                    },
+                    {
+                      model: Role,
+                      as: 'roles',
+                      through: { attributes: [] },
+                      attributes: ['id', 'name'],
+                    },
+                    {
+                      model: Url,
+                      as: 'urls',
+                      through: { attributes: [] },
+                      attributes: ['id', 'url'],
+                    },
+                  ],
+                },
+              ],
+            });
+
+            if (members) {
+              teamFind.dataValues.members = members;
+            } else {
+              teamFind.dataValues.members = [];
+            }
+          })
+        );
+      }
 
       const maxPage = Math.ceil(team.count / perPage);
       const previousPage = parseInt(page, 10) - 1;

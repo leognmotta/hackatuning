@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { Link as RouterLink } from 'react-router-dom';
+import { FaUsers, FaExternalLinkAlt } from 'react-icons/fa';
+
 import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Button } from '../../components/Form';
 import { Container } from './styles';
+import { CardTeam } from '../../components/Card/styles';
 
 export default function ManageTeam({ match }) {
   const { id } = match.params;
@@ -53,22 +57,63 @@ export default function ManageTeam({ match }) {
 
   return (
     <Container>
-      <h1>Team {team.id}</h1>
-      <strong>Creator:</strong> {team.creator.name}
-      {team.members.map(member => (
-        <div key={member.id}>
-          <strong>Name:</strong> {member.name}
-          <div className="actions">
-            <Button
-              color="#e3133e"
-              text="Delete"
-              onClick={() =>
-                handleDeleteMember(team.id, member.id, member.name)
-              }
-            />
+      <h1 style={{ marginBottom: '30px', textAlign: 'center' }}>Manage Team</h1>
+      <CardTeam key={team.id}>
+        <div className="team-id">
+          <p>{String(team.id).padStart(3, '0')}</p>
+        </div>
+
+        <div className="team-content">
+          <div className="container">
+            <div className="creator">
+              Created by{' '}
+              <RouterLink
+                target="_blank"
+                to={`/profile/${team.creator.nickname}`}
+                className="link"
+              >
+                {team.creator.name}
+              </RouterLink>
+            </div>
+
+            <div className="members">
+              <FaUsers />
+              <strong>Members:</strong>
+            </div>
+
+            <div className="member">
+              {team.members.length > 0 ? '' : 'This team has no members yet'}
+
+              {team.members.map(member => (
+                <div key={member.id} className="member__item">
+                  <strong>Name:</strong>
+                  <p>{member.name}</p>
+                  <div className="actions actions--left">
+                    <RouterLink
+                      target="_blank"
+                      to={`/profile/${member.nickname}`}
+                      className="link"
+                      style={{ marginRight: '20px' }}
+                    >
+                      Profile
+                      <FaExternalLinkAlt class="external" size={15} />
+                    </RouterLink>
+
+                    <Button
+                      color="#e3133e"
+                      text="Delete"
+                      onClick={() =>
+                        handleDeleteMember(team.id, member.id, member.name)
+                      }
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      ))}
+      </CardTeam>
+
       <ToastContainer />
     </Container>
   );

@@ -4,6 +4,15 @@ export const CardTeam = styled.div`
   display: flex;
   justify-content: flex-start;
 
+  @media only screen and (max-width: 470px) {
+    flex-direction: column;
+
+    .team-id {
+      justify-content: center;
+      border-radius: 6px 6px 0px 0px !important;
+    }
+  }
+
   &:not(:last-of-type) {
     margin-bottom: 30px;
   }
@@ -102,5 +111,9 @@ export const CardTeam = styled.div`
       fill: #210d4a;
       margin-left: 8px;
     }
+  }
+
+  .actions {
+    margin-top: 10px;
   }
 `;

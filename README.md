@@ -4,6 +4,8 @@ A project by:
 
 # Hackatuning
 
+[See the prototype project](https://hackatuning.com/)
+
 Hey there, hackatuning is an open source hackathon management system.
 
 ## How to run the project

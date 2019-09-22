@@ -78,7 +78,7 @@ class UserController {
           name: user.name,
           email: user.email,
         },
-        link: `${process.env.WEB_URL}/confirm?tk=${token}`,
+        link: `${process.env.APP_URL}/v1/users/confirm/${token}`,
       });
 
       if (urls && urls.length > 0) {

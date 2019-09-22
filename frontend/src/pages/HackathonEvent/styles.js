@@ -197,8 +197,7 @@ export const Card = styled.div`
   }
 
   img {
-    width: 100%;
-    max-width: 100px;
+    width: 100px;
     height: 100px;
     border-radius: 50%;
     border: 5px solid #eee;

@@ -400,11 +400,12 @@ class TeamInviteController {
         }
       );
 
-      await TeamMember.destroy({
+      const teams = await TeamMember.findAll({
         where: {
           member_id: member.member_id,
           is_member: false,
         },
+        attributes: ['id'],
         include: [
           {
             model: Team,
@@ -415,6 +416,18 @@ class TeamInviteController {
           },
         ],
       });
+
+      if (teams) {
+        await Promise.all(
+          teams.map(async mem => {
+            await TeamMember.destroy({
+              where: {
+                id: mem.id,
+              },
+            });
+          })
+        );
+      }
 
       await Queue.add(TeamAcceptInviteMail.key, {
         creator: {

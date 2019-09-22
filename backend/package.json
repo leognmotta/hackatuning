@@ -8,7 +8,7 @@
     "build": "sucrase ./src -d ./dist --transforms imports && cp -r ./src/app/views ./dist/app/views",
     "dev": "nodemon src/server",
     "queue:dev": "nodemon src/queue.js",
-    "queue:prod": "sucrase-node src/queue.js",
+    "queue:prod": "node dist/queue.js",
     "migrate": "sequelize db:migrate",
     "migration:g": "sequelize migration:generate --name",
     "migrate:undo": "sequelize db:migrate:undo",

@@ -11,7 +11,7 @@ Hey there, hackatuning is an open source hackathon management system.
 <a href="https://hackatuning.com">
     <img src="https://hackatuning.com/static/media/Logo@default.85d7e950.svg" alt="hackatuning logo" title="hackatuning" height="50" />
 </a>
-======================
+
 ## **Creating and managing hackathons is easy!**
 
 ### Did you have trouble organizing a hackathon? Did you have trouble finding a team or member for your team? Outdated or old tools? Would you like to tuning your hackathon?
@@ -81,4 +81,3 @@ MAIL_PASS=
 [Copyright (c) 2019](https://github.com/leomotta121/hackatuning/blob/develop/LICENSE)
 
 [Leonardo Motta](https://leomotta.me), [Adam Dias](https://github.com/adamdias), [Rafael Prado](https://rprado.myportfolio.com/)
-

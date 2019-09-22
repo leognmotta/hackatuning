@@ -20,6 +20,7 @@ export default function HackathonEvent({ match, history }) {
   const [roles, setRoles] = useState([]);
   const [select, setSelect] = useState('all');
   const [search, setSearch] = useState('');
+  const [hackathon, setHackathon] = useState({ title: '', subtitle: '' });
 
   useEffect(() => {
     async function loadData() {
@@ -35,8 +36,11 @@ export default function HackathonEvent({ match, history }) {
           `/v1/hackathons/${id}/participants?onlyNoTeam=true&perPage=${perPage}&page=${page}&filterRoles=${select}${shouldSearch}`
         );
 
+        const { data: hacka } = await api.get(`/v1/hackathons/${id}`);
+
         const response = await api('/v1/validate');
 
+        setHackathon({ title: hacka.title, subtitle: hacka.subtitle });
         setPagination(data.pagination.maxPage);
         setUserId(response.data.id);
         setParticipants(data.participants);
@@ -73,9 +77,9 @@ export default function HackathonEvent({ match, history }) {
 
   async function handleCraeteTeam() {
     try {
-      await api.post(`/v1/teams/hackathons/${id}`);
+      const { data } = await api.post(`/v1/teams/hackathons/${id}`);
 
-      setIsTeamOwner({ ...isTeamOwner, state: true });
+      setIsTeamOwner({ id: data.id, state: true });
 
       toast('You have created your team, you can now invite participants!', {
         className: 'toast-background-success',
@@ -154,6 +158,10 @@ export default function HackathonEvent({ match, history }) {
 
   return (
     <Container>
+      <h1>{hackathon.title}</h1>
+      <h2 style={{ textAlign: 'center', marginBottom: 20 }}>
+        {hackathon.subtitle}
+      </h2>
       <Content>
         <div className="search" style={{ marginBottom: 20 }}>
           <div className="search__select">

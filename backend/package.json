@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/server.js",
-    "build": "sucrase ./src -d ./dist --transforms imports",
+    "build": "sucrase ./src -d ./dist --transforms imports && cp -r ./src/app/views ./dist/app/views",
     "dev": "nodemon src/server",
     "queue:dev": "nodemon src/queue.js",
     "queue:prod": "sucrase-node src/queue.js",

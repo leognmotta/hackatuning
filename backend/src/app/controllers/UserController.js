@@ -118,13 +118,20 @@ class UserController {
     try {
       const { nickname } = req.params;
 
+      let where;
+
+      if (/^[0-9]+$/.test(nickname)) {
+        where = {
+          id: nickname,
+        };
+      } else {
+        where = {
+          nickname,
+        };
+      }
+
       const user = await User.findOne({
-        where: {
-          [Op.or]: [
-            { nickname },
-            { id: parseInt(nickname, 16) ? parseInt(nickname, 16) : 0 },
-          ],
-        },
+        where,
         attributes: ['id', 'name', 'nickname', 'bio', 'avatar_id'],
         include: [
           {

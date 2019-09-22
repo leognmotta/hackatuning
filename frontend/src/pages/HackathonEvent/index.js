@@ -52,6 +52,8 @@ export default function HackathonEvent({ match, history }) {
     async function loadIsTeamOwner() {
       const { data } = await api.get(`/v1/me/teams/creator?hackathon_id=${id}`);
 
+      console.log(data.teams);
+
       if (data.teams.length > 0)
         setIsTeamOwner({ state: true, id: data.teams[0].id });
     }
@@ -236,7 +238,7 @@ export default function HackathonEvent({ match, history }) {
                       participant.participant.id !== userId ? (
                         <Button
                           type="button"
-                          text={participant.statusInvite ? 'Sent' : 'invite'}
+                          text={participant.statusInvite ? 'sent' : 'invite'}
                           disabled={!!participant.statusInvite}
                           onClick={() =>
                             handleInviteUser(

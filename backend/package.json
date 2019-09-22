@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node src/server",
+    "start": "node dist/server.js",
+    "build": "sucrase ./src -d ./dist --transforms imports",
     "dev": "nodemon src/server",
     "queue:dev": "nodemon src/queue.js",
     "queue:prod": "sucrase-node src/queue.js",

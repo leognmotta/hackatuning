@@ -7,12 +7,7 @@ import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button } from '../../components/Form';
 import Link from '../../components/Link';
-import {
-  Container,
-  ManageTeamsContainer,
-  TeamsContainer,
-  Card,
-} from './styles';
+import { Container, ManageTeamsContainer, TeamsContainer } from './styles';
 import { CardTeam } from '../../components/Card/styles';
 
 export default function Teams() {
@@ -85,8 +80,13 @@ export default function Teams() {
 
                 <div className="team-content">
                   <p className="title">
-                    Team of {''}
-                    <strong>{team.hackathon.title}</strong>
+                    Team of{' '}
+                    <RouterLink
+                      to={`hackathon/${team.hackathon.id}`}
+                      className="link link--black"
+                    >
+                      {team.hackathon.title}
+                    </RouterLink>
                   </p>
 
                   <div className="container">

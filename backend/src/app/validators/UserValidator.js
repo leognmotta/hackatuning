@@ -9,7 +9,7 @@ class UserValidator {
         nickname: Yup.string().required(),
         bio: Yup.string(),
         email: Yup.string()
-          .email()
+          .email('Url not valid, add http:// or https://')
           .required(),
         password: Yup.string()
           .required()
@@ -53,7 +53,7 @@ class UserValidator {
         name: Yup.string(),
         nickname: Yup.string(),
         bio: Yup.string(),
-        email: Yup.string().email(),
+        email: Yup.string().email('Url not valid, add http:// or https://'),
         oldPassword: Yup.string().min(6),
         password: Yup.string()
           .min(6)

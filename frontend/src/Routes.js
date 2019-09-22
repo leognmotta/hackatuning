@@ -16,6 +16,7 @@ import ManageTeam from './pages/ManageTeam';
 import Profile from './pages/Profile';
 import Invitations from './pages/Invitations';
 import Teams from './pages/Teams';
+import SeeAllTeams from './pages/SeeAllTeams';
 
 const Routes = () => (
   <Switch>
@@ -32,6 +33,7 @@ const Routes = () => (
 
     <PrivateRoute path="/hackathons" component={Hackathons} />
     <PrivateRoute path="/hackathon/:id" exact component={HackathonEvent} />
+    <PrivateRoute path="/hackathon/:id/teams" component={SeeAllTeams} />
     <Route path="/hackathon/:id/details" component={Details} />
     <PrivateRoute path="/hackathon/:id/edit" component={UpdateHackathon} />
     <PrivateRoute path="/hackathon/team/:id/manage" component={ManageTeam} />

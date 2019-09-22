@@ -1,9 +1,10 @@
 import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
+import Queue from '../../lib/Queue';
+import ConfirmationResponseMail from '../jobs/ConfirmationResponseMail';
 
 import User from '../models/User';
 import authConfig from '../../config/authConfig';
-import ApiError from '../../config/ApiError';
 
 class UserConfirmEmailController {
   async update(req, res, next) {
@@ -14,11 +15,9 @@ class UserConfirmEmailController {
         token,
         authConfig.secret
       ).catch(() => {
-        throw new ApiError(
-          'Invalid token.',
-          'The token has expired or is not valid.',
-          401
-        );
+        return res
+          .status(301)
+          .redirect(`${process.env.WEB_URL}/internal-error`);
       });
 
       const user = await User.findOne({
@@ -29,15 +28,22 @@ class UserConfirmEmailController {
       });
 
       if (!user) {
-        throw new ApiError('Not Found', 'User not found!', 404);
+        return res
+          .status(301)
+          .redirect(`${process.env.WEB_URL}/internal-error`);
       }
 
-      const { id, nickname, name } = await user.update({
+      const { name, email } = await user.update({
         confirm_email: true,
         confirm_email_token: null,
       });
 
-      return res.json({ id, nickname, name });
+      await Queue.add(ConfirmationResponseMail.key, {
+        name,
+        email,
+      });
+
+      return res.status(301).redirect(process.env.WEB_URL);
     } catch (error) {
       return next(error);
     }

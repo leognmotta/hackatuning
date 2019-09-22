@@ -4,7 +4,7 @@ export const CardTeam = styled.div`
   display: flex;
   justify-content: flex-start;
 
-  @media only screen and (max-width: 470px) {
+  @media only screen and (max-width: 600px) {
     flex-direction: column;
 
     .team-id {

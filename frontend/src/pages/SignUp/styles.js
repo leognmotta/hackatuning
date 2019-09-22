@@ -49,6 +49,8 @@ export const H1 = styled.h1`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 400px;
 
   .or {
     margin: 20px;

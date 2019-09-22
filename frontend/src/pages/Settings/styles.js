@@ -42,6 +42,9 @@ export const Container = styled.div`
   /*###################################################################*/
 
   form {
+    width: 100%;
+    max-width: 450px;
+
     .or {
       margin: 20px;
     }

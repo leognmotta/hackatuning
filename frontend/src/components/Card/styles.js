@@ -44,7 +44,7 @@ export const CardTeam = styled.div`
     background: #ffffff 0% 0% no-repeat padding-box;
     box-shadow: 0px 1px 20px #0000000d;
     border-radius: 0px 6px 6px 0px;
-    padding: 15px 30px;
+    padding: 15px 30px 25px 30px;
   }
 
   .actions {

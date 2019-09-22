@@ -81,3 +81,4 @@ MAIL_PASS=
 [Copyright (c) 2019](https://github.com/leomotta121/hackatuning/blob/develop/LICENSE)
 
 [Leonardo Motta](https://leomotta.me), [Adam Dias](https://github.com/adamdias), [Rafael Prado](https://rprado.myportfolio.com/)
+

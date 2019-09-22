@@ -13,6 +13,7 @@ class ConfirmationResponseMail {
       subject: `${name}, your email was confirmed!`,
       template: 'confirmation_response_email',
       context: {
+        api: process.env.APP_URL,
         user: name.split(' ')[0] ? name.split(' ')[0] : name,
       },
     });

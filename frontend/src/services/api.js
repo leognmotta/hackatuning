@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { getToken } from '../utils/auth';
 
-// const url = process.env.API_URL || 'https://api.hackatuning.com';
-const url = process.env.API_URL || 'http://localhost:3333';
+const url = process.env.API_URL || 'https://api.hackatuning.com';
+// const url = process.env.API_URL || 'http://localhost:3333';
 
 const api = axios.create({
   baseURL: url,

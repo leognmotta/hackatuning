@@ -34,7 +34,7 @@ export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 320px;
+  max-width: 400px;
 
   .or {
     margin: 20px;

@@ -228,78 +228,87 @@ class TeamInviteController {
           'created_at',
           'updated_at',
         ],
-        include: [
-          {
-            model: Team,
-            as: 'team',
-            attributes: ['id', 'creator_id'],
-            include: [
-              {
-                model: Hackathon,
-                as: 'hackathon',
-                attributes: ['id', 'title'],
-              },
-              {
-                model: User,
-                as: 'creator',
-                attributes: ['id', 'name', 'nickname', 'bio', 'avatar_id'],
-                include: [
-                  {
-                    model: File,
-                    as: 'avatar',
-                    attributes: ['id', 'url', 'path'],
-                  },
-                  {
-                    model: Role,
-                    as: 'roles',
-                    through: { attributes: [] },
-                    attributes: ['id', 'name'],
-                  },
-                  {
-                    model: Url,
-                    as: 'urls',
-                    through: { attributes: [] },
-                    attributes: ['id', 'url'],
-                  },
-                ],
-              },
-              {
-                model: User,
-                as: 'members',
-                through: { attributes: [] },
-                attributes: ['id', 'name', 'nickname', 'bio', 'avatar_id'],
-                include: [
-                  {
-                    model: TeamMember,
-                    as: 'member',
-                    where: {
-                      is_member: true,
-                    },
-                  },
-                  {
-                    model: File,
-                    as: 'avatar',
-                    attributes: ['id', 'url', 'path'],
-                  },
-                  {
-                    model: Role,
-                    as: 'roles',
-                    through: { attributes: [] },
-                    attributes: ['id', 'name'],
-                  },
-                  {
-                    model: Url,
-                    as: 'urls',
-                    through: { attributes: [] },
-                    attributes: ['id', 'url'],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
         order: [['created_at', 'DESC']],
       });
+
+      if (invite) {
+        await Promise.all(
+          invite.map(async inv => {
+            const teams = await Team.findOne({
+              where: {
+                id: inv.team_id,
+              },
+              attributes: ['id', 'creator_id'],
+              include: [
+                {
+                  model: Hackathon,
+                  as: 'hackathon',
+                  attributes: ['id', 'title'],
+                },
+                {
+                  model: User,
+                  as: 'creator',
+                  attributes: ['id', 'name', 'nickname', 'bio', 'avatar_id'],
+                  include: [
+                    {
+                      model: File,
+                      as: 'avatar',
+                      attributes: ['id', 'url', 'path'],
+                    },
+                    {
+                      model: Role,
+                      as: 'roles',
+                      through: { attributes: [] },
+                      attributes: ['id', 'name'],
+                    },
+                    {
+                      model: Url,
+                      as: 'urls',
+                      through: { attributes: [] },
+                      attributes: ['id', 'url'],
+                    },
+                  ],
+                },
+                {
+                  model: User,
+                  as: 'members',
+                  through: { attributes: [] },
+                  attributes: ['id', 'name', 'nickname', 'bio', 'avatar_id'],
+                  include: [
+                    {
+                      model: TeamMember,
+                      as: 'member',
+                      where: {
+                        team_id: inv.team_id,
+                        is_member: true,
+                      },
+                    },
+                    {
+                      model: File,
+                      as: 'avatar',
+                      attributes: ['id', 'url', 'path'],
+                    },
+                    {
+                      model: Role,
+                      as: 'roles',
+                      through: { attributes: [] },
+                      attributes: ['id', 'name'],
+                    },
+                    {
+                      model: Url,
+                      as: 'urls',
+                      through: { attributes: [] },
+                      attributes: ['id', 'url'],
+                    },
+                  ],
+                },
+              ],
+            });
+
+            inv.dataValues.team = teams;
+          })
+        );
+      }
 
       return res.json(invite);
     } catch (error) {

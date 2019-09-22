@@ -2,7 +2,13 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   h1 {
+    font-family: 'Montserrat Alternates', sans-serif;
     text-align: center;
+  }
+
+  h2 {
+    font-weight: 400;
+    font-size: 18px;
   }
 
   margin: 40px 0;

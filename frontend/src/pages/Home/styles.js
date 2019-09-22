@@ -5,6 +5,11 @@ export const Container = styled.div`
     background: none;
   }
 
+  .carousel .control-arrow {
+    height: 80%;
+    margin-top: 48px !important;
+  }
+
   .carousel .carousel-status {
     margin-top: 20px;
   }
@@ -16,6 +21,10 @@ export const Container = styled.div`
   @media only screen and (max-width: 400px) {
     .carousel .carousel-status {
       margin-top: 0px;
+    }
+
+    .carousel .control-arrow {
+      display: none;
     }
   }
 `;

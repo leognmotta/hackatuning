@@ -25,8 +25,6 @@ export default function Teams() {
 
       setManageTeams(manageTeamsResponse.teams);
       setTeams(teamsResponse.teams);
-
-      console.log(teamsResponse.teams);
     }
 
     loadData();
@@ -77,7 +75,7 @@ export default function Teams() {
               </div>
 
               <div className="actions">
-                <Link to={`/hackathon/${team.id}/manage`} text="edit" />
+                <Link to={`/hackathon/team/${team.id}/manage`} text="edit" />
                 <Button
                   text="Delete"
                   color="#e3133e"

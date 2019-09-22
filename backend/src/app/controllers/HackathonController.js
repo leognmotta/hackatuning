@@ -111,7 +111,7 @@ class HackathonController {
             attributes: ['id', 'name', 'nickname'],
           },
         ],
-        order: [['createdAt', 'DESC']],
+        order: [['deadline_subscription', 'ASC']],
       });
 
       hackathons.rows.map(hackathon => {

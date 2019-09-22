@@ -15,7 +15,7 @@ import {
   TabeletNav,
 } from './styles';
 
-export default withRouter(function Header() {
+export default withRouter(function Header({ history }) {
   const isAuth = useSelector(state => state.auth.isAuth);
   const [width, setWidth] = useState(window.innerWidth);
   const [invitationCount, setInvitationCount] = useState(0);
@@ -36,7 +36,7 @@ export default withRouter(function Header() {
     }
 
     loadInvitationCount();
-  }, []);
+  }, [history.location.pathname]);
 
   let authMenu = <Desktop count={invitationCount} />;
 

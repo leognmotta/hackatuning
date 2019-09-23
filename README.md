@@ -2,19 +2,17 @@ A project by:
 
 [Leonardo Motta](https://leomotta.me), [Adam Dias](https://github.com/adamdias), [Rafael Prado](https://rprado.myportfolio.com/)
 
-# Hackatuning
-
-[See the prototype project](https://hackatuning.com/)
-
-Hey there, hackatuning is an open source hackathon management system.
-
 <a href="https://hackatuning.com">
     <img src="https://hackatuning.com/static/media/Logo@default.85d7e950.svg" alt="hackatuning logo" title="hackatuning" height="50" />
 </a>
 
-## **Creating and managing hackathons is easy!**
+## [See the prototype project](https://hackatuning.com/)
 
-### Did you have trouble organizing a hackathon? Did you have trouble finding a team or member for your team? Outdated or old tools? Would you like to tuning your hackathon?
+Hey there, hackatuning is an open source hackathon management system.
+
+### **Creating and managing hackathons is easy!**
+
+Did you have trouble organizing a hackathon? Did you have trouble finding a team or member for your team? Outdated or old tools? Would you like to tuning your hackathon?
 
 <a href="https://hackatuning.com">
 <img src="https://i.ibb.co/cyNrdgB/thumb.png" alt="hackatuning" title="hackatuning" /></a>

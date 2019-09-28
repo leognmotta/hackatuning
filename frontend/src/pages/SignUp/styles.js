@@ -19,52 +19,6 @@ export const Container = styled.div`
     margin-bottom: 30px;
   }
 
-  .toast-background {
-    background: lightcoral;
-  }
-
-  .toast-background-success {
-    background: #04a777;
-  }
-
-  .toast-font-size {
-    color: #fff;
-    text-align: left;
-    font-size: 14px;
-    font-weight: bold;
-  }
-
-  .toast-progress-bar-success {
-    background: #333745;
-  }
-
-  .toast-progress-bar {
-    background: red;
-  }
-`;
-export const H1 = styled.h1`
-  margin: 15px 0 5px 0;
-`;
-
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 400px;
-
-  .or {
-    margin: 20px;
-  }
-
-  h4 {
-    text-align: left;
-    margin: 10px 0 10px 0;
-  }
-
-  small {
-    text-align: left;
-  }
-
   .btn {
     height: 40px;
     width: auto;
@@ -130,40 +84,6 @@ export const Form = styled.form`
   }
 `;
 
-export const Input = styled.input`
-  margin: 10px 0 15px 0;
-  height: 40px;
-  width: 100%;
-  font-size: 14px;
-  padding: 0 0 0 10px;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border: 2px solid #cccccc;
-  border-radius: 6px;
-  opacity: 1;
-
-  &:focus {
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border: 2px solid #1437e3;
-    border-radius: 6px;
-    opacity: 1;
-  }
-`;
-
-export const TextArea = styled.textarea`
-  margin: 10px 0 5px 0;
-  width: 100%;
-  font-size: 14px;
-  padding: 10px;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border: 2px solid #cccccc;
-  border-radius: 6px;
-  opacity: 1;
-  resize: none;
-
-  &:focus {
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border: 2px solid #1437e3;
-    border-radius: 6px;
-    opacity: 1;
-  }
+export const H1 = styled.h1`
+  margin: 15px 0 5px 0;
 `;

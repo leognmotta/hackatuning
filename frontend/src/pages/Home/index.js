@@ -5,8 +5,10 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { FaMapMarkerAlt, FaRegCalendarAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
+import LoadingScreen from 'react-loading-screen';
 import api from '../../services/api';
 
+import LogoIcon from '../../assets/Logo@icon.svg';
 import DefaultCover from '../../assets/default_cover.jpg';
 import {
   Container,
@@ -17,6 +19,7 @@ import {
 } from './styles';
 
 export default function Home({ history }) {
+  const [loading, setLoading] = useState(true);
   const [hackaCarousel, setHackaCarousel] = useState([]);
   const [hackathons, setHackathons] = useState([]);
   const [pagination, setPagination] = useState({});
@@ -38,6 +41,7 @@ export default function Home({ history }) {
       setHackaCarousel(dataCarousel.hackathons);
       setHackathons(data.hackathons);
       setPagination(data.pagination);
+      setLoading(false);
     }
 
     loadHackathons();
@@ -54,8 +58,8 @@ export default function Home({ history }) {
     history.push(`/?page=${index.selected + 1}`);
   }
 
-  return (
-    <Container>
+  const page = (
+    <>
       <Carousel autoPlay infiniteLoop interval={3000} showThumbs={false}>
         {hackaCarousel.map(hackathon => (
           <CarouselContainer
@@ -165,6 +169,21 @@ export default function Home({ history }) {
           previousLabel="&#10094;"
         />
       ) : null}
+    </>
+  );
+
+  return (
+    <Container>
+      {loading ? (
+        <LoadingScreen
+          bgColor="#f1f1f1"
+          spinnerColor="#1437E3"
+          loading={loading}
+          logoSrc={LogoIcon}
+        />
+      ) : (
+        page
+      )}
     </Container>
   );
 }

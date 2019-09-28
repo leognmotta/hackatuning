@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { FaRegCalendarAlt } from 'react-icons/fa';
 import { format, parseISO } from 'date-fns';
-
+import LoadingScreen from 'react-loading-screen';
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../../services/api';
 
+import LogoIcon from '../../assets/Logo@icon.svg';
 import DefaultCover from '../../assets/default_cover.jpg';
 import Link from '../../components/Link';
 import { Button } from '../../components/Form';
@@ -17,6 +18,7 @@ import {
 } from './styles';
 
 export default function Hackathons() {
+  const [loading, setLoading] = useState(true);
   const [meParticipants, setMeParticipants] = useState([]);
   const [meHackathons, setMeHackathons] = useState([]);
 
@@ -38,6 +40,7 @@ export default function Hackathons() {
     }
 
     loadMeHackathons();
+    setLoading(false);
   }, []);
 
   async function handleDeleteHackathon(id) {
@@ -74,7 +77,14 @@ export default function Hackathons() {
     }
   }
 
-  return (
+  return loading ? (
+    <LoadingScreen
+      bgColor="#f1f1f1"
+      spinnerColor="#1437E3"
+      loading={loading}
+      logoSrc={LogoIcon}
+    />
+  ) : (
     <Container>
       <h1>My Hackathons</h1>
       <h2 className="heading_section">Manage your hackathons</h2>

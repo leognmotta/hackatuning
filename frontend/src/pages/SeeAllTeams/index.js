@@ -27,7 +27,7 @@ export default function SeeAllTeams({ history, match }) {
     }
 
     laodteams();
-  }, [id]);
+  }, [id, history]);
 
   return (
     <Container>

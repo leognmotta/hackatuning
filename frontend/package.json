@@ -5,6 +5,7 @@
   "dependencies": {
     "@brainhubeu/react-file-input": "^0.7.3",
     "@rocketseat/unform": "^1.5.1",
+    "@tanem/react-nprogress": "^3.0.5",
     "axios": "^0.19.0",
     "babel-eslint": "^10.0.3",
     "date-fns": "^2.0.0-beta.5",
@@ -16,6 +17,7 @@
     "react-datepicker": "^2.9.6",
     "react-dom": "^16.9.0",
     "react-icons": "^3.7.0",
+    "react-loading-screen": "^0.0.17",
     "react-paginate": "^6.3.0",
     "react-redux": "^7.1.1",
     "react-responsive-carousel": "^3.1.46",

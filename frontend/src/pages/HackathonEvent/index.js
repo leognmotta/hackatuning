@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import ReactPaginate from 'react-paginate';
+import LoadingScreen from 'react-loading-screen';
 import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 
+import LogoIcon from '../../assets/Logo@icon.svg';
 import DefaultAvatar from '../../assets/default-user-image.png';
 import { Button, Input, Select } from '../../components/Form';
 import Link from '../../components/Link';
@@ -13,6 +15,7 @@ import { Container, TabContainer, Card, Content } from './styles';
 export default function HackathonEvent({ match, history }) {
   const perPage = 10;
   const { id } = match.params;
+  const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState();
   const [isTeamOwner, setIsTeamOwner] = useState({ state: false, id: '' });
   const [participants, setParticipants] = useState([]);
@@ -73,6 +76,7 @@ export default function HackathonEvent({ match, history }) {
     }
 
     loadRoles();
+    setLoading(false);
   }, []);
 
   async function handleCraeteTeam() {
@@ -158,125 +162,137 @@ export default function HackathonEvent({ match, history }) {
 
   return (
     <Container>
-      <h1>{hackathon.title}</h1>
-      <h2 style={{ textAlign: 'center', marginBottom: 20 }}>
-        {hackathon.subtitle}
-      </h2>
-      <Content>
-        <div className="search" style={{ marginBottom: 20 }}>
-          <div className="search__select">
-            <Select
-              label="Roles:"
-              options={roles}
-              onChange={e => handleSelectChange(e)}
-            />
-          </div>
+      {loading ? (
+        <LoadingScreen
+          bgColor="#f1f1f1"
+          spinnerColor="#1437E3"
+          loading={loading}
+          logoSrc={LogoIcon}
+        />
+      ) : (
+        <>
+          <h1>{hackathon.title}</h1>
+          <h2 style={{ textAlign: 'center', marginBottom: 20 }}>
+            {hackathon.subtitle}
+          </h2>
+          <Content>
+            <div className="search" style={{ marginBottom: 20 }}>
+              <div className="search__select">
+                <Select
+                  label="Roles:"
+                  options={roles}
+                  onChange={e => handleSelectChange(e)}
+                />
+              </div>
 
-          <div className="search__text">
-            <Input
-              label="Name, nickname or email:"
-              value={search}
-              placeholder="Search:"
-              onChange={e => handleSearchChange(e)}
-            />
-          </div>
-        </div>
+              <div className="search__text">
+                <Input
+                  label="Name, nickname or email:"
+                  value={search}
+                  placeholder="Search:"
+                  onChange={e => handleSearchChange(e)}
+                />
+              </div>
+            </div>
 
-        <div className="buttons">
-          <Link
-            to={`/app/hackathon/${id}/teams`}
-            text="See All Teams"
-            style={{ marginRight: '20px' }}
-          />
+            <div className="buttons">
+              <Link
+                to={`/app/hackathon/${id}/teams`}
+                text="See All Teams"
+                style={{ marginRight: '20px' }}
+              />
 
-          {isTeamOwner.state ? (
-            <Link
-              to={`/hackathon/team/${isTeamOwner.id}/manage`}
-              text="Manage Team"
-            />
-          ) : (
-            <Button
-              type="button"
-              text="Create team"
-              onClick={handleCraeteTeam}
-            />
-          )}
-        </div>
+              {isTeamOwner.state ? (
+                <Link
+                  to={`/hackathon/team/${isTeamOwner.id}/manage`}
+                  text="Manage Team"
+                />
+              ) : (
+                <Button
+                  type="button"
+                  text="Create team"
+                  onClick={handleCraeteTeam}
+                />
+              )}
+            </div>
 
-        <TabContainer>
-          {participants.map((participant, index) => (
-            <Card key={participant.participant.id}>
-              <div className="tab-content">
-                <header>
-                  <img
-                    src={
-                      participant.participant.avatar
-                        ? participant.participant.avatar.url
-                        : DefaultAvatar
-                    }
-                    alt={`${participant.name}`}
-                  />
-                </header>
+            <TabContainer>
+              {participants.map((participant, index) => (
+                <Card key={participant.participant.id}>
+                  <div className="tab-content">
+                    <header>
+                      <img
+                        src={
+                          participant.participant.avatar
+                            ? participant.participant.avatar.url
+                            : DefaultAvatar
+                        }
+                        alt={`${participant.name}`}
+                      />
+                    </header>
 
-                <div className="participant_content">
-                  <h2>{participant.participant.name}</h2>
-                  <small>{participant.participant.nickname}</small>
+                    <div className="participant_content">
+                      <h2>{participant.participant.name}</h2>
+                      <small>{participant.participant.nickname}</small>
 
-                  <div className="participants__roles">
-                    {participant.participant.roles.map(role => (
-                      <span key={role.id} className="participants__items">
-                        {role.name}
-                      </span>
-                    ))}
-                  </div>
+                      <div className="participants__roles">
+                        {participant.participant.roles.map(role => (
+                          <span key={role.id} className="participants__items">
+                            {role.name}
+                          </span>
+                        ))}
+                      </div>
 
-                  <div className="align-right">
-                    <div className="participants__actions">
-                      <RouterLink
-                        target="_blank"
-                        to={`/${participant.participant.nickname}`}
-                        className="link"
-                      >
-                        Full Profile
-                      </RouterLink>
+                      <div className="align-right">
+                        <div className="participants__actions">
+                          <RouterLink
+                            target="_blank"
+                            to={`/${participant.participant.nickname}`}
+                            className="link"
+                          >
+                            Full Profile
+                          </RouterLink>
 
-                      {isTeamOwner.state &&
-                      participant.participant.id !== userId ? (
-                        <Button
-                          type="button"
-                          text={participant.statusInvite ? 'sent' : 'invite'}
-                          disabled={!!participant.statusInvite}
-                          onClick={() =>
-                            handleInviteUser(
-                              participant.participant.nickname,
-                              index
-                            )
-                          }
-                        />
-                      ) : null}
+                          {isTeamOwner.state &&
+                          participant.participant.id !== userId ? (
+                            <Button
+                              type="button"
+                              text={
+                                participant.statusInvite ? 'sent' : 'invite'
+                              }
+                              disabled={!!participant.statusInvite}
+                              onClick={() =>
+                                handleInviteUser(
+                                  participant.participant.nickname,
+                                  index
+                                )
+                              }
+                            />
+                          ) : null}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </TabContainer>
-      </Content>
+                </Card>
+              ))}
+            </TabContainer>
+          </Content>
+          {pagination > 1 ? (
+            <ReactPaginate
+              pageCount={pagination}
+              pageRangeDisplayed={3}
+              marginPagesDisplayed={3}
+              onPageChange={index => handlePageChange(index)}
+              containerClassName="pagination-container"
+              activeLinkClassName="active"
+              nextLabel="&#10095;"
+              previousLabel="&#10094;"
+            />
+          ) : null}
 
-      {pagination > 1 ? (
-        <ReactPaginate
-          pageCount={pagination}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={3}
-          onPageChange={index => handlePageChange(index)}
-          containerClassName="pagination-container"
-          activeLinkClassName="active"
-          nextLabel="&#10095;"
-          previousLabel="&#10094;"
-        />
-      ) : null}
-
-      <ToastContainer />
+          <ToastContainer />
+        </>
+      )}
     </Container>
   );
 }

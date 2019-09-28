@@ -41,6 +41,8 @@ export default function Home({ history }) {
       setHackathons(data.hackathons);
       setPagination(data.pagination);
       setLoading(false);
+
+      console.log(data.pagination.currentPage);
     }
 
     loadHackathons();
@@ -158,11 +160,11 @@ export default function Home({ history }) {
 
       {pagination.maxPage > 1 ? (
         <ReactPaginate
-          forcePage={page}
           pageCount={pagination.maxPage}
           pageRangeDisplayed={3}
           marginPagesDisplayed={3}
           onPageChange={index => handlePageChange(index)}
+          forcePage={pagination.currentPage - 1}
           containerClassName="pagination-container"
           activeLinkClassName="active"
           nextLabel="&#10095;"

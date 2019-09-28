@@ -8,16 +8,19 @@ import {
 } from 'react-icons/fa';
 import { format, parseISO } from 'date-fns';
 import { ToastContainer, toast } from 'react-toastify';
+import LoadingScreen from 'react-loading-screen';
 import api from '../../services/api';
 import { Form, Button } from '../../components/Form';
 import 'react-datepicker/dist/react-datepicker.css';
 
+import LogoIcon from '../../assets/Logo@icon.svg';
 import DefaultCover from '../../assets/default_cover.jpg';
 import DefaultAvatar from '../../assets/default-user-image.png';
 import { Container } from './styles';
 import { isAuthenticated } from '../../utils/auth';
 
 export default function Details({ match, history }) {
+  const [loading, setLoading] = useState(true);
   const hackathonId = match.params.id;
   const [hackathon, setHackathon] = useState({
     cover: { url: '' },
@@ -42,6 +45,7 @@ export default function Details({ match, history }) {
       );
 
       setHackathon(data);
+      setLoading(false);
     }
 
     loadHackathon();
@@ -72,7 +76,14 @@ export default function Details({ match, history }) {
     }
   }
 
-  return (
+  return loading ? (
+    <LoadingScreen
+      bgColor="#f1f1f1"
+      spinnerColor="#1437E3"
+      loading={loading}
+      logoSrc={LogoIcon}
+    />
+  ) : (
     <Container url={hackathon.cover ? hackathon.cover.url : DefaultCover}>
       <div className="image_container">
         <div className="header__text">

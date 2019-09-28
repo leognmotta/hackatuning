@@ -16,11 +16,9 @@ export default function Invitations() {
 
   useEffect(() => {
     async function loadInvites() {
-      setTimeout(async () => {
-        const { data } = await api.get('/v1/teams/invites/me');
+      const { data } = await api.get('/v1/teams/invites/me');
 
-        setInvites(data);
-      }, 10000);
+      setInvites(data);
     }
 
     loadInvites();

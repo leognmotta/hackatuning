@@ -56,7 +56,7 @@ export default function RegisterHackathon({ history }) {
       });
 
       setTimeout(() => {
-        history.push('/hackathons');
+        history.push('/app/hackathons');
       }, 2000);
     } catch (error) {
       toast(

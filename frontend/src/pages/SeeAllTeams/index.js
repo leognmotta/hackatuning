@@ -41,7 +41,10 @@ export default function SeeAllTeams({ history, match }) {
           className="buttons"
           style={{ marginBottom: '35px', marginTop: '5px' }}
         >
-          <Link to={`/hackathon/${id}`} text="See participants without team" />
+          <Link
+            to={`/app/hackathon/${id}`}
+            text="See participants without team"
+          />
         </div>
 
         <TeamContent>
@@ -58,7 +61,7 @@ export default function SeeAllTeams({ history, match }) {
                       Created by{' '}
                       <RouterLink
                         target="_blank"
-                        to={`/profile/${team.creator.nickname}`}
+                        to={`/${team.creator.nickname}`}
                         className="link"
                       >
                         {team.creator.name}
@@ -77,7 +80,7 @@ export default function SeeAllTeams({ history, match }) {
                       {team.members.map(member => (
                         <RouterLink
                           target="_blank"
-                          to={`/profile/${member.member.nickname}`}
+                          to={`/${member.member.nickname}`}
                           className="member__link"
                         >
                           <FaUserCircle className="link" size={25} />{' '}

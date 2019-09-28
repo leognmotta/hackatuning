@@ -56,7 +56,7 @@ export default function SignUp({ history }) {
       );
 
       setTimeout(() => {
-        history.push('/login');
+        history.push('/app/login');
       }, 2500);
     } catch (error) {
       toast(
@@ -195,7 +195,7 @@ export default function SignUp({ history }) {
 
         <span className="or">OR</span>
 
-        <Link className="link" to="/login">
+        <Link className="link" to="/app/login">
           Login with existing account!
         </Link>
       </Form>

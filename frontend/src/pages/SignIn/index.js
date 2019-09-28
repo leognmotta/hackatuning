@@ -71,7 +71,7 @@ export default function SignIn({ history }) {
         />
 
         <Button type="submit" text="Sign in" />
-        <Link className="link" to="/register">
+        <Link className="link" to="/app/register">
           Register now!
         </Link>
       </Form>

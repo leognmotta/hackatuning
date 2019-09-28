@@ -89,9 +89,11 @@ export default function Home({ history }) {
               </div>
 
               {hackathon.isParticipant ? (
-                <Link to={`hackathon/${hackathon.id}`}>Go to event</Link>
+                <Link to={`/app/hackathon/${hackathon.id}`}>Go to event</Link>
               ) : (
-                <Link to={`/hackathon/${hackathon.id}/details`}>Details</Link>
+                <Link to={`/app/hackathon/${hackathon.id}/details`}>
+                  Details
+                </Link>
               )}
             </div>
           </CarouselContainer>
@@ -136,9 +138,11 @@ export default function Home({ history }) {
                   </div>
 
                   {hackathon.isParticipant ? (
-                    <Link to={`hackathon/${hackathon.id}`}>Go to event</Link>
+                    <Link to={`/app/hackathon/${hackathon.id}`}>
+                      Go to event
+                    </Link>
                   ) : (
-                    <Link to={`/hackathon/${hackathon.id}/details`}>
+                    <Link to={`/app/hackathon/${hackathon.id}/details`}>
                       Details
                     </Link>
                   )}

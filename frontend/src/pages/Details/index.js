@@ -54,9 +54,9 @@ export default function Details({ match, history }) {
       if (isAuthenticated()) {
         await api.post(`/v1/hackathons/${hackathonId}/participants`);
 
-        history.push(`/hackathon/${hackathonId}`);
+        history.push(`/app/hackathon/${hackathonId}`);
       } else {
-        history.push(`/login`);
+        history.push(`/app/login`);
       }
     } catch (error) {
       toast(

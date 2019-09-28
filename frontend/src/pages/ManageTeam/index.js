@@ -69,7 +69,7 @@ export default function ManageTeam({ match }) {
               Created by{' '}
               <RouterLink
                 target="_blank"
-                to={`/profile/${team.creator.nickname}`}
+                to={`/${team.creator.nickname}`}
                 className="link"
               >
                 {team.creator.name}
@@ -91,7 +91,7 @@ export default function ManageTeam({ match }) {
                   <div className="actions actions--left">
                     <RouterLink
                       target="_blank"
-                      to={`/profile/${member.nickname}`}
+                      to={`/${member.nickname}`}
                       className="link"
                       style={{ marginRight: '20px' }}
                     >

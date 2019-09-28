@@ -29,10 +29,6 @@ export default function Hackathons() {
       setMeParticipants(data.hackathons);
     }
 
-    loadMeParticipants();
-  }, []);
-
-  useEffect(() => {
     async function loadMeHackathons() {
       const { data } = await api.get('/v1/me/hackas');
 
@@ -40,6 +36,7 @@ export default function Hackathons() {
     }
 
     loadMeHackathons();
+    loadMeParticipants();
     setLoading(false);
   }, []);
 

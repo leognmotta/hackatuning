@@ -119,7 +119,7 @@ export default function Hackathons() {
 
                   <div className="actions">
                     <Link
-                      to={`hackathon/${hackathon.id}/details`}
+                      to={`/app/hackathon/${hackathon.id}/details`}
                       text="Details"
                       style={{
                         maxWidth: '80px',
@@ -127,7 +127,10 @@ export default function Hackathons() {
                         marginRight: '10px',
                       }}
                     />
-                    <Link to={`hackathon/${hackathon.id}/edit`} text="Edit" />
+                    <Link
+                      to={`/app/hackathon/${hackathon.id}/edit`}
+                      text="Edit"
+                    />
                     <Button
                       text="Delete"
                       color="#E3143E"
@@ -186,7 +189,7 @@ export default function Hackathons() {
 
                   <div>
                     <Link
-                      to={`hackathon/${participant.id}`}
+                      to={`/app/hackathon/${participant.id}`}
                       text="Go to event!"
                     />
                   </div>

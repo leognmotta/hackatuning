@@ -9,18 +9,18 @@ export default function Desktop({ count }) {
   return (
     <StyledUl>
       <li>
-        <Link className="create_hackathon" to="register-hackathon">
+        <Link className="create_hackathon" to="/app/register-hackathon">
           Create Hackathon
         </Link>
       </li>
       <li className="notification_container">
-        <Link to="/invitations">
+        <Link to="/app/invitations">
           {count > 0 ? <InvitationCount count={count} /> : null}
           <FaEnvelope color="#1437E3" size={24} />
         </Link>
       </li>
       <li>
-        <Link to="/settings">
+        <Link to="/app/settings">
           <FaCog color="#1437E3" size={24} />
         </Link>
       </li>

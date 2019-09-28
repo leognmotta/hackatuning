@@ -45,7 +45,7 @@ export default function HackathonEvent({ match, history }) {
         setUserId(response.data.id);
         setParticipants(data.participants);
       } catch (error) {
-        history.push(`/hackathon/${id}/details`);
+        history.push(`/app/hackathon/${id}/details`);
       }
     }
 
@@ -141,19 +141,19 @@ export default function HackathonEvent({ match, history }) {
 
     setPagination(data.pagination.maxPage);
     setParticipants(data.participants);
-    history.push(`/hackathon/${id}?page=${index.selected + 1}`);
+    history.push(`/app/hackathon/${id}?page=${index.selected + 1}`);
   }
 
   function handleSearchChange(e) {
     setSearch(e.target.value);
 
-    history.push(`/hackathon/${id}?page=1`);
+    history.push(`/app/hackathon/${id}?page=1`);
   }
 
   function handleSelectChange(e) {
     setSelect(e.target.value);
 
-    history.push(`/hackathon/${id}?page=1`);
+    history.push(`/app/hackathon/${id}?page=1`);
   }
 
   return (
@@ -184,7 +184,7 @@ export default function HackathonEvent({ match, history }) {
 
         <div className="buttons">
           <Link
-            to={`/hackathon/${id}/teams`}
+            to={`/app/hackathon/${id}/teams`}
             text="See All Teams"
             style={{ marginRight: '20px' }}
           />
@@ -234,7 +234,7 @@ export default function HackathonEvent({ match, history }) {
                     <div className="participants__actions">
                       <RouterLink
                         target="_blank"
-                        to={`/profile/${participant.participant.nickname}`}
+                        to={`/${participant.participant.nickname}`}
                         className="link"
                       >
                         Full Profile

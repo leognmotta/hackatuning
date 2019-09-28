@@ -24,7 +24,7 @@ export default function Profile({ match, history }) {
     }
 
     loadProfile();
-  }, [nickname]);
+  }, [nickname, history]);
 
   return (
     <Container>

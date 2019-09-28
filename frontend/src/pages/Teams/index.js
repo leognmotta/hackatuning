@@ -82,7 +82,7 @@ export default function Teams() {
                   <p className="title">
                     Team of{' '}
                     <RouterLink
-                      to={`hackathon/${team.hackathon.id}`}
+                      to={`/app/hackathon/${team.hackathon.id}`}
                       className="link link--black"
                     >
                       {team.hackathon.title}
@@ -94,7 +94,7 @@ export default function Teams() {
                       Created by{' '}
                       <RouterLink
                         target="_blank"
-                        to={`/profile/${team.creator.nickname}`}
+                        to={`/${team.creator.nickname}`}
                         className="link"
                       >
                         {team.creator.name}
@@ -113,7 +113,7 @@ export default function Teams() {
                       {team.members.map(member => (
                         <RouterLink
                           target="_blank"
-                          to={`/profile/${member.nickname}`}
+                          to={`/${member.nickname}`}
                           className="member__link"
                         >
                           <FaUserCircle className="link" size={25} />{' '}
@@ -126,7 +126,7 @@ export default function Teams() {
 
                   <div className="actions">
                     <Link
-                      to={`/hackathon/team/${team.id}/manage`}
+                      to={`/app/hackathon/team/${team.id}/manage`}
                       text="edit"
                       style={{ marginLeft: '15px' }}
                     />
@@ -167,7 +167,7 @@ export default function Teams() {
                       Created by{' '}
                       <RouterLink
                         target="_blank"
-                        to={`/profile/${team.team.creator.nickname}`}
+                        to={`/${team.team.creator.nickname}`}
                         className="link"
                       >
                         {team.team.creator.name}
@@ -186,7 +186,7 @@ export default function Teams() {
                       {team.team.members.map(member => (
                         <RouterLink
                           target="_blank"
-                          to={`/profile/${member.nickname}`}
+                          to={`/${member.nickname}`}
                           className="member__link"
                         >
                           <FaUserCircle className="link" size={25} />{' '}
@@ -199,7 +199,7 @@ export default function Teams() {
 
                   <div className="actions">
                     <Link
-                      to={`hackathon/${team.team.hackathon.id}`}
+                      to={`/app/hackathon/${team.team.hackathon.id}`}
                       text="Go To Event"
                     />
                   </div>

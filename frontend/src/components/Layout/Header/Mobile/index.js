@@ -9,7 +9,7 @@ export default function Desktop({ count }) {
   return (
     <>
       <NotificationContianer>
-        <NavLink to="/invitations">
+        <NavLink to="/app/invitations">
           {count > 0 ? <InvitationCount count={count} /> : null}
           <FaEnvelope color="#1437E3" size={24} />
         </NavLink>
@@ -23,13 +23,13 @@ export default function Desktop({ count }) {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/register-hackathon" activeClassName="selected">
+          <NavLink to="/app/register-hackathon" activeClassName="selected">
             <FaPlus color="#1437E3" size={22} />
             <span>Add Hackathon</span>
           </NavLink>
         </li>
         <li>
-          <NavLink to="/settings" activeClassName="selected">
+          <NavLink to="/app/settings" activeClassName="selected">
             <FaCog color="#1437E3" size={22} />
             <span>Settings</span>
           </NavLink>

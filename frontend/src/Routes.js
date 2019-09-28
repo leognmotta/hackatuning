@@ -21,25 +21,31 @@ import SeeAllTeams from './pages/SeeAllTeams';
 const Routes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <IsLogged path="/login" component={SignIn} />
-    <IsLogged path="/register" component={SignUp} />
-    <PrivateRoute path="/settings" component={Settings} />
+    <IsLogged path="/app/login" component={SignIn} />
+    <IsLogged path="/app/register" component={SignUp} />
+    <PrivateRoute path="/app/settings" component={Settings} />
 
-    <PrivateRoute path="/teams" component={Teams} />
+    <PrivateRoute path="/app/teams" component={Teams} />
 
-    <Route path="/profile/:nickname" component={Profile} />
+    <Route exact path="/:nickname" component={Profile} />
 
-    <PrivateRoute path="/invitations" component={Invitations} />
+    <PrivateRoute path="/app/invitations" component={Invitations} />
 
-    <PrivateRoute path="/hackathons" component={Hackathons} />
-    <PrivateRoute path="/hackathon/:id" exact component={HackathonEvent} />
-    <PrivateRoute path="/hackathon/:id/teams" component={SeeAllTeams} />
-    <Route path="/hackathon/:id/details" component={Details} />
-    <PrivateRoute path="/hackathon/:id/edit" component={UpdateHackathon} />
-    <PrivateRoute path="/hackathon/team/:id/manage" component={ManageTeam} />
-    <PrivateRoute path="/register-hackathon" component={RegisterHackathon} />
+    <PrivateRoute path="/app/hackathons" component={Hackathons} />
+    <PrivateRoute path="/app/hackathon/:id" exact component={HackathonEvent} />
+    <PrivateRoute path="/app/hackathon/:id/teams" component={SeeAllTeams} />
+    <Route path="/app/hackathon/:id/details" component={Details} />
+    <PrivateRoute path="/app/hackathon/:id/edit" component={UpdateHackathon} />
+    <PrivateRoute
+      path="/app/hackathon/team/:id/manage"
+      component={ManageTeam}
+    />
+    <PrivateRoute
+      path="/app/register-hackathon"
+      component={RegisterHackathon}
+    />
 
-    <Route path="/internal-error" render={() => <h1>Internal error</h1>} />
+    <Route path="/app/internal-error" render={() => <h1>Internal error</h1>} />
     <Route path="*" render={() => <h1>Not found</h1>} />
   </Switch>
 );

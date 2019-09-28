@@ -103,7 +103,7 @@ export default function Invitations() {
                     Created by{' '}
                     <RouterLink
                       target="_blank"
-                      to={`/profile/${invite.team.creator.nickname}`}
+                      to={`/${invite.team.creator.nickname}`}
                       className="link"
                     >
                       {invite.team.creator.name}
@@ -122,7 +122,7 @@ export default function Invitations() {
                     {invite.team.members.map(member => (
                       <RouterLink
                         target="_blank"
-                        to={`/profile/${member.nickname}`}
+                        to={`/${member.nickname}`}
                         className="member__link"
                       >
                         <FaUserCircle className="link" size={25} />{' '}

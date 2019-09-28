@@ -15,26 +15,30 @@ export default function Desktop({ count }) {
   return (
     <StyledUl>
       <li>
-        <Link to="/register-hackathon" className="create_hackathon">
+        <Link to="/app/register-hackathon" className="create_hackathon">
           Create Hackathon
         </Link>
       </li>
       <li>
-        <TabLink to="/hackathons" className="left" activeClassName="selected">
+        <TabLink
+          to="/app/hackathons"
+          className="left"
+          activeClassName="selected"
+        >
           Hackathons
         </TabLink>
-        <TabLink to="/teams" className="right" activeClassName="selected">
+        <TabLink to="/app/teams" className="right" activeClassName="selected">
           Teams
         </TabLink>
       </li>
       <li className="notification_container">
-        <Link to="/invitations">
+        <Link to="/app/invitations">
           {count > 0 ? <InvitationCount count={count} /> : null}
           <FaEnvelope color="#1437E3" size={24} />
         </Link>
       </li>
       <li>
-        <Link to="/settings">
+        <Link to="/app/settings">
           <FaCog color="#1437E3" size={24} />
         </Link>
       </li>

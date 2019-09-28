@@ -61,7 +61,7 @@ export default withRouter(function Header({ history }) {
               authMenu
             ) : (
               <ul>
-                <StyledLink to="/login">Login</StyledLink>
+                <StyledLink to="/app/login">Login</StyledLink>
               </ul>
             )}
           </nav>
@@ -69,10 +69,14 @@ export default withRouter(function Header({ history }) {
       </StyledHeader>
       {width < 960 && isAuth ? (
         <TabeletNav className="tablet">
-          <TabLink to="/hackathons" className="left" activeClassName="selected">
+          <TabLink
+            to="/app/hackathons"
+            className="left"
+            activeClassName="selected"
+          >
             Hackathons
           </TabLink>
-          <TabLink to="/teams" className="right" activeClassName="selected">
+          <TabLink to="/app/teams" className="right" activeClassName="selected">
             Teams
           </TabLink>
         </TabeletNav>

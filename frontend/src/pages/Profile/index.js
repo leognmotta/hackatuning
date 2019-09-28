@@ -5,7 +5,7 @@ import api from '../../services/api';
 import DefaultAvatar from '../../assets/default-user-image.png';
 import { Container } from './styles';
 
-export default function Profile({ match }) {
+export default function Profile({ match, history }) {
   const { nickname } = match.params;
   const [profile, setProfile] = useState({
     urls: [{ id: '', url: '' }],
@@ -14,9 +14,13 @@ export default function Profile({ match }) {
 
   useEffect(() => {
     async function loadProfile() {
-      const { data } = await api.get(`/v1/users/${nickname}`);
+      try {
+        const { data } = await api.get(`/v1/users/${nickname}`);
 
-      setProfile(data);
+        setProfile(data);
+      } catch (error) {
+        history.push('/');
+      }
     }
 
     loadProfile();

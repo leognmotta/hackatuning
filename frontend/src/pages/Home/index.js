@@ -24,12 +24,11 @@ export default function Home({ history }) {
   const [hackathons, setHackathons] = useState([]);
   const [pagination, setPagination] = useState({});
   const perPage = 8;
+  const searchURLParam = new URLSearchParams(history.location.search);
+  const page = searchURLParam.get('page') || 1;
 
   useEffect(() => {
     async function loadHackathons() {
-      const searchURLParam = new URLSearchParams(history.location.search);
-      const page = searchURLParam.get('page') || 1;
-
       const { data: dataCarousel } = await api.get(
         `/v1/hackathons?perPage=${perPage}&page=${page}&featured=3`
       );
@@ -45,7 +44,7 @@ export default function Home({ history }) {
     }
 
     loadHackathons();
-  }, [history.location.search]);
+  }, [history.location.search, page]);
 
   async function handlePageChange(index) {
     const { data } = await api.get(
@@ -58,7 +57,7 @@ export default function Home({ history }) {
     history.push(`/?page=${index.selected + 1}`);
   }
 
-  const page = (
+  const homePage = (
     <>
       <Carousel autoPlay infiniteLoop interval={3000} showThumbs={false}>
         {hackaCarousel.map(hackathon => (
@@ -159,6 +158,7 @@ export default function Home({ history }) {
 
       {pagination.maxPage > 1 ? (
         <ReactPaginate
+          forcePage={page}
           pageCount={pagination.maxPage}
           pageRangeDisplayed={3}
           marginPagesDisplayed={3}
@@ -182,7 +182,7 @@ export default function Home({ history }) {
           logoSrc={LogoIcon}
         />
       ) : (
-        page
+        homePage
       )}
     </Container>
   );

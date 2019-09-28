@@ -47,6 +47,7 @@ export default function HackathonEvent({ match, history }) {
         setPagination(data.pagination.maxPage);
         setUserId(response.data.id);
         setParticipants(data.participants);
+        setLoading(false);
       } catch (error) {
         history.push(`/app/hackathon/${id}/details`);
       }
@@ -76,7 +77,6 @@ export default function HackathonEvent({ match, history }) {
     }
 
     loadRoles();
-    setLoading(false);
   }, []);
 
   async function handleCraeteTeam() {

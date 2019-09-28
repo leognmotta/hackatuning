@@ -7,7 +7,8 @@ import { login } from '../../utils/auth';
 import { reduxLogin } from '../../store/modules/auth/actions';
 
 import LogoIcon from '../../assets/Logo@icon.svg';
-import { StyledForm, Container, Input } from './styles';
+import { Container } from './styles';
+import { Form, Button, Input } from '../../components/Form';
 
 export default function SignIn({ history }) {
   const [email, setEmail] = useState();
@@ -50,40 +51,30 @@ export default function SignIn({ history }) {
 
   return (
     <Container>
-      <StyledForm onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <img src={LogoIcon} alt="logo" style={{ marginBottom: 20 }} />
         <h1>Sign in</h1>
         <small>Please, provide your email and password</small>
 
-        <label htmlFor="email" className="label">
-          {' '}
-          Email:
-        </label>
         <Input
-          id="email"
+          label="Email:"
           type="email"
-          name="email"
-          placeholder="Your E-Mail here"
           onChange={e => setEmail(e.target.value)}
+          value={email}
         />
 
-        <label htmlFor="password" className="label">
-          {' '}
-          Passoword:
-        </label>
         <Input
-          id="password"
-          type="password"
-          name="password"
-          placeholder="A super secret pass here!"
+          label="Passoword:"
           onChange={e => setPassword(e.target.value)}
+          type="password"
+          value={password}
         />
 
-        <button type="submit">Sign in</button>
+        <Button type="submit" text="Sign in" />
         <Link className="link" to="/register">
           Register now!
         </Link>
-      </StyledForm>
+      </Form>
 
       <ToastContainer />
     </Container>

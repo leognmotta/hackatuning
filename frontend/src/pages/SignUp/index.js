@@ -130,6 +130,7 @@ export default function SignUp({ history }) {
         <Input
           label="Password:"
           value={form.password}
+          placeholder="***"
           type="password"
           onChange={e => setForm({ ...form, password: e.target.value })}
         />

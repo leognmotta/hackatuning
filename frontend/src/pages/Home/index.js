@@ -41,8 +41,6 @@ export default function Home({ history }) {
       setHackathons(data.hackathons);
       setPagination(data.pagination);
       setLoading(false);
-
-      console.log(data.pagination.currentPage);
     }
 
     loadHackathons();

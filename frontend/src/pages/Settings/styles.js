@@ -20,31 +20,7 @@ export const Container = styled.div`
     border: 2px solid #cccccc;
   }
 
-  .toast-background {
-    background: lightcoral;
-  }
-  .toast-font-size {
-    color: #fff;
-    text-align: left;
-    font-size: 14px;
-    font-weight: bold;
-  }
-  .toast-progress-bar {
-    background: red;
-  }
-  .toast-background_success {
-    background: #04a777;
-  }
-  .toast-progress-bar_success {
-    background: #333745;
-  }
-
-  /*###################################################################*/
-
   form {
-    width: 100%;
-    max-width: 450px;
-
     .or {
       margin: 20px;
     }

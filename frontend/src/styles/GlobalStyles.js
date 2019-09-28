@@ -37,6 +37,29 @@ export default createGlobalStyle`
     padding: 1em;
     flex: 1;
     background: #F6F8F9;
+
+    .toast-font-size {
+    color: #fff;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .toast-background {
+    background: lightcoral;
+  }
+
+  .toast-progress-bar {
+    background: red;
+  }
+
+  .toast-background-success {
+    background: #04a777;
+  }
+
+  .toast-progress-bar-success {
+    background: #333745;
+  }
   }
 
   button {

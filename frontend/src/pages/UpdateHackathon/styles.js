@@ -29,23 +29,4 @@ export const Container = styled.div`
     margin-bottom: 15px;
     font-size: 14px;
   }
-
-  .toast-background {
-    background: lightcoral;
-  }
-  .toast-font-size {
-    color: #fff;
-    text-align: left;
-    font-size: 14px;
-    font-weight: bold;
-  }
-  .toast-progress-bar {
-    background: red;
-  }
-  .toast-background_success {
-    background: #04a777;
-  }
-  .toast-progress-bar_success {
-    background: #333745;
-  }
 `;

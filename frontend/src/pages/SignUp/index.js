@@ -6,7 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import api from '../../services/api';
 
 import LogoIcon from '../../assets/Logo@icon.svg';
-import { Container, Form, Input, H1, TextArea } from './styles';
+import { Form, Input, Button, TextArea } from '../../components/Form';
+import { Container, H1 } from './styles';
 
 export default function SignUp({ history }) {
   const [roles, setRoles] = useState([]);
@@ -50,12 +51,13 @@ export default function SignUp({ history }) {
           className: 'toast-background-success',
           bodyClassName: 'toast-font-size',
           progressClassName: 'toast-progress-bar-success',
+          autoClose: 2500,
         }
       );
 
       setTimeout(() => {
         history.push('/login');
-      }, 3500);
+      }, 2500);
     } catch (error) {
       toast(
         error.response.data.fields
@@ -103,61 +105,39 @@ export default function SignUp({ history }) {
       <small className="subTitle">Create an account to use our services.</small>
 
       <Form onSubmit={handleSubmit}>
-        <label htmlFor="name" className="label">
-          {' '}
-          Name:
-        </label>
         <Input
-          name="name"
-          id="name"
-          placeholder=" Your name here!"
+          label="Name:"
+          value={form.name}
+          placeholder="John Doe"
           onChange={e => setForm({ ...form, name: e.target.value })}
         />
 
-        <label htmlFor="nickname" className="label">
-          {' '}
-          Nickname:
-        </label>
         <Input
-          id="nickname"
-          name="nickname"
-          placeholder=" Nickname"
+          label="Nickname:"
+          value={form.nickname}
+          placeholder="johndoe"
           onChange={e => setForm({ ...form, nickname: e.target.value })}
         />
 
-        <label htmlFor="email" className="label">
-          {' '}
-          Email:
-        </label>
         <Input
-          name="email"
+          label="Email:"
           type="email"
-          id="email"
-          placeholder=" E-Mail here!"
-          err
+          value={form.email}
+          placeholder="john@doe.com"
           onChange={e => setForm({ ...form, email: e.target.value })}
         />
 
-        <label htmlFor="password" className="label">
-          {' '}
-          Password:
-        </label>
         <Input
-          id="password"
-          name="password"
+          label="Password:"
+          value={form.password}
           type="password"
-          placeholder=" Super secret pass plss"
           onChange={e => setForm({ ...form, password: e.target.value })}
         />
 
-        <label htmlFor="bio" className="label">
-          {' '}
-          Bio:
-        </label>
         <TextArea
-          id="bio"
-          name="bio"
-          placeholder=" Tell me about you! I want to know..."
+          label="Bio:"
+          value={form.bio}
+          placeholder="Tell me about you! I want to know..."
           rows="5"
           onChange={e => setForm({ ...form, bio: e.target.value })}
         />
@@ -167,7 +147,7 @@ export default function SignUp({ history }) {
         <div className="urls">
           <div className="url_box">
             {form.urls.map((url, index) => (
-              <div key={url.id} className="inner_input">
+              <div key={url} className="inner_input">
                 <Input
                   placeholder="Some useful links here"
                   value={url}
@@ -211,9 +191,7 @@ export default function SignUp({ history }) {
           ))}
         </div>
 
-        <button className="btn" type="submit">
-          Register
-        </button>
+        <Button type="submit" text="Send" />
 
         <span className="or">OR</span>
 

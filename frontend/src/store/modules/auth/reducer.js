@@ -1,6 +1,4 @@
-// Actions
-const LOGIN = 'LOGIN';
-const LOGOUT = 'LOGOUT';
+import { LOGIN, LOGOUT } from './actions';
 
 // Initial state
 const INITIAL_STATE = {
@@ -33,13 +31,4 @@ export default function reducer(state = INITIAL_STATE, action) {
     default:
       return state;
   }
-}
-
-// Action Creators
-export function reduxLogin(user) {
-  return { type: LOGIN, user };
-}
-
-export function reduxLogout() {
-  return { type: LOGOUT };
 }

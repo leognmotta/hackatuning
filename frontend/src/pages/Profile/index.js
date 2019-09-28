@@ -45,7 +45,7 @@ export default function Profile({ match }) {
           {profile.urls.map(url => (
             <div key={url.id} className="urls">
               <FaGlobe />{' '}
-                <a href={url.url} target="_blank" rel="noopener noreferrer">
+              <a href={url.url} target="_blank" rel="noopener noreferrer">
                 {url.url}
               </a>
             </div>

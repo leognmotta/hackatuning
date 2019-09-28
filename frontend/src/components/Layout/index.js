@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import api from '../../services/api';
-import { reduxLogin, reduxLogout } from '../../store/ducks/auth';
+import { reduxLogin, reduxLogout } from '../../store/modules/auth/actions';
 import { logout } from '../../utils/auth';
 
 import Header from './Header';

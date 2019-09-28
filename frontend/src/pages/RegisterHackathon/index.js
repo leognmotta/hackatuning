@@ -50,9 +50,9 @@ export default function RegisterHackathon({ history }) {
         await api.post(`/v1/files/hackathons/${data.id}`, formData, config);
 
       toast('Hackathon created!', {
-        className: 'toast-background_success',
+        className: 'toast-background-success',
         bodyClassName: 'toast-font-size',
-        progressClassName: 'toast-progress-bar_success',
+        progressClassName: 'toast-progress-bar-success',
       });
 
       setTimeout(() => {

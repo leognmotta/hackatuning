@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { FaPlus, FaTimes } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,7 +9,11 @@ import DefaultAvatar from '../../assets/default-user-image.png';
 import { Form, Input, TextArea, Button } from '../../components/Form';
 import { Container, H1 } from './styles';
 
-export default function Settings() {
+const mapStateToProps = state => ({
+  user: state.auth,
+});
+
+export default connect(mapStateToProps)(function Settings({ user }) {
   const [roles, setRoles] = useState([
     { id: undefined, name: '', checked: false },
   ]);
@@ -23,8 +28,7 @@ export default function Settings() {
 
   useEffect(() => {
     async function getUserData() {
-      const response = await api.get('/v1/validate');
-      const { data } = await api.get(`/v1/users/${response.data.id}`);
+      const { data } = await api.get(`/v1/users/${user.id}`);
       const rolesResponse = await api.get('/v1/roles');
 
       const arr = rolesResponse.data.map(role => {
@@ -54,7 +58,7 @@ export default function Settings() {
     }
 
     getUserData();
-  }, []);
+  }, [user.id]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -72,9 +76,9 @@ export default function Settings() {
       await api.put(`/v1/users`, obj);
 
       toast('Profile updated successfully!', {
-        className: 'toast-background_success',
+        className: 'toast-background-success',
         bodyClassName: 'toast-font-size',
-        progressClassName: 'toast-progress-bar_success',
+        progressClassName: 'toast-progress-bar-success',
       });
     } catch (error) {
       toast(
@@ -142,9 +146,9 @@ export default function Settings() {
 
       if (data.url) {
         toast('Avatar successfully changed!', {
-          className: 'toast-background_success',
+          className: 'toast-background-success',
           bodyClassName: 'toast-font-size',
-          progressClassName: 'toast-progress-bar_success',
+          progressClassName: 'toast-progress-bar-success',
         });
       } else {
         toast('There was an error uploading the avatar!', {
@@ -218,7 +222,7 @@ export default function Settings() {
         <div className="urls">
           <div className="url_box">
             {form.urls.map((url, index) => (
-              <div key={url.id} className="inner_input">
+              <div key={url} className="inner_input">
                 <Input
                   style={{ marginBottom: '10px' }}
                   placeholder="Some useful links here"
@@ -266,4 +270,4 @@ export default function Settings() {
       <ToastContainer />
     </Container>
   );
-}
+});

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import api from '../../services/api';
 import { login } from '../../utils/auth';
-import { reduxLogin } from '../../store/ducks/auth';
+import { reduxLogin } from '../../store/modules/auth/actions';
 
 import LogoIcon from '../../assets/Logo@icon.svg';
 import { StyledForm, Container, Input } from './styles';

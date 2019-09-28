@@ -23,21 +23,16 @@ export default function Hackathons() {
   const [meHackathons, setMeHackathons] = useState([]);
 
   useEffect(() => {
-    async function loadMeParticipants() {
-      const { data } = await api.get('/v1/me/participants/hackas');
+    async function loadData() {
+      const { data: hackData } = await api.get('/v1/me/participants/hackas');
+      const { data: participantsData } = await api.get('/v1/me/hackas');
 
-      setMeParticipants(data.hackathons);
+      setMeHackathons(hackData.hackathons);
+      setMeParticipants(participantsData.hackathons);
+      setLoading(false);
     }
 
-    async function loadMeHackathons() {
-      const { data } = await api.get('/v1/me/hackas');
-
-      setMeHackathons(data.hackathons);
-    }
-
-    loadMeHackathons();
-    loadMeParticipants();
-    setLoading(false);
+    loadData();
   }, []);
 
   async function handleDeleteHackathon(id) {

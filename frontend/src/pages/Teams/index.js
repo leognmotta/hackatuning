@@ -157,7 +157,7 @@ export default function Teams() {
         )}
       </ManageTeamsContainer>
 
-      <h2 className="heading_section">Teams i participate</h2>
+      <h2 className="heading_section">Teams I participate</h2>
       <TeamsContainer>
         {teams.length > 0 ? (
           teams.map(team => (

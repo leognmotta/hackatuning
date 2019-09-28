@@ -204,7 +204,7 @@ export default function HackathonEvent({ match, history }) {
 
               {isTeamOwner.state ? (
                 <Link
-                  to={`/hackathon/team/${isTeamOwner.id}/manage`}
+                  to={`/app/hackathon/team/${isTeamOwner.id}/manage`}
                   text="Manage Team"
                 />
               ) : (

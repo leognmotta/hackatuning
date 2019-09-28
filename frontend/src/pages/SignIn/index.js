@@ -67,12 +67,12 @@ export default function SignIn({ history }) {
         <Input
           label="Passoword:"
           onChange={e => setPassword(e.target.value)}
-          placeholder="***"
           type="password"
           value={password}
         />
 
         <Button type="submit" text="Sign in" />
+
         <Link className="link" to="/app/register">
           Register now!
         </Link>

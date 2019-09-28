@@ -59,6 +59,7 @@ export default function SignIn({ history }) {
         <Input
           label="Email:"
           type="email"
+          placeholder="me@mail.com"
           onChange={e => setEmail(e.target.value)}
           value={email}
         />
@@ -66,6 +67,7 @@ export default function SignIn({ history }) {
         <Input
           label="Passoword:"
           onChange={e => setPassword(e.target.value)}
+          placeholder="***"
           type="password"
           value={password}
         />

@@ -17,25 +17,6 @@ export const Container = styled.div`
     font-size: 24px;
     color: #210d4a;
   }
-
-  .toast-background {
-    background: lightcoral;
-  }
-  .toast-font-size {
-    color: #fff;
-    text-align: left;
-    font-size: 14px;
-    font-weight: bold;
-  }
-  .toast-progress-bar {
-    background: red;
-  }
-  .toast-background_success {
-    background: #04a777;
-  }
-  .toast-progress-bar_success {
-    background: #333745;
-  }
 `;
 
 export const ParticipantContainer = styled.div`

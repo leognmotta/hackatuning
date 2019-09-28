@@ -76,9 +76,9 @@ export default connect(mapStateToProps)(function Settings({ user }) {
       await api.put(`/v1/users`, obj);
 
       toast('Profile updated successfully!', {
-        className: 'toast-background_success',
+        className: 'toast-background-success',
         bodyClassName: 'toast-font-size',
-        progressClassName: 'toast-progress-bar_success',
+        progressClassName: 'toast-progress-bar-success',
       });
     } catch (error) {
       toast(
@@ -146,9 +146,9 @@ export default connect(mapStateToProps)(function Settings({ user }) {
 
       if (data.url) {
         toast('Avatar successfully changed!', {
-          className: 'toast-background_success',
+          className: 'toast-background-success',
           bodyClassName: 'toast-font-size',
-          progressClassName: 'toast-progress-bar_success',
+          progressClassName: 'toast-progress-bar-success',
         });
       } else {
         toast('There was an error uploading the avatar!', {

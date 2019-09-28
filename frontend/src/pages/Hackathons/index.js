@@ -55,9 +55,9 @@ export default function Hackathons() {
         setMeHackathons(newMeHackathons);
 
         toast('Hackathon deleted!', {
-          className: 'toast-background_success',
+          className: 'toast-background-success',
           bodyClassName: 'toast-font-size',
-          progressClassName: 'toast-progress-bar_success',
+          progressClassName: 'toast-progress-bar-success',
         });
       }
     } catch (error) {

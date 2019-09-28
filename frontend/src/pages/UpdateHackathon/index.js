@@ -68,9 +68,9 @@ export default function UpdateHackathon({ match }) {
       await api.put(`/v1/hackathons/${id}`, obj);
 
       toast('Hackathon successfully updated!', {
-        className: 'toast-background_success',
+        className: 'toast-background-success',
         bodyClassName: 'toast-font-size',
-        progressClassName: 'toast-progress-bar_success',
+        progressClassName: 'toast-progress-bar-success',
       });
     } catch (error) {
       toast(
@@ -111,9 +111,9 @@ export default function UpdateHackathon({ match }) {
 
       if (data.url) {
         toast('Cover successfully changed!', {
-          className: 'toast-background_success',
+          className: 'toast-background-success',
           bodyClassName: 'toast-font-size',
-          progressClassName: 'toast-progress-bar_success',
+          progressClassName: 'toast-progress-bar-success',
         });
       } else {
         toast('There was an error uploading the cover!', {

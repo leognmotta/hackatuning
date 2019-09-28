@@ -3,10 +3,6 @@ import styled from 'styled-components';
 export const Container = styled.div`
   margin: 40px auto;
 
-  .toast-background {
-    background: lightcoral;
-  }
-
   .actions--left {
     justify-content: flex-start !important;
   }

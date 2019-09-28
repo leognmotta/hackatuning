@@ -1,14 +1,26 @@
-import { createStore, compose, applyMiddleware } from 'redux';
+/* eslint-disable no-console */
+import { createStore, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
-import reducers from './ducks';
+import rootReducer from './modules/rootReducer';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const sagaMonitor =
+  process.env.NODE_ENV === 'development'
+    ? console.tron.createSagaMonitor()
+    : null;
 
-const logger = store => next => action => {
-  const result = next(action);
-  return result;
-};
+const sagaMiddleware = createSagaMiddleware({
+  sagaMonitor,
+});
 
-const store = createStore(reducers, composeEnhancers(applyMiddleware(logger)));
+const enhancer =
+  process.env.NODE_ENV === 'development'
+    ? compose(
+        console.tron.createEnhancer(),
+        applyMiddleware(sagaMiddleware)
+      )
+    : applyMiddleware(sagaMiddleware);
+
+const store = createStore(rootReducer, enhancer);
 
 export default store;

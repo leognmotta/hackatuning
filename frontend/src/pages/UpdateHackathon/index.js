@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { parseISO } from 'date-fns';
 import DatePicker from 'react-datepicker';
+import LoadingScreen from 'react-loading-screen';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../../services/api';
 
+import LogoIcon from '../../assets/Logo@icon.svg';
 import DefaultCover from '../../assets/default_cover.jpg';
 import { Form, Input, TextArea, Button } from '../../components/Form';
 import { Container } from './styles';
 
 export default function UpdateHackathon({ match }) {
+  const [loading, setLoading] = useState(true);
   const [cover, setCover] = useState();
   const [form, setForm] = useState({
     title: '',
@@ -51,6 +54,8 @@ export default function UpdateHackathon({ match }) {
         deadline_team_creation: parseISO(data.deadline_team_creation),
         event_ending: parseISO(data.event_ending),
       });
+
+      setLoading(false);
     }
 
     loadHackathon();
@@ -138,7 +143,14 @@ export default function UpdateHackathon({ match }) {
     }
   }
 
-  return (
+  return loading ? (
+    <LoadingScreen
+      bgColor="#f1f1f1"
+      spinnerColor="#1437E3"
+      loading={loading}
+      logoSrc={LogoIcon}
+    />
+  ) : (
     <Container>
       <h1>Update Hackathon</h1>
 

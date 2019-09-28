@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { FaUsers, FaExternalLinkAlt, FaUserCircle } from 'react-icons/fa';
 import { Link as RouterLink } from 'react-router-dom';
+import LoadingScreen from 'react-loading-screen';
 import api from '../../services/api';
 import Link from '../../components/Link';
 
+import LogoIcon from '../../assets/Logo@icon.svg';
 import { CardTeam } from '../../components/Card/styles';
 import { TeamContent } from './styles';
 import { Container, Content } from '../HackathonEvent/styles';
 
 export default function SeeAllTeams({ history, match }) {
   const { id } = match.params;
+  const [loading, setLoading] = useState(true);
   const [teams, setTeams] = useState([]);
   const [hackathon, setHackathon] = useState({});
 
@@ -21,6 +24,7 @@ export default function SeeAllTeams({ history, match }) {
 
         setHackathon(hackResponse);
         setTeams(data.teams);
+        setLoading(false);
       } catch (error) {
         history.push('/');
       }
@@ -29,7 +33,14 @@ export default function SeeAllTeams({ history, match }) {
     laodteams();
   }, [id, history]);
 
-  return (
+  return loading ? (
+    <LoadingScreen
+      bgColor="#f1f1f1"
+      spinnerColor="#1437E3"
+      loading={loading}
+      logoSrc={LogoIcon}
+    />
+  ) : (
     <Container>
       <h1>{hackathon.title}</h1>
       <h2 style={{ textAlign: 'center', marginBottom: 20 }}>

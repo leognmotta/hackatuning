@@ -4,13 +4,15 @@ import * as fs from 'fs';
 import File from '../models/File';
 import ApiError from '../../config/ApiError';
 import User from '../models/User';
+import RemoveFile from '../services/RemoveFile';
+import CompressFile from '../services/CompressFile';
 
 class FileUserController {
   async store(req, res, next) {
     try {
-      const { originalname: name, filename: path, size, mimetype } = req.file;
+      const { originalname: name, filename, size, mimetype, path } = req.file;
 
-      if (!name || !path) {
+      if (!name || !filename) {
         throw new ApiError(
           'Validations Fails',
           'You made an invalid request',
@@ -18,7 +20,11 @@ class FileUserController {
         );
       }
 
+      const newPath = await CompressFile(path, filename);
+
       if (!['image/png', 'image/jpeg'].includes(mimetype)) {
+        await RemoveFile(newPath);
+
         throw new ApiError(
           'Extension not allowed',
           'Only .jpg and .png file allowed',
@@ -27,6 +33,8 @@ class FileUserController {
       }
 
       if (size > 15000000) {
+        await RemoveFile(newPath);
+
         throw new ApiError(
           'File too large',
           'Only files up to 15MB allowed',
@@ -48,12 +56,13 @@ class FileUserController {
       });
 
       if (!user) {
+        await RemoveFile(newPath);
         throw new ApiError('Not Found', 'User not found', 404);
       }
 
       const file = await File.create({
         name,
-        path,
+        path: newPath,
       });
 
       if (user.avatar_id) {

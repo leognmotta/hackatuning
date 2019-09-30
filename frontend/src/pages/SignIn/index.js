@@ -36,16 +36,21 @@ export default function SignIn({ history }) {
 
       history.push('/');
     } catch (error) {
-      toast(
-        error.response.data.fields
-          ? error.response.data.fields[0].message
-          : error.response.data.message,
-        {
-          className: 'toast-background',
-          bodyClassName: 'toast-font-size',
-          progressClassName: 'toast-progress-bar',
-        }
-      );
+      let errMsg;
+
+      if (error.response.status === 429) {
+        errMsg = 'You have exceeded the retry limit, please try again later';
+      } else if (error.response.data.fields) {
+        errMsg = error.response.data.fields[0].message;
+      } else {
+        errMsg = error.response.data.message;
+      }
+
+      toast(errMsg, {
+        className: 'toast-background',
+        bodyClassName: 'toast-font-size',
+        progressClassName: 'toast-progress-bar',
+      });
     }
   }
 
@@ -65,9 +70,10 @@ export default function SignIn({ history }) {
         />
 
         <Input
-          label="Passoword:"
+          label="Password:"
           onChange={e => setPassword(e.target.value)}
           type="password"
+          placeholder="***"
           value={password}
         />
 

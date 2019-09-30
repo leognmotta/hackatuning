@@ -168,6 +168,15 @@ class HackathonController {
   async show(req, res, next) {
     try {
       const { id } = req.params;
+      const { authorization: authHeader } = req.headers;
+
+      if (authHeader) {
+        const [, token] = authHeader.split(' ');
+
+        const decoded = await promisify(jwt.verify)(token, authConfig.secret);
+
+        req.userId = decoded.id;
+      }
 
       const hackathon = await Hackathon.findOne({
         where: { id },
@@ -198,6 +207,23 @@ class HackathonController {
           `The Hackathon event was not found with id: ${id}`,
           404
         );
+
+      hackathon.dataValues.isParticipant = false;
+
+      if (req.userId) {
+        const isParticipant = await Participant.findOne({
+          where: {
+            hackathon_id: hackathon.dataValues.id,
+            user_id: req.userId,
+          },
+        });
+
+        if (isParticipant) {
+          hackathon.dataValues.isParticipant = true;
+        } else {
+          hackathon.dataValues.isParticipant = false;
+        }
+      }
 
       return res.json(hackathon);
     } catch (error) {

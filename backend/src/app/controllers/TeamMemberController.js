@@ -12,7 +12,7 @@ class TeamMemberController {
     try {
       const { id: teamId, pId: memberId } = req.params;
 
-      if (/^[0-9]+$/.test(memberId)) {
+      if (!/^[0-9]+$/.test(memberId)) {
         throw new ApiError('Invalid Params', 'Member id not valid', 400);
       }
 

@@ -166,7 +166,7 @@ export default function UpdateHackathon({ match }) {
           style={{ maxWidth: 200, maxHeight: 200, margin: '30px auto' }}
         />
 
-        <p className="label">Cover:</p>
+        <p className="label">Cover: (900x720)</p>
 
         <label htmlFor="file">
           <input

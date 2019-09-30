@@ -202,7 +202,7 @@ export default connect(mapStateToProps)(function Settings({ user }) {
 
       <Form onSubmit={handleSubmit}>
         <p className="label" style={{ marginTop: '20px' }}>
-          Avatar:
+          Avatar: (550x500)
         </p>
         <input
           className="file"

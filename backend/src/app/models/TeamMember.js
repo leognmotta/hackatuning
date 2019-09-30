@@ -4,7 +4,14 @@ class TeamMember extends Model {
   static init(sequelize) {
     super.init(
       {
-        is_member: Sequelize.BOOLEAN,
+        is_member: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: false,
+        },
+        team_id: {
+          type: Sequelize.INTEGER,
+          references: { model: 'teams', key: 'id' },
+        },
       },
       {
         sequelize,
@@ -15,12 +22,12 @@ class TeamMember extends Model {
   }
 
   static associate(models) {
+    this.belongsTo(models.User, { foreignKey: 'member_id', as: 'member' });
+
     this.belongsTo(models.Team, {
       foreignKey: 'team_id',
       as: 'team',
     });
-
-    this.belongsTo(models.User, { foreignKey: 'member_id', as: 'member' });
   }
 }
 

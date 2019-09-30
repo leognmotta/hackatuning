@@ -64,8 +64,9 @@ class MeTeamController {
             const members = await TeamMember.findAll({
               where: {
                 team_id: teamFind.id,
+                is_member: true,
               },
-              attributes: ['id', 'is_member'],
+              attributes: ['id', 'member_id', 'is_member'],
               include: [
                 {
                   model: User,

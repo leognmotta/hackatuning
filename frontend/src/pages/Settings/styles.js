@@ -10,6 +10,9 @@ export const Container = styled.div`
   align-items: center;
   margin-bottom: 40px;
   margin-top: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 430px;
 
   .file {
     margin-top: 10px;

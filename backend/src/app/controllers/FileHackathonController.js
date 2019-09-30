@@ -4,13 +4,15 @@ import * as fs from 'fs';
 import File from '../models/File';
 import ApiError from '../../config/ApiError';
 import Hackathon from '../models/Hackathon';
+import CompressFile from '../services/CompressFile';
+import RemoveFile from '../services/RemoveFile';
 
 class FileUserController {
   async store(req, res, next) {
     try {
-      const { originalname: name, filename: path, size, mimetype } = req.file;
+      const { originalname: name, filename, size, mimetype, path } = req.file;
 
-      if (!name || !path) {
+      if (!name || !filename) {
         throw new ApiError(
           'Validations Fails',
           'You made an invalid request',
@@ -18,7 +20,11 @@ class FileUserController {
         );
       }
 
+      const newPath = await CompressFile(path, filename, 900, 720);
+
       if (!['image/png', 'image/jpeg'].includes(mimetype)) {
+        await RemoveFile(newPath);
+
         throw new ApiError(
           'Extension not allowed',
           'Only .jpg and .png file allowed',
@@ -27,6 +33,8 @@ class FileUserController {
       }
 
       if (size > 15000000) {
+        await RemoveFile(newPath);
+
         throw new ApiError(
           'File too large',
           'Only files up to 15MB allowed',
@@ -49,6 +57,8 @@ class FileUserController {
       });
 
       if (!hackathon) {
+        await RemoveFile(newPath);
+
         throw new ApiError(
           'Not Found',
           'Hackathon not found or does not belong to you',
@@ -58,7 +68,7 @@ class FileUserController {
 
       const file = await File.create({
         name,
-        path,
+        path: newPath,
       });
 
       if (hackathon.cover_id) {

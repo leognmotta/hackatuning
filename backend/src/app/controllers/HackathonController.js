@@ -84,8 +84,8 @@ class HackathonController {
 
       const hackathons = await Hackathon.findAndCountAll({
         where: {
-          event_date: {
-            [Op.gt]: new Date(),
+          deadline_subscription: {
+            [Op.gte]: new Date(),
           },
         },
         attributes: [

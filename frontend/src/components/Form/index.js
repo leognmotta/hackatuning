@@ -8,6 +8,7 @@ import Select from './Select';
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 function Form({ onSubmit, ...props }) {

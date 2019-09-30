@@ -4,10 +4,12 @@ export const Container = styled.div`
   display: flex;
   text-align: center;
   width: 100%;
+  margin: 0 auto;
   margin-top: 40px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 430px;
 
   img {
     height: 110px;

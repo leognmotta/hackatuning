@@ -8,7 +8,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 305px;
+  max-width: 430px;
 
   img {
     height: 110px;

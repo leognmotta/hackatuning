@@ -13,6 +13,7 @@ import { Form, Input, TextArea, Button } from '../../components/Form';
 import { Container } from './styles';
 
 export default function UpdateHackathon({ match }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = useState(true);
   const [cover, setCover] = useState();
   const [form, setForm] = useState({
@@ -63,6 +64,7 @@ export default function UpdateHackathon({ match }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
     const { id } = match.params;
 
     const obj = { ...form };
@@ -77,7 +79,10 @@ export default function UpdateHackathon({ match }) {
         bodyClassName: 'toast-font-size',
         progressClassName: 'toast-progress-bar-success',
       });
+
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       toast(
         error.response.data.fields
           ? error.response.data.fields[0].message
@@ -294,7 +299,7 @@ export default function UpdateHackathon({ match }) {
           }
         />
 
-        <Button text="Send" />
+        <Button loading={isLoading ? 1 : 0} type="submit" text="Send" />
       </Form>
 
       <ToastContainer />

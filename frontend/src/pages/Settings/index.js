@@ -16,6 +16,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(function Settings({ user }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = useState(true);
   const [roles, setRoles] = useState([
     { id: undefined, name: '', checked: false },
@@ -66,6 +67,7 @@ export default connect(mapStateToProps)(function Settings({ user }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const { name, bio, nickname, urls, skills } = form;
@@ -84,7 +86,10 @@ export default connect(mapStateToProps)(function Settings({ user }) {
         bodyClassName: 'toast-font-size',
         progressClassName: 'toast-progress-bar-success',
       });
+
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       toast(
         error.response.data.fields
           ? error.response.data.fields[0].message
@@ -276,7 +281,7 @@ export default connect(mapStateToProps)(function Settings({ user }) {
           ))}
         </div>
 
-        <Button text="Send" />
+        <Button loading={isLoading ? 1 : 0} text="Send" />
       </Form>
       <ToastContainer />
     </Container>

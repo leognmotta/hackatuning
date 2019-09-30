@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 import {
   FaMapMarkerAlt,
@@ -11,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import LoadingScreen from 'react-loading-screen';
 import api from '../../services/api';
 import { Form, Button } from '../../components/Form';
+import Link from '../../components/Link';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import LogoIcon from '../../assets/Logo@icon.svg';
@@ -105,12 +107,16 @@ export default function Details({ match, history }) {
         </div>
 
         {isAuthenticated() ? (
-          <Form onSubmit={handleSubmit}>
-            <Button
-              text="Subscribe"
-              style={{ width: 240, margin: '20px auto' }}
-            />
-          </Form>
+          hackathon.isParticipant ? (
+            <Link to={`/app/hackathon/${hackathon.id}`} text="Go to event" />
+          ) : (
+            <Form onSubmit={handleSubmit}>
+              <Button
+                text="Subscribe"
+                style={{ width: 240, margin: '20px auto' }}
+              />
+            </Form>
+          )
         ) : (
           <Form onSubmit={handleSubmit}>
             <Button

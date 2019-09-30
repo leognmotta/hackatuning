@@ -53,6 +53,10 @@ export const Container = styled.div`
     box-shadow: 0px 1px 20px #0000000d;
   }
 
+  a {
+    background: #ff9914;
+  }
+
   .header__text {
     color: #fff;
 

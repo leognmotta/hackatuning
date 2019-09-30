@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Container } from './styles';
 
 export default function RegisterHackathon({ history }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState();
   const [form, setForm] = useState({
     title: '',
@@ -27,6 +28,7 @@ export default function RegisterHackathon({ history }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
     let formData;
     let config = {};
 
@@ -59,6 +61,7 @@ export default function RegisterHackathon({ history }) {
         history.push('/app/hackathons');
       }, 2000);
     } catch (error) {
+      setIsLoading(false);
       toast(
         error.response.data.fields
           ? error.response.data.fields[0].message
@@ -218,7 +221,7 @@ export default function RegisterHackathon({ history }) {
           }
         />
 
-        <Button text="Send" type="submit" />
+        <Button loading={isLoading ? 1 : 0} text="Send" type="submit" />
       </Form>
 
       <ToastContainer />

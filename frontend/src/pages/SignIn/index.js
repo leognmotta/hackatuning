@@ -11,12 +11,14 @@ import { Container } from './styles';
 import { Form, Button, Input } from '../../components/Form';
 
 export default function SignIn({ history }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const dispatch = useDispatch();
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const { data } = await api.post('/v1/sessions', {
@@ -37,6 +39,7 @@ export default function SignIn({ history }) {
       history.push('/');
     } catch (error) {
       let errMsg;
+      setIsLoading(false);
 
       if (error.response.status === 429) {
         errMsg = 'You have exceeded the retry limit, please try again later';
@@ -77,7 +80,7 @@ export default function SignIn({ history }) {
           value={password}
         />
 
-        <Button type="submit" text="Sign in" />
+        <Button loading={isLoading ? 1 : 0} type="submit" text="Sign in" />
 
         <Link className="link" to="/app/register">
           Register now!

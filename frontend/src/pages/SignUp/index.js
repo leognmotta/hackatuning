@@ -10,6 +10,7 @@ import { Form, Input, Button, TextArea } from '../../components/Form';
 import { Container, H1 } from './styles';
 
 export default function SignUp({ history }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [roles, setRoles] = useState([]);
   const [form, setForm] = useState({
     name: '',
@@ -33,6 +34,7 @@ export default function SignUp({ history }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       await api.post('/v1/users', {
@@ -59,6 +61,7 @@ export default function SignUp({ history }) {
         history.push('/app/login');
       }, 2500);
     } catch (error) {
+      setIsLoading(false);
       toast(
         error.response.data.fields
           ? error.response.data.fields[0].message
@@ -192,7 +195,7 @@ export default function SignUp({ history }) {
           ))}
         </div>
 
-        <Button type="submit" text="Send" />
+        <Button loading={isLoading ? 1 : 0} type="submit" text="Send" />
 
         <span className="or">OR</span>
 

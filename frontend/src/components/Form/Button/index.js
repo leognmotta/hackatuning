@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import Spinner from '../../Spinner';
 
-const StyledButton = styled.button`
+const StyledButton = styled.button.attrs(props => ({
+  disabled: props.loading || 0,
+}))`
   font-size: 14px;
   font-family: 'Montserrat Alternates', sans-serif;
   margin: 10px 0 10px 0;
@@ -20,18 +23,32 @@ const StyledButton = styled.button`
   border-radius: 6px;
   border: 0;
   font-weight: bold;
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
 `;
 
 export default function Button({
   text = 'Button',
   type = 'submit',
+  spinnerSize = 20,
+  loading = 0,
   color,
   onClick,
   ...props
 }) {
   return (
-    <StyledButton type={type} onClick={onClick} color={color} {...props}>
-      {text}
+    <StyledButton
+      type={type}
+      onClick={onClick}
+      color={color}
+      spinnerSize={spinnerSize}
+      loading={loading}
+      {...props}
+    >
+      {loading === 1 ? <Spinner size={spinnerSize} /> : text}
     </StyledButton>
   );
 }

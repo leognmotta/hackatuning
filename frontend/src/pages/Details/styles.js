@@ -5,11 +5,13 @@ export const Container = styled.div`
 
   .image_container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     border-radius: 6px;
     padding: 25px 40px 20px 40px;
     margin-bottom: 35px;
+    background-size: cover;
+    background-position: center;
 
     background-image: -webkit-gradient(
         linear,
@@ -19,18 +21,18 @@ export const Container = styled.div`
         to(rgba(20, 55, 227, 0.8))
       ),
       url(${props => props.url});
+
     background-image: linear-gradient(
         rgba(52, 140, 254, 0.8),
         rgba(20, 55, 227, 0.8)
       ),
       url(${props => props.url});
-    background-size: cover;
-    background-position: center;
   }
 
   @media only screen and (max-width: 750px) {
     .image_container {
       flex-direction: column;
+
       h1 {
         font-size: 28px !important;
       }
@@ -59,6 +61,8 @@ export const Container = styled.div`
 
   .header__text {
     color: #fff;
+    flex: 1;
+    margin-right: 30px;
 
     h1 {
       font-family: 'Montserrat Alternates', sans-serif;

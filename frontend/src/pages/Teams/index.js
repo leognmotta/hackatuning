@@ -128,7 +128,8 @@ export default function Teams() {
                           className="member__link"
                         >
                           <FaUserCircle className="link" size={25} />{' '}
-                          {member.name}{' '}
+                          {member.member.name}{' '}
+                          {member.is_member ? '' : '(Invite send)'}
                           <FaExternalLinkAlt class="external" size={15} />
                         </RouterLink>
                       ))}

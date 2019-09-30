@@ -24,8 +24,10 @@ export default function Hackathons() {
 
   useEffect(() => {
     async function loadData() {
-      const { data: hackData } = await api.get('/v1/me/participants/hackas');
-      const { data: participantsData } = await api.get('/v1/me/hackas');
+      const { data: participantsData } = await api.get(
+        '/v1/me/participants/hackas'
+      );
+      const { data: hackData } = await api.get('/v1/me/hackas');
 
       setMeHackathons(hackData.hackathons);
       setMeParticipants(participantsData.hackathons);

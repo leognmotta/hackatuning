@@ -46,11 +46,11 @@ export default createGlobalStyle`
   }
 
   .toast-background {
-    background: lightcoral;
+    background: #DD2D4A;
   }
 
   .toast-progress-bar {
-    background: red;
+    background: rgba(0, 0, 0, 0.3);
   }
 
   .toast-background-success {

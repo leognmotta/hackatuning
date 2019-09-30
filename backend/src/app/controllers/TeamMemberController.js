@@ -10,9 +10,11 @@ import TeamRemovedMemberNotifiyMail from '../jobs/TeamRemovedMemberNotifiyMail';
 class TeamMemberController {
   async delete(req, res, next) {
     try {
-      const { id: teamId, pId } = req.params;
+      const { id: teamId, pId: memberId } = req.params;
 
-      const memberId = parseInt(pId, 16);
+      if (/^[0-9]+$/.test(memberId)) {
+        throw new ApiError('Invalid Params', 'Member id not valid', 400);
+      }
 
       const team = await Team.findOne({
         where: {
@@ -36,6 +38,14 @@ class TeamMemberController {
           id: teamId,
         },
       });
+
+      if (!isCreator) {
+        throw new ApiError(
+          'Not Authorized',
+          'You are note the team creator.',
+          401
+        );
+      }
 
       if (isCreator && memberId === req.userId) {
         throw new ApiError(

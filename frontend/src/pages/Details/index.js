@@ -106,25 +106,27 @@ export default function Details({ match, history }) {
           </div>
         </div>
 
-        {isAuthenticated() ? (
-          hackathon.isParticipant ? (
-            <Link to={`/app/hackathon/${hackathon.id}`} text="Go to event" />
+        <div className="header__button">
+          {isAuthenticated() ? (
+            hackathon.isParticipant ? (
+              <Link to={`/app/hackathon/${hackathon.id}`} text="Go to event" />
+            ) : (
+              <Form onSubmit={handleSubmit}>
+                <Button
+                  text="Subscribe"
+                  style={{ width: 240, margin: '20px auto' }}
+                />
+              </Form>
+            )
           ) : (
             <Form onSubmit={handleSubmit}>
               <Button
-                text="Subscribe"
+                text="Sign In"
                 style={{ width: 240, margin: '20px auto' }}
               />
             </Form>
-          )
-        ) : (
-          <Form onSubmit={handleSubmit}>
-            <Button
-              text="Sign In"
-              style={{ width: 240, margin: '20px auto' }}
-            />
-          </Form>
-        )}
+          )}
+        </div>
       </div>
 
       <div className="details">

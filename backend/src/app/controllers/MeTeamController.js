@@ -9,8 +9,7 @@ import Hackathon from '../models/Hackathon';
 class MeTeamController {
   async index(req, res, next) {
     try {
-      const { page = 1, perPage = 20 } = req.query;
-      const { hackathon_id } = req.query;
+      const { page = 1, perPage = 20, hackathon_id } = req.query;
 
       let where = {
         creator_id: req.userId,
@@ -56,40 +55,53 @@ class MeTeamController {
               },
             ],
           },
-          {
-            model: User,
-            as: 'members',
-            through: { attributes: [] },
-            attributes: ['id', 'name', 'nickname', 'bio', 'avatar_id'],
-            include: [
-              {
-                model: TeamMember,
-                as: 'member',
-                where: {
-                  is_member: true,
-                },
-              },
-              {
-                model: File,
-                as: 'avatar',
-                attributes: ['id', 'url', 'path'],
-              },
-              {
-                model: Role,
-                as: 'roles',
-                through: { attributes: [] },
-                attributes: ['id', 'name'],
-              },
-              {
-                model: Url,
-                as: 'urls',
-                through: { attributes: [] },
-                attributes: ['id', 'url'],
-              },
-            ],
-          },
         ],
       });
+
+      if (team) {
+        await Promise.all(
+          team.rows.map(async teamFind => {
+            const members = await TeamMember.findAll({
+              where: {
+                team_id: teamFind.id,
+              },
+              attributes: ['id', 'is_member'],
+              include: [
+                {
+                  model: User,
+                  as: 'member',
+                  attributes: ['id', 'name', 'nickname', 'bio', 'avatar_id'],
+                  include: [
+                    {
+                      model: File,
+                      as: 'avatar',
+                      attributes: ['id', 'url', 'path'],
+                    },
+                    {
+                      model: Role,
+                      as: 'roles',
+                      through: { attributes: [] },
+                      attributes: ['id', 'name'],
+                    },
+                    {
+                      model: Url,
+                      as: 'urls',
+                      through: { attributes: [] },
+                      attributes: ['id', 'url'],
+                    },
+                  ],
+                },
+              ],
+            });
+
+            if (members) {
+              teamFind.dataValues.members = members;
+            } else {
+              teamFind.dataValues.members = [];
+            }
+          })
+        );
+      }
 
       const maxPage = Math.ceil(team.count / perPage);
       const previousPage = parseInt(page, 10) - 1;

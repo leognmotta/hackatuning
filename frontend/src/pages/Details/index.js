@@ -9,13 +9,12 @@ import {
 } from 'react-icons/fa';
 import { format, parseISO } from 'date-fns';
 import { ToastContainer, toast } from 'react-toastify';
-import LoadingScreen from 'react-loading-screen';
+import LoadingScreen from '../../components/LoadScreen';
 import api from '../../services/api';
 import { Form, Button } from '../../components/Form';
 import Link from '../../components/Link';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import LogoIcon from '../../assets/Logo@icon.svg';
 import DefaultCover from '../../assets/default_cover.jpg';
 import DefaultAvatar from '../../assets/default-user-image.png';
 import { Container } from './styles';
@@ -79,12 +78,7 @@ export default function Details({ match, history }) {
   }
 
   return loading ? (
-    <LoadingScreen
-      bgColor="#f1f1f1"
-      spinnerColor="#1437E3"
-      loading={loading}
-      logoSrc={LogoIcon}
-    />
+    <LoadingScreen />
   ) : (
     <Container url={hackathon.cover ? hackathon.cover.url : DefaultCover}>
       <div className="image_container">

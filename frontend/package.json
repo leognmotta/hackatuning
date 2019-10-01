@@ -23,6 +23,7 @@
     "react-responsive-carousel": "^3.1.46",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
+    "react-scroll-up-button": "^1.6.4",
     "react-toastify": "^5.3.2",
     "reactotron-core-client": "^2.8.4",
     "reactotron-react-js": "^3.3.4",

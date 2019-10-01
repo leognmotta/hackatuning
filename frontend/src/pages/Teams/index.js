@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link as RouterLink } from 'react-router-dom';
 import { FaExternalLinkAlt, FaUserCircle, FaUsers } from 'react-icons/fa';
-import LoadingScreen from 'react-loading-screen';
+import LoadingScreen from '../../components/LoadScreen';
 import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 
-import LogoIcon from '../../assets/Logo@icon.svg';
 import { Button } from '../../components/Form';
 import Link from '../../components/Link';
 import { Container, ManageTeamsContainer, TeamsContainer } from './styles';
@@ -69,12 +68,7 @@ export default function Teams() {
   }
 
   return loading ? (
-    <LoadingScreen
-      bgColor="#f1f1f1"
-      spinnerColor="#1437E3"
-      loading={loading}
-      logoSrc={LogoIcon}
-    />
+    <LoadingScreen />
   ) : (
     <Container>
       <h1 style={{ textAlign: 'center' }}>My Teams</h1>

@@ -5,10 +5,9 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { FaMapMarkerAlt, FaRegCalendarAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
-import LoadingScreen from 'react-loading-screen';
+import LoadingScreen from '../../components/LoadScreen';
 import api from '../../services/api';
 
-import LogoIcon from '../../assets/Logo@icon.svg';
 import DefaultCover from '../../assets/default_cover.jpg';
 import {
   Container,
@@ -172,18 +171,5 @@ export default function Home({ history }) {
     </>
   );
 
-  return (
-    <Container>
-      {loading ? (
-        <LoadingScreen
-          bgColor="#f1f1f1"
-          spinnerColor="#1437E3"
-          loading={loading}
-          logoSrc={LogoIcon}
-        />
-      ) : (
-        homePage
-      )}
-    </Container>
-  );
+  return <Container>{loading ? <LoadingScreen /> : homePage}</Container>;
 }

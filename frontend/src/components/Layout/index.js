@@ -37,7 +37,12 @@ export default function Layout({ children }) {
         AnimationDuration={500}
         ContainerClassName="ScrollUpButton__Container"
         TransitionClassName="ScrollUpButton__Toggled"
-        style={{ background: 'none', fill: '#34adfe', border: 'none' }}
+        style={{
+          background: 'none',
+          fill: '#34adfe',
+          border: 'none',
+          marginBottom: 50,
+        }}
       />
       <Footer />
     </>

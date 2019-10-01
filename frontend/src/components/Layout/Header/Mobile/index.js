@@ -1,15 +1,20 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { FaCog, FaHome, FaPlus, FaEnvelope } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import InvitationCount from '../../../InvitationCount';
 import { logout } from '../../../../utils/auth';
+import { reduxLogout } from '../../../../store/modules/auth/actions';
 
 import { StyledUl, NotificationContianer } from './styles';
 
-export default function Desktop({ count }) {
+export default function Desktop({ count, history }) {
+  const dispatch = useDispatch();
+
   async function handleLogout() {
-    await logout();
-    document.location.reload();
+    logout();
+    dispatch(reduxLogout());
+    history.push('/');
   }
 
   function handleSettings() {

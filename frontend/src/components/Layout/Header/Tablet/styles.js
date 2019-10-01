@@ -48,6 +48,7 @@ export const StyledUl = styled.ul`
         color: #fff;
         font-size: 12px;
         border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+        cursor: pointer;
       }
     }
   }

@@ -4,11 +4,12 @@ import styled, { keyframes } from 'styled-components';
 import AnimatedLogo from '../../assets/Logo@animated.svg';
 
 const rotate = keyframes`
-  0%   {transform: rotate(0deg);}
-  25%  {transform: rotate(90deg);}
-  50%  {transform: rotate(180deg);}
-  75%  {transform: rotate(270deg);}
-  100% {transform: rotate(360deg);}
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 `;
 
 const StyledLoadScreen = styled.div`
@@ -30,6 +31,8 @@ const StyledLoadScreen = styled.div`
 
   img {
     width: 10vw;
+    max-width: 90px;
+    min-width: 60px;
     animation: ${rotate} 1.6s infinite;
     animation-timing-function: ease-out;
   }

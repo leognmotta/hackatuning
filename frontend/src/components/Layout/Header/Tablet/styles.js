@@ -14,6 +14,44 @@ export const StyledUl = styled.ul`
     }
   }
 
+  .arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 12px solid #34adfe;
+    position: absolute;
+    right: 10px;
+    top: -12px;
+  }
+
+  .ui__sub {
+    position: absolute;
+    z-index: 999;
+    right: -6px;
+    width: 130px;
+    top: 45px;
+    display: none;
+
+    & .ui__subitem {
+      display: flex;
+
+      .ui__sublink {
+        font-weight: bold;
+        background: #34adfe;
+        width: 100%;
+        padding: 8px;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        text-align: center;
+        color: #fff;
+        font-size: 12px;
+        border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
   .notification_container {
     position: relative;
 

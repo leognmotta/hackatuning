@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FaPlus, FaTimes } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../../services/api';
+import { login } from '../../utils/auth';
+import { reduxLogin } from '../../store/modules/auth/actions';
 
 import LogoIcon from '../../assets/Logo@icon.svg';
 import { Form, Input, Button, TextArea } from '../../components/Form';
 import { Container, H1 } from './styles';
 
 export default function SignUp({ history }) {
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [roles, setRoles] = useState([]);
   const [form, setForm] = useState({
@@ -53,13 +57,28 @@ export default function SignUp({ history }) {
           className: 'toast-background-success',
           bodyClassName: 'toast-font-size',
           progressClassName: 'toast-progress-bar-success',
-          autoClose: 2500,
+          autoClose: 1500,
         }
       );
 
+      const { data } = await api.post('/v1/sessions', {
+        email: form.email,
+        password: form.password,
+      });
+
+      login(data.token);
+
+      dispatch(
+        reduxLogin({
+          id: data.user.id,
+          isAuth: true,
+          name: data.user.name,
+        })
+      );
+
       setTimeout(() => {
-        history.push('/app/login');
-      }, 2500);
+        history.push('/');
+      }, 1500);
     } catch (error) {
       setIsLoading(false);
       toast(

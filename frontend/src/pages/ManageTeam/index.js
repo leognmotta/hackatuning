@@ -7,14 +7,20 @@ import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 
 import LogoIcon from '../../assets/Logo@icon.svg';
-import { Button } from '../../components/Form';
+import { Button, Form, Input, TextArea } from '../../components/Form';
 import { Container } from './styles';
 import { CardTeam } from '../../components/Card/styles';
 
 export default function ManageTeam({ match }) {
-  const [loading, setLoading] = useState(true);
   const { id } = match.params;
+  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [team, setTeam] = useState({ creator: { name: '' }, members: [] });
+  const [form, setForm] = useState({
+    title: '',
+    url: '',
+    description: '',
+  });
 
   useEffect(() => {
     async function loadTeam() {
@@ -58,6 +64,44 @@ export default function ManageTeam({ match }) {
     }
   }
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setIsLoading(true);
+    let message;
+
+    try {
+      if (!team.project) {
+        await api.post(`/v1/projects/teams/${team.id}`, {
+          title: form.title,
+          url: form.url,
+          description: form.description,
+        });
+
+        message = 'Project successfully created!';
+      }
+
+      toast(message, {
+        className: 'toast-background-success',
+        bodyClassName: 'toast-font-size',
+        progressClassName: 'toast-progress-bar-success',
+      });
+
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      toast(
+        error.response.data.fields
+          ? error.response.data.fields[0].message
+          : error.response.data.message,
+        {
+          className: 'toast-background',
+          bodyClassName: 'toast-font-size',
+          progressClassName: 'toast-progress-bar',
+        }
+      );
+    }
+  }
+
   return loading ? (
     <LoadingScreen
       bgColor="#f1f1f1"
@@ -68,7 +112,8 @@ export default function ManageTeam({ match }) {
   ) : (
     <Container>
       <h1 style={{ marginBottom: '30px', textAlign: 'center' }}>Manage Team</h1>
-      <CardTeam key={team.id}>
+
+      <CardTeam key={team.id} style={{ maxWidth: 620, margin: '0 auto' }}>
         <div className="team-id">
           <p>{String(team.id).padStart(3, '0')}</p>
         </div>
@@ -123,6 +168,27 @@ export default function ManageTeam({ match }) {
           </div>
         </div>
       </CardTeam>
+
+      <Form onSubmit={handleSubmit}>
+        <h2>Team Project</h2>
+        <Input
+          label="Title"
+          onChange={e => setForm({ ...form, title: e.target.value })}
+          value={form.title}
+        />
+        <Input
+          label="Url"
+          onChange={e => setForm({ ...form, url: e.target.value })}
+          value={form.url}
+        />
+        <TextArea
+          label="Description"
+          onChange={e => setForm({ ...form, description: e.target.value })}
+          value={form.description}
+        />
+
+        <Button text="send" loading={isLoading ? 1 : 0} />
+      </Form>
 
       <ToastContainer />
     </Container>

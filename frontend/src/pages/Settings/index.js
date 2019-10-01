@@ -238,7 +238,7 @@ export default connect(mapStateToProps)(function Settings({ user }) {
         <div className="urls">
           <div className="url_box">
             {form.urls.map((url, index) => (
-              <div key={url} className="inner_input">
+              <div key={url.id} className="inner_input">
                 <Input
                   style={{ marginBottom: '10px' }}
                   placeholder="Some useful links here"

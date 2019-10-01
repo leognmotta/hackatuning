@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { FaPlus, FaTimes } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import LoadingScreen from 'react-loading-screen';
+import LoadingScreen from '../../components/LoadScreen';
 import api from '../../services/api';
 
-import LogoIcon from '../../assets/Logo@icon.svg';
 import DefaultAvatar from '../../assets/default-user-image.png';
 import { Form, Input, TextArea, Button } from '../../components/Form';
 import { Container, H1 } from './styles';
@@ -183,12 +182,7 @@ export default connect(mapStateToProps)(function Settings({ user }) {
   }
 
   return loading ? (
-    <LoadingScreen
-      bgColor="#f1f1f1"
-      spinnerColor="#1437E3"
-      loading={loading}
-      logoSrc={LogoIcon}
-    />
+    <LoadingScreen />
   ) : (
     <Container>
       <H1> Edite your profile </H1>

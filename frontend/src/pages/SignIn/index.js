@@ -76,7 +76,7 @@ export default function SignIn({ history }) {
           label="Password:"
           onChange={e => setPassword(e.target.value)}
           type="password"
-          placeholder="***"
+          placeholder="password"
           value={password}
         />
 

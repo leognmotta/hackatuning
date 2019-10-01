@@ -38,7 +38,8 @@ export default createGlobalStyle`
     flex: 1;
     background: #F6F8F9;
 
-    .toast-font-size {
+
+  .toast-font-size {
     color: #fff;
     text-align: left;
     font-size: 14px;

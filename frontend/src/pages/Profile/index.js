@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FaGlobe } from 'react-icons/fa';
-import LoadingScreen from 'react-loading-screen';
+import LoadingScreen from '../../components/LoadScreen';
 import api from '../../services/api';
 
-import LogoIcon from '../../assets/Logo@icon.svg';
 import DefaultAvatar from '../../assets/default-user-image.png';
 import { Container } from './styles';
 
@@ -31,12 +30,7 @@ export default function Profile({ match, history }) {
   }, [nickname, history]);
 
   return loading ? (
-    <LoadingScreen
-      bgColor="#f1f1f1"
-      spinnerColor="#1437E3"
-      loading={loading}
-      logoSrc={LogoIcon}
-    />
+    <LoadingScreen />
   ) : (
     <Container>
       <div className="profile__box">

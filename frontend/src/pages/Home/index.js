@@ -39,7 +39,7 @@ export default function Home({ history }) {
       setHackaCarousel(dataCarousel.hackathons);
       setHackathons(data.hackathons);
       setPagination(data.pagination);
-      setLoading(true);
+      setLoading(false);
     }
 
     loadHackathons();

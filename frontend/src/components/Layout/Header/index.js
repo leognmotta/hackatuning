@@ -38,14 +38,14 @@ export default withRouter(function Header({ history }) {
     loadInvitationCount();
   }, [history.location.pathname]);
 
-  let authMenu = <Desktop count={invitationCount} />;
+  let authMenu = <Desktop count={invitationCount} history={history} />;
 
   if (width < 960) {
-    authMenu = <Tablet count={invitationCount} />;
+    authMenu = <Tablet count={invitationCount} history={history} />;
   }
 
   if (width < 580) {
-    authMenu = <Mobile count={invitationCount} />;
+    authMenu = <Mobile count={invitationCount} history={history} />;
   }
 
   return (

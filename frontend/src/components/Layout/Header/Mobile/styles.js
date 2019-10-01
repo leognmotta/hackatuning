@@ -66,15 +66,22 @@ export const StyledUl = styled.ul`
     }
   }
 
-  a {
+  .ui__item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     font-size: 10px;
     font-weight: bold;
     color: #fff;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:visited {
+      color: #fff;
+    }
 
     svg {
       fill: #fff;
@@ -82,15 +89,34 @@ export const StyledUl = styled.ul`
       cursor: pointer;
     }
 
-    width: 100%;
-    height: 100%;
+    &--relative {
+      position: relative;
+    }
   }
 
-  a {
-    text-decoration: none;
+  .ui__sub {
+    position: absolute;
+    z-index: 999;
+    top: -102px;
+    right: 0;
+    width: 100%;
+    display: none;
 
-    &:visited {
-      color: #fff;
+    & .ui__subitem {
+      display: flex;
+
+      .ui__sublink {
+        background: #34adfe;
+        width: 100%;
+        padding: 15px;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        text-align: center;
+        color: #fff;
+        font-size: 14px;
+        border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+      }
     }
   }
 `;

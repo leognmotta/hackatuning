@@ -12,4 +12,14 @@ export const Container = styled.div`
     padding-bottom: 20px;
     margin-bottom: 25px;
   }
+
+  form {
+    max-width: 430px;
+    margin: 0 auto;
+
+    h2 {
+      text-align: center;
+      margin: 20px 0;
+    }
+  }
 `;

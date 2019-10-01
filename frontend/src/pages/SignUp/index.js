@@ -147,11 +147,13 @@ export default function SignUp({ history }) {
         />
 
         <h4 className="label">Useful urls:</h4>
-        <small>Github link, linkedin or personal website</small>
+        <small style={{ textAlign: 'left' }}>
+          Github link, linkedin or personal website
+        </small>
         <div className="urls">
           <div className="url_box">
             {form.urls.map((url, index) => (
-              <div key={url} className="inner_input">
+              <div key={index} className="inner_input">
                 <Input
                   placeholder="Some useful links here"
                   value={url}
@@ -177,7 +179,9 @@ export default function SignUp({ history }) {
           </button>
         </div>
 
-        <h4 className="label">Select Roles:</h4>
+        <h4 className="label" style={{ marginTop: '5x' }}>
+          Select Roles:
+        </h4>
         <div className="roles">
           {roles.map(role => (
             <label key={role.id} htmlFor={`roles${role.name}`}>

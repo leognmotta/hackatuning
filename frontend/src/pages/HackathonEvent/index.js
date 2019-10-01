@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import ReactPaginate from 'react-paginate';
-import LoadingScreen from 'react-loading-screen';
+import LoadingScreen from '../../components/LoadScreen';
 import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 
-import LogoIcon from '../../assets/Logo@icon.svg';
 import DefaultAvatar from '../../assets/default-user-image.png';
 import { Button, Input, Select } from '../../components/Form';
 import Link from '../../components/Link';
@@ -163,12 +162,7 @@ export default function HackathonEvent({ match, history }) {
   return (
     <Container>
       {loading ? (
-        <LoadingScreen
-          bgColor="#f1f1f1"
-          spinnerColor="#1437E3"
-          loading={loading}
-          logoSrc={LogoIcon}
-        />
+        <LoadingScreen />
       ) : (
         <>
           <h1>{hackathon.title}</h1>

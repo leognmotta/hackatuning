@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { FaRegCalendarAlt } from 'react-icons/fa';
 import { format, parseISO } from 'date-fns';
-import LoadingScreen from 'react-loading-screen';
+import LoadingScreen from '../../components/LoadScreen';
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../../services/api';
 
-import LogoIcon from '../../assets/Logo@icon.svg';
 import DefaultCover from '../../assets/default_cover.jpg';
 import Link from '../../components/Link';
 import { Button } from '../../components/Form';
@@ -72,12 +71,7 @@ export default function Hackathons() {
   }
 
   return loading ? (
-    <LoadingScreen
-      bgColor="#f1f1f1"
-      spinnerColor="#1437E3"
-      loading={loading}
-      logoSrc={LogoIcon}
-    />
+    <LoadingScreen />
   ) : (
     <Container>
       <h1>My Hackathons</h1>

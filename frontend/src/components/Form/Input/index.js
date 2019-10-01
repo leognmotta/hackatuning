@@ -5,7 +5,7 @@ const StyledInput = styled.input`
   margin: 10px 0 15px 0;
   height: 40px;
   width: 100%;
-  font-size: 14px;
+  font-size: 15px;
   padding: 0 0 0 10px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 2px solid #cccccc;

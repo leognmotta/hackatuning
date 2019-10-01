@@ -142,6 +142,7 @@ export default createGlobalStyle`
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    margin-top: 10px;
     margin-bottom: 20px;
     justify-content: flex-start;
 

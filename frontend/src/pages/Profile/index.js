@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { FaGlobe } from 'react-icons/fa';
+import LoadingScreen from 'react-loading-screen';
 import api from '../../services/api';
 
+import LogoIcon from '../../assets/Logo@icon.svg';
 import DefaultAvatar from '../../assets/default-user-image.png';
 import { Container } from './styles';
 
 export default function Profile({ match, history }) {
+  const [loading, setLoading] = useState(true);
   const { nickname } = match.params;
   const [profile, setProfile] = useState({
     urls: [{ id: '', url: '' }],
@@ -18,6 +21,7 @@ export default function Profile({ match, history }) {
         const { data } = await api.get(`/v1/users/${nickname}`);
 
         setProfile(data);
+        setLoading(false);
       } catch (error) {
         history.push('/');
       }
@@ -26,7 +30,14 @@ export default function Profile({ match, history }) {
     loadProfile();
   }, [nickname, history]);
 
-  return (
+  return loading ? (
+    <LoadingScreen
+      bgColor="#f1f1f1"
+      spinnerColor="#1437E3"
+      loading={loading}
+      logoSrc={LogoIcon}
+    />
+  ) : (
     <Container>
       <div className="profile__box">
         <img

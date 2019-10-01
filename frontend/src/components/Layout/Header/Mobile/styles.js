@@ -97,7 +97,7 @@ export const StyledUl = styled.ul`
   .ui__sub {
     position: absolute;
     z-index: 999;
-    top: -102px;
+    top: -96px;
     right: 0;
     width: 100%;
     display: none;
@@ -114,7 +114,7 @@ export const StyledUl = styled.ul`
         text-decoration: none;
         text-align: center;
         color: #fff;
-        font-size: 14px;
+        font-size: 12px;
         border-bottom: 3px solid rgba(0, 0, 0, 0.2);
       }
     }

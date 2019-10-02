@@ -7,6 +7,7 @@ import {
   FaRegCalendarAlt,
   FaTrophy,
 } from 'react-icons/fa';
+import { Link as RouterLink } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import { ToastContainer, toast } from 'react-toastify';
 import LoadingScreen from '../../components/LoadScreen';
@@ -95,7 +96,15 @@ export default function Details({ match, history }) {
                 }
                 alt={hackathon.organizer.name}
               />
-              <strong>{hackathon.organizer.name}</strong>
+              <strong>
+                <RouterLink
+                  target="_blank"
+                  to={`/${hackathon.organizer.nickname}`}
+                  className="profile__link"
+                >
+                  {hackathon.organizer.name}
+                </RouterLink>
+              </strong>
             </h2>
           </div>
         </div>

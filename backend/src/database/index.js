@@ -15,6 +15,7 @@ import Team from '../app/models/Team';
 import TeamMember from '../app/models/TeamMember';
 import Project from '../app/models/Project';
 import TeamProject from '../app/models/TeamProject';
+import Mentor from '../app/models/Mentor';
 
 const models = [
   Role,
@@ -29,6 +30,7 @@ const models = [
   TeamMember,
   Project,
   TeamProject,
+  Mentor,
 ];
 
 class Database {

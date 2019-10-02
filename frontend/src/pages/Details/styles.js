@@ -93,6 +93,7 @@ export const Container = styled.div`
       font-family: 'Montserrat Alternates', sans-serif;
       font-size: 32px;
       margin-bottom: 10px;
+      text-align: center;
     }
 
     .profile__link {

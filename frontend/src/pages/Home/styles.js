@@ -47,12 +47,6 @@ export const CarouselContainer = styled.div`
     margin-right: 30px;
     border-radius: 6px;
 
-    @media only screen and (max-width: 700px) {
-      max-width: 280px;
-      max-height: 280px;
-      margin-right: 10px;
-    }
-
     @media only screen and (max-width: 630px) {
       display: none;
     }
@@ -123,6 +117,35 @@ export const CarouselContainer = styled.div`
   height: 350px;
   border-radius: 6px;
 
+  background: #163de5;
+
+  background-image: -ms-linear-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(52, 140, 254, 0.6)),
+      to(rgba(20, 55, 227, 0.7))
+    ),
+    url(${props => props.url});
+
+  background-image: -o-linear-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(52, 140, 254, 0.6)),
+      to(rgba(20, 55, 227, 0.7))
+    ),
+    url(${props => props.url});
+
+  background-image: -moz-linear-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(52, 140, 254, 0.6)),
+      to(rgba(20, 55, 227, 0.7))
+    ),
+    url(${props => props.url});
+
   background-image: -webkit-gradient(
       linear,
       left top,
@@ -131,11 +154,13 @@ export const CarouselContainer = styled.div`
       to(rgba(20, 55, 227, 0.7))
     ),
     url(${props => props.url});
+
   background-image: linear-gradient(
       rgba(52, 140, 254, 0.6),
       rgba(20, 55, 227, 0.7)
     ),
     url(${props => props.url});
+
   background-size: cover;
   background-position: center;
 `;

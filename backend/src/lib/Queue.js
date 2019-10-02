@@ -15,6 +15,8 @@ import TeamRemovedMemberNotifiyMail from '../app/jobs/TeamRemovedMemberNotifiyMa
 import TeamAcceptInviteMail from '../app/jobs/TeamAcceptInviteMail';
 import TeamDeniedInviteMail from '../app/jobs/TeamDeniedInviteMail';
 import ConfirmationResponseMail from '../app/jobs/ConfirmationResponseMail';
+import InviteMentorMail from '../app/jobs/InviteMentorMail';
+import NewMentorMail from '../app/jobs/newMentorMail';
 
 const jobs = [
   RecoverMail,
@@ -31,6 +33,8 @@ const jobs = [
   TeamAcceptInviteMail,
   TeamDeniedInviteMail,
   ConfirmationResponseMail,
+  InviteMentorMail,
+  NewMentorMail,
 ];
 
 class Queue {

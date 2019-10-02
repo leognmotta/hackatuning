@@ -56,7 +56,24 @@ export const Container = styled.div`
   }
 
   a {
+    display: block;
+    margin: 15px 0;
     background: #ff9914;
+
+    @media only screen and (max-width: 440px) {
+      margin-bottom: 25px;
+    }
+  }
+
+  .header__button {
+    @media only screen and (max-width: 750px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 0;
+      margin-bottom: -5px;
+    }
   }
 
   .header__text {
@@ -64,10 +81,28 @@ export const Container = styled.div`
     flex: 1;
     margin-right: 30px;
 
+    @media only screen and (max-width: 750px) {
+      margin-right: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
     h1 {
       font-family: 'Montserrat Alternates', sans-serif;
       font-size: 32px;
       margin-bottom: 10px;
+    }
+
+    .profile__link {
+      color: #fff;
+      text-decoration: none;
+      background: transparent;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     .organizer {
@@ -76,6 +111,10 @@ export const Container = styled.div`
         font-weight: 400;
         display: flex;
         align-items: center;
+
+        @media only screen and (max-width: 375px) {
+          flex-direction: column;
+        }
       }
 
       img {
@@ -84,6 +123,10 @@ export const Container = styled.div`
         border-radius: 50%;
         margin-left: 15px;
         margin-right: 10px;
+
+        @media only screen and (max-width: 375px) {
+          margin: 10px 0;
+        }
       }
     }
   }
@@ -93,7 +136,7 @@ export const Container = styled.div`
     align-items: flex-start;
     padding: 0 70px;
 
-    @media only screen and (max-width: 900px) {
+    @media only screen and (max-width: 1150px) {
       padding: 0 !important;
 
       &__photo {
@@ -105,7 +148,7 @@ export const Container = styled.div`
       }
     }
 
-    @media only screen and (max-width: 750px) {
+    @media only screen and (max-width: 800px) {
       flex-direction: column !important;
 
       &__awards {
@@ -128,8 +171,8 @@ export const Container = styled.div`
       flex-direction: column;
 
       #cover {
-        width: 100%;
-        max-height: 400px;
+        width: 100% !important;
+        max-height: 400px !important;
         object-fit: cover;
         box-shadow: 0px 1px 20px #0000000d;
         border-radius: 6px;

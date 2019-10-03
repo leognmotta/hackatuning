@@ -178,7 +178,7 @@ export const Container = styled.div`
       }
 
       &__desc {
-        flex: 100%;
+        flex: 100% !important;
         padding-left: 0px !important;
       }
 

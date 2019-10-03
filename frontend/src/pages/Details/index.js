@@ -155,27 +155,32 @@ export default function Details({ match, history }) {
             <div>
               <FaPenAlt />
               <span>
-                Registrations: until {hackathon.deadline_subscription}
+                <strong>Registrations:</strong>
+                until {hackathon.deadline_subscription}
               </span>
             </div>
 
             <div>
               <FaUsers />
               <span>
-                Create teams: until {hackathon.deadline_team_creation}
+                <strong>Create teams:</strong>
+                until {hackathon.deadline_team_creation}
               </span>
             </div>
 
             <div>
               <FaRegCalendarAlt />
               <span>
-                Event: {hackathon.event_date} to {hackathon.event_ending}
+                <strong>Event:</strong>
+                {hackathon.event_date} to {hackathon.event_ending}
               </span>
             </div>
 
             <div>
               <FaMapMarkerAlt />
-              <span>{!hackathon.online ? hackathon.location : 'Online'}</span>
+              <span className="dates__locale">
+                {!hackathon.online ? hackathon.location : 'Online'}
+              </span>
             </div>
           </div>
 

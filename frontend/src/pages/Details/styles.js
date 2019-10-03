@@ -246,6 +246,7 @@ export const Container = styled.div`
     }
 
     &__desc {
+      width: 100%;
       padding-left: 35px;
       flex: 50%;
     }

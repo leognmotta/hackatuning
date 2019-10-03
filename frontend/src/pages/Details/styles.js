@@ -87,19 +87,27 @@ export const Container = styled.div`
       align-items: center;
       justify-content: center;
       flex-direction: column;
+
+      h1 {
+        text-align: center;
+      }
     }
 
     h1 {
       font-family: 'Montserrat Alternates', sans-serif;
       font-size: 32px;
       margin-bottom: 10px;
-      text-align: center;
     }
 
     .profile__link {
       color: #fff;
       text-decoration: none;
       background: transparent;
+
+      @media only screen and (max-width: 440px) {
+        margin-top: 0px;
+        margin-bottom: 5px;
+      }
 
       &:hover {
         text-decoration: underline;
@@ -133,6 +141,7 @@ export const Container = styled.div`
   }
 
   .details {
+    width: 100%;
     display: flex;
     align-items: flex-start;
     padding: 0 70px;
@@ -153,15 +162,54 @@ export const Container = styled.div`
       flex-direction: column !important;
 
       &__awards {
+        flex: 100% !important;
         margin-bottom: 35px;
+        flex-direction: column;
+
+        p {
+          margin-left: 0px !important;
+          margin-top: 20px;
+        }
       }
 
       &__photo {
+        flex: 100% !important;
         padding-right: 0px !important;
       }
 
       &__desc {
+        flex: 100%;
         padding-left: 0px !important;
+      }
+
+      &__dates {
+        border-radius: 6px !important;
+
+        div {
+          flex-direction: column;
+          justify-content: center;
+
+          span {
+            text-align: center;
+          }
+
+          svg {
+            width: 25px !important;
+            height: 25px !important;
+            margin-right: 0px !important;
+          }
+
+          strong {
+            margin-right: 0px !important;
+            margin-top: 10px;
+            display: block;
+            margin-right: 0;
+          }
+
+          .dates__locale {
+            margin-top: 10px;
+          }
+        }
       }
     }
 
@@ -237,6 +285,11 @@ export const Container = styled.div`
           height: 22px;
           margin-right: 20px;
         }
+
+        strong {
+          margin-right: 10px;
+        }
+
         span {
           font-family: 'Montserrat Alternates', sans-serif;
           font-size: 16px;

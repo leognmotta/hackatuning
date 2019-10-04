@@ -132,7 +132,15 @@ class UserController {
 
       const user = await User.findOne({
         where,
-        attributes: ['id', 'name', 'nickname', 'bio', 'avatar_id'],
+        attributes: [
+          'id',
+          'name',
+          'nickname',
+          'bio',
+          'avatar_id',
+          'calendly',
+          'is_mentor',
+        ],
         include: [
           {
             model: File,

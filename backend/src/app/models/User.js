@@ -13,6 +13,7 @@ class User extends Model {
         password_hash: Sequelize.STRING,
         recover_pass_token: Sequelize.TEXT,
         confirm_email: Sequelize.BOOLEAN,
+        is_mentor: Sequelize.BOOLEAN,
         confirm_email_token: Sequelize.TEXT,
       },
       {

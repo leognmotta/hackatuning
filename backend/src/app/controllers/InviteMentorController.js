@@ -11,7 +11,7 @@ import NewMentorMail from '../jobs/newMentorMail';
 
 import Queue from '../../lib/Queue';
 
-class ParticipantController {
+class InviteMentorController {
   async store(req, res, next) {
     try {
       const { id } = req.params;
@@ -103,7 +103,9 @@ class ParticipantController {
           .redirect(`${process.env.WEB_URL}/internal-error`);
       });
 
-      const user = await User.findByPk(decoded.user);
+      const user = await User.findByPk(decoded.user, {
+        attributes: ['id', 'name', 'is_mentor'],
+      });
 
       await user.update({
         is_mentor: true,
@@ -121,4 +123,4 @@ class ParticipantController {
   }
 }
 
-export default new ParticipantController();
+export default new InviteMentorController();

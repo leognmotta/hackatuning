@@ -53,8 +53,9 @@ class UserValidator {
         name: Yup.string(),
         nickname: Yup.string(),
         bio: Yup.string(),
-        email: Yup.string().email('Url not valid, add http:// or https://'),
+        email: Yup.string().email(),
         oldPassword: Yup.string().min(6),
+        calendly: Yup.string().url(),
         password: Yup.string()
           .min(6)
           .when('oldPassword', (oldPassword, field) =>
@@ -65,7 +66,7 @@ class UserValidator {
         ),
         urls: Yup.array().of(
           Yup.string()
-            .url('url not valid')
+            .url('Url not valid, add http:// or https://')
             .min(5)
         ),
         roles: Yup.array().of(Yup.number()),

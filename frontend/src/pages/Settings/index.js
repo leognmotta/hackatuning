@@ -21,10 +21,12 @@ export default connect(mapStateToProps)(function Settings({ user }) {
     { id: undefined, name: '', checked: false },
   ]);
   const [avatar, setAvatar] = useState(null);
+  const [isMentor, setIsMentor] = useState(false);
   const [form, setForm] = useState({
     name: '',
     nickname: '',
     bio: '',
+    calendly: '',
     urls: [''],
     skills: [],
   });
@@ -54,9 +56,11 @@ export default connect(mapStateToProps)(function Settings({ user }) {
         name: data.name,
         nickname: data.nickname,
         bio: data.bio,
+        calendly: data.calendly,
         urls: data.urls.map(url => url.url),
         skills: data.roles.map(role => role.id),
       });
+      setIsMentor(data.is_mentor);
       setAvatar(data.avatar ? data.avatar.url : DefaultAvatar);
       setLoading(false);
     }
@@ -69,11 +73,12 @@ export default connect(mapStateToProps)(function Settings({ user }) {
     setIsLoading(true);
 
     try {
-      const { name, bio, nickname, urls, skills } = form;
+      const { name, bio, nickname, urls, skills, calendly } = form;
       const obj = {};
 
       if (name) obj.name = name;
       if (bio) obj.bio = bio;
+      if (calendly) obj.calendly = calendly;
       if (nickname) obj.nickname = nickname;
       if (urls[0].length > 1) obj.urls = urls;
       if (skills.length > 1) obj.roles = skills;
@@ -219,6 +224,15 @@ export default connect(mapStateToProps)(function Settings({ user }) {
           onChange={e => setForm({ ...form, nickname: e.target.value })}
         />
 
+        {isMentor ? (
+          <Input
+            label="calendly:"
+            value={form.calendly}
+            placeholder="Calendly url"
+            onChange={e => setForm({ ...form, calendly: e.target.value })}
+          />
+        ) : null}
+
         <TextArea
           label="Bio:"
           placeholder=" Tell me about you! I want to know..."
@@ -232,7 +246,7 @@ export default connect(mapStateToProps)(function Settings({ user }) {
         <div className="urls">
           <div className="url_box">
             {form.urls.map((url, index) => (
-              <div key={url.id} className="inner_input">
+              <div key={index} className="inner_input">
                 <Input
                   style={{ marginBottom: '10px' }}
                   placeholder="Some useful links here"

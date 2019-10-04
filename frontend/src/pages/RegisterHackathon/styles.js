@@ -24,4 +24,8 @@ export const Container = styled.div`
     margin-bottom: 15px;
     font-size: 14px;
   }
+
+  small {
+    margin-bottom: 20px;
+  }
 `;

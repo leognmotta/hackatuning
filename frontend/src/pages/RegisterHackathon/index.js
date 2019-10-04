@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { ToastContainer, toast } from 'react-toastify';
 import api from '../../services/api';
-import { Form, Input, TextArea, Button } from '../../components/Form/index';
+import {
+  Form,
+  Input,
+  TextArea,
+  Button,
+  InputArray,
+} from '../../components/Form/index';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -24,6 +30,7 @@ export default function RegisterHackathon({ history }) {
     awards: '',
     min_participants: 1,
     max_participants: 9999,
+    mentors: [''],
   });
 
   async function handleSubmit(e) {
@@ -51,6 +58,11 @@ export default function RegisterHackathon({ history }) {
       if (formData)
         await api.post(`/v1/files/hackathons/${data.id}`, formData, config);
 
+      if (form.mentors.length >= 0 && form.mentors[0] !== '')
+        await api.post(`/v1/hackathons/${data.id}/mentors/invite`, {
+          emails: form.mentors,
+        });
+
       toast('Hackathon created!', {
         className: 'toast-background-success',
         bodyClassName: 'toast-font-size',
@@ -73,6 +85,22 @@ export default function RegisterHackathon({ history }) {
         }
       );
     }
+  }
+
+  async function onChangeMentorMail(e, index) {
+    form.mentors[index] = e.target.value;
+
+    setForm({ ...form, mentors: form.mentors });
+  }
+
+  function addMentorField() {
+    setForm({ ...form, mentors: [...form.mentors, ''] });
+  }
+
+  function removeMentorField(index) {
+    form.mentors.splice(index, 1);
+
+    setForm({ ...form, mentors: [...form.mentors] });
   }
 
   return (
@@ -219,6 +247,18 @@ export default function RegisterHackathon({ history }) {
           onChange={date =>
             setForm({ ...form, deadline_team_creation: new Date(date) })
           }
+        />
+
+        <h2>Invite mentors:</h2>
+
+        <small>Plese enter mentor's email.</small>
+
+        <InputArray
+          values={form.mentors}
+          onChange={onChangeMentorMail}
+          addField={addMentorField}
+          removeField={removeMentorField}
+          label="Email:"
         />
 
         <Button loading={isLoading ? 1 : 0} text="Send" type="submit" />

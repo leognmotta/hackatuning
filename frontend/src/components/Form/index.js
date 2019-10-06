@@ -4,6 +4,7 @@ import Input from './Input';
 import TextArea from './TextArea';
 import Button from './Button';
 import Select from './Select';
+import InputArray from './InputArray';
 
 const StyledForm = styled.form`
   display: flex;
@@ -15,4 +16,4 @@ function Form({ onSubmit, ...props }) {
   return <StyledForm onSubmit={onSubmit} {...props} />;
 }
 
-export { Input, TextArea, Form, Button, Select };
+export { Input, TextArea, Form, Button, Select, InputArray };

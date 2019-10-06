@@ -17,6 +17,7 @@ import Profile from './pages/Profile';
 import Invitations from './pages/Invitations';
 import Teams from './pages/Teams';
 import SeeAllTeams from './pages/SeeAllTeams';
+import Claendly from './pages/Calendly';
 
 const Routes = () => (
   <Switch>
@@ -44,6 +45,8 @@ const Routes = () => (
       path="/app/register-hackathon"
       component={RegisterHackathon}
     />
+
+    <PrivateRoute path="/app/calendly" component={Claendly} />
 
     <Route path="/app/internal-error" render={() => <h1>Internal error</h1>} />
     <Route path="*" render={() => <h1>Not found</h1>} />

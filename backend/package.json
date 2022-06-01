@@ -39,7 +39,7 @@
     "rate-limit-redis": "^1.6.0",
     "redis": "^2.8.0",
     "sequelize": "^5.15.2",
-    "sharp": "^0.23.1",
+    "sharp": "^0.30.5",
     "socket.io": "^2.2.0",
     "yup": "^0.27.0"
   },
